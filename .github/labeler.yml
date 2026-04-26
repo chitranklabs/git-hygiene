@@ -1,0 +1,47 @@
+# Labeler Configuration (v5 Syntax)
+# -------------------------------------------------------------
+# Keys represent the label names in GitHub.
+# Values represent the file patterns to match.
+
+'pkg/core':
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'packages/core/**'
+
+'pkg/cli':
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'packages/cli/**'
+
+'pkg/action':
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'packages/action/**'
+
+'area/ci':
+  - changed-files:
+      - any-glob-to-any-file:
+          - '.github/workflows/**'
+          - '.github/actions/**'
+          - 'lefthook.yml'
+          - 'turbo.json'
+
+'area/docs':
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'docs/**'
+          - '*.md'
+
+'area/deps':
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'package.json'
+          - 'pnpm-lock.yaml'
+          - '**/package.json'
+
+'area/maintenance':
+  - changed-files:
+      - any-glob-to-any-file:
+          - '.github/workflows/stale.yml'
+    branch:
+      - '^maintenance/.*'

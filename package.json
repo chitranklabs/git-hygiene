@@ -68,9 +68,6 @@
     "pnpm": ">=9.0.0"
   },
   "git-hygiene": {
-    "maxHeaderLength": 100,
-    "allowEmptyScope": false,
-    "typeCase": "lower-case",
-    "subjectFullStop": "never"
+    "maxHeaderLength": 100
   }
 }
