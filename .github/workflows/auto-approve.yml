@@ -5,8 +5,8 @@
 # release, or maintenance branches once CI passes.
 #
 # Branch protection is configured to allow chitrank-bot to
-# bypass approval requirements, so this workflow only needs
-# to enable auto-merge — no review/approval step required.
+# bypass approval requirements, so no review step is needed —
+# only auto-merge enablement.
 # =============================================================
 
 name: Auto-Approve 🤖✅
@@ -35,7 +35,7 @@ jobs:
   auto-merge:
     name: Enable Auto-Merge ✅
     runs-on: ubuntu-latest
-    # Skip immediately if CI didn't succeed (saves a runner minute)
+    # Skip the runner entirely when CI didn't succeed
     if: >-
       github.event.workflow_run.conclusion == 'success' ||
       github.event.workflow_run.conclusion == 'skipped' ||
@@ -86,7 +86,7 @@ jobs:
             exit 0
           fi
 
-          # 2. Fetch authoritative PR data (author, branch) — don't trust event payload.
+          # 2. Fetch authoritative PR data — don't trust workflow_run event fields.
           PR_DATA=$(gh pr view "$PR_NUMBER" \
             --repo "$GITHUB_REPOSITORY" \
             --json author,headRefName,state)
@@ -117,7 +117,7 @@ jobs:
           fi
 
           if [ "$IS_RENOVATE" != "true" ] && [ "$IS_RELEASE" != "true" ] && [ "$IS_MAINTENANCE" != "true" ]; then
-            echo "🚫 PR #$PR_NUMBER (author: $PR_AUTHOR, branch: $PR_BRANCH) is not an authorized automation source."
+            echo "🚫 PR #$PR_NUMBER (author: $PR_AUTHOR, branch: $PR_BRANCH) is not authorized."
             echo "should_run=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
@@ -141,10 +141,9 @@ jobs:
 
           PR_DATA=$(gh pr view "$PR_NUMBER" \
             --repo "$GITHUB_REPOSITORY" \
-            --json mergeable,mergeStateStatus,statusCheckRollup)
+            --json mergeable,statusCheckRollup)
 
           MERGEABLE=$(echo "$PR_DATA" | jq -r '.mergeable')
-          MERGE_STATE=$(echo "$PR_DATA" | jq -r '.mergeStateStatus')
 
           if [ "$MERGEABLE" == "CONFLICTING" ]; then
             echo "❌ PR has merge conflicts. Skipping."
@@ -152,8 +151,7 @@ jobs:
             exit 0
           fi
 
-          # Find any check that isn't done-and-green.
-          # Exclude this workflow itself (it's still running right now).
+          # Find checks that aren't done-and-green, excluding this workflow itself.
           PENDING_OR_FAILED=$(echo "$PR_DATA" | jq -r '
             .statusCheckRollup
             | map(select(
@@ -169,7 +167,6 @@ jobs:
             echo "⏳ Other checks not yet green:"
             echo "$PENDING_OR_FAILED"
             echo "ready=false" >> "$GITHUB_OUTPUT"
-            # exit 0 — this is "wait for next CI run", not a failure.
             exit 0
           fi
 
@@ -184,8 +181,6 @@ jobs:
         run: |
           set -euo pipefail
 
-          # Branch protection allows chitrank-bot to bypass review requirements,
-          # so we don't need to approve — just enable auto-merge.
           gh pr merge "$PR_NUMBER" \
             --repo "$GITHUB_REPOSITORY" \
             --auto \
