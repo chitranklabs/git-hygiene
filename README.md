@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="./assets/hero-banner.png" alt="Git Hygiene Hero Banner" width="100%" />
+  <img src="./assets/logo.png" alt="Git Hygiene Hero Banner" width="160" height="auto"/>
 
 # git-hygiene 🌊
 
