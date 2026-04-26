@@ -17,7 +17,7 @@ runs:
       shell: bash
       run: |
         if [ -n "${{ inputs.value }}" ]; then
-          npx --yes git-hygiene@latest ${{ inputs.command }} "${{ inputs.value }}"
+          npx --yes @chitrank2050/git-hygiene@latest ${{ inputs.command }} "${{ inputs.value }}"
         else
-          npx --yes git-hygiene@latest ${{ inputs.command }}
+          npx --yes @chitrank2050/git-hygiene@latest ${{ inputs.command }}
         fi

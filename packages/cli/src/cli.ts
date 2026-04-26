@@ -4,8 +4,8 @@ import { parseArgs } from 'node:util';
 import { execSync } from 'node:child_process';
 import fs from 'node:fs';
 import pc from 'picocolors';
-import { validateBranch, validateTitle, validateCommit } from '@git-hygiene/core';
-import type { ValidationResult } from '@git-hygiene/core';
+import { validateBranch, validateTitle, validateCommit } from '@chitrank2050/git-hygiene-core';
+import type { ValidationResult } from '@chitrank2050/git-hygiene-core';
 
 const HELP_TEXT = `
 ${pc.bold('git-hygiene')} 🌊

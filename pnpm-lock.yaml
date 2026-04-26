@@ -41,11 +41,19 @@ importers:
         specifier: ^8.26.0
         version: 8.59.0(eslint@10.2.1)(typescript@6.0.3)
 
-  packages/action: {}
+  packages/action:
+    dependencies:
+      '@chitrank2050/git-hygiene-core':
+        specifier: workspace:*
+        version: link:../core
+    devDependencies:
+      '@types/node':
+        specifier: ^25.6.0
+        version: 25.6.0
 
   packages/cli:
     dependencies:
-      '@git-hygiene/core':
+      '@chitrank2050/git-hygiene-core':
         specifier: workspace:*
         version: link:../core
       picocolors:
