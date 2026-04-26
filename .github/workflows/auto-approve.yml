@@ -15,7 +15,7 @@ on:
   # zizmor: ignore[dangerous-triggers]
   workflow_run:
     workflows:
-      - 'CI & Security Analysis ⚡️'
+      - 'CI 🌊'
     branches:
       - 'renovate/**'
       - 'chore/changelog-*'

@@ -133,7 +133,7 @@ Run any check manually from the terminal.
 
 ```bash
 # Check a specific commit message
-npx @chitrank2050/git-hygiene commit "feat: add super speed"
+npx @chitrank2050/git-hygiene commit --value "feat: my awesome commit"
 
 # Check a branch name string
 npx @chitrank2050/git-hygiene branch "feature/cool-stuff"
@@ -141,6 +141,30 @@ npx @chitrank2050/git-hygiene branch "feature/cool-stuff"
 # Check a PR title
 npx @chitrank2050/git-hygiene title "fix(core): resolve memory leak"
 ```
+
+---
+
+## 🐙 GitHub Action
+
+You can easily integrate `git-hygiene` into your CI/CD pipeline using the official GitHub Action. This allows you to validate PR titles, branch names, and commit messages automatically.
+
+### Usage Example
+
+```yaml
+jobs:
+  hygiene:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate PR Title 🌊
+        uses: chitranklabs/git-hygiene/packages/action@main
+        with:
+          command: 'title'
+          value: ${{ github.event.pull_request.title }}
+```
+
+For more details, see the [Action Documentation](./packages/action/README.md).
+
+---
 
 ### 5. Programmatic Usage (Library)
 
