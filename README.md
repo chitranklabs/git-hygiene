@@ -1,36 +1,55 @@
+<div align="center">
+  <img src="./assets/hero-banner.png" alt="Git Hygiene Hero Banner" width="100%" />
+
 # git-hygiene 🌊
 
-> The ultimate zero-dependency metadata validator for modern Git workflows.
+**The ultimate zero-dependency metadata validator for modern Git workflows.**
 
-`git-hygiene` enforces Conventional Commits, branch naming patterns, and PR titles using a single, unified engine. Built with native Node.js APIs for blazing-fast microsecond startup times.
+[![CI](https://github.com/chitranklabs/git-hygiene/actions/workflows/ci.yml/badge.svg)](https://github.com/chitranklabs/git-hygiene/actions/workflows/ci.yml)
+[![Scorecard](https://github.com/chitranklabs/git-hygiene/actions/workflows/scorecard.yml/badge.svg)](https://github.com/chitranklabs/git-hygiene/actions/workflows/scorecard.yml)
+[![NPM Version](https://img.shields.io/npm/v/@chitrank2050/git-hygiene?color=blue&label=npm)](https://www.npmjs.com/package/@chitrank2050/git-hygiene)
+[![JSR Version](https://img.shields.io/jsr/v/@chitrank2050/git-hygiene?color=yellow&label=jsr)](https://jsr.io/@chitrank2050/git-hygiene)
+[![License](https://img.shields.io/github/license/chitranklabs/git-hygiene)](./LICENSE)
 
-## ✨ Why `git-hygiene`?
+[Features](#features) • [Installation](#installation) • [Usage](#usage) • [Architecture](#architecture) • [Contributing](#contributing)
 
-Historically, enforcing Git standards required stringing together multiple tools: `commitlint` for messages, a custom shell script for branches, and a GitHub Action for PR titles.
+</div>
 
-`git-hygiene` solves this by providing a **Unified Metadata Engine**:
+<br />
 
-- **One Standard**: Define your types (`feat`, `fix`, `chore`, etc.) once. They apply everywhere.
-- **Zero Dependencies**: The CLI uses Node 24+ native `util.parseArgs` to start instantly. No `commander` or `yargs` overhead.
-- **Universal**: Run it locally via Lefthook/Husky or in CI via our provided GitHub Action.
+`git-hygiene` is a high-performance, **zero-dependency** engine designed to enforce perfect metadata across your entire Git lifecycle. Built natively for **Node.js 24+**, it validates Conventional Commits, branch naming patterns, and Pull Request titles with microsecond startup times.
 
-## 📦 Installation
+---
 
-Available on both **NPM** and **JSR**.
+## Features <a id="features"></a> ✨
+
+| Feature | Description                |
+| ------- | -------------------------- | --------------------------------------------------------------------------- |
+| 🧼      | **Unified Engine**         | Define your standards once. Enforce them in commits, branches, and PRs.     |
+| ⚡      | **Zero Dependencies**      | Built using native Node.js APIs. No `commander`, `yargs`, or `chalk` bloat. |
+| 🛡️      | **Hardened Security**      | 100% SHA-pinned workflows and OpenSSF Scorecard verified.                   |
+| 📦      | **Universal Distribution** | Native support for **NPM**, **JSR**, and **GitHub Actions**.                |
+| 🧠      | **Context Aware**          | Automatically detects `.git` environment and CI context.                    |
+
+---
+
+## Installation <a id="installation"></a> 📦
 
 ```bash
-# via NPM
+# Using pnpm (Recommended)
 pnpm add -D @chitrank2050/git-hygiene
 
-# via JSR
-npx jsr add @chitrank2050/git-hygiene
+# Using npm
+npm install --save-dev @chitrank2050/git-hygiene
 ```
 
-## 🛠️ Usage
+---
 
-### 1. Local Hooks (Lefthook / Husky)
+## Usage <a id="usage"></a> 🛠️
 
-Validate branch names before pushing and commit messages before saving.
+### 1. Local Hooks (Lefthook)
+
+The recommended way to use `git-hygiene` locally.
 
 ```yaml
 # lefthook.yml
@@ -45,47 +64,124 @@ pre-push:
       run: npx @chitrank2050/git-hygiene branch
 ```
 
-### 2. GitHub Actions
+### 2. Local Hooks (Husky)
 
-Validate PR titles natively in your CI pipeline. Use a full SHA pin for maximum security.
-
-```yaml
-# .github/workflows/pr-title.yml
-name: PR Title Validation
-
-on:
-  pull_request:
-    types: [opened, edited, synchronize]
-
-jobs:
-  validate:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Validate PR Title 🌊
-        uses: chitranklabs/git-hygiene/packages/action@<SHA> # v0.1.0
-        with:
-          command: title
-          value: ${{ github.event.pull_request.title }}
-```
-
-## 🏛️ Monorepo Architecture
-
-This project is built as a high-performance monorepo using Turborepo:
-
-- **[`@chitrank2050/git-hygiene-core`](./packages/core)**: The standalone validation engine.
-- **[`@chitrank2050/git-hygiene`](./packages/cli)**: The zero-dependency CLI tool.
-- **[`@chitrank2050/git-hygiene-action`](./packages/action)**: The GitHub Composite Action wrapper.
-
-## 🤝 Contributing
-
-We use `pnpm` and `turbo`.
+For projects using Husky 9+.
 
 ```bash
-pnpm install
-pnpm build  # Bundles via tsup
-pnpm test   # Runs native Node.js tests
+# .husky/commit-msg
+npx @chitrank2050/git-hygiene commit $1
+
+# .husky/pre-push
+npx @chitrank2050/git-hygiene branch
 ```
+
+### 3. GitHub Actions (CI)
+
+Validate PR metadata natively. We recommend pinning to a specific SHA.
+
+```yaml
+# Validate PR Title
+- name: Validate PR Title 🏷️
+  uses: chitranklabs/git-hygiene/packages/action@<SHA>
+  with:
+    command: 'title'
+    value: '${{ github.event.pull_request.title }}'
+
+# Validate Branch Name
+- name: Validate Branch Name 🌿
+  uses: chitranklabs/git-hygiene/packages/action@<SHA>
+  with:
+    command: 'branch'
+    value: '${{ github.head_ref }}'
+```
+
+### 4. Manual / Script Usage
+
+Run any check manually from the terminal.
+
+```bash
+# Check a specific commit message
+npx @chitrank2050/git-hygiene commit "feat: add super speed"
+
+# Check a branch name string
+npx @chitrank2050/git-hygiene branch "feature/cool-stuff"
+
+# Check a PR title
+npx @chitrank2050/git-hygiene title "fix(core): resolve memory leak"
+```
+
+### 5. Programmatic Usage (Library)
+
+Import the engine directly into your TypeScript project.
+
+```typescript
+import { validateBranch } from '@chitrank2050/git-hygiene-core';
+
+const { valid, error } = validateBranch('feat/new-ui');
+```
+
+---
+
+## ⚙️ Configuration
+
+Configure your rules in the root `package.json`.
+
+```json
+{
+  "git-hygiene": {
+    "types": ["feat", "fix", "chore", "docs", "refactor", "test"],
+    "ignoreBranches": ["main", "develop"],
+    "maxHeaderLength": 72
+  }
+}
+```
+
+---
+
+## Architecture <a id="architecture"></a> 🏛️
+
+```mermaid
+graph TD
+    A[Consumer Project] -->|CLI| B(@chitrank2050/git-hygiene)
+    A -->|Action| C(@chitrank2050/git-hygiene-action)
+    B --> D(@chitrank2050/git-hygiene-core)
+    C --> D
+    D -->|Engine| E(Conventional Commits & Regex)
+```
+
+---
+
+## 🙏 Credits
+
+`git-hygiene` stands on the shoulders of giants. Special thanks to:
+
+- **[commitlint](https://commitlint.js.org/)**: For the industry-standard commit validation logic we use under the hood.
+
+---
 
 ## 📜 License
 
-MIT © [Chitrank Agnihotri](https://www.chitrankagnihotri.com)
+MIT - see [LICENSE](LICENSE) for details.
+
+If you use `git-hygiene` in your project, a star or credit is appreciated. ✨
+
+---
+
+## Contributing <a id="contributing"></a> 🤝
+
+We ❤️ contributions! Whether you're fixing a bug, adding a feature, or improving documentation:
+
+1. **Fork** the repository.
+2. **Create** a branch (`feat/amazing-feature`).
+3. **Commit** your changes (using Conventional Commits!).
+4. **Push** to the branch.
+5. **Open** a Pull Request.
+
+Please see our [SECURITY.md](./SECURITY.md) for reporting vulnerabilities.
+
+---
+
+<div align="center">
+  ❤️ Developed by [Chitrank Agnihotri](https://www.chitrankagnihotri.com)
+</div>
