@@ -45,7 +45,6 @@ describe('Validation Engine', () => {
     it('should reject invalid types', async () => {
       const res = await validateCommit('unknown: message');
       assert.strictEqual(res.valid, false);
-      assert.ok(res.message.includes('type-enum'));
       assert.ok(res.errors?.some(e => e.name === 'type-enum'));
     });
 

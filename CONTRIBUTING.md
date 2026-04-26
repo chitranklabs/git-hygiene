@@ -13,6 +13,14 @@ By participating in this project, you agree to abide by our [Code of Conduct](./
 - **Node.js**: v24 or higher
 - **pnpm**: v9 or higher
 
+### Repository Structure
+
+This is a monorepo managed with **pnpm workspaces** and **Turborepo**:
+
+- `packages/core`: 🧠 The core validation engine. Pure logic, shared by CLI and Action.
+- `packages/cli`: 🌊 The command-line interface. Built on top of core.
+- `packages/action`: ⚡ The GitHub Action wrapper. Optimized for CI.
+
 ### Local Setup
 
 1. **Clone the repo**:
