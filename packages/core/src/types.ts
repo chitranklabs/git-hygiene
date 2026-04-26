@@ -66,6 +66,15 @@ export interface ResolvedConfig extends GitHygieneConfig {
 
 /**
  * @description
+ * Detailed error information for a validation failure.
+ */
+export interface ValidationError {
+  message: string;
+  name: string;
+}
+
+/**
+ * @description
  * The result of a metadata validation check.
  */
 export interface ValidationResult {
@@ -77,4 +86,6 @@ export interface ValidationResult {
   actual?: string;
   /** The expected format or rule (if invalid) */
   expected?: string;
+  /** Detailed list of errors (for complex validations like commits) */
+  errors?: ValidationError[];
 }

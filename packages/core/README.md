@@ -37,27 +37,48 @@ import { validateBranch, validateTitle, validateCommit } from '@chitrank2050/git
 
 // 1. Validate a branch name
 const branchResult = validateBranch('feat/add-login');
-console.log(branchResult.valid); // true
+if (!branchResult.valid) {
+  console.error(`Invalid branch: ${branchResult.error}`);
+}
 
 // 2. Validate a PR title
 const titleResult = validateTitle('feat: implement oauth2');
-console.log(titleResult.valid); // true
+console.log(`Title valid: ${titleResult.valid}`);
 
 // 3. Validate a commit message (Async)
+// Returns a detailed report including commitlint warnings/errors
 const commitResult = await validateCommit('fix: resolve memory leak');
-console.log(commitResult.valid); // true
+if (commitResult.valid) {
+  console.log('✅ Commit follows standards');
+} else {
+  console.log('❌ Commit validation failed:');
+  commitResult.errors.forEach(err => console.log(`- ${err.message}`));
+}
 ```
 
 ## ⚙️ Configuration
 
-The core engine automatically looks for a `git-hygiene` block in your root `package.json`.
+`git-hygiene` is designed to be zero-config, but you can easily customize the engine by adding a `git-hygiene` block to your root `package.json`.
+
+| Property          | Description                           | Default                                     | Possible Values                  |
+| ----------------- | ------------------------------------- | ------------------------------------------- | -------------------------------- |
+| `types`           | Allowed commit types                  | `feat`, `fix`, `chore`, etc.                | `string[]`                       |
+| `ignoreBranches`  | Branches to skip validation           | `main`, `master`, `development`, `gh-pages` | `string[]`                       |
+| `maxHeaderLength` | Max length of the commit header       | `72`                                        | `number`                         |
+| `maxBodyLength`   | Max length of a single body line      | `1000`                                      | `number`                         |
+| `minBodyLength`   | Min length of the commit body         | `0`                                         | `number`                         |
+| `typeCase`        | Case requirement for types            | `lower-case`                                | `lower-case`, `upper-case`, etc. |
+| `scopeCase`       | Case requirement for scopes           | `lower-case`                                | `lower-case`, `upper-case`, etc. |
+| `allowEmptyScope` | Whether scope is optional             | `true`                                      | `boolean`                        |
+| `subjectFullStop` | Whether subject can end with a period | `never`                                     | `always`, `never`                |
 
 ```json
 {
   "git-hygiene": {
-    "types": ["feat", "fix", "chore", "docs", "refactor"],
-    "ignoreBranches": ["main", "develop"],
-    "maxHeaderLength": 72
+    "types": ["feat", "fix", "chore", "docs", "refactor", "test"],
+    "ignoreBranches": ["main", "develop", "release/*"],
+    "maxHeaderLength": 100,
+    "allowEmptyScope": false
   }
 }
 ```

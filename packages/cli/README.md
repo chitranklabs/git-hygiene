@@ -51,9 +51,38 @@ Validates a Pull Request title string.
 npx @chitrank2050/git-hygiene title "feat(cli): add colors"
 ```
 
-## ⚓ Git Hook Integration (Lefthook)
+## ⚙️ Configuration
 
-Add this to your `lefthook.yml` for automatic enforcement:
+`git-hygiene` is designed to be zero-config, but you can easily customize the rules by adding a `git-hygiene` block to your root `package.json`.
+
+| Property          | Description                           | Default                                     | Possible Values                  |
+| ----------------- | ------------------------------------- | ------------------------------------------- | -------------------------------- |
+| `types`           | Allowed commit types                  | `feat`, `fix`, `chore`, etc.                | `string[]`                       |
+| `ignoreBranches`  | Branches to skip validation           | `main`, `master`, `development`, `gh-pages` | `string[]`                       |
+| `maxHeaderLength` | Max length of the commit header       | `72`                                        | `number`                         |
+| `maxBodyLength`   | Max length of a single body line      | `1000`                                      | `number`                         |
+| `minBodyLength`   | Min length of the commit body         | `0`                                         | `number`                         |
+| `typeCase`        | Case requirement for types            | `lower-case`                                | `lower-case`, `upper-case`, etc. |
+| `scopeCase`       | Case requirement for scopes           | `lower-case`                                | `lower-case`, `upper-case`, etc. |
+| `allowEmptyScope` | Whether scope is optional             | `true`                                      | `boolean`                        |
+| `subjectFullStop` | Whether subject can end with a period | `never`                                     | `always`, `never`                |
+
+```json
+{
+  "git-hygiene": {
+    "types": ["feat", "fix", "chore", "docs", "refactor", "test"],
+    "ignoreBranches": ["main", "develop", "release/*"],
+    "maxHeaderLength": 100,
+    "allowEmptyScope": false
+  }
+}
+```
+
+## ⚓ Git Hook Integration
+
+### Lefthook (Recommended)
+
+Add this to your `lefthook.yml` for blazing-fast enforcement:
 
 ```yaml
 commit-msg:
@@ -65,6 +94,18 @@ pre-push:
   commands:
     hygiene:
       run: npx @chitrank2050/git-hygiene branch
+```
+
+### Husky
+
+For projects using Husky 9+:
+
+```bash
+# .husky/commit-msg
+npx @chitrank2050/git-hygiene commit $1
+
+# .husky/pre-push
+npx @chitrank2050/git-hygiene branch
 ```
 
 ## 📜 License

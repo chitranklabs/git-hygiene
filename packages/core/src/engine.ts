@@ -73,6 +73,15 @@ export async function validateCommit(message: string): Promise<ValidationResult>
   const report = await lint(message, rules);
   if (report.valid) return { valid: true, message: 'Commit message is valid.' };
 
-  const errors = report.errors.map((err: { message: string }) => ` - ${err.message}`).join('\n');
-  return { valid: false, message: `Invalid commit message:\n${errors}` };
+  const errors = report.errors.map((err: { message: string; name: string }) => ({
+    message: err.message,
+    name: err.name,
+  }));
+
+  const messageSummary = errors.map((err: { message: string }) => ` - ${err.message}`).join('\n');
+  return {
+    valid: false,
+    message: `Invalid commit message:\n${messageSummary}`,
+    errors,
+  };
 }

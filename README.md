@@ -141,16 +141,33 @@ const { valid, error } = validateBranch('feat/new-ui');
 
 ---
 
-## ⚙️ Configuration
+## Configuration <a id="configuration"></a> ⚙️
 
-Configure your rules in the root `package.json`.
+`git-hygiene` is designed to be zero-config, but you can easily customize the engine by adding a `git-hygiene` block to your root `package.json`.
+
+### Reference Table
+
+| Property          | Description                               | Default                                     | Possible Values                                |
+| ----------------- | ----------------------------------------- | ------------------------------------------- | ---------------------------------------------- |
+| `types`           | Allowed commit types                      | `feat`, `fix`, `chore`, etc.                | `string[]`                                     |
+| `ignoreBranches`  | Branches to skip validation (e.g. `main`) | `main`, `master`, `development`, `gh-pages` | `string[]`                                     |
+| `maxHeaderLength` | Max length of the commit header           | `72`                                        | `number`                                       |
+| `maxBodyLength`   | Max length of a single body line          | `1000`                                      | `number`                                       |
+| `minBodyLength`   | Min length of the commit body             | `0`                                         | `number`                                       |
+| `typeCase`        | Case requirement for types                | `lower-case`                                | `lower-case`, `upper-case`, `camel-case`, etc. |
+| `scopeCase`       | Case requirement for scopes               | `lower-case`                                | `lower-case`, `upper-case`, `camel-case`, etc. |
+| `allowEmptyScope` | Whether scope is optional                 | `true`                                      | `boolean`                                      |
+| `subjectFullStop` | Whether subject can end with a period     | `never`                                     | `always`, `never`                              |
+
+### Example `package.json`
 
 ```json
 {
   "git-hygiene": {
     "types": ["feat", "fix", "chore", "docs", "refactor", "test"],
-    "ignoreBranches": ["main", "develop"],
-    "maxHeaderLength": 72
+    "ignoreBranches": ["main", "develop", "release/*"],
+    "maxHeaderLength": 100,
+    "allowEmptyScope": false
   }
 }
 ```
