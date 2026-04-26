@@ -1,6 +1,6 @@
 {
-  "name": "git-hygiene",
-  "version": "0.1.0",
+  "name": "git-hygiene-workspace",
+  "private": true,
   "description": "The ultimate zero-dependency metadata validator for modern Git workflows. Enforce conventional commits, branch naming patterns, and PR titles with blazing-fast native Node.js performance.",
   "author": {
     "name": "Chitrank Agnihotri",
@@ -35,43 +35,19 @@
     "native-ts"
   ],
   "type": "module",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "bin": {
-    "git-hygiene": "./dist/cli.js"
-  },
-  "exports": {
-    ".": {
-      "import": "./dist/index.js",
-      "types": "./dist/index.d.ts"
-    }
-  },
-  "files": [
-    "dist",
-    "README.md",
-    "LICENSE"
-  ],
   "scripts": {
-    "// --- 🚀 Core ---": "",
-    "dev": "node --experimental-strip-types src/cli.ts",
-    "build": "tsup",
-    "test": "node --test src/**/*.test.ts",
-    "// --- 🧹 Hygiene ---": "",
-    "lint": "eslint \"src/**/*.ts\" --max-warnings 0",
-    "format": "prettier --check \"src/**/*.ts\"",
-    "format:fix": "prettier --write \"src/**/*.ts\"",
-    "prepare": "echo 'Setup hooks here if needed'"
+    "build": "turbo build",
+    "test": "turbo test",
+    "lint": "turbo lint",
+    "format": "turbo format",
+    "dev": "turbo dev"
   },
   "devDependencies": {
-    "@commitlint/lint": "^19.7.1",
-    "@types/node": "^22.13.10",
+    "turbo": "^2.0.0",
+    "typescript": "^6.0.3",
     "eslint": "^9.21.0",
-    "eslint-config-prettier": "^10.0.2",
-    "globals": "^16.0.0",
     "prettier": "^3.5.3",
-    "tsup": "^8.4.0",
-    "typescript": "^5.8.2",
-    "typescript-eslint": "^8.26.0"
+    "tsup": "^8.4.0"
   },
   "packageManager": "pnpm@10.5.2",
   "engines": {

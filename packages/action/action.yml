@@ -1,0 +1,23 @@
+name: 'Git Hygiene Validator'
+description: 'Zero-dependency metadata validator for Commits, Branches, and PR Titles'
+author: 'Chitrank Agnihotri'
+
+inputs:
+  command:
+    description: 'The validation command to run (branch, title, commit)'
+    required: true
+  value:
+    description: 'The value to validate (for title and commit commands)'
+    required: false
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Run Git Hygiene 🌊
+      shell: bash
+      run: |
+        if [ -n "${{ inputs.value }}" ]; then
+          npx --yes git-hygiene@latest ${{ inputs.command }} "${{ inputs.value }}"
+        else
+          npx --yes git-hygiene@latest ${{ inputs.command }}
+        fi

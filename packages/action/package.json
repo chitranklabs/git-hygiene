@@ -1,0 +1,31 @@
+{
+  "name": "@git-hygiene/action",
+  "version": "0.1.0",
+  "description": "GitHub Action wrapper for git-hygiene metadata validator.",
+  "author": {
+    "name": "Chitrank Agnihotri",
+    "email": "chitrank2050@gmail.com",
+    "url": "https://www.chitrankagnihotri.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chitranklabs/git-hygiene"
+  },
+  "bugs": {
+    "url": "https://github.com/chitranklabs/git-hygiene/issues"
+  },
+  "homepage": "https://github.com/chitranklabs/git-hygiene/tree/main/packages/action#readme",
+  "keywords": [
+    "git",
+    "github-actions",
+    "conventional-commits",
+    "branch-naming",
+    "lint",
+    "hygiene",
+    "metadata"
+  ],
+  "engines": {
+    "node": ">=24.0.0"
+  }
+}
