@@ -87,7 +87,6 @@
       "revert",
       "maintenance",
       "renovate"
-    ],
-    "maxHeaderLength": 100
+    ]
   }
 }

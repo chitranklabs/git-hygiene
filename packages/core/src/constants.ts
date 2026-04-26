@@ -21,7 +21,7 @@ export const DEFAULT_CONFIG: GitHygieneConfig = {
     'maintenance',
   ],
   ignoreBranches: ['main', 'master', 'development', 'gh-pages'],
-  maxHeaderLength: 72,
+  maxHeaderLength: 100,
   maxBodyLength: 1000,
   minBodyLength: 0,
   typeCase: 'lower-case',
