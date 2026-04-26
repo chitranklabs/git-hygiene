@@ -17,6 +17,10 @@ permissions:
   issues: write
   pull-requests: write
 
+env:
+  NODE_VERSION: 24
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   stale:
     if: github.event_name != 'workflow_dispatch' || github.actor == github.repository_owner
