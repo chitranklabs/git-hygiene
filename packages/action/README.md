@@ -43,8 +43,10 @@ jobs:
 
 ## ⚙️ Inputs
 
-| `command` | The validation command to run (`branch`, `title`, `commit`) | **Yes** |
-| `value` | The value to validate (required for `title` and `commit`) | No |
+| Input     | Description                                                 | Required |
+| :-------- | :---------------------------------------------------------- | :------- |
+| `command` | The validation command to run (`branch`, `title`, `commit`) | **Yes**  |
+| `value`   | The value to validate (required for `title` and `commit`)   | No       |
 
 ## ⚙️ Configuration
 
