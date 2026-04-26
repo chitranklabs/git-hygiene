@@ -1,6 +1,6 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert';
-import { validateBranch, validateTitle, validateCommit } from '../src/engine.js';
+import { validateBranch, validateTitle, validateCommit } from '../src/engine.ts';
 
 describe('Validation Engine', () => {
   describe('validateBranch', () => {
