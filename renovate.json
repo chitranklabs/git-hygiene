@@ -1,0 +1,33 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended", ":timezone(Asia/Kolkata)"],
+  "labels": ["dependencies", "renovate"],
+  "assignees": [],
+  "gitAuthor": "Chitrank agnihotri <chitrank2050@gmail.com>",
+  "baseBranches": ["main"],
+  "schedule": ["every weekend"],
+  "prBodyColumns": ["Package", "Change", "Age", "Confidence"],
+  "packageRules": [
+    {
+      "matchPackagePatterns": ["eslint", "prettier", "typescript-eslint"],
+      "groupName": "linting & formatting"
+    },
+    {
+      "matchPackageNames": ["typescript"],
+      "groupName": "typescript",
+      "versioning": "npm"
+    },
+    {
+      "matchUpdateTypes": ["patch", "minor"],
+      "matchPackagePatterns": ["*"],
+      "groupName": "non-major dependencies",
+      "automerge": true
+    }
+  ],
+  "dependencyDashboard": true,
+  "prConcurrentLimit": 10,
+  "prHourlyLimit": 2,
+  "vulnerabilityAlerts": {
+    "enabled": true
+  }
+}

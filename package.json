@@ -1,0 +1,81 @@
+{
+  "name": "git-hygiene",
+  "version": "0.1.0",
+  "description": "The ultimate zero-dependency metadata validator for modern Git workflows. Enforce conventional commits, branch naming patterns, and PR titles with blazing-fast native Node.js performance.",
+  "author": {
+    "name": "Chitrank Agnihotri",
+    "email": "chitrank2050@gmail.com",
+    "url": "https://www.chitrankagnihotri.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chitranklabs/git-hygiene"
+  },
+  "bugs": {
+    "url": "https://github.com/chitranklabs/git-hygiene/issues"
+  },
+  "homepage": "https://github.com/chitranklabs/git-hygiene",
+  "keywords": [
+    "git",
+    "conventional-commits",
+    "branch-naming",
+    "github-actions",
+    "lint",
+    "hygiene",
+    "developer-experience",
+    "dx",
+    "commitlint",
+    "metadata",
+    "automation",
+    "jsr",
+    "npm",
+    "zero-dependency",
+    "typescript",
+    "native-ts"
+  ],
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "git-hygiene": "./dist/cli.js"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "// --- 🚀 Core ---": "",
+    "dev": "node --experimental-strip-types src/cli.ts",
+    "build": "tsup",
+    "test": "node --test src/**/*.test.ts",
+    "// --- 🧹 Hygiene ---": "",
+    "lint": "eslint \"src/**/*.ts\" --max-warnings 0",
+    "format": "prettier --check \"src/**/*.ts\"",
+    "format:fix": "prettier --write \"src/**/*.ts\"",
+    "prepare": "echo 'Setup hooks here if needed'"
+  },
+  "devDependencies": {
+    "@commitlint/lint": "^19.7.1",
+    "@types/node": "^22.13.10",
+    "eslint": "^9.21.0",
+    "eslint-config-prettier": "^10.0.2",
+    "globals": "^16.0.0",
+    "prettier": "^3.5.3",
+    "tsup": "^8.4.0",
+    "typescript": "^5.8.2",
+    "typescript-eslint": "^8.26.0"
+  },
+  "packageManager": "pnpm@10.5.2",
+  "engines": {
+    "node": ">=24.0.0",
+    "pnpm": ">=9.0.0"
+  }
+}
