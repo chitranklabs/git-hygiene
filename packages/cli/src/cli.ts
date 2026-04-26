@@ -2,6 +2,7 @@
 
 import { parseArgs } from 'node:util';
 import { execSync } from 'node:child_process';
+import fs from 'node:fs';
 import pc from 'picocolors';
 import { validateBranch, validateTitle, validateCommit } from '@git-hygiene/core';
 import type { ValidationResult } from '@git-hygiene/core';
@@ -58,10 +59,18 @@ async function main() {
       }
       case 'commit': {
         if (!arg) {
-          console.error(pc.red('❌ Error: Commit message is required.'));
+          console.error(pc.red('❌ Error: Commit message or file path is required.'));
           process.exit(1);
         }
-        report(await validateCommit(arg));
+
+        let messageToValidate = arg;
+
+        // If the argument is a file path (like .git/COMMIT_EDITMSG), read it
+        if (fs.existsSync(arg) && fs.statSync(arg).isFile()) {
+          messageToValidate = fs.readFileSync(arg, 'utf8').trim();
+        }
+
+        report(await validateCommit(messageToValidate));
         break;
       }
       default:

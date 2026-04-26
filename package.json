@@ -36,6 +36,7 @@
   ],
   "type": "module",
   "scripts": {
+    "prepare": "lefthook install",
     "build": "turbo build",
     "test": "turbo test",
     "lint": "turbo lint",
@@ -46,11 +47,12 @@
     "deps:update": "pnpm update --interactive --latest -r"
   },
   "devDependencies": {
-    "@eslint/js": "^9.21.0",
-    "@types/node": "^22.13.10",
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^25.6.0",
     "eslint": "^10.2.1",
     "eslint-config-prettier": "^10.0.2",
-    "globals": "^16.0.0",
+    "globals": "^17.5.0",
+    "lefthook": "^3.10.0",
     "prettier": "^3.5.3",
     "tsup": "^8.4.0",
     "turbo": "^2.0.0",
