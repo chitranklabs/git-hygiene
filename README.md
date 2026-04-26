@@ -114,14 +114,14 @@ Validate PR metadata natively. We recommend pinning to a specific SHA.
 ```yaml
 # Validate PR Title
 - name: Validate PR Title 🏷️
-  uses: chitranklabs/git-hygiene/packages/action@<SHA>
+  uses: chitranklabs/git-hygiene@<SHA>
   with:
     command: 'title'
     value: '${{ github.event.pull_request.title }}'
 
 # Validate Branch Name
 - name: Validate Branch Name 🌿
-  uses: chitranklabs/git-hygiene/packages/action@<SHA>
+  uses: chitranklabs/git-hygiene@<SHA>
   with:
     command: 'branch'
     value: '${{ github.head_ref }}'
@@ -156,13 +156,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Validate PR Title 🌊
-        uses: chitranklabs/git-hygiene/packages/action@main
+        uses: chitranklabs/git-hygiene@<SHA>
         with:
           command: 'title'
           value: ${{ github.event.pull_request.title }}
 ```
 
-For more details, see the [Action Documentation](./packages/action/README.md).
+> **Note on Pinning to a SHA:** For maximum security and stability, we highly recommend pinning the `uses` directive to a specific commit SHA instead of a branch like `@main`. You can get the commit SHA by navigating to the [Commits page](https://github.com/chitranklabs/git-hygiene/commits/main) of this repository and copying the 40-character hash (e.g. `uses: chitranklabs/git-hygiene@8f3d...`).
 
 ---
 
@@ -216,7 +216,7 @@ const { valid, error } = validateBranch('feat/new-ui');
 ```mermaid
 graph TD
     A[Consumer Project] -->|CLI| B["@chitrank2050/git-hygiene"]
-    A -->|Action| C["@chitrank2050/git-hygiene-action"]
+    A -->|Action| C["GitHub Action (Root)"]
     B --> D["@chitrank2050/git-hygiene-core"]
     C --> D
     D -->|Engine| E["Conventional Commits & Regex"]

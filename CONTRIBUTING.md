@@ -19,7 +19,6 @@ This is a monorepo managed with **pnpm workspaces** and **Turborepo**:
 
 - `packages/core`: 🧠 The core validation engine. Pure logic, shared by CLI and Action.
 - `packages/cli`: 🌊 The command-line interface. Built on top of core.
-- `packages/action`: ⚡ The GitHub Action wrapper. Optimized for CI.
 
 ### Local Setup
 
