@@ -1,0 +1,26 @@
+# =============================================================
+# Lefthook - Git hooks manager
+# =============================================================
+
+pre-commit:
+  parallel: true
+  commands:
+    lint:
+      glob: "*.ts"
+      run: pnpm eslint {staged_files} --fix
+      stage_fixed: true
+    format:
+      glob: "*.{ts,json,md,yml,yaml}"
+      run: pnpm prettier --write {staged_files}
+      stage_fixed: true
+
+commit-msg:
+  commands:
+    hygiene:
+      # "Dogfooding" - We use our own CLI to validate our own commits!
+      run: node --experimental-strip-types packages/cli/src/cli.ts commit {1}
+
+pre-push:
+  commands:
+    hygiene:
+      run: node --experimental-strip-types packages/cli/src/cli.ts branch

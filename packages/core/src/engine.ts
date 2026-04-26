@@ -1,5 +1,5 @@
 import lint from '@commitlint/lint';
-import { ALLOWED_TYPES, PATTERNS } from './constants.js';
+import { ALLOWED_TYPES, PATTERNS } from './constants.ts';
 
 export interface ValidationResult {
   valid: boolean;
@@ -31,7 +31,7 @@ export function validateTitle(title: string): ValidationResult {
 }
 
 export async function validateCommit(message: string): Promise<ValidationResult> {
-  const rules = {
+  const rules: any = {
     'type-enum': [2, 'always', ALLOWED_TYPES],
     'type-case': [2, 'always', 'lower-case'],
     'type-empty': [2, 'never'],
