@@ -16,14 +16,20 @@ on:
       - closed
     branches:
       - main
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to finalize (e.g. v0.1.0)'
+        required: true
 
 jobs:
   finalize:
     name: Finalize Release 🚀
     if: |
+      (github.event_name == 'pull_request' &&
       github.event.pull_request.merged == true &&
-      contains(github.event.pull_request.labels.*.name, 'release') &&
-      (github.actor == github.repository_owner || github.actor == 'chitrank2050' || github.event.pull_request.user.login == 'chitrank-actions[bot]')
+      contains(github.event.pull_request.labels.*.name, 'release')) ||
+      (github.event_name == 'workflow_dispatch' && github.actor == 'chitrank2050')
     runs-on: ubuntu-latest
     env:
       NODE_VERSION: 24
@@ -56,14 +62,20 @@ jobs:
         id: vars
         env:
           BRANCH_NAME: ${{ github.event.pull_request.head.ref }}
+          INPUT_VERSION: ${{ github.event.inputs.version }}
         run: |
-          # Extract version from branch name (chore/changelog-vX.Y.Z)
-          TAG_NAME=$(echo "$BRANCH_NAME" | sed 's/chore\/changelog-//')
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            TAG_NAME="$INPUT_VERSION"
+          else
+            # Extract version from branch name (chore/changelog-vX.Y.Z)
+            TAG_NAME=$(echo "$BRANCH_NAME" | sed 's/chore\/changelog-//')
+          fi
 
           if [[ ! "$TAG_NAME" =~ ^v?[0-9]+\.[0-9]+\.[0-9]+(-.*)?$ ]]; then
-            echo "❌ Error: Could not extract valid tag from branch name: $BRANCH_NAME"
+            echo "❌ Error: Could not extract valid tag. Got: $TAG_NAME"
             exit 1
           fi
+
           # Ensure tag starts with 'v' for consistency with cliff.toml
           if [[ ! "$TAG_NAME" =~ ^v ]]; then
             TAG_NAME="v$TAG_NAME"
@@ -119,7 +131,7 @@ jobs:
           cache: 'pnpm'
 
       - name: Install dependencies 📥
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --frozen-lockfile --prefer-offline
 
       - name: Build Project 🏗️
         run: pnpm build
