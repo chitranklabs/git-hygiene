@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.5] - 2026-04-26
+
+### 🚜 Refactor
+
+- Remove dedicated action package and consolidate logic into the repository root ([892a890](892a89054d563ee5537109f645e0a3fd31284a55)) by @chitrank2050
+- Consolidate PR validation logic and enable automated approval for bot-managed workflows ([5dc3bd1](5dc3bd150beafaf3d91b41a5b3ffc1da8ae043e2)) by @chitrank2050
+
+### 📚 Documentation
+
+- Reorder license section to appear at the end of README ([8ce3632](8ce3632966c4496d23420c05f824adc66b379b33)) by @chitrank2050
+- Update badge layout and add registry comparison table to README ([9f394b4](9f394b47372a102e7bfb5ce2f3a853748d5981d4)) by @chitrank2050
+
+### ⚙️ Miscellaneous Tasks
+
+- Update changelog with v0.1.4 release and clean up formatting ([0e9a240](0e9a240a308e93fda4580611b835473a65a3f13a)) by @chitrank2050
+- Update workflow trigger name and document GitHub Action usage in README ([d7e6038](d7e60380ddbcd6728ea003c0df759b328b4999b8)) by @chitrank2050
+
 ## [0.1.4] - 2026-04-26
 
 ### ⚙️ Miscellaneous Tasks
