@@ -1,8 +1,17 @@
-# @chitrank2050/git-hygiene 🌊
+<div align="center">
+  <h1>@chitrank2050/git-hygiene 🌊</h1>
 
-The ultimate zero-dependency metadata validator for modern Git workflows.
+**The ultimate zero-dependency metadata validator for modern Git workflows.**
 
-This CLI tool enforces **Conventional Commits**, **branch naming patterns**, and **PR titles** using a single, unified engine. Built with native Node.js APIs for blazing-fast microsecond startup times.
+[![NPM Version](https://img.shields.io/npm/v/@chitrank2050/git-hygiene?color=blue&label=npm)](https://www.npmjs.com/package/@chitrank2050/git-hygiene)
+[![JSR Version](https://img.shields.io/jsr/v/@chitrank2050/git-hygiene?color=yellow&label=jsr)](https://jsr.io/@chitrank2050/git-hygiene)
+[![License](https://img.shields.io/github/license/chitranklabs/git-hygiene)](../../LICENSE)
+
+</div>
+
+<br />
+
+`git-hygiene` is a high-performance CLI tool that enforces **Conventional Commits**, **branch naming patterns**, and **PR titles** using a single, unified engine. Built with native Node.js APIs for blazing-fast microsecond startup times.
 
 ## 📦 Installation
 
@@ -16,7 +25,7 @@ npx @chitrank2050/git-hygiene --help
 
 ## 🛠️ Commands
 
-### `branch`
+### `branch` 🌿
 
 Validates the current checked-out branch name against your project rules. Perfect for `pre-push` hooks.
 
@@ -24,7 +33,7 @@ Validates the current checked-out branch name against your project rules. Perfec
 npx @chitrank2050/git-hygiene branch
 ```
 
-### `commit <text|file>`
+### `commit <text|file>` 📜
 
 Validates a commit message string or a file (like `.git/COMMIT_EDITMSG`). Perfect for `commit-msg` hooks.
 
@@ -34,7 +43,7 @@ npx @chitrank2050/git-hygiene commit "feat: add super speed"
 npx @chitrank2050/git-hygiene commit .git/COMMIT_EDITMSG
 ```
 
-### `title <text>`
+### `title <text>` 🏷️
 
 Validates a Pull Request title string.
 
@@ -60,4 +69,4 @@ pre-push:
 
 ## 📜 License
 
-MIT
+MIT - see [LICENSE](../../LICENSE) for details.

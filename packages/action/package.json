@@ -1,5 +1,6 @@
 {
   "name": "@chitrank2050/git-hygiene-action",
+  "private": true,
   "version": "0.1.0",
   "description": "GitHub Action for git-hygiene. A zero-dependency metadata validator for conventional commits, branch names, and PR titles.",
   "author": {

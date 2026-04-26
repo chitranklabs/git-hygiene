@@ -6,28 +6,28 @@
 
   <p>
   <a href="https://github.com/chitranklabs/git-hygiene/actions/workflows/ci.yml">
-    <img src="https://github.com/chitranklabs/git-hygiene/actions/workflows/ci.yml/badge.svg" alt="CI Status"/>
+    <img src="https://github.com/chitranklabs/git-hygiene/actions/workflows/ci.yml/badge.svg" alt="CI Status" />
   </a>
   <a href="https://bestpractices.coreinfrastructure.org/projects/1">
-    <img src="https://bestpractices.coreinfrastructure.org/projects/1/badge" alt="Best Practices">
+    <img src="https://bestpractices.coreinfrastructure.org/projects/1/badge" alt="Best Practices" />
   </a>
   <a href="https://github.com/chitranklabs/git-hygiene/actions/workflows/scorecard.yml">
-    <img src="https://github.com/chitranklabs/git-hygiene/actions/workflows/scorecard.yml/badge.svg" alt="Scorecard Status"/>
+    <img src="https://github.com/chitranklabs/git-hygiene/actions/workflows/scorecard.yml/badge.svg" alt="Scorecard Status" />
   </a>
   <a href="https://scorecard.dev/viewer/?uri=github.com/chitranklabs/git-hygiene">
-    <img src="https://api.scorecard.dev/projects/github.com/chitranklabs/git-hygiene/badge" alt="OpenSSF Scorecard">
+    <img src="https://api.scorecard.dev/projects/github.com/chitranklabs/git-hygiene/badge" alt="OpenSSF Scorecard" />
   </a>
   <a href="https://codecov.io/gh/chitranklabs/git-hygiene">
-    <img src="https://codecov.io/gh/chitranklabs/git-hygiene/branch/main/graph/badge.svg" alt="Code Coverage"/>
+    <img src="https://codecov.io/gh/chitranklabs/git-hygiene/branch/main/graph/badge.svg" alt="Code Coverage" />
   </a>
   <a href="https://www.npmjs.com/package/@chitrank2050/git-hygiene">
-    <img src="https://img.shields.io/npm/v/@chitrank2050/git-hygiene?color=blue&label=npm" alt="NPM Version"/>
+    <img src="https://img.shields.io/npm/v/@chitrank2050/git-hygiene?color=blue&label=npm" alt="NPM Version" />
   </a>
   <a href="https://jsr.io/@chitrank2050/git-hygiene">
-    <img src="https://img.shields.io/jsr/v/@chitrank2050/git-hygiene?color=yellow&label=jsr" alt="JSR Version"/>
+    <img src="https://img.shields.io/jsr/v/@chitrank2050/git-hygiene?color=yellow&label=jsr" alt="JSR Version" />
   </a>
   <a href="./LICENSE">
-    <img src="https://img.shields.io/github/license/chitranklabs/git-hygiene" alt="License"/>
+    <img src="https://img.shields.io/github/license/chitranklabs/git-hygiene" alt="License" />
   </a>
 
 [Features](#features) • [Installation](#installation) • [Usage](#usage) • [Architecture](#architecture) • [Contributing](#contributing)
