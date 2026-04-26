@@ -59,11 +59,15 @@ export async function validateCommit(message: string): Promise<ValidationResult>
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const rules: any = {
     'type-enum': [2, 'always', config.types],
-    'type-case': [2, 'always', 'lower-case'],
+    'type-case': [2, 'always', config.typeCase],
     'type-empty': [2, 'never'],
+    'scope-case': [2, 'always', config.scopeCase],
+    'scope-empty': [config.allowEmptyScope ? 0 : 2, 'never'],
     'subject-empty': [2, 'never'],
-    'subject-full-stop': [2, 'never', '.'],
-    'header-max-length': [2, 'always', 72],
+    'subject-full-stop': [2, config.subjectFullStop, '.'],
+    'header-max-length': [2, 'always', config.maxHeaderLength],
+    'body-max-line-length': [2, 'always', config.maxBodyLength],
+    'body-min-length': [2, 'always', config.minBodyLength],
   };
 
   const report = await lint(message, rules);

@@ -15,6 +15,37 @@ export interface GitHygieneConfig {
    * Typically base branches like 'main', 'master', 'development'.
    */
   ignoreBranches: string[];
+
+  /**
+   * The maximum allowed length for the commit message header (first line).
+   * Default is 72 characters (Conventional Commits standard).
+   */
+  maxHeaderLength: number;
+
+  /**
+   * Minimum and maximum allowed length for the commit message body.
+   */
+  maxBodyLength?: number;
+  minBodyLength?: number;
+
+  /**
+   * Rules for casing of types and scopes.
+   * Default is 'lower-case'.
+   */
+  typeCase?: string;
+  scopeCase?: string;
+
+  /**
+   * Whether to allow an empty scope in PR titles and commit messages.
+   * Default is true.
+   */
+  allowEmptyScope?: boolean;
+
+  /**
+   * Whether the subject should end with a full stop.
+   * Default is 'never'.
+   */
+  subjectFullStop?: 'always' | 'never';
 }
 
 /**
