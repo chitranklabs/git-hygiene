@@ -17,6 +17,8 @@ All notable changes to this project will be documented in this file.
 - **release:** Bump version to 0.1.2  ([a1f62c2](a1f62c24c03c19a18ce8b97610350030afec56a5)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
 - Update maxHeaderLength to 100 in constants and remove redundant config from package.json ([b1a838a](b1a838ae59c30d46bd8316d5bf1baf2eb693e791)) by @chitrank2050
 - Increase default maxHeaderLength from 72 to 100 across documentation and config ([ae99ac9](ae99ac9d9b6306a723e14c8beb25350d5ba4ac24)) by @chitrank2050
+- Update release workflow to sync versioning for both NPM and JSR packages ([047f4d8](047f4d8ae50751d6ff36b1867e65b9713056f51e)) by @chitrank2050
+- **release:** Bump version to v0.1.2  ([7fe59ba](7fe59ba1af525ce354321b516cdd6c8e8b101c4a)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
 
 ## [0.1.1] - 2026-04-26
 
