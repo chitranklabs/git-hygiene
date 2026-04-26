@@ -149,7 +149,7 @@ jobs:
           for pkg in packages/*; do
             if [ -f "$pkg/jsr.json" ]; then
               echo "🚀 Publishing $pkg to JSR via OIDC..."
-              (cd "$pkg" && npx jsr publish --allow-slow-types)
+              (cd "$pkg" && npx jsr publish --allow-slow-types --allow-dirty)
             fi
           done
 

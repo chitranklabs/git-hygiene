@@ -39,3 +39,8 @@ Thumbs.db
 osv-scanner
 gitleaks
 gitleaks.tar.gz
+
+# Maintenance & Temporary
+.gemini/
+scratch/
+git-cliff/
