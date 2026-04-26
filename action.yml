@@ -2,6 +2,10 @@ name: 'Git Hygiene Validator'
 description: 'Zero-dependency metadata validator for Commits, Branches, and PR Titles'
 author: 'Chitrank Agnihotri'
 
+branding:
+  icon: 'wind'
+  color: 'blue'
+
 inputs:
   command:
     description: 'The validation command to run (branch, title, commit)'
