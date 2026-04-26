@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## [0.1.5] - 2026-04-26
 
+### 🚀 Features
+
+- Add branding icon and color to action metadata ([5c2582d](5c2582de363071757b34738875df170864f863ea)) by @chitrank2050
+
 ### 🚜 Refactor
 
 - Remove dedicated action package and consolidate logic into the repository root ([892a890](892a89054d563ee5537109f645e0a3fd31284a55)) by @chitrank2050
@@ -18,6 +22,8 @@ All notable changes to this project will be documented in this file.
 
 - Update changelog with v0.1.4 release and clean up formatting ([0e9a240](0e9a240a308e93fda4580611b835473a65a3f13a)) by @chitrank2050
 - Update workflow trigger name and document GitHub Action usage in README ([d7e6038](d7e60380ddbcd6728ea003c0df759b328b4999b8)) by @chitrank2050
+- Update permissions and add strict error handling to auto-approve workflow scripts ([34b2359](34b2359d7a73290f7b484af8443312a283c4ae1a)) by @chitrank2050
+- **release:** Bump version to v0.1.5 ([6b623be](6b623be6a739545498d8d274788a61aeb85919df)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
 
 ## [0.1.4] - 2026-04-26
 
