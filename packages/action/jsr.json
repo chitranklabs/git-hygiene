@@ -1,5 +1,5 @@
 {
-  "name": "@chitrank2050/git-hygiene-core",
+  "name": "@chitrank2050/git-hygiene-action",
   "version": "0.1.0",
   "exports": "./src/index.ts"
 }

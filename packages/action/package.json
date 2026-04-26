@@ -1,7 +1,7 @@
 {
-  "name": "@git-hygiene/action",
+  "name": "@chitrank2050/git-hygiene-action",
   "version": "0.1.0",
-  "description": "GitHub Action wrapper for git-hygiene metadata validator.",
+  "description": "GitHub Action for git-hygiene. A zero-dependency metadata validator for conventional commits, branch names, and PR titles.",
   "author": {
     "name": "Chitrank Agnihotri",
     "email": "chitrank2050@gmail.com",
@@ -18,13 +18,37 @@
   "homepage": "https://github.com/chitranklabs/git-hygiene/tree/main/packages/action#readme",
   "keywords": [
     "git",
-    "github-actions",
     "conventional-commits",
     "branch-naming",
     "lint",
     "hygiene",
-    "metadata"
+    "commitlint",
+    "metadata",
+    "github-action"
   ],
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "action.yml"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --dts --clean --minify",
+    "test": "node --experimental-strip-types --test tests/**/*.test.ts",
+    "lint": "eslint src/**/*.ts",
+    "lint:fix": "eslint src/**/*.ts --fix",
+    "format": "prettier --write src/**/*.ts",
+    "format:check": "prettier --check src/**/*.ts"
+  },
+  "dependencies": {
+    "@chitrank2050/git-hygiene-core": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^25.6.0"
+  },
   "engines": {
     "node": ">=24.0.0"
   }

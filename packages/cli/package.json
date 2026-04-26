@@ -1,5 +1,5 @@
 {
-  "name": "git-hygiene",
+  "name": "@chitrank2050/git-hygiene",
   "version": "0.1.0",
   "description": "The ultimate zero-dependency metadata validator for modern Git workflows. CLI tool.",
   "author": {
@@ -24,28 +24,29 @@
     "hygiene",
     "commitlint",
     "metadata",
-    "cli",
-    "zero-dependency"
+    "cli"
   ],
   "type": "module",
   "bin": {
     "git-hygiene": "./dist/cli.js"
   },
+  "main": "./dist/cli.js",
+  "types": "./dist/cli.d.ts",
   "files": [
     "dist",
     "README.md",
     "LICENSE"
   ],
   "scripts": {
-    "build": "tsup src/cli.ts --format esm --clean --minify --shims",
-    "dev": "node --experimental-strip-types src/cli.ts",
+    "build": "tsup src/cli.ts --format esm --dts --clean --minify",
+    "test": "node --experimental-strip-types --test tests/**/*.test.ts",
     "lint": "eslint src/**/*.ts",
     "lint:fix": "eslint src/**/*.ts --fix",
     "format": "prettier --write src/**/*.ts",
     "format:check": "prettier --check src/**/*.ts"
   },
   "dependencies": {
-    "@git-hygiene/core": "workspace:*",
+    "@chitrank2050/git-hygiene-core": "workspace:*",
     "picocolors": "^1.1.1"
   },
   "devDependencies": {
