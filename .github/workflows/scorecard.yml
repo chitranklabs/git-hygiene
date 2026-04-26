@@ -2,7 +2,7 @@
 # OpenSSF Scorecard Analysis
 #
 # Analyzes the repository for security best practices.
-# Note: This workflow has strict restrictions (no global env).
+# Note: This workflow has strict restrictions (NO env vars allowed).
 # =============================================================
 
 name: Scorecard 🛡️
@@ -29,11 +29,6 @@ jobs:
       id-token: write
       contents: read
       actions: read
-
-    # NOTE: Move env here to satisfy Scorecard restrictions
-    env:
-      NODE_VERSION: 24
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
     steps:
       - name: Harden Runner 🛡️
