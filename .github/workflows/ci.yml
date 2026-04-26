@@ -1,8 +1,8 @@
 # =============================================================
 # CI & Security Analysis ⚡️
 #
-# Optimized primary pipeline for code quality and security.
-# Triggers only when relevant files change to save minutes.
+# Primary pipeline for code quality and security.
+# Optimized to run only when relevant files change.
 # =============================================================
 
 name: CI 🌊
@@ -11,11 +11,25 @@ on:
   push:
     branches: [main]
     paths-ignore:
+      # Documentation
       - 'docs/**'
+      - 'assets/**'
+      # Markdown (community health & repo meta)
       - '*.md'
+      - '.github/ISSUE_TEMPLATE/**'
+      - '.github/PULL_REQUEST_TEMPLATE.md'
+      - '.github/FUNDING.yml'
+      - '.github/CODEOWNERS'
+      # Editor & IDE configs
       - '.vscode/**'
       - '.editorconfig'
+      # Environment examples
+      - '.env.example'
+      # Dependency management (Renovate handles PRs)
+      - 'renovate.json'
+      # Changelog & release tooling config
       - 'cliff.toml'
+      # Git hooks config (local-only)
       - 'lefthook.yml'
   pull_request:
     branches: [main]
@@ -38,8 +52,10 @@ jobs:
     name: Detect Changes 🔍
     runs-on: ubuntu-latest
     outputs:
-      logic: ${{ steps.filter.outputs.logic }}
-      docs: ${{ steps.filter.outputs.docs }}
+      src: ${{ steps.filter.outputs.src }}
+      deps: ${{ steps.filter.outputs.deps }}
+      lint: ${{ steps.filter.outputs.lint }}
+      workflows: ${{ steps.filter.outputs.workflows }}
     steps:
       - name: Harden Runner 🛡️
         uses: step-security/harden-runner@8d3c67de8e2fe68ef647c8db1e6a09f647780f40 # v2.19.0
@@ -55,21 +71,23 @@ jobs:
         id: filter
         with:
           filters: |
-            logic:
+            src:
               - 'packages/**'
-              - 'package.json'
+            deps:
               - 'pnpm-lock.yaml'
+              - 'package.json'
+            lint:
+              - 'eslint.config.mjs'
               - 'tsconfig.json'
-              - 'turbo.json'
-            docs:
-              - 'docs/**'
-              - '*.md'
+            workflows:
+              - '.github/workflows/**'
+              - '.github/actions/**'
 
   # ─── QUALITY ASSURANCE ───────────────────────────────────────
   quality:
     name: Hygiene & Security 🧼🛡️
     needs: changes
-    if: needs.changes.outputs.logic == 'true'
+    if: needs.changes.outputs.src == 'true' || needs.changes.outputs.deps == 'true' || needs.changes.outputs.lint == 'true' || needs.changes.outputs.workflows == 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Harden Runner 🛡️
@@ -83,7 +101,7 @@ jobs:
           persist-credentials: false
 
       - name: Install pnpm 📦
-        uses: pnpm/action-setup@903f9c1a6ebcba6cf41d87230be49611ac97822e # v6.0.3
+        uses: pnpm/action-setup@fe39f3513467c6999335a02e6900222f7797b0a7 # v4.1.0
 
       - name: Setup Node.js 🟢
         uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
@@ -99,16 +117,20 @@ jobs:
           echo "::group::Starting Parallel Checks"
           mkdir -p .ci-status
 
-          # 1. Turbo Build
-          (pnpm build > .ci-status/build.log 2>&1 || echo "1" > .ci-status/build.fail) &
+          # 1. Build (only if src or deps changed)
+          if [ "${{ needs.changes.outputs.src }}" == "true" ] || [ "${{ needs.changes.outputs.deps }}" == "true" ]; then
+            (pnpm build > .ci-status/build.log 2>&1 || echo "1" > .ci-status/build.fail) &
+          fi
 
-          # 2. Turbo Test
-          (pnpm test > .ci-status/test.log 2>&1 || echo "1" > .ci-status/test.fail) &
+          # 2. Test (only if src changed)
+          if [ "${{ needs.changes.outputs.src }}" == "true" ]; then
+            (pnpm test > .ci-status/test.log 2>&1 || echo "1" > .ci-status/test.fail) &
+          fi
 
-          # 3. Turbo Lint
+          # 3. Lint
           (pnpm lint > .ci-status/lint.log 2>&1 || echo "1" > .ci-status/lint.fail) &
 
-          # 4. OSV Scanner (Security)
+          # 4. OSV Scanner
           curl -L https://github.com/google/osv-scanner/releases/download/v2.3.5/osv-scanner_linux_amd64 -o osv-scanner
           chmod +x osv-scanner
           (./osv-scanner --lockfile=pnpm-lock.yaml > .ci-status/osv.log 2>&1 || echo "1" > .ci-status/osv.fail) &
