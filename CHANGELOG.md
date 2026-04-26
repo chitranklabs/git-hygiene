@@ -22,6 +22,8 @@ All notable changes to this project will be documented in this file.
 - Update release workflow to sync versioning for both NPM and JSR packages ([047f4d8](047f4d8ae50751d6ff36b1867e65b9713056f51e)) by @chitrank2050
 - **release:** Bump version to v0.1.2  ([7fe59ba](7fe59ba1af525ce354321b516cdd6c8e8b101c4a)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
 - **release:** Bump version to v0.1.2  ([899bd2f](899bd2f53d54697e0295767ae8f010868a962c46)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
+- Dynamically update core package dependency versions during JSR publication ([7f44522](7f44522ce8c09f6d99885ef8a9e062b6b2bb691c)) by @chitrank2050
+- **release:** Bump version to v0.1.2  ([2181482](2181482afeac483bbdfddb8ede12380ca5ff50e3)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
 
 ## [0.1.1] - 2026-04-26
 
