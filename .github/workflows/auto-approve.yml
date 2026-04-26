@@ -11,7 +11,7 @@ on:
   # zizmor: ignore[dangerous-triggers]
   workflow_run:
     workflows:
-      - 'CI 🌊'
+      - 'CI & Security Analysis ⚡️'
     branches:
       - 'renovate/**'
       - 'chore/changelog-*'
@@ -20,12 +20,8 @@ on:
       - completed
 
 permissions:
-  contents: write
-  pull-requests: write
-
-env:
-  NODE_VERSION: 24
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+  contents: read # No longer needs write to merge
+  pull-requests: write # Required to post an approval review
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.workflow_run.id }}
@@ -140,6 +136,9 @@ jobs:
         run: |
           # 1. Smart Token Selection
           # GitHub prevents a bot from approving its own PR.
+          # If the PR was created by our bot, we use the default GITHUB_TOKEN to approve it.
+          # Otherwise, we use the Bot Token which has more power to bypass rules.
+
           if [[ "$ACTOR" == *"chitrank"* && "$ACTOR" == *"[bot]"* ]]; then
             echo "🤖 PR created by our bot ($ACTOR). Using DEFAULT_TOKEN for approval."
             export GH_TOKEN="$DEFAULT_TOKEN"
