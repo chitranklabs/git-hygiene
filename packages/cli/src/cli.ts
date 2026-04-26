@@ -45,8 +45,9 @@ async function main() {
 
     switch (command) {
       case 'branch': {
-        const currentBranch = execSync('git rev-parse --abbrev-ref HEAD').toString().trim();
-        report(validateBranch(currentBranch));
+        const branchToValidate =
+          arg || execSync('git rev-parse --abbrev-ref HEAD').toString().trim();
+        report(validateBranch(branchToValidate));
         break;
       }
       case 'title': {

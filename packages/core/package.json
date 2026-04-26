@@ -43,7 +43,7 @@
   "scripts": {
     "build": "tsup src/index.ts --format esm --dts --clean --minify",
     "test": "node --experimental-strip-types --test tests/**/*.test.ts",
-    "test:cov": "node --experimental-strip-types --test --experimental-test-coverage --test-reporter=lcov --test-reporter-destination=coverage/lcov.info tests/**/*.test.ts",
+    "test:cov": "mkdir -p coverage && node --experimental-strip-types --test --experimental-test-coverage --test-reporter=lcov --test-reporter-destination=coverage/lcov.info tests/**/*.test.ts",
     "lint": "eslint src/**/*.ts",
     "lint:fix": "eslint src/**/*.ts --fix",
     "format": "prettier --write src/**/*.ts",
