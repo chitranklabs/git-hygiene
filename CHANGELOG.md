@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.3] - 2026-04-26
+
+### ⚙️ Miscellaneous Tasks
+
+- Update JSR metadata with descriptions and publication filters ([cd4076e](cd4076ec433a7d7188244575145a2674fa599cd0)) by @chitrank2050
+- **release:** Bump version to v0.1.3 ([f10e8be](f10e8beebde9ecbb137ec4faadabead7445d5ae4)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
+
 ## [0.1.2] - 2026-04-26
 
 ### 🚜 Refactor
