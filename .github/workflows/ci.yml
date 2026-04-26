@@ -110,13 +110,16 @@ jobs:
         run: pnpm install --frozen-lockfile --prefer-offline
 
       - name: Run Parallel Checks ⚡️
+        env:
+          SRC_CHANGED: ${{ needs.changes.outputs.src }}
+          DEPS_CHANGED: ${{ needs.changes.outputs.deps }}
         run: |
           echo "::group::Starting Parallel Checks"
           mkdir -p .ci-status
-          if [ "${{ needs.changes.outputs.src }}" == "true" ] || [ "${{ needs.changes.outputs.deps }}" == "true" ]; then
+          if [ "$SRC_CHANGED" == "true" ] || [ "$DEPS_CHANGED" == "true" ]; then
             (pnpm build > .ci-status/build.log 2>&1 || echo "1" > .ci-status/build.fail) &
           fi
-          if [ "${{ needs.changes.outputs.src }}" == "true" ]; then
+          if [ "$SRC_CHANGED" == "true" ]; then
             (pnpm test > .ci-status/test.log 2>&1 || echo "1" > .ci-status/test.fail) &
           fi
           (pnpm lint > .ci-status/lint.log 2>&1 || echo "1" > .ci-status/lint.fail) &
@@ -158,6 +161,9 @@ jobs:
           persist-credentials: false
 
       - name: Run Gitleaks 🕵️
-        uses: gitleaks/gitleaks-action@ff98106e4c7b2bc287b24eaf42907196329070c7 # v2.3.9
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}il-status-code 1
+        run: |
+          VERSION="8.24.0"
+          curl -L "https://github.com/gitleaks/gitleaks/releases/download/v${VERSION}/gitleaks_${VERSION}_linux_x64.tar.gz" -o gitleaks.tar.gz
+          tar -xzf gitleaks.tar.gz gitleaks
+          chmod +x gitleaks
+          ./gitleaks detect --source . --verbose --redact --fail-status-code 1

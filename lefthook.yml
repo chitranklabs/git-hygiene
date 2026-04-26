@@ -5,14 +5,26 @@
 pre-commit:
   parallel: true
   commands:
-    lint:
+    # 1. Block commits that contain secrets/credentials
+    secrets:
+      run: gitleaks protect --staged --redact -v
+
+    # 2. TypeScript files - ESLint fix + Prettier format
+    lint-ts:
       glob: '*.ts'
       run: pnpm exec eslint {staged_files} --fix && pnpm exec prettier --write {staged_files}
       stage_fixed: true
-    format:
-      glob: '*.{ts,json,md,yml,yaml}'
+
+    # 3. JSON / YAML - Prettier format only
+    lint-json-yml:
+      glob: '*.{json,yml,yaml}'
       run: pnpm exec prettier --write {staged_files}
       stage_fixed: true
+
+    # 4. GitHub Actions - Security linting
+    lint-actions:
+      glob: '.github/workflows/*.yml'
+      run: if command -v zizmor > /dev/null; then zizmor {staged_files}; else echo "zizmor not found, skipping actions lint. Install with 'brew install zizmor'"; fi
 
 commit-msg:
   commands:

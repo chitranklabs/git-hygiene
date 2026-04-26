@@ -34,5 +34,11 @@
   ],
   "engines": {
     "node": ">=24.0.0"
+  },
+  "dependencies": {
+    "@chitrank2050/git-hygiene-core": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^25.6.0"
   }
 }
