@@ -1,0 +1,5 @@
+{
+  "name": "@chitranklabs/git-hygiene-cli",
+  "version": "0.1.0",
+  "exports": "./src/cli.ts"
+}
