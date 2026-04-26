@@ -20,7 +20,7 @@ on:
       - completed
 
 permissions:
-  contents: read
+  contents: write
   pull-requests: write
 
 concurrency:
@@ -106,6 +106,7 @@ jobs:
           GH_TOKEN: ${{ steps.generate_token.outputs.token }}
           PR_NUMBER: ${{ steps.guard.outputs.pr_number }}
         run: |
+          set -euo pipefail
           # Fetch PR status including mergeability and all check states
           PR_DATA=$(gh pr view "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --json mergeable,statusCheckRollup)
           MERGEABLE=$(echo "$PR_DATA" | jq -r '.mergeable')
@@ -134,6 +135,7 @@ jobs:
           ACTOR: ${{ steps.guard.outputs.actor }}
           USER_ID: 'chitrank2050'
         run: |
+          set -euo pipefail
           # 1. Smart Token Selection
           # GitHub prevents a bot from approving its own PR.
           # If the PR was created by our bot, we use the default GITHUB_TOKEN to approve it.
