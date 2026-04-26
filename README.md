@@ -11,6 +11,9 @@
   <a href="https://jsr.io/@chitrank2050/git-hygiene">
     <img src="https://jsr.io/badges/@chitrank2050/git-hygiene" alt="JSR Version" />
   </a>
+  <a href="https://github.com/marketplace/actions/git-hygiene-validator">
+    <img src="https://img.shields.io/badge/Marketplace-Git%20Hygiene-blue?logo=github" alt="GitHub Marketplace" />
+  </a>
   <br/>
   <br/>
   <a href="https://github.com/chitranklabs/git-hygiene/actions/workflows/ci.yml">
@@ -43,12 +46,13 @@
 
 ## 📦 Registries & Links
 
-| Registry       | Package                          | URL                                                                                                              |
-| :------------- | :------------------------------- | :--------------------------------------------------------------------------------------------------------------- |
-| **NPM**        | `@chitrank2050/git-hygiene`      | [npmjs.com/package/@chitrank2050/git-hygiene](https://www.npmjs.com/package/@chitrank2050/git-hygiene)           |
-| **JSR**        | `@chitrank2050/git-hygiene`      | [jsr.io/@chitrank2050/git-hygiene](https://jsr.io/@chitrank2050/git-hygiene)                                     |
-| **Core (NPM)** | `@chitrank2050/git-hygiene-core` | [npmjs.com/package/@chitrank2050/git-hygiene-core](https://www.npmjs.com/package/@chitrank2050/git-hygiene-core) |
-| **Core (JSR)** | `@chitrank2050/git-hygiene-core` | [jsr.io/@chitrank2050/git-hygiene-core](https://jsr.io/@chitrank2050/git-hygiene-core)                           |
+| Registry        | Package                          | URL                                                                                                                  |
+| :-------------- | :------------------------------- | :------------------------------------------------------------------------------------------------------------------- |
+| **NPM**         | `@chitrank2050/git-hygiene`      | [npmjs.com/package/@chitrank2050/git-hygiene](https://www.npmjs.com/package/@chitrank2050/git-hygiene)               |
+| **JSR**         | `@chitrank2050/git-hygiene`      | [jsr.io/@chitrank2050/git-hygiene](https://jsr.io/@chitrank2050/git-hygiene)                                         |
+| **Marketplace** | `git-hygiene-validator`          | [github.com/marketplace/actions/git-hygiene-validator](https://github.com/marketplace/actions/git-hygiene-validator) |
+| **Core (NPM)**  | `@chitrank2050/git-hygiene-core` | [npmjs.com/package/@chitrank2050/git-hygiene-core](https://www.npmjs.com/package/@chitrank2050/git-hygiene-core)     |
+| **Core (JSR)**  | `@chitrank2050/git-hygiene-core` | [jsr.io/@chitrank2050/git-hygiene-core](https://jsr.io/@chitrank2050/git-hygiene-core)                               |
 
 ---
 
