@@ -19,7 +19,7 @@ on:
 jobs:
   prepare:
     name: Prepare Release PR 🚀
-    if: github.actor == github.repository_owner
+    if: github.actor == github.repository_owner || github.actor == 'chitrank2050'
     runs-on: ubuntu-latest
     permissions:
       contents: write

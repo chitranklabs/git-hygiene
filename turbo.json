@@ -9,6 +9,11 @@
       "dependsOn": ["build"],
       "inputs": ["src/**/*.ts", "tests/**/*.ts"]
     },
+    "test:cov": {
+      "dependsOn": ["build"],
+      "inputs": ["src/**/*.ts", "tests/**/*.ts"],
+      "outputs": ["coverage/**"]
+    },
     "lint": {},
     "lint:fix": {},
     "format": {},

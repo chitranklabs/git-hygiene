@@ -23,7 +23,7 @@ jobs:
     if: |
       github.event.pull_request.merged == true &&
       contains(github.event.pull_request.labels.*.name, 'release') &&
-      github.actor == github.repository_owner
+      (github.actor == github.repository_owner || github.actor == 'chitrank2050' || github.event.pull_request.user.login == 'chitrank-actions[bot]')
     runs-on: ubuntu-latest
     env:
       NODE_VERSION: 24
