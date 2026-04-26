@@ -2,12 +2,27 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.2] - 2026-04-26
+
+### ⚙️ Miscellaneous Tasks
+
+- Renovate config to include merge confidence, refine matching rules & group actions deps ([feab45a](feab45af018de9e9e07edfbdf1b88620ead6aa36)) by @chitrank2050
+
 ## [0.1.1] - 2026-04-26
+
+### 🚀 Features
+
+- Add configuration for allowed commit types to package manifest files ([78e8a93](78e8a931d9ad67ef50621598918156b22571e3eb)) by @chitrank2050
 
 ### 📚 Documentation
 
 - Add repository structure to CONTRIBUTING.md and clean up redundant engine test assertion ([a40917f](a40917fb98bb2e8eceed9d7f5a1ecc58e56f2a24)) by @chitrank2050
 - Add input table to README and migrate Gitleaks scan to official GitHub Action ([858f6c4](858f6c41df7f11b062ed7b61e4e3514726b38601)) by @chitrank2050
+
+### ⚙️ Miscellaneous Tasks
+
+- Add MIT license field to jsr.json files in core and cli packages ([f385a7e](f385a7e6442d18f24be9a473f8e2eadaa669062a)) by @chitrank2050
+- **release:** Bump version to 0.1.1  ([6490c0f](6490c0f7a7a7f1f89c01fda4adabbac04079f00f)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
 
 ## [0.1.0] - 2026-04-26
 
