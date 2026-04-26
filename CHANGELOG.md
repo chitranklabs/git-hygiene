@@ -4,9 +4,19 @@ All notable changes to this project will be documented in this file.
 
 ## [0.1.2] - 2026-04-26
 
+### 🚜 Refactor
+
+- Improve PR authorization logic and add draft status validation to auto-approve workflow ([900a8f9](900a8f90300bc27763e67b4d68eac16f6d2f3f1a)) by @chitrank2050
+- Streamline auto-approve workflow authorization, permissions, and status checks ([77ef074](77ef074dd5886282059102e9fcc41e8ce48e5430)) by @chitrank2050
+
 ### ⚙️ Miscellaneous Tasks
 
 - Renovate config to include merge confidence, refine matching rules & group actions deps ([feab45a](feab45af018de9e9e07edfbdf1b88620ead6aa36)) by @chitrank2050
+- Update contents permission to write in auto-approve workflow ([b0a44cc](b0a44cc2d5a8f5edd848516f169ca37909aded1d)) by @chitrank2050
+- Update gitignore and allow dirty state in jsr publish workflow ([72d661c](72d661c31a90933ff7c0b2f992dbe5f6af706b7b)) by @chitrank2050
+- **release:** Bump version to 0.1.2  ([a1f62c2](a1f62c24c03c19a18ce8b97610350030afec56a5)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
+- Update maxHeaderLength to 100 in constants and remove redundant config from package.json ([b1a838a](b1a838ae59c30d46bd8316d5bf1baf2eb693e791)) by @chitrank2050
+- Increase default maxHeaderLength from 72 to 100 across documentation and config ([ae99ac9](ae99ac9d9b6306a723e14c8beb25350d5ba4ac24)) by @chitrank2050
 
 ## [0.1.1] - 2026-04-26
 
