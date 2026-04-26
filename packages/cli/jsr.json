@@ -1,6 +1,6 @@
 {
   "name": "@chitrank2050/git-hygiene",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "The ultimate zero-dependency metadata validator for modern Git workflows. CLI tool for enforcing conventional commits and branch naming.",
   "license": "MIT",
   "exports": "./src/cli.ts",
