@@ -1,7 +1,7 @@
 {
   "name": "git-hygiene-workspace",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "The ultimate zero-dependency metadata validator for modern Git workflows. Enforce conventional commits, branch naming patterns, and PR titles with blazing-fast native Node.js performance.",
   "author": {
     "name": "Chitrank Agnihotri",
