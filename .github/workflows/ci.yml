@@ -1,0 +1,61 @@
+# =============================================================
+# CI & Security Analysis 🌊
+#
+# Main CI pipeline to build, test, and lint the monorepo.
+# This workflow ensures code quality and correctness.
+# =============================================================
+
+name: CI 🌊
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+env:
+  NODE_VERSION: 24
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  quality:
+    name: Build, Test & Lint 🏗️
+    runs-on: ubuntu-latest
+    steps:
+      - name: Harden Runner 🛡️
+        uses: step-security/harden-runner@8d3c67de8e2fe68ef647c8db1e6a09f647780f40 # v2.19.0
+        with:
+          egress-policy: audit
+
+      - name: Checkout repository 📥
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+
+      - name: Setup Node.js 🟢
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Install pnpm 📦
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Install dependencies 📥
+        run: pnpm install --frozen-lockfile
+
+      - name: Turbo Lint 🧹
+        run: pnpm lint
+
+      - name: Turbo Format Check 🎨
+        run: pnpm format:check
+
+      - name: Turbo Test 🧪
+        run: pnpm test
+
+      - name: Turbo Build 🏗️
+        run: pnpm build
