@@ -57,5 +57,22 @@
   },
   "engines": {
     "node": ">=24.0.0"
+  },
+  "git-hygiene": {
+    "types": [
+      "feat",
+      "fix",
+      "chore",
+      "docs",
+      "style",
+      "refactor",
+      "perf",
+      "test",
+      "build",
+      "ci",
+      "revert",
+      "maintenance",
+      "renovate"
+    ]
   }
 }
