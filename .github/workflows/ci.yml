@@ -122,7 +122,6 @@ jobs:
           fi
           if [ "$HAS_SRC" == "true" ]; then
             (pnpm test:cov > .ci-status/test.log 2>&1 || echo "1" > .ci-status/test.fail) &
-            echo "tests_ran=true" >> "$GITHUB_OUTPUT"
           fi
           (pnpm lint > .ci-status/lint.log 2>&1 || echo "1" > .ci-status/lint.fail) &
           (pnpm lint:md > .ci-status/md.log 2>&1 || echo "1" > .ci-status/md.fail) &
@@ -146,7 +145,7 @@ jobs:
           exit $EXIT_CODE
 
       - name: Upload coverage to Codecov 📊
-        if: steps.run_checks.outputs.tests_ran == 'true'
+        if: needs.changes.outputs.src == 'true'
         uses: codecov/codecov-action@57e3a136b779b570ffcdbf80b3bdc90e7fab3de2 # v6.0.0
         with:
           token: ${{ secrets.CODECOV_TOKEN }}

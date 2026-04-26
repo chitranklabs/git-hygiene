@@ -83,7 +83,7 @@ jobs:
         with:
           token: ${{ steps.generate_token.outputs.token }}
           commit-message: 'chore(release): bump version to ${{ github.event.inputs.tag_name }}'
-          title: '🚀 Release ${{ github.event.inputs.tag_name }}'
+          title: 'chore(release): 🚀 ${{ github.event.inputs.tag_name }}'
           body: |
             <!-- autofill-start -->
             - chore(release): update CHANGELOG.md
