@@ -1,10 +1,14 @@
 {
   "name": "@chitrank2050/git-hygiene-core",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "The lightweight, zero-dependency validation engine behind git-hygiene. Core logic for branch and commit message enforcement.",
   "license": "MIT",
   "exports": "./src/index.ts",
   "publish": {
-    "exclude": ["tests", "scratch", ".github"]
+    "exclude": [
+      "tests",
+      "scratch",
+      ".github"
+    ]
   }
 }
