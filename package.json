@@ -45,7 +45,8 @@
     "format:check": "turbo format:check",
     "dev": "turbo dev",
     "deps:update": "pnpm update --interactive --latest -r",
-    "changelog": "git-cliff -o CHANGELOG.md",
+    "changelog": "bash scripts/generate-changelog.sh",
+    "tag": "bash scripts/git-tag.sh",
     "release": "pnpm build && pnpm changelog && echo 'Ready to publish!'"
   },
   "devDependencies": {
