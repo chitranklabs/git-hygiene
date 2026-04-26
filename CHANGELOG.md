@@ -8,13 +8,15 @@ All notable changes to this project will be documented in this file.
 
 - Update JSR metadata and bump version to v0.1.3 ([8a45c23](8a45c2397754d93bfc12f7f3e15bb1476f7194f7)) by @chitrank2050
 - Update tag pattern and standardize version formatting in release workflow ([8e8787d](8e8787d76f93eb11cc5375ae39a91771acfe6db8)) by @chitrank2050
+- Trim commit messages in changelog template ([54cf3de](54cf3deb1fddb9773b298adbb2822a6c79daacba)) by @chitrank2050
+- **release:** Bump version to v0.1.4 ([0dbb79e](0dbb79ed0596591f0530c047d61b8f22cfb92f19)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
 
 ## [0.1.3] - 2026-04-26
 
 ### ⚙️ Miscellaneous Tasks
 
 - Update JSR metadata with descriptions and publication filters ([cd4076e](cd4076ec433a7d7188244575145a2674fa599cd0)) by @chitrank2050
-- **release:** Bump version to v0.1.3  ([f10e8be](f10e8beebde9ecbb137ec4faadabead7445d5ae4)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
+- **release:** Bump version to v0.1.3 ([f10e8be](f10e8beebde9ecbb137ec4faadabead7445d5ae4)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
 
 ## [0.1.2] - 2026-04-26
 
@@ -30,14 +32,14 @@ All notable changes to this project will be documented in this file.
 - Renovate config to include merge confidence, refine matching rules & group actions deps ([feab45a](feab45af018de9e9e07edfbdf1b88620ead6aa36)) by @chitrank2050
 - Update contents permission to write in auto-approve workflow ([b0a44cc](b0a44cc2d5a8f5edd848516f169ca37909aded1d)) by @chitrank2050
 - Update gitignore and allow dirty state in jsr publish workflow ([72d661c](72d661c31a90933ff7c0b2f992dbe5f6af706b7b)) by @chitrank2050
-- **release:** Bump version to 0.1.2  ([a1f62c2](a1f62c24c03c19a18ce8b97610350030afec56a5)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
+- **release:** Bump version to 0.1.2 ([a1f62c2](a1f62c24c03c19a18ce8b97610350030afec56a5)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
 - Update maxHeaderLength to 100 in constants and remove redundant config from package.json ([b1a838a](b1a838ae59c30d46bd8316d5bf1baf2eb693e791)) by @chitrank2050
 - Increase default maxHeaderLength from 72 to 100 across documentation and config ([ae99ac9](ae99ac9d9b6306a723e14c8beb25350d5ba4ac24)) by @chitrank2050
 - Update release workflow to sync versioning for both NPM and JSR packages ([047f4d8](047f4d8ae50751d6ff36b1867e65b9713056f51e)) by @chitrank2050
-- **release:** Bump version to v0.1.2  ([7fe59ba](7fe59ba1af525ce354321b516cdd6c8e8b101c4a)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
-- **release:** Bump version to v0.1.2  ([899bd2f](899bd2f53d54697e0295767ae8f010868a962c46)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
+- **release:** Bump version to v0.1.2 ([7fe59ba](7fe59ba1af525ce354321b516cdd6c8e8b101c4a)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
+- **release:** Bump version to v0.1.2 ([899bd2f](899bd2f53d54697e0295767ae8f010868a962c46)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
 - Dynamically update core package dependency versions during JSR publication ([7f44522](7f44522ce8c09f6d99885ef8a9e062b6b2bb691c)) by @chitrank2050
-- **release:** Bump version to v0.1.2  ([2181482](2181482afeac483bbdfddb8ede12380ca5ff50e3)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
+- **release:** Bump version to v0.1.2 ([2181482](2181482afeac483bbdfddb8ede12380ca5ff50e3)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
 
 ## [0.1.1] - 2026-04-26
 
@@ -53,7 +55,7 @@ All notable changes to this project will be documented in this file.
 ### ⚙️ Miscellaneous Tasks
 
 - Add MIT license field to jsr.json files in core and cli packages ([f385a7e](f385a7e6442d18f24be9a473f8e2eadaa669062a)) by @chitrank2050
-- **release:** Bump version to 0.1.1  ([6490c0f](6490c0f7a7a7f1f89c01fda4adabbac04079f00f)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
+- **release:** Bump version to 0.1.1 ([6490c0f](6490c0f7a7a7f1f89c01fda4adabbac04079f00f)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
 
 ## [0.1.0] - 2026-04-26
 
@@ -124,7 +126,7 @@ All notable changes to this project will be documented in this file.
 - Update release PR title format and optimize CI coverage upload condition ([1f02eb8](1f02eb8259671b8c01ab0d5063e8e8d77700b026)) by @chitrank2050
 - Add rocket emoji to release pull request title ([fef1a64](fef1a64af80b3411483b96de290c7a338d16144d)) by @chitrank2050
 - Update changelog template to link github users and add remote repository configuration ([ef71397](ef713972906a0a6c47add22d721653cc17de719e)) by @chitrank2050
-- **release:** Bump version to 0.1.0  ([7a12644](7a12644c82a348bbfbd850c11b111c26717cc1a2)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
-- **release:** Bump version to 0.1.0  ([2556b6f](2556b6fec14e4e9740aa3bf85eed270b509ab2ca)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
+- **release:** Bump version to 0.1.0 ([7a12644](7a12644c82a348bbfbd850c11b111c26717cc1a2)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
+- **release:** Bump version to 0.1.0 ([2556b6f](2556b6fec14e4e9740aa3bf85eed270b509ab2ca)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
 
 <!-- generated by git-cliff -->
