@@ -129,15 +129,11 @@ jobs:
           pnpm -r publish --access public --no-git-checks
 
       - name: Publish to JSR 🦖
-        if: env.JSR_TOKEN != ''
-        env:
-          JSR_TOKEN: ${{ secrets.JSR_TOKEN }}
         run: |
           for pkg in packages/*; do
             if [ -f "$pkg/jsr.json" ]; then
-              cd "$pkg"
-              npx jsr publish --token $JSR_TOKEN
-              cd ../..
+              echo "🚀 Publishing $pkg to JSR via OIDC..."
+              (cd "$pkg" && npx jsr publish --allow-slow-types)
             fi
           done
 
