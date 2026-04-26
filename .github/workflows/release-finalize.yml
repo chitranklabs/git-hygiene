@@ -145,10 +145,19 @@ jobs:
           pnpm -r publish --access public --no-git-checks
 
       - name: Publish to JSR 🦖
+        env:
+          TAG_NAME: ${{ steps.vars.outputs.tag_name }}
         run: |
+          CLEAN_VERSION=$(echo "$TAG_NAME" | sed 's/^v//')
           for pkg in packages/*; do
             if [ -f "$pkg/jsr.json" ]; then
               echo "🚀 Publishing $pkg to JSR via OIDC..."
+
+              # Transform workspace:* to real version for JSR compatibility
+              if [ -f "$pkg/package.json" ]; then
+                jq ".dependencies[\"@chitrank2050/git-hygiene-core\"] = \"^$CLEAN_VERSION\"" "$pkg/package.json" > "$pkg/package.json.tmp" && mv "$pkg/package.json.tmp" "$pkg/package.json"
+              fi
+
               (cd "$pkg" && npx jsr publish --allow-slow-types --allow-dirty)
             fi
           done
