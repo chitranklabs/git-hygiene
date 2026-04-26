@@ -5,6 +5,14 @@
   <p>The ultimate zero-dependency metadata validator for modern Git workflows.</p>
 
   <p>
+  <a href="https://www.npmjs.com/package/@chitrank2050/git-hygiene">
+    <img src="https://img.shields.io/npm/v/@chitrank2050/git-hygiene?logo=npm&color=CB3837" alt="NPM Version" />
+  </a>
+  <a href="https://jsr.io/@chitrank2050/git-hygiene">
+    <img src="https://jsr.io/badges/@chitrank2050/git-hygiene" alt="JSR Version" />
+  </a>
+  <br/>
+  <br/>
   <a href="https://github.com/chitranklabs/git-hygiene/actions/workflows/ci.yml">
     <img src="https://github.com/chitranklabs/git-hygiene/actions/workflows/ci.yml/badge.svg" alt="CI Status" />
   </a>
@@ -20,12 +28,6 @@
   <a href="https://codecov.io/gh/chitranklabs/git-hygiene">
     <img src="https://codecov.io/gh/chitranklabs/git-hygiene/branch/main/graph/badge.svg" alt="Code Coverage" />
   </a>
-  <a href="https://www.npmjs.com/package/@chitrank2050/git-hygiene">
-    <img src="https://img.shields.io/npm/v/@chitrank2050/git-hygiene?color=blue&label=npm" alt="NPM Version" />
-  </a>
-  <a href="https://jsr.io/@chitrank2050/git-hygiene">
-    <img src="https://img.shields.io/jsr/v/@chitrank2050/git-hygiene?color=yellow&label=jsr" alt="JSR Version" />
-  </a>
   <a href="./LICENSE">
     <img src="https://img.shields.io/github/license/chitranklabs/git-hygiene" alt="License" />
   </a>
@@ -36,6 +38,17 @@
 </div>
 
 `git-hygiene` is a high-performance, **zero-dependency** engine designed to enforce perfect metadata across your entire Git lifecycle. Built natively for **Node.js 24+**, it validates Conventional Commits, branch naming patterns, and Pull Request titles with microsecond startup times.
+
+---
+
+## 📦 Registries & Links
+
+| Registry       | Package                          | URL                                                                                                              |
+| :------------- | :------------------------------- | :--------------------------------------------------------------------------------------------------------------- |
+| **NPM**        | `@chitrank2050/git-hygiene`      | [npmjs.com/package/@chitrank2050/git-hygiene](https://www.npmjs.com/package/@chitrank2050/git-hygiene)           |
+| **JSR**        | `@chitrank2050/git-hygiene`      | [jsr.io/@chitrank2050/git-hygiene](https://jsr.io/@chitrank2050/git-hygiene)                                     |
+| **Core (NPM)** | `@chitrank2050/git-hygiene-core` | [npmjs.com/package/@chitrank2050/git-hygiene-core](https://www.npmjs.com/package/@chitrank2050/git-hygiene-core) |
+| **Core (JSR)** | `@chitrank2050/git-hygiene-core` | [jsr.io/@chitrank2050/git-hygiene-core](https://jsr.io/@chitrank2050/git-hygiene-core)                           |
 
 ---
 
