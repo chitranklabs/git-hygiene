@@ -1,21 +1,24 @@
-export const ALLOWED_TYPES = [
-  'feat',
-  'fix',
-  'chore',
-  'docs',
-  'style',
-  'refactor',
-  'perf',
-  'test',
-  'build',
-  'ci',
-  'revert',
-  'maintenance',
-] as const;
+import { GitHygieneConfig } from './types.ts';
 
-export type MetadataType = (typeof ALLOWED_TYPES)[number];
-
-export const PATTERNS = {
-  BRANCH: new RegExp(`^(${ALLOWED_TYPES.join('|')})/.+$`),
-  TITLE: new RegExp(`^(${ALLOWED_TYPES.join('|')})(\\([a-z0-9-]+\\))?: .+$`),
-};
+/**
+ * @description
+ * The out-of-the-box standard configuration for git-hygiene.
+ * Adheres to the Conventional Commits specification.
+ */
+export const DEFAULT_CONFIG: GitHygieneConfig = {
+  types: [
+    'feat',
+    'fix',
+    'chore',
+    'docs',
+    'style',
+    'refactor',
+    'perf',
+    'test',
+    'build',
+    'ci',
+    'revert',
+    'maintenance',
+  ],
+  ignoreBranches: ['main', 'master', 'development', 'gh-pages'],
+} as const;

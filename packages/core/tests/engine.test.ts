@@ -8,8 +8,15 @@ describe('Validation Engine', () => {
       assert.strictEqual(validateBranch('feat/login-screen').valid, true);
     });
 
+    it('should accept ignored base branches natively', () => {
+      assert.strictEqual(validateBranch('main').valid, true);
+      assert.strictEqual(validateBranch('master').valid, true);
+      assert.strictEqual(validateBranch('development').valid, true);
+    });
+
     it('should reject invalid branch names', () => {
       assert.strictEqual(validateBranch('wrong-name').valid, false);
+      assert.strictEqual(validateBranch('feat-login').valid, false);
     });
   });
 
