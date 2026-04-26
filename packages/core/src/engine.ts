@@ -1,6 +1,6 @@
 import lint from '@commitlint/lint';
 import { loadConfig } from './config.ts';
-import { ValidationResult } from './types.ts';
+import type { ValidationResult } from './types.ts';
 
 /**
  * @description
@@ -56,6 +56,7 @@ export function validateTitle(title: string): ValidationResult {
 export async function validateCommit(message: string): Promise<ValidationResult> {
   const config = loadConfig();
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const rules: any = {
     'type-enum': [2, 'always', config.types],
     'type-case': [2, 'always', 'lower-case'],
@@ -68,6 +69,6 @@ export async function validateCommit(message: string): Promise<ValidationResult>
   const report = await lint(message, rules);
   if (report.valid) return { valid: true, message: 'Commit message is valid.' };
 
-  const errors = report.errors.map((err: any) => ` - ${err.message}`).join('\n');
+  const errors = report.errors.map((err: { message: string }) => ` - ${err.message}`).join('\n');
   return { valid: false, message: `Invalid commit message:\n${errors}` };
 }

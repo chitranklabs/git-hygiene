@@ -47,4 +47,3 @@ export interface ValidationResult {
   /** The expected format or rule (if invalid) */
   expected?: string;
 }
-

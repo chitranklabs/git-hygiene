@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { GitHygieneConfig, ResolvedConfig } from './types.ts';
+import type { GitHygieneConfig, ResolvedConfig } from './types.ts';
 import { DEFAULT_CONFIG } from './constants.ts';
 
 let cachedConfig: ResolvedConfig | null = null;
@@ -25,7 +25,7 @@ export function loadConfig(): ResolvedConfig {
         userConfig = pkg['git-hygiene'];
       }
     }
-  } catch (error) {
+  } catch {
     // Silently fallback to defaults if package.json is missing or invalid
   }
 

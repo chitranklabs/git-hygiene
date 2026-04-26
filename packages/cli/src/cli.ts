@@ -4,6 +4,7 @@ import { parseArgs } from 'node:util';
 import { execSync } from 'node:child_process';
 import pc from 'picocolors';
 import { validateBranch, validateTitle, validateCommit } from '@git-hygiene/core';
+import type { ValidationResult } from '@git-hygiene/core';
 
 const HELP_TEXT = `
 ${pc.bold('git-hygiene')} 🌊
@@ -67,13 +68,14 @@ async function main() {
         console.error(pc.red(`❌ Unknown command: ${command}`));
         process.exit(1);
     }
-  } catch (err: any) {
-    console.error(pc.red(`❌ Fatal Error: ${err.message}`));
+  } catch (err: unknown) {
+    const msg = err instanceof Error ? err.message : String(err);
+    console.error(pc.red(`❌ Fatal Error: ${msg}`));
     process.exit(1);
   }
 }
 
-function report(result: any) {
+function report(result: ValidationResult) {
   if (result.valid) {
     console.log(`${pc.green('✅')} ${result.message}`);
     process.exit(0);

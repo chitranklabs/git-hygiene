@@ -40,7 +40,9 @@
     "build": "tsup src/cli.ts --format esm --clean --minify --shims",
     "dev": "node --experimental-strip-types src/cli.ts",
     "lint": "eslint src/**/*.ts",
-    "format": "prettier --check src/**/*.ts"
+    "lint:fix": "eslint src/**/*.ts --fix",
+    "format": "prettier --write src/**/*.ts",
+    "format:check": "prettier --check src/**/*.ts"
   },
   "dependencies": {
     "@git-hygiene/core": "workspace:*",

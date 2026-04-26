@@ -1,4 +1,4 @@
-import { GitHygieneConfig } from './types.ts';
+import type { GitHygieneConfig } from './types.ts';
 
 /**
  * @description

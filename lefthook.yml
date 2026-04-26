@@ -6,12 +6,12 @@ pre-commit:
   parallel: true
   commands:
     lint:
-      glob: "*.ts"
-      run: pnpm eslint {staged_files} --fix
+      glob: '*.ts'
+      run: pnpm exec eslint {staged_files} --fix && pnpm exec prettier --write {staged_files}
       stage_fixed: true
     format:
-      glob: "*.{ts,json,md,yml,yaml}"
-      run: pnpm prettier --write {staged_files}
+      glob: '*.{ts,json,md,yml,yaml}'
+      run: pnpm exec prettier --write {staged_files}
       stage_fixed: true
 
 commit-msg:

@@ -10,7 +10,9 @@
       "inputs": ["src/**/*.ts", "tests/**/*.ts"]
     },
     "lint": {},
+    "lint:fix": {},
     "format": {},
+    "format:check": {},
     "dev": {
       "cache": false,
       "persistent": true
