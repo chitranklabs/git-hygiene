@@ -29,5 +29,6 @@
   "prHourlyLimit": 2,
   "vulnerabilityAlerts": {
     "enabled": true
-  }
+  },
+  "platformAutomerge": true
 }

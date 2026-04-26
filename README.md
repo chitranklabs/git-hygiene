@@ -6,9 +6,10 @@
 
 ## ✨ Why `git-hygiene`?
 
-Historically, enforcing Git standards required stringing together multiple tools: `commitlint` for messages, a custom shell script for branches, and a GitHub Action for PR titles. 
+Historically, enforcing Git standards required stringing together multiple tools: `commitlint` for messages, a custom shell script for branches, and a GitHub Action for PR titles.
 
 `git-hygiene` solves this by providing a **Unified Metadata Engine**:
+
 - **One Standard**: Define your types (`feat`, `fix`, `chore`, etc.) once. They apply everywhere.
 - **Zero Dependencies**: The CLI uses Node 24+ native `util.parseArgs` to start instantly. No `commander` or `yargs` overhead.
 - **Universal**: Run it locally via Lefthook/Husky or in CI via our provided GitHub Action.
@@ -19,10 +20,10 @@ Available on both **NPM** and **JSR**.
 
 ```bash
 # via NPM
-pnpm add -D git-hygiene
+pnpm add -D @chitrank2050/git-hygiene
 
 # via JSR
-npx jsr add @chitranklabs/git-hygiene-cli
+npx jsr add @chitrank2050/git-hygiene
 ```
 
 ## 🛠️ Usage
@@ -36,17 +37,17 @@ Validate branch names before pushing and commit messages before saving.
 commit-msg:
   commands:
     hygiene:
-      run: npx git-hygiene commit {1}
+      run: npx @chitrank2050/git-hygiene commit {1}
 
 pre-push:
   commands:
     hygiene:
-      run: npx git-hygiene branch
+      run: npx @chitrank2050/git-hygiene branch
 ```
 
 ### 2. GitHub Actions
 
-Validate PR titles natively in your CI pipeline.
+Validate PR titles natively in your CI pipeline. Use a full SHA pin for maximum security.
 
 ```yaml
 # .github/workflows/pr-title.yml
@@ -61,7 +62,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Validate PR Title 🌊
-        uses: chitranklabs/git-hygiene/packages/action@main
+        uses: chitranklabs/git-hygiene/packages/action@<SHA> # v0.1.0
         with:
           command: title
           value: ${{ github.event.pull_request.title }}
@@ -71,9 +72,9 @@ jobs:
 
 This project is built as a high-performance monorepo using Turborepo:
 
-- **`@git-hygiene/core`**: The standalone validation engine. Published to NPM and JSR.
-- **`git-hygiene`**: The zero-dependency CLI tool.
-- **`@git-hygiene/action`**: The GitHub Composite Action wrapper.
+- **[`@chitrank2050/git-hygiene-core`](./packages/core)**: The standalone validation engine.
+- **[`@chitrank2050/git-hygiene`](./packages/cli)**: The zero-dependency CLI tool.
+- **[`@chitrank2050/git-hygiene-action`](./packages/action)**: The GitHub Composite Action wrapper.
 
 ## 🤝 Contributing
 
@@ -81,11 +82,10 @@ We use `pnpm` and `turbo`.
 
 ```bash
 pnpm install
-pnpm dev    # Uses Node --experimental-strip-types
-pnpm test   # Uses Node native test runner
 pnpm build  # Bundles via tsup
+pnpm test   # Runs native Node.js tests
 ```
 
 ## 📜 License
 
-MIT © Chitrank Agnihotri
+MIT © [Chitrank Agnihotri](https://www.chitrankagnihotri.com)
