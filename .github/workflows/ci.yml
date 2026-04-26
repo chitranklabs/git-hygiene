@@ -163,8 +163,12 @@ jobs:
           persist-credentials: false
 
       - name: Run Gitleaks 🕵️
-        uses: gitleaks/gitleaks-action@ff98106e4c7b2bc287b24eaf42907196329070c7 # v2.3.9
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          fail-status-code: 1
+        run: |
+          # Fetch Gitleaks binary directly (Free & Fast)
+          VERSION="8.24.0"
+          curl -L https://github.com/gitleaks/gitleaks/releases/download/v${VERSION}/gitleaks_${VERSION}_linux_x64.tar.gz -o gitleaks.tar.gz
+          tar -xzf gitleaks.tar.gz gitleaks
+          chmod +x gitleaks
+
+          # Run scan on full history
+          ./gitleaks detect --verbose --redact
