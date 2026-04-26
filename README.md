@@ -1,21 +1,36 @@
 <div align="center">
   <img src="./assets/logo.png" alt="Git Hygiene Hero Banner" width="160" height="auto"/>
 
-# git-hygiene 🌊
+  <h1>git-hygiene 🌊</h1>
+  <p>The ultimate zero-dependency metadata validator for modern Git workflows.</p>
 
-**The ultimate zero-dependency metadata validator for modern Git workflows.**
-
-[![CI](https://github.com/chitranklabs/git-hygiene/actions/workflows/ci.yml/badge.svg)](https://github.com/chitranklabs/git-hygiene/actions/workflows/ci.yml)
-[![Scorecard](https://github.com/chitranklabs/git-hygiene/actions/workflows/scorecard.yml/badge.svg)](https://github.com/chitranklabs/git-hygiene/actions/workflows/scorecard.yml)
-[![NPM Version](https://img.shields.io/npm/v/@chitrank2050/git-hygiene?color=blue&label=npm)](https://www.npmjs.com/package/@chitrank2050/git-hygiene)
-[![JSR Version](https://img.shields.io/jsr/v/@chitrank2050/git-hygiene?color=yellow&label=jsr)](https://jsr.io/@chitrank2050/git-hygiene)
-[![License](https://img.shields.io/github/license/chitranklabs/git-hygiene)](./LICENSE)
+  <p>
+  <a href="https://github.com/chitranklabs/git-hygiene/actions/workflows/ci.yml">
+    <img src="https://github.com/chitranklabs/git-hygiene/actions/workflows/ci.yml/badge.svg" alt="CI Status"/>
+  </a>
+  <a href="https://bestpractices.coreinfrastructure.org/projects/1">
+    <img src="https://bestpractices.coreinfrastructure.org/projects/1/badge" alt="Best Practices">
+  </a>
+  <a href="https://github.com/chitranklabs/git-hygiene/actions/workflows/scorecard.yml">
+    <img src="https://github.com/chitranklabs/git-hygiene/actions/workflows/scorecard.yml/badge.svg" alt="Scorecard Status"/>
+  </a>
+  <a href="https://codecov.io/gh/chitranklabs/git-hygiene">
+    <img src="https://codecov.io/gh/chitranklabs/git-hygiene/branch/main/graph/badge.svg" alt="Code Coverage"/>
+  </a>
+  <a href="https://www.npmjs.com/package/@chitrank2050/git-hygiene">
+    <img src="https://img.shields.io/npm/v/@chitrank2050/git-hygiene?color=blue&label=npm" alt="NPM Version"/>
+  </a>
+  <a href="https://jsr.io/@chitrank2050/git-hygiene">
+    <img src="https://img.shields.io/jsr/v/@chitrank2050/git-hygiene?color=yellow&label=jsr" alt="JSR Version"/>
+  </a>
+  <a href="./LICENSE">
+    <img src="https://img.shields.io/github/license/chitranklabs/git-hygiene" alt="License"/>
+  </a>
 
 [Features](#features) • [Installation](#installation) • [Usage](#usage) • [Architecture](#architecture) • [Contributing](#contributing)
 
+  <br/>
 </div>
-
-<br />
 
 `git-hygiene` is a high-performance, **zero-dependency** engine designed to enforce perfect metadata across your entire Git lifecycle. Built natively for **Node.js 24+**, it validates Conventional Commits, branch naming patterns, and Pull Request titles with microsecond startup times.
 
@@ -23,13 +38,13 @@
 
 ## Features <a id="features"></a> ✨
 
-| Feature | Description                |
-| ------- | -------------------------- | --------------------------------------------------------------------------- |
-| 🧼      | **Unified Engine**         | Define your standards once. Enforce them in commits, branches, and PRs.     |
-| ⚡      | **Zero Dependencies**      | Built using native Node.js APIs. No `commander`, `yargs`, or `chalk` bloat. |
-| 🛡️      | **Hardened Security**      | 100% SHA-pinned workflows and OpenSSF Scorecard verified.                   |
-| 📦      | **Universal Distribution** | Native support for **NPM**, **JSR**, and **GitHub Actions**.                |
-| 🧠      | **Context Aware**          | Automatically detects `.git` environment and CI context.                    |
+| Feature                       | Description                                                                 |
+| ----------------------------- | --------------------------------------------------------------------------- |
+| 🧼 **Unified Engine**         | Define your standards once. Enforce them in commits, branches, and PRs.     |
+| ⚡ **Zero Dependencies**      | Built using native Node.js APIs. No `commander`, `yargs`, or `chalk` bloat. |
+| 🛡️ **Hardened Security**      | 100% SHA-pinned workflows & OpenSSF Scorecard verified.                     |
+| 📦 **Universal Distribution** | Native support for **NPM**, **JSR**, and **GitHub Actions**.                |
+| 🧠 **Context Aware**          | Automatically detects `.git` environment and CI context.                    |
 
 ---
 
@@ -143,11 +158,11 @@ Configure your rules in the root `package.json`.
 
 ```mermaid
 graph TD
-    A[Consumer Project] -->|CLI| B(@chitrank2050/git-hygiene)
-    A -->|Action| C(@chitrank2050/git-hygiene-action)
-    B --> D(@chitrank2050/git-hygiene-core)
+    A[Consumer Project] -->|CLI| B["@chitrank2050/git-hygiene"]
+    A -->|Action| C["@chitrank2050/git-hygiene-action"]
+    B --> D["@chitrank2050/git-hygiene-core"]
     C --> D
-    D -->|Engine| E(Conventional Commits & Regex)
+    D -->|Engine| E["Conventional Commits & Regex"]
 ```
 
 ---
@@ -170,18 +185,16 @@ If you use `git-hygiene` in your project, a star or credit is appreciated. ✨
 
 ## Contributing <a id="contributing"></a> 🤝
 
-We ❤️ contributions! Whether you're fixing a bug, adding a feature, or improving documentation:
-
-1. **Fork** the repository.
-2. **Create** a branch (`feat/amazing-feature`).
-3. **Commit** your changes (using Conventional Commits!).
-4. **Push** to the branch.
-5. **Open** a Pull Request.
-
-Please see our [SECURITY.md](./SECURITY.md) for reporting vulnerabilities.
+We ❤️ contributions! Whether you're fixing a bug, adding a feature, or improving documentation, please see our [Contributing Guide](./CONTRIBUTING.md) to get started.
 
 ---
 
-<div align="center">
-  ❤️ Developed by [Chitrank Agnihotri](https://www.chitrankagnihotri.com)
-</div>
+## Community & Support 🌏
+
+- **Security**: Please see our [Security Policy](./SECURITY.md) for reporting vulnerabilities.
+- **Conduct**: We follow the [Contributor Covenant Code of Conduct](./CODE_OF_CONDUCT.md).
+- **Support**: If you use `git-hygiene` in your project, a star or credit is appreciated. ✨
+
+---
+
+❤️ Developed by [Chitrank Agnihotri](https://www.chitrankagnihotri.com)

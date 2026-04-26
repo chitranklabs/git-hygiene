@@ -16,4 +16,21 @@ If you find a security vulnerability, please **do not** open a public issue. Ins
 1. **GitHub Private Vulnerability Reporting**: Use the "Report a vulnerability" button in the Security tab of this repository.
 2. **Email**: Contact the maintainer at `chitrank2050@gmail.com`.
 
-We aim to acknowledge all reports within 48 hours and provide a fix or mitigation within 7 days.
+### Our Process
+
+1. **Acknowledgment**: We will acknowledge your report within 48 hours.
+2. **Investigation**: We will investigate the issue and determine its severity.
+3. **Disclosure**: Once a fix is ready, we will coordinate a public disclosure date with you.
+4. **Credit**: We are happy to credit you for your discovery in our security advisories and changelogs.
+
+## Security Practices
+
+`git-hygiene` is built with a **Security-First** mindset:
+
+- **Egress Lockdown**: CI/CD runners are restricted to known endpoints.
+- **Dependency Auditing**: Automated OSV scanning on every PR.
+- **Secret Scanning**: Gitleaks integrated into local hooks and CI.
+- **Minimal Surface**: We use the principle of least privilege for all cloud and CI tokens.
+- **SHA Pinning**: All GitHub Actions are pinned to full commit SHAs.
+
+Thank you for helping keep `git-hygiene` secure! 🛡️✨

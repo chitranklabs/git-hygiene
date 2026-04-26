@@ -110,6 +110,7 @@ jobs:
         run: pnpm install --frozen-lockfile --prefer-offline
 
       - name: Run Parallel Checks ⚡️
+        id: run_checks
         env:
           HAS_SRC: ${{ needs.changes.outputs.src }}
           HAS_DEPS: ${{ needs.changes.outputs.deps }}
@@ -120,9 +121,9 @@ jobs:
             (pnpm build > .ci-status/build.log 2>&1 || echo "1" > .ci-status/build.fail) &
           fi
           if [ "$HAS_SRC" == "true" ]; then
-            (pnpm test > .ci-status/test.log 2>&1 || echo "1" > .ci-status/test.fail) &
+            (pnpm test:cov > .ci-status/test.log 2>&1 || echo "1" > .ci-status/test.fail) &
+            echo "tests_ran=true" >> "$GITHUB_OUTPUT"
           fi
-
           (pnpm lint > .ci-status/lint.log 2>&1 || echo "1" > .ci-status/lint.fail) &
           (pnpm lint:md > .ci-status/md.log 2>&1 || echo "1" > .ci-status/md.fail) &
           curl -L https://github.com/google/osv-scanner/releases/download/v2.3.5/osv-scanner_linux_amd64 -o osv-scanner
@@ -143,6 +144,14 @@ jobs:
             fi
           done
           exit $EXIT_CODE
+
+      - name: Upload coverage to Codecov 📊
+        if: steps.run_checks.outputs.tests_ran == 'true'
+        uses: codecov/codecov-action@57e3a136b779b570ffcdbf80b3bdc90e7fab3de2 # v6.0.0
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./packages/*/coverage/lcov.info
+          fail_ci_if_error: false
 
   secret_scan:
     name: Secret Scan 🔑

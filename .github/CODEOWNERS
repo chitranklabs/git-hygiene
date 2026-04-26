@@ -1,0 +1,18 @@
+# Global Owners
+* @chitrank2050
+
+# 🏗️ Infrastructure & CI/CD
+/.github/workflows/ @chitrank2050
+/lefthook.yml @chitrank2050
+/renovate.json @chitrank2050
+
+# 🛡️ Security & Governance
+/SECURITY.md @chitrank2050
+/CONTRIBUTING.md @chitrank2050
+/CODE_OF_CONDUCT.md @chitrank2050
+/.github/CODEOWNERS @chitrank2050
+
+# 📦 Packages
+/packages/core/ @chitrank2050
+/packages/cli/ @chitrank2050
+/packages/action/ @chitrank2050

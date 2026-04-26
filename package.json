@@ -39,6 +39,7 @@
     "prepare": "lefthook install",
     "build": "turbo build",
     "test": "turbo test",
+    "test:cov": "turbo test:cov",
     "lint": "turbo lint",
     "lint:fix": "turbo lint:fix",
     "lint:md": "markdownlint --fix \"**/*.md\" --ignore node_modules",
