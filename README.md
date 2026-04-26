@@ -195,14 +195,6 @@ graph TD
 
 ---
 
-## 📜 License
-
-MIT - see [LICENSE](LICENSE) for details.
-
-If you use `git-hygiene` in your project, a star or credit is appreciated. ✨
-
----
-
 ## Contributing <a id="contributing"></a> 🤝
 
 We ❤️ contributions! Whether you're fixing a bug, adding a feature, or improving documentation, please see our [Contributing Guide](./CONTRIBUTING.md) to get started.
@@ -214,6 +206,14 @@ We ❤️ contributions! Whether you're fixing a bug, adding a feature, or impro
 - **Security**: Please see our [Security Policy](./SECURITY.md) for reporting vulnerabilities.
 - **Conduct**: We follow the [Contributor Covenant Code of Conduct](./CODE_OF_CONDUCT.md).
 - **Support**: If you use `git-hygiene` in your project, a star or credit is appreciated. ✨
+
+---
+
+## 📜 License
+
+MIT - see [LICENSE](LICENSE) for details.
+
+If you use `git-hygiene` in your project, a star or credit is appreciated. ✨
 
 ---
 
