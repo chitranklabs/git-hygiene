@@ -63,9 +63,14 @@ jobs:
           # Bump root
           jq ".version = \"$CLEAN_VERSION\"" package.json > package.json.tmp && mv package.json.tmp package.json
 
-          # Bump workspace packages
-          for pkg in packages/*/package.json; do
-            jq ".version = \"$CLEAN_VERSION\"" "$pkg" > "$pkg.tmp" && mv "$pkg.tmp" "$pkg"
+          # Bump workspace packages (NPM & JSR)
+          for pkg_dir in packages/*; do
+            if [ -f "$pkg_dir/package.json" ]; then
+              jq ".version = \"$CLEAN_VERSION\"" "$pkg_dir/package.json" > "$pkg_dir/package.json.tmp" && mv "$pkg_dir/package.json.tmp" "$pkg_dir/package.json"
+            fi
+            if [ -f "$pkg_dir/jsr.json" ]; then
+              jq ".version = \"$CLEAN_VERSION\"" "$pkg_dir/jsr.json" > "$pkg_dir/jsr.json.tmp" && mv "$pkg_dir/jsr.json.tmp" "$pkg_dir/jsr.json"
+            fi
           done
 
       - name: Update CHANGELOG.md 📝
@@ -87,7 +92,7 @@ jobs:
           body: |
             <!-- autofill-start -->
             - chore(release): update CHANGELOG.md
-            - chore(release): sync workspace versions
+            - chore(release): sync workspace versions (NPM & JSR)
             <!-- autofill-end -->
           labels: |
             chore
@@ -100,3 +105,4 @@ jobs:
             CHANGELOG.md
             package.json
             packages/*/package.json
+            packages/*/jsr.json
