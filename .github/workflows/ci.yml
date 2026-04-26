@@ -58,7 +58,7 @@ jobs:
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           persist-credentials: false
-          fetch-depth: 1 # Shallow clone for faster change detection
+          fetch-depth: 1
 
       - uses: dorny/paths-filter@fbd0ab8f3e69293af611ebaee6363fc25e6d187d # v4.0.1
         id: filter
@@ -111,18 +111,20 @@ jobs:
 
       - name: Run Parallel Checks ⚡️
         env:
-          SRC_CHANGED: ${{ needs.changes.outputs.src }}
-          DEPS_CHANGED: ${{ needs.changes.outputs.deps }}
+          HAS_SRC: ${{ needs.changes.outputs.src }}
+          HAS_DEPS: ${{ needs.changes.outputs.deps }}
         run: |
           echo "::group::Starting Parallel Checks"
           mkdir -p .ci-status
-          if [ "$SRC_CHANGED" == "true" ] || [ "$DEPS_CHANGED" == "true" ]; then
+          if [ "$HAS_SRC" == "true" ] || [ "$HAS_DEPS" == "true" ]; then
             (pnpm build > .ci-status/build.log 2>&1 || echo "1" > .ci-status/build.fail) &
           fi
-          if [ "$SRC_CHANGED" == "true" ]; then
+          if [ "$HAS_SRC" == "true" ]; then
             (pnpm test > .ci-status/test.log 2>&1 || echo "1" > .ci-status/test.fail) &
           fi
+
           (pnpm lint > .ci-status/lint.log 2>&1 || echo "1" > .ci-status/lint.fail) &
+          (pnpm lint:md > .ci-status/md.log 2>&1 || echo "1" > .ci-status/md.fail) &
           curl -L https://github.com/google/osv-scanner/releases/download/v2.3.5/osv-scanner_linux_amd64 -o osv-scanner
           chmod +x osv-scanner
           (./osv-scanner --lockfile=pnpm-lock.yaml > .ci-status/osv.log 2>&1 || echo "1" > .ci-status/osv.fail) &
@@ -157,13 +159,12 @@ jobs:
       - name: Checkout 📥
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
-          fetch-depth: 0 # Gitleaks requires full history
+          fetch-depth: 0
           persist-credentials: false
 
       - name: Run Gitleaks 🕵️
-        run: |
-          VERSION="8.24.0"
-          curl -L "https://github.com/gitleaks/gitleaks/releases/download/v${VERSION}/gitleaks_${VERSION}_linux_x64.tar.gz" -o gitleaks.tar.gz
-          tar -xzf gitleaks.tar.gz gitleaks
-          chmod +x gitleaks
-          ./gitleaks detect --source . --verbose --redact --fail-status-code 1
+        uses: gitleaks/gitleaks-action@ff98106e4c7b2bc287b24eaf42907196329070c7 # v2.3.9
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          fail-status-code: 1

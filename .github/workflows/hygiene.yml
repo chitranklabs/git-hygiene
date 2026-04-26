@@ -52,14 +52,16 @@ jobs:
         run: pnpm build
 
       - name: Validate PR Title 🏷️
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
         run: |
-          TITLE="${{ github.event.pull_request.title }}"
-          node --experimental-strip-types packages/cli/src/cli.ts title "$TITLE"
+          node --experimental-strip-types packages/cli/src/cli.ts title "$PR_TITLE"
 
       - name: Validate Branch Name 🌿
+        env:
+          BRANCH_NAME: ${{ github.head_ref }}
         run: |
-          BRANCH="${{ github.head_ref }}"
-          node --experimental-strip-types packages/cli/src/cli.ts branch "$BRANCH"
+          node --experimental-strip-types packages/cli/src/cli.ts branch "$BRANCH_NAME"
 
       - name: Validate Commit History 📜
         run: |
