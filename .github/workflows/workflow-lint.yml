@@ -1,9 +1,5 @@
 # =============================================================
-# Workflow Linting - Security Audit for GitHub Actions
-#
-# Uses zizmor to scan all workflows in .github/workflows/
-# for security misconfigurations, overly broad permissions,
-# and potential injection vulnerabilities.
+# GitHub Actions Security Analysis with zizmor 🌈
 # =============================================================
 
 name: GitHub Actions Security Analysis with zizmor 🌈
@@ -16,8 +12,6 @@ on:
   pull_request:
     branches: ['main']
 
-permissions: {}
-
 env:
   NODE_VERSION: 24
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
@@ -26,10 +20,11 @@ jobs:
   zizmor:
     name: Run zizmor 🌈
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     permissions:
-      security-events: write # Required for upload-sarif (used by zizmor-action) to upload SARIF files.
-      contents: read # Only needed for private repos. Needed to clone the repo.
-      actions: read # Only needed for private repos. Needed for upload-sarif to read workflow run info.
+      security-events: write
+      contents: read
+      actions: read
     steps:
       - name: Harden Runner 🛡️
         uses: step-security/harden-runner@8d3c67de8e2fe68ef647c8db1e6a09f647780f40 # v2.19.0
@@ -40,6 +35,7 @@ jobs:
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           persist-credentials: false
+          fetch-depth: 1
 
       - name: Run zizmor 🌈
         uses: zizmorcore/zizmor-action@b1d7e1fb5de872772f31590499237e7cce841e8e # v0.5.3

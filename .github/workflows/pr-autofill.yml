@@ -1,11 +1,5 @@
 # =============================================================
 # Automated PR Description (Autofill)
-#
-# Automatically populates the Pull Request description with a
-# summarized changelog of all commits in the branch.
-#
-# This ensures that every PR has a professional, categorized
-# description without any manual effort from the developer.
 # =============================================================
 
 name: PR Description Autofill ✍️
@@ -16,22 +10,18 @@ on:
     types: [opened, synchronize, reopened]
   workflow_dispatch:
 
-permissions:
-  pull-requests: write
-  contents: read
-
 env:
   NODE_VERSION: 24
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-
-concurrency:
-  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
-  cancel-in-progress: true
 
 jobs:
   autofill:
     name: Generate Description 📝
     runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      pull-requests: write
+      contents: read
     if: |
       (github.event_name != 'workflow_dispatch' || github.actor == github.repository_owner) &&
       github.event.pull_request.user.login != 'renovate[bot]' &&
@@ -60,7 +50,6 @@ jobs:
         uses: orhun/git-cliff-action@c93ef52f3d0ddcdcc9bd5447d98d458a11cd4f72 # v4.7.1
         with:
           config: cliff.toml
-          # Removed --no-exec to allow fetching GitHub usernames (@chitrank2050)
           args: origin/${{ github.base_ref }}..HEAD --strip all
         env:
           GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
@@ -72,23 +61,12 @@ jobs:
           PR_NUMBER: ${{ github.event.pull_request.number }}
           COMMITS: ${{ steps.cliff.outputs.content }}
         run: |
-          # 1. Get the CURRENT PR body from GitHub
           CURRENT_BODY=$(gh pr view "$PR_NUMBER" --json body --template '{{.body}}')
-
           if [[ ! "$CURRENT_BODY" == *"<!-- autofill-start -->"* ]]; then
-            echo "No tags found, generating minimalist body..."
-            # Using printf to avoid heredoc indentation issues in YAML
             CURRENT_BODY=$(printf "<!-- autofill-start -->\n<!-- autofill-end -->")
           fi
-
-          # 4. Perform a surgical replacement of the content between tags
-          # We use a temp file to handle multiline safely
           echo "$CURRENT_BODY" > final_body.md
-
-          # Delete everything between tags
           sed -i '/<!-- autofill-start -->/,/<!-- autofill-end -->/{//!d}' final_body.md
-
-          # Insert the new commits after the start tag
           sed -i "/<!-- autofill-start -->/r /dev/stdin" final_body.md <<EOF
           $COMMITS
           EOF
