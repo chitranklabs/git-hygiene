@@ -14,6 +14,9 @@
   <a href="https://github.com/chitranklabs/git-hygiene/actions/workflows/scorecard.yml">
     <img src="https://github.com/chitranklabs/git-hygiene/actions/workflows/scorecard.yml/badge.svg" alt="Scorecard Status"/>
   </a>
+  <a href="https://scorecard.dev/viewer/?uri=github.com/chitranklabs/git-hygiene">
+    <img src="https://api.scorecard.dev/projects/github.com/chitranklabs/git-hygiene/badge" alt="OpenSSF Scorecard">
+  </a>
   <a href="https://codecov.io/gh/chitranklabs/git-hygiene">
     <img src="https://codecov.io/gh/chitranklabs/git-hygiene/branch/main/graph/badge.svg" alt="Code Coverage"/>
   </a>
