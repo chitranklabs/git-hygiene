@@ -18,7 +18,7 @@ export interface GitHygieneConfig {
 
   /**
    * The maximum allowed length for the commit message header (first line).
-   * Default is 72 characters (Conventional Commits standard).
+   * Default is 100 characters (Conventional Commits standard).
    */
   maxHeaderLength: number;
 

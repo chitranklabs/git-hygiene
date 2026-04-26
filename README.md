@@ -151,7 +151,7 @@ const { valid, error } = validateBranch('feat/new-ui');
 | ----------------- | ----------------------------------------- | ------------------------------------------- | ---------------------------------------------- |
 | `types`           | Allowed commit types                      | `feat`, `fix`, `chore`, etc.                | `string[]`                                     |
 | `ignoreBranches`  | Branches to skip validation (e.g. `main`) | `main`, `master`, `development`, `gh-pages` | `string[]`                                     |
-| `maxHeaderLength` | Max length of the commit header           | `72`                                        | `number`                                       |
+| `maxHeaderLength` | Max length of the commit header           | `100`                                       | `number`                                       |
 | `maxBodyLength`   | Max length of a single body line          | `1000`                                      | `number`                                       |
 | `minBodyLength`   | Min length of the commit body             | `0`                                         | `number`                                       |
 | `typeCase`        | Case requirement for types                | `lower-case`                                | `lower-case`, `upper-case`, `camel-case`, etc. |

@@ -9,7 +9,7 @@ describe('Configuration Loader', () => {
 
   it('should load default configuration when no package.json exists', () => {
     const config = loadConfig();
-    assert.strictEqual(config.maxHeaderLength, 72);
+    assert.strictEqual(config.maxHeaderLength, 100);
     assert.ok(config.types.includes('feat'));
     assert.ok(config.types.includes('fix'));
   });
