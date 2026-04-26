@@ -8,6 +8,8 @@ All notable changes to this project will be documented in this file.
 
 - Improve PR authorization logic and add draft status validation to auto-approve workflow ([900a8f9](900a8f90300bc27763e67b4d68eac16f6d2f3f1a)) by @chitrank2050
 - Streamline auto-approve workflow authorization, permissions, and status checks ([77ef074](77ef074dd5886282059102e9fcc41e8ce48e5430)) by @chitrank2050
+- Replace auto-approval flow with direct auto-merge enablement in CI workflow ([4017b05](4017b05832f246ba2b8b7d4e61e753d7b0ff633d)) by @chitrank2050
+- Replace auto-approve logic with direct auto-merge enablement in CI workflow ([874bd13](874bd1300ff40e152e989d0d43c6785ce79db64b)) by @chitrank2050
 
 ### ⚙️ Miscellaneous Tasks
 
@@ -19,6 +21,7 @@ All notable changes to this project will be documented in this file.
 - Increase default maxHeaderLength from 72 to 100 across documentation and config ([ae99ac9](ae99ac9d9b6306a723e14c8beb25350d5ba4ac24)) by @chitrank2050
 - Update release workflow to sync versioning for both NPM and JSR packages ([047f4d8](047f4d8ae50751d6ff36b1867e65b9713056f51e)) by @chitrank2050
 - **release:** Bump version to v0.1.2  ([7fe59ba](7fe59ba1af525ce354321b516cdd6c8e8b101c4a)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
+- **release:** Bump version to v0.1.2  ([899bd2f](899bd2f53d54697e0295767ae8f010868a962c46)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
 
 ## [0.1.1] - 2026-04-26
 
