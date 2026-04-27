@@ -13,8 +13,8 @@ on:
   workflow_dispatch:
     inputs:
       tag_name:
-        description: 'Tag to release (e.g. v0.1.0)'
-        required: true
+        description: 'Manual tag to release (e.g. v0.1.0). Leave empty to use git-hygiene recommendation.'
+        required: false
 
 jobs:
   prepare:
@@ -39,6 +39,27 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
+      - name: Install pnpm 📦
+        uses: pnpm/action-setup@903f9c1a6ebcba6cf41d87230be49611ac97822e # v6.0.3
+
+      - name: Setup Node.js 🟢
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+
+      - name: Install dependencies 📥
+        run: pnpm install --frozen-lockfile --prefer-offline
+
+      - name: Build Project 🏗️
+        run: pnpm build
+
+      - name: Get Recommended Bump 🌊
+        id: hygiene
+        uses: ./
+        with:
+          command: 'bump'
+
       - name: Create Bot Token 🤖🔑
         id: generate_token
         uses: ./.github/actions/setup-bot
@@ -53,13 +74,37 @@ jobs:
         run: |
           git remote set-url origin "https://x-access-token:${TOKEN}@github.com/${REPO}"
 
-      - name: Sync Versions 📦
+      - name: Determine New Version 🔢
         id: vars
         env:
-          NEW_VERSION: ${{ github.event.inputs.tag_name }}
+          MANUAL_TAG: ${{ github.event.inputs.tag_name }}
+          BUMP: ${{ steps.hygiene.outputs.releaseType }}
         run: |
-          CLEAN_VERSION=$(echo "$NEW_VERSION" | sed 's/^v//')
-          echo "clean_version=$CLEAN_VERSION" >> "$GITHUB_OUTPUT"
+          CURRENT_VERSION=$(jq -r .version package.json)
+
+          if [ -n "$MANUAL_TAG" ]; then
+            NEW_VERSION=$(echo "$MANUAL_TAG" | sed 's/^v//')
+            echo "Using manual version: $NEW_VERSION"
+          else
+            echo "Calculating version from bump: $BUMP"
+            NEW_VERSION=$(node -e "
+              const semver = '$CURRENT_VERSION'.split('.').map(Number);
+              const type = '$BUMP';
+              if (type === 'major') semver[0]++, semver[1] = 0, semver[2] = 0;
+              else if (type === 'minor') semver[1]++, semver[2] = 0;
+              else semver[2]++;
+              console.log(semver.join('.'));
+            ")
+            echo "Calculated version: $NEW_VERSION"
+          fi
+
+          echo "clean_version=$NEW_VERSION" >> "$GITHUB_OUTPUT"
+          echo "tag_name=v$NEW_VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Sync Versions 📦
+        env:
+          CLEAN_VERSION: ${{ steps.vars.outputs.clean_version }}
+        run: |
           echo "Bumping monorepo to $CLEAN_VERSION"
 
           # Bump root
@@ -80,8 +125,7 @@ jobs:
         id: git-cliff
         with:
           config: cliff.toml
-          # Ensure we always pass the v-prefixed tag to match cliff.toml expectations
-          args: --tag v${{ steps.vars.outputs.clean_version }} --output CHANGELOG.md
+          args: --tag ${{ steps.vars.outputs.tag_name }} --output CHANGELOG.md
         env:
           GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
 
@@ -90,17 +134,18 @@ jobs:
         uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
         with:
           token: ${{ steps.generate_token.outputs.token }}
-          commit-message: 'chore(release): bump version to ${{ github.event.inputs.tag_name }}'
-          title: 'chore(release): 🚀 ${{ github.event.inputs.tag_name }}'
+          commit-message: 'chore(release): bump version to ${{ steps.vars.outputs.tag_name }}'
+          title: 'chore(release): 🚀 ${{ steps.vars.outputs.tag_name }}'
           body: |
             <!-- autofill-start -->
             - chore(release): update CHANGELOG.md
             - chore(release): sync workspace versions (NPM & JSR)
+            - chore(release): bump recommendation from git-hygiene (${{ steps.hygiene.outputs.releaseType }})
             <!-- autofill-end -->
           labels: |
             chore
             release
-          branch: 'chore/changelog-${{ github.event.inputs.tag_name }}'
+          branch: 'chore/release-${{ steps.vars.outputs.tag_name }}'
           base: main
           delete-branch: true
           assignees: chitrank2050
