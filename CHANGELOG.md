@@ -2,11 +2,27 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.4.10] - 2026-04-27
+
+### 📚 Documentation
+
+- Update supported version range and add workflow auditing to security practices ([e993cc0](e993cc037181e1ce7ce6df3f14f303ed3519c65e)) by @chitrank2050
+
+### ⚙️ Miscellaneous Tasks
+
+- Update documentation, JSR integration, and dependency requirements for Node.js 24 and pnpm 10 ([58c62db](58c62db79a08b3776fb8dfc069be3baa69631cb5)) by @chitrank2050
+- Add MIT license files and update relative documentation links in packages ([02927ca](02927caab4edcdeb401bf09a13179df0f2b15cbf)) by @chitrank2050
+- Move NPM publish step before JSR publish in release workflow ([b961e37](b961e3730cf4edfdea81adcd53929db87e6ea2b5)) by @chitrank2050
+
 ## [0.4.9] - 2026-04-27
 
 ### 🚜 Refactor
 
 - Remove core pkg dep from package.json in favor of jsr.json imports during release/publish ([12b65d9](12b65d9a6d40040bb26e2d336443a242b6a4b75f)) by @chitrank2050
+
+### ⚙️ Miscellaneous Tasks
+
+- **release:** Bump version to v0.4.9 ([8abac92](8abac926a6afcde68889b34f9ec3d1acefd69538)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
 
 ## [0.4.8] - 2026-04-27
 
