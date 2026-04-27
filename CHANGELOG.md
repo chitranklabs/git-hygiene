@@ -2,6 +2,44 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.7] - 2026-04-27
+
+### 🚀 Features
+
+- Added support for extends and custom rules configuration ([47b5c78](47b5c78065acbbd5231945c0d0ef81d832a07eef)) by @chitrank2050
+- Implement configuration extensibility and commitlint parser preset support ([bc57c75](bc57c75916a80f40d0d8eeeaa4b43ffeca16aded)) by @chitrank2050
+- Add support for extends and custom rules configuration in documentation ([e2ef5cf](e2ef5cf40d236bca4a66f65f8467625b9ed2629c)) by @chitrank2050
+- Add bump command to suggest semantic versioning based on commit history ([21413ae](21413aebff1f90ae0b4e082b88edb2aea5c5dc56)) by @chitrank2050
+- Add --json CLI flag and support for configuration validation ([f1567b3](f1567b3388370e3e6726fa7f16bebbea7f3f8285)) by @chitrank2050
+- Integrate version bumping into release flow and add commit linting script ([e6c99db](e6c99db280d0c015c01c5714ee6c5d0b455ed71d)) by @chitrank2050
+- Introduce zero-config Omni-Mode to auto validate PR metadata & calculate version bumps ([1dd140c](1dd140c24493105aaf4172a85827697774ff638e)) by @chitrank2050
+- Granularize CI checks and automate release versioning using git-hygiene recommendations ([736402f](736402f10418e57b33c3ca22d58902439894c2b6)) by @chitrank2050
+- Integrate Gitleaks installation into release preparation workflow and configure in lefthook ([31cb24f](31cb24f9120ab7a57cfdf04778d85cf50ff41dd9)) by @chitrank2050
+
+### 🚜 Refactor
+
+- Make config loading and validation async to support dynamic preset resolution ([84ca6bf](84ca6bf6bca724ec3a59c1947fe07a29de527afc)) by @chitrank2050
+- Improve type safety, add support for function-based parser presets & update documentation ([8df2e95](8df2e95115e192aae091fdec2b1995d754a397e6)) by @chitrank2050
+
+### 📚 Documentation
+
+- Update documentation for JSON output support and programmatic configuration usage ([221177a](221177aa434cfd29528a9bdcbe22f4fe1d495f4d)) by @chitrank2050
+- Add automated release process documentation to CONTRIBUTING.md and README.md ([c3e2549](c3e254945ebc927158f4d6401550c0eab5836edd)) by @chitrank2050
+
+### ⚙️ Miscellaneous Tasks
+
+- Update lefthook configuration to improve git hook execution ([5c0f4ad](5c0f4adc48f44c8156f628fe6acdcc796c0bb03a)) by @chitrank2050
+
+## [0.1.6] - 2026-04-26
+
+### 📚 Documentation
+
+- Add GitHub Marketplace action badge and registry link to README ([2555faa](2555faa0a9512380c5516faf804073d0b71596a4)) by @chitrank2050
+
+### ⚙️ Miscellaneous Tasks
+
+- **release:** Bump version to v0.1.6 ([df91567](df915671bcf396c4b24cf0d5791004b2600413a7)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
+
 ## [0.1.5] - 2026-04-26
 
 ### 🚀 Features

@@ -1,6 +1,6 @@
 {
   "name": "@chitrank2050/git-hygiene",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "The ultimate zero-dependency metadata validator for modern Git workflows. CLI tool.",
   "author": {
     "name": "Chitrank Agnihotri",
