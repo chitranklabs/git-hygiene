@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.4.7] - 2026-04-27
+
+### ⚙️ Miscellaneous Tasks
+
+- **release:** Bump version to v0.4.7 ([d460da9](d460da929b1cf8e9f33a6f91c952b8d6db9b55d8)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
+
 ## [0.4.6] - 2026-04-27
 
 ### 🚜 Refactor
@@ -10,6 +16,7 @@ All notable changes to this project will be documented in this file.
 
 ### ⚙️ Miscellaneous Tasks
 
+- Bump version to 0.4.6 and enable auto nodeModulesDir in JSR configuration ([cc56132](cc561324e45304d16c74e9c043e89b8ff5158550)) by @chitrank2050
 - **release:** Bump version to v0.4.6 ([a5aeb20](a5aeb203eb69e035e00f110e6b234fe4833f9b6f)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
 
 ## [0.4.5] - 2026-04-27
