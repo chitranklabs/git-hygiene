@@ -7,8 +7,6 @@
 [![JSR Version](https://jsr.io/badges/@chitrank2050/git-hygiene)](https://jsr.io/@chitrank2050/git-hygiene)
 [![License](https://img.shields.io/github/license/chitranklabs/git-hygiene)](./LICENSE)
 
-<br/>
-<br/>
   <a href="https://ko-fi.com/D1D71U581P" target="_blank">
       <img src="https://ko-fi.com/img/githubbutton_sm.svg" alt="Buy me a coffee at ko-fi.com">
     </a>
