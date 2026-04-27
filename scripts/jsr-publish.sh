@@ -69,7 +69,7 @@ for pkg in "${PACKAGES[@]}"; do
       CMD_BASE="npx jsr publish"
     fi
 
-    PUBLISH_CMD="$CMD_BASE --unstable-bare-node-builtins --unstable-sloppy-imports --unstable-byonm --no-check --allow-slow-types --allow-dirty --no-provenance"
+    PUBLISH_CMD="$CMD_BASE --unstable-bare-node-builtins --no-check --allow-slow-types --allow-dirty --no-provenance"
     
     if [ "$DRY_RUN_FLAG" == "--dry-run" ]; then
       echo "   (Dry run mode enabled)"
