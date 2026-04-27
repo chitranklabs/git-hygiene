@@ -54,6 +54,13 @@ jobs:
       - name: Build Project 🏗️
         run: pnpm build
 
+      - name: Install Gitleaks 🔑
+        run: |
+          VERSION="8.18.2"
+          curl -sSLo gitleaks.tar.gz "https://github.com/gitleaks/gitleaks/releases/download/v${VERSION}/gitleaks_${VERSION}_linux_x64.tar.gz"
+          tar -xzf gitleaks.tar.gz gitleaks
+          sudo install gitleaks /usr/local/bin/
+
       - name: Get Recommended Bump 🌊
         id: hygiene
         uses: ./
