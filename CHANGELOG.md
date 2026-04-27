@@ -2,11 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.2.0] - 2026-04-27
+## [0.3.1] - 2026-04-27
 
-### 🚜 Refactor
+### 📚 Documentation
 
-- Migrate from CommonJS require to ESM dynamic imports & refine JSR package publishing logic ([100b8a5](100b8a5095b520ecb74235ac4ee0dff02398e3f6)) by @chitrank2050
+- Add security badges and update action usage examples with latest release SHA ([362c615](362c61509fcf38d74ae13c2cdeb8c22d9ab7e652)) by @chitrank2050
+- Update package descriptions to clarify ESM support, runtime requirements and dependency status ([599ae6b](599ae6b820dd681e10789afa7691ba37268efce0)) by @chitrank2050
 
 ## [0.2.0] - 2026-04-27
 
@@ -32,6 +33,7 @@ All notable changes to this project will be documented in this file.
 - Make config loading and validation async to support dynamic preset resolution ([84ca6bf](84ca6bf6bca724ec3a59c1947fe07a29de527afc)) by @chitrank2050
 - Improve type safety, add support for function-based parser presets & update documentation ([8df2e95](8df2e95115e192aae091fdec2b1995d754a397e6)) by @chitrank2050
 - Improve tag extraction logic to support both workflow inputs and branch naming conventions ([ca57cab](ca57cab37cefa39f9546cd9159c9f1a45da9c756)) by @chitrank2050
+- Migrate from CommonJS require to ESM dynamic imports & refine JSR package publishing logic ([100b8a5](100b8a5095b520ecb74235ac4ee0dff02398e3f6)) by @chitrank2050
 
 ### 📚 Documentation
 
@@ -46,6 +48,7 @@ All notable changes to this project will be documented in this file.
 - Strip scripts and update core dependency version in package.json before JSR publication ([bc2e9d5](bc2e9d5202c6abd1594758810dbdb382dbed6c7c)) by @chitrank2050
 - **release:** Bump version to v0.2.0 ([c98ed0a](c98ed0a21d49175025a9fc0ee80e1dd70b6211a6)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
 - Reorder NPM publish step after JSR publish in release workflow ([e5d52dc](e5d52dcd16d45f7369cddc4365320308bcf1f363)) by @chitrank2050
+- **release:** Bump version to v0.2.0 ([7cd725a](7cd725abdbcd12d0e14b77fa94c423dd9ddf8933)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
 
 ## [0.1.6] - 2026-04-26
 
