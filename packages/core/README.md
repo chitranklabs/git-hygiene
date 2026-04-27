@@ -6,12 +6,29 @@
 [![NPM Version](https://img.shields.io/npm/v/@chitrank2050/git-hygiene-core?color=blue&label=npm)](https://www.npmjs.com/package/@chitrank2050/git-hygiene-core)
 [![JSR Version](https://jsr.io/badges/@chitrank2050/git-hygiene-core)](https://jsr.io/@chitrank2050/git-hygiene-core)
 [![License](https://img.shields.io/github/license/chitranklabs/git-hygiene)](./LICENSE)
+<br/>
+[![CLI NPM](https://img.shields.io/npm/v/@chitrank2050/git-hygiene?color=brightgreen&label=cli-npm)](https://www.npmjs.com/package/@chitrank2050/git-hygiene)
+[![CLI JSR](https://jsr.io/badges/@chitrank2050/git-hygiene?label=cli-jsr)](https://jsr.io/@chitrank2050/git-hygiene)
 
+<br/>
+<br/>
+<a href="https://ko-fi.com/D1D71U581P" target="_blank"><b>Support</b></a>
 </div>
 
 <br />
 
 `@chitrank2050/git-hygiene-core` provides the core validation logic for modern Git workflows. Built as a **Native ESM** engine for **Node.js 24 (Stable)**, it offers high-performance validation with zero external dependencies (built on top of the standard `commitlint` engine).
+
+---
+
+### 🧩 Ecosystem
+
+| Package                            | Role              | Status                                                                                                                                                                                                                                                                   |
+| :--------------------------------- | :---------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **@chitrank2050/git-hygiene**      | CLI & Action      | [![npm](https://img.shields.io/npm/v/@chitrank2050/git-hygiene?color=blue&label=npm)](https://www.npmjs.com/package/@chitrank2050/git-hygiene) [![jsr](https://jsr.io/badges/@chitrank2050/git-hygiene)](https://jsr.io/@chitrank2050/git-hygiene)                       |
+| **@chitrank2050/git-hygiene-core** | Standalone Engine | [![npm](https://img.shields.io/npm/v/@chitrank2050/git-hygiene-core?color=orange&label=npm)](https://www.npmjs.com/package/@chitrank2050/git-hygiene-core) [![jsr](https://jsr.io/badges/@chitrank2050/git-hygiene-core)](https://jsr.io/@chitrank2050/git-hygiene-core) |
+
+---
 
 ## Features ✨
 

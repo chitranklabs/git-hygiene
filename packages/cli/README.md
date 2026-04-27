@@ -7,11 +7,25 @@
 [![JSR Version](https://jsr.io/badges/@chitrank2050/git-hygiene)](https://jsr.io/@chitrank2050/git-hygiene)
 [![License](https://img.shields.io/github/license/chitranklabs/git-hygiene)](./LICENSE)
 
+<br/>
+<br/>
+<a href="https://ko-fi.com/D1D71U581P" target="_blank"><b>Support</b></a>
 </div>
 
 <br />
 
 `git-hygiene` is a high-performance, **zero-dependency** CLI tool that enforces **Conventional Commits**, **branch naming patterns**, and **PR titles** using a single, unified engine. Built natively for **Node.js 24 (Stable)** with microsecond startup times.
+
+---
+
+### 🧩 Ecosystem
+
+| Package                            | Role              | Status                                                                                                                                                                                                                                                                   |
+| :--------------------------------- | :---------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **@chitrank2050/git-hygiene**      | CLI & Action      | [![npm](https://img.shields.io/npm/v/@chitrank2050/git-hygiene?color=blue&label=npm)](https://www.npmjs.com/package/@chitrank2050/git-hygiene) [![jsr](https://jsr.io/badges/@chitrank2050/git-hygiene)](https://jsr.io/@chitrank2050/git-hygiene)                       |
+| **@chitrank2050/git-hygiene-core** | Standalone Engine | [![npm](https://img.shields.io/npm/v/@chitrank2050/git-hygiene-core?color=orange&label=npm)](https://www.npmjs.com/package/@chitrank2050/git-hygiene-core) [![jsr](https://jsr.io/badges/@chitrank2050/git-hygiene-core)](https://jsr.io/@chitrank2050/git-hygiene-core) |
+
+---
 
 ## 📦 Installation
 

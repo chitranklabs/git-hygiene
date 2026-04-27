@@ -5,17 +5,6 @@
   <p>The ultimate zero-dependency metadata validator for modern Git workflows.</p>
 
   <p>
-  <a href="https://www.npmjs.com/package/@chitrank2050/git-hygiene">
-    <img src="https://img.shields.io/npm/v/@chitrank2050/git-hygiene?logo=npm&color=CB3837" alt="NPM Version" />
-  </a>
-  <a href="https://jsr.io/@chitrank2050/git-hygiene">
-    <img src="https://jsr.io/badges/@chitrank2050/git-hygiene" alt="JSR Version" />
-  </a>
-  <a href="https://github.com/marketplace/actions/git-hygiene-validator">
-    <img src="https://img.shields.io/badge/Marketplace-Git%20Hygiene-blue?logo=github" alt="GitHub Marketplace" />
-  </a>
-  <br/>
-  <br/>
   <a href="https://github.com/chitranklabs/git-hygiene/actions/workflows/ci.yml">
     <img src="https://github.com/chitranklabs/git-hygiene/actions/workflows/ci.yml/badge.svg" alt="CI Status" />
   </a>
@@ -40,6 +29,11 @@
   <a href="./LICENSE">
     <img src="https://img.shields.io/github/license/chitranklabs/git-hygiene" alt="License" />
   </a>
+  <br/>
+  <br/>
+  <a href="https://ko-fi.com/D1D71U581P" target="_blank"><b>Support</b></a>
+  <br/>
+  <br/>
 
 [Features](#features) • [Installation](#installation) • [Usage](#usage) • [Architecture](#architecture) • [Contributing](#contributing)
 
