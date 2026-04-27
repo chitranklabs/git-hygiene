@@ -26,6 +26,9 @@
   <a href="https://codecov.io/gh/chitranklabs/git-hygiene">
     <img src="https://codecov.io/gh/chitranklabs/git-hygiene/branch/main/graph/badge.svg" alt="Code Coverage" />
   </a>
+  <a href="https://github.com/chitranklabs/git-hygiene/attestations">
+    <img src="https://img.shields.io/badge/SLSA-Level_3-blue?logo=slsa" alt="SLSA Level 3" />
+  </a>
   <a href="./LICENSE">
     <img src="https://img.shields.io/github/license/chitranklabs/git-hygiene" alt="License" />
   </a>
@@ -41,7 +44,7 @@
   <br/>
 </div>
 
-`git-hygiene` is a high-performance, **zero-dependency** engine designed to enforce perfect metadata across your entire Git lifecycle. Built natively for **Node.js 24 (Stable)**, it validates Conventional Commits, branch naming patterns, and Pull Request titles with microsecond startup times.
+`git-hygiene` is a high-performance, **zero-dependency** engine designed to enforce perfect metadata across your entire Git lifecycle. Built for **Node.js 24+**, it leverages **native TypeScript type-stripping** for microsecond startup times and zero-compilation runtime performance.
 
 ---
 
