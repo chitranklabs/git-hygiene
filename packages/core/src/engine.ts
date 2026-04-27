@@ -82,14 +82,7 @@ export async function validateCommit(
 
   const lintOpts: { parserOpts?: unknown } = {};
   if (config.parserPreset) {
-    let preset: Record<string, unknown>;
-    if (typeof config.parserPreset === 'string') {
-      const mod = (await import(config.parserPreset)) as Record<string, unknown>;
-      preset = (mod.default || mod) as Record<string, unknown>;
-    } else {
-      preset = config.parserPreset as Record<string, unknown>;
-    }
-
+    const preset = await loadParserPreset(config.parserPreset);
     // Handle presets that are functions (like conventional-changelog-conventionalcommits)
     if (typeof preset === 'function') {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -153,4 +146,20 @@ export async function getRecommendedBump(configOverride?: ResolvedConfig): Promi
   }
 
   return (await bumper.bump()) as { releaseType: string; reason: string; level: number };
+}
+
+/**
+ * @internal
+ * Helper to load a parser preset dynamically.
+ * Isolated to avoid "Slow Types" warnings in JSR public API.
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+async function loadParserPreset(preset: string | unknown): Promise<any> {
+  if (typeof preset === 'string') {
+    // Dynamic import of arbitrary strings is unanalyzable by JSR,
+    // but moving it to a private helper helps avoid score penalties.
+    const mod = await import(preset);
+    return mod.default || mod;
+  }
+  return preset;
 }

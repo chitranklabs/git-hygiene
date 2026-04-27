@@ -174,7 +174,7 @@ jobs:
                 cat "$pkg/package.json"
               fi
 
-              (cd "$pkg" && deno publish --unstable-bare-node-builtins --unstable-sloppy-imports --unstable-byonm --no-check --allow-slow-types --allow-dirty)
+              (cd "$pkg" && deno publish --unstable-bare-node-builtins --unstable-sloppy-imports --unstable-byonm --no-check --allow-slow-types --allow-dirty --no-provenance --no-lock)
             fi
           done
 
