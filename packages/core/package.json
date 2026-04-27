@@ -1,7 +1,7 @@
 {
   "name": "@chitrank2050/git-hygiene-core",
-  "version": "0.4.0",
-  "description": "High-performance, zero-dependency validation engine for modern Git workflows. Core logic for enforcing conventional commits and branch naming.",
+  "version": "0.4.1",
+  "description": "Core validation engine for git-hygiene. Validates conventional commits, branch names, and PR titles.",
   "author": {
     "name": "Chitrank Agnihotri",
     "email": "chitrank2050@gmail.com",

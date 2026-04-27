@@ -1,7 +1,7 @@
 {
   "name": "@chitrank2050/git-hygiene",
-  "version": "0.4.0",
-  "description": "The ultimate zero-dependency CLI for modern Git hygiene. Enforce conventional commits and branch naming with blazing speed.",
+  "version": "0.4.1",
+  "description": "The ultimate zero-dependency metadata validator for modern Git workflows. CLI tool.",
   "author": {
     "name": "Chitrank Agnihotri",
     "email": "chitrank2050@gmail.com",
