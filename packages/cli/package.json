@@ -28,7 +28,8 @@
   ],
   "type": "module",
   "bin": {
-    "git-hygiene": "./dist/cli.js"
+    "git-hygiene": "./dist/cli.js",
+    "@chitrank2050/git-hygiene": "./dist/cli.js"
   },
   "main": "./dist/cli.js",
   "types": "./dist/cli.d.ts",
