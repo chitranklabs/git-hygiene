@@ -54,6 +54,10 @@ if (commitResult.valid) {
   console.log('❌ Commit validation failed:');
   commitResult.errors.forEach(err => console.log(`- ${err.message}`));
 }
+
+// 4. Suggest a semantic version bump
+const bump = await getRecommendedBump();
+console.log(`Recommended bump: ${bump.releaseType} (Reason: ${bump.reason})`);
 ```
 
 ## ⚙️ Configuration

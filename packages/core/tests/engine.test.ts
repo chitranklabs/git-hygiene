@@ -1,6 +1,11 @@
 import { describe, it, afterEach } from 'node:test';
 import assert from 'node:assert';
-import { validateBranch, validateTitle, validateCommit } from '../src/engine.ts';
+import {
+  validateBranch,
+  validateTitle,
+  validateCommit,
+  getRecommendedBump,
+} from '../src/engine.ts';
 import { clearConfigCache } from '../src/config.ts';
 
 describe('Validation Engine', () => {
@@ -99,6 +104,14 @@ describe('Validation Engine', () => {
       const res = await validateCommit(message);
       assert.strictEqual(res.valid, false);
       assert.ok(res.errors?.some(e => e.name === 'body-max-line-length'));
+    });
+  });
+
+  describe('getRecommendedBump', () => {
+    it('should return a recommended bump result', async () => {
+      const res = await getRecommendedBump();
+      assert.ok(res.releaseType);
+      assert.ok(res.reason);
     });
   });
 });

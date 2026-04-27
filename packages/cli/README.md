@@ -51,6 +51,14 @@ Validates a Pull Request title string.
 npx @chitrank2050/git-hygiene title "feat(cli): add colors"
 ```
 
+### `bump` 🚀
+
+Suggests the next semantic version number (patch, minor, or major) based on your commit history since the last tag.
+
+```bash
+npx @chitrank2050/git-hygiene bump
+```
+
 ## ⚙️ Configuration
 
 `git-hygiene` is designed to be zero-config, but you can easily customize the rules by adding a `git-hygiene` block to your root `package.json`.

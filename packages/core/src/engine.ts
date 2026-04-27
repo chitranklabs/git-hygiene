@@ -2,6 +2,7 @@ import lint from '@commitlint/lint';
 import { loadConfig } from './config.ts';
 import type { ValidationResult } from './types.ts';
 import { createRequire } from 'node:module';
+import { Bumper } from 'conventional-recommended-bump';
 
 const require = createRequire(import.meta.url);
 
@@ -102,4 +103,27 @@ export async function validateCommit(message: string): Promise<ValidationResult>
     message: `Invalid commit message:\n${messageSummary}`,
     errors,
   };
+}
+
+/**
+ * @description
+ * Suggests the next semantic version bump based on the commit history
+ * since the last tag.
+ *
+ * @returns {Promise<{ releaseType: string; reason: string; level: number }>} The recommended bump info
+ */
+export async function getRecommendedBump() {
+  const config = await loadConfig();
+  const bumper = new Bumper(process.cwd());
+
+  if (config.parserPreset) {
+    // If we have a resolved preset (object with parserOpts), use it
+    if (typeof config.parserPreset === 'object') {
+      bumper.config(config.parserPreset);
+    } else {
+      await bumper.loadPreset(config.parserPreset);
+    }
+  }
+
+  return await bumper.bump();
 }

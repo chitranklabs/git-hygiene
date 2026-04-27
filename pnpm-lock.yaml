@@ -66,11 +66,14 @@ importers:
         specifier: ^20.5.0
         version: 20.5.0
       conventional-changelog-conventionalcommits:
-        specifier: ^8.0.0
-        version: 8.0.0
+        specifier: ^9.3.1
+        version: 9.3.1
       conventional-changelog-preset-loader:
         specifier: ^5.0.0
         version: 5.0.0
+      conventional-recommended-bump:
+        specifier: ^11.2.0
+        version: 11.2.0
     devDependencies:
       '@types/node':
         specifier: ^25.6.0
@@ -139,6 +142,21 @@ packages:
         integrity: sha512-ZJoS8oSq2CAZEpc/YI9SulLrdiIyXeHb/OGqGrkUP6Q7YV+0ouNAa7GjqRdXeQPncHQIDz/jbCTlHScvYvO/gA==,
       }
     engines: { node: '>=v18' }
+
+  '@conventional-changelog/git-client@2.7.0':
+    resolution:
+      {
+        integrity: sha512-j7A8/LBEQ+3rugMzPXoKYzyUPpw/0CBQCyvtTR7Lmu4olG4yRC/Tfkq79Mr3yuPs0SUitlO2HwGP3gitMJnRFw==,
+      }
+    engines: { node: '>=18' }
+    peerDependencies:
+      conventional-commits-filter: ^5.0.0
+      conventional-commits-parser: ^6.4.0
+    peerDependenciesMeta:
+      conventional-commits-filter:
+        optional: true
+      conventional-commits-parser:
+        optional: true
 
   '@esbuild/aix-ppc64@0.27.7':
     resolution:
@@ -710,6 +728,13 @@ packages:
     cpu: [x64]
     os: [win32]
 
+  '@simple-libs/child-process-utils@1.0.2':
+    resolution:
+      {
+        integrity: sha512-/4R8QKnd/8agJynkNdJmNw2MBxuFTRcNFnE5Sg/G+jkSsV8/UBgULMzhizWWW42p8L5H7flImV2ATi79Ove2Tw==,
+      }
+    engines: { node: '>=18' }
+
   '@simple-libs/stream-utils@1.2.0':
     resolution:
       {
@@ -1051,13 +1076,6 @@ packages:
       }
     engines: { node: '>=18' }
 
-  conventional-changelog-conventionalcommits@8.0.0:
-    resolution:
-      {
-        integrity: sha512-eOvlTO6OcySPyyyk8pKz2dP4jjElYunj9hn9/s0OB+gapTO8zwS9UQWrZ1pmF2hFs3vw1xhonOLGcGjy/zgsuA==,
-      }
-    engines: { node: '>=18' }
-
   conventional-changelog-conventionalcommits@9.3.1:
     resolution:
       {
@@ -1072,10 +1090,25 @@ packages:
       }
     engines: { node: '>=18' }
 
+  conventional-commits-filter@5.0.0:
+    resolution:
+      {
+        integrity: sha512-tQMagCOC59EVgNZcC5zl7XqO30Wki9i9J3acbUvkaosCT6JX3EeFwJD7Qqp4MCikRnzS18WXV3BLIQ66ytu6+Q==,
+      }
+    engines: { node: '>=18' }
+
   conventional-commits-parser@6.4.0:
     resolution:
       {
         integrity: sha512-tvRg7FIBNlyPzjdG8wWRlPHQJJHI7DylhtRGeU9Lq+JuoPh5BKpPRX83ZdLrvXuOSu5Eo/e7SzOQhU4Hd2Miuw==,
+      }
+    engines: { node: '>=18' }
+    hasBin: true
+
+  conventional-recommended-bump@11.2.0:
+    resolution:
+      {
+        integrity: sha512-lqIdmw330QdMBgfL0e6+6q5OMKyIpy4OZNmepit6FS3GldhkG+70drZjuZ0A5NFpze5j85dlYs3GabQXl6sMHw==,
       }
     engines: { node: '>=18' }
     hasBin: true
@@ -2273,6 +2306,15 @@ snapshots:
       conventional-commits-parser: 6.4.0
       picocolors: 1.1.1
 
+  '@conventional-changelog/git-client@2.7.0(conventional-commits-filter@5.0.0)(conventional-commits-parser@6.4.0)':
+    dependencies:
+      '@simple-libs/child-process-utils': 1.0.2
+      '@simple-libs/stream-utils': 1.2.0
+      semver: 7.7.4
+    optionalDependencies:
+      conventional-commits-filter: 5.0.0
+      conventional-commits-parser: 6.4.0
+
   '@esbuild/aix-ppc64@0.27.7':
     optional: true
 
@@ -2490,6 +2532,10 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.60.2':
     optional: true
 
+  '@simple-libs/child-process-utils@1.0.2':
+    dependencies:
+      '@simple-libs/stream-utils': 1.2.0
+
   '@simple-libs/stream-utils@1.2.0': {}
 
   '@turbo/darwin-64@2.9.6':
@@ -2684,19 +2730,25 @@ snapshots:
     dependencies:
       compare-func: 2.0.0
 
-  conventional-changelog-conventionalcommits@8.0.0:
-    dependencies:
-      compare-func: 2.0.0
-
   conventional-changelog-conventionalcommits@9.3.1:
     dependencies:
       compare-func: 2.0.0
 
   conventional-changelog-preset-loader@5.0.0: {}
 
+  conventional-commits-filter@5.0.0: {}
+
   conventional-commits-parser@6.4.0:
     dependencies:
       '@simple-libs/stream-utils': 1.2.0
+      meow: 13.2.0
+
+  conventional-recommended-bump@11.2.0:
+    dependencies:
+      '@conventional-changelog/git-client': 2.7.0(conventional-commits-filter@5.0.0)(conventional-commits-parser@6.4.0)
+      conventional-changelog-preset-loader: 5.0.0
+      conventional-commits-filter: 5.0.0
+      conventional-commits-parser: 6.4.0
       meow: 13.2.0
 
   cross-spawn@7.0.6:

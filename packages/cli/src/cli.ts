@@ -4,7 +4,12 @@ import { parseArgs } from 'node:util';
 import { execSync } from 'node:child_process';
 import fs from 'node:fs';
 import pc from 'picocolors';
-import { validateBranch, validateTitle, validateCommit } from '@chitrank2050/git-hygiene-core';
+import {
+  validateBranch,
+  validateTitle,
+  validateCommit,
+  getRecommendedBump,
+} from '@chitrank2050/git-hygiene-core';
 import type { ValidationResult } from '@chitrank2050/git-hygiene-core';
 
 const HELP_TEXT = `
@@ -18,6 +23,7 @@ ${pc.bold('Commands:')}
   ${pc.cyan('branch')}          Validate current Git branch name
   ${pc.cyan('title <text>')}    Validate a PR title string
   ${pc.cyan('commit <text>')}   Validate a commit message string
+  ${pc.cyan('bump')}            Suggest the next semantic version
 
 ${pc.bold('Options:')}
   --help, -h        Show this help message
@@ -72,6 +78,13 @@ async function main() {
         }
 
         report(await validateCommit(messageToValidate));
+        break;
+      }
+      case 'bump': {
+        const { releaseType, reason } = (await getRecommendedBump()) as any;
+        console.log(`\n${pc.bold('Recommended Bump:')} ${pc.green(pc.underline(releaseType))}`);
+        console.log(`${pc.dim('Reason:')} ${reason}\n`);
+        process.exit(0);
         break;
       }
       default:

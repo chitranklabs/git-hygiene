@@ -144,6 +144,9 @@ npx @chitrank2050/git-hygiene branch "feature/cool-stuff"
 
 # Check a PR title
 npx @chitrank2050/git-hygiene title "fix(core): resolve memory leak"
+
+# Suggest the next semantic version bump
+npx @chitrank2050/git-hygiene bump
 ```
 
 ---
