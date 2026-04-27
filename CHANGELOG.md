@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.4.1] - 2026-04-27
+
+### 🚀 Features
+
+- Update package exclusion rules ([f644133](f644133934d51e09b171c9da5298520b8075b70f)) by @chitrank2050
+
 ## [0.4.0] - 2026-04-27
 
 ### 🚀 Features
@@ -16,6 +22,8 @@ All notable changes to this project will be documented in this file.
 ### ⚙️ Miscellaneous Tasks
 
 - Migrate JSR release process from npx to Deno CLI ([72f60f7](72f60f7c23caf5c188b7adbd2d9aba694fb88ce8)) by @chitrank2050
+- Update JSR config with refined publish excludes & explicit package paths for release workflow ([2fd9650](2fd9650fa52289074afb0a8c727b369fd0baa0ea)) by @chitrank2050
+- **release:** Bump version to v0.4.0 ([1c54194](1c541942404182763d44222f708b5beedba70ce8)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
 
 ## [0.3.1] - 2026-04-27
 
