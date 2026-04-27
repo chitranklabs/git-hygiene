@@ -6,8 +6,8 @@ We only support the latest version of `git-hygiene`. Please ensure you are alway
 
 | Version | Supported          |
 | ------- | ------------------ |
-| v0.x.x  | :white_check_mark: |
-| < v0.1  | :x:                |
+| v0.4.x  | :white_check_mark: |
+| < v0.4  | :x:                |
 
 ## Reporting a Vulnerability
 
@@ -30,6 +30,7 @@ If you find a security vulnerability, please **do not** open a public issue. Ins
 - **Egress Lockdown**: CI/CD runners are restricted to known endpoints.
 - **Dependency Auditing**: Automated OSV scanning on every PR.
 - **Secret Scanning**: Gitleaks integrated into local hooks and CI.
+- **Workflow Auditing**: Zizmor static analysis for GitHub Action security.
 - **Minimal Surface**: We use the principle of least privilege for all cloud and CI tokens.
 - **SHA Pinning**: All GitHub Actions are pinned to full commit SHAs.
 
