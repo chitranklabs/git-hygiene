@@ -1,6 +1,6 @@
 import lint from '@commitlint/lint';
 import { loadConfig } from './config.ts';
-import type { ValidationResult } from './types.ts';
+import type { ValidationResult, ResolvedConfig } from './types.ts';
 import { createRequire } from 'node:module';
 import { Bumper } from 'conventional-recommended-bump';
 
@@ -14,8 +14,11 @@ const require = createRequire(import.meta.url);
  * @param branchName - The raw string name of the branch to validate
  * @returns {Promise<ValidationResult>} The status and messaging of the validation
  */
-export async function validateBranch(branchName: string): Promise<ValidationResult> {
-  const config = await loadConfig();
+export async function validateBranch(
+  branchName: string,
+  configOverride?: ResolvedConfig,
+): Promise<ValidationResult> {
+  const config = configOverride || (await loadConfig());
   const isValid = config.patterns.branch.test(branchName);
 
   if (isValid) return { valid: true, message: `Branch name "${branchName}" is valid.` };
@@ -35,8 +38,11 @@ export async function validateBranch(branchName: string): Promise<ValidationResu
  * @param title - The PR title to validate (e.g., 'feat: add login')
  * @returns {Promise<ValidationResult>} The status and messaging of the validation
  */
-export async function validateTitle(title: string): Promise<ValidationResult> {
-  const config = await loadConfig();
+export async function validateTitle(
+  title: string,
+  configOverride?: ResolvedConfig,
+): Promise<ValidationResult> {
+  const config = configOverride || (await loadConfig());
   const isValid = config.patterns.title.test(title);
 
   if (isValid) return { valid: true, message: `PR title "${title}" is valid.` };
@@ -57,8 +63,11 @@ export async function validateTitle(title: string): Promise<ValidationResult> {
  * @param message - The multi-line commit message
  * @returns {Promise<ValidationResult>} The status and messaging of the validation
  */
-export async function validateCommit(message: string): Promise<ValidationResult> {
-  const config = await loadConfig();
+export async function validateCommit(
+  message: string,
+  configOverride?: ResolvedConfig,
+): Promise<ValidationResult> {
+  const config = configOverride || (await loadConfig());
 
   const rules: Record<string, unknown> = {
     'type-enum': [2, 'always', config.types],
@@ -112,12 +121,12 @@ export async function validateCommit(message: string): Promise<ValidationResult>
  *
  * @returns {Promise<{ releaseType: string; reason: string; level: number }>} The recommended bump info
  */
-export async function getRecommendedBump(): Promise<{
+export async function getRecommendedBump(configOverride?: ResolvedConfig): Promise<{
   releaseType: string;
   reason: string;
   level: number;
 }> {
-  const config = await loadConfig();
+  const config = configOverride || (await loadConfig());
   const bumper = new Bumper(process.cwd());
 
   if (config.parserPreset) {

@@ -130,8 +130,8 @@ describe('Validation Engine', () => {
       assert.strictEqual(config.parserPreset, mockPreset);
 
       // Verify it actually works in validateCommit
-      // We manually override the loaded config for this test case
-      const res = await validateCommit('feat: test commit');
+      // We pass the resolved config directly as an override
+      const res = await validateCommit('feat: test commit', config);
       assert.strictEqual(res.valid, true);
     });
   });

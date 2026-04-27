@@ -14,13 +14,25 @@ inputs:
     description: 'The value to validate (for title and commit commands)'
     required: false
 
+outputs:
+  releaseType:
+    description: 'The recommended release type (patch, minor, major) for the bump command'
+  reason:
+    description: 'The reason for the recommended bump'
+
 runs:
   using: 'composite'
   steps:
     - name: Run Git Hygiene 🌊
       shell: bash
       run: |
-        if [ -n "${{ inputs.value }}" ]; then
+        if [ "${{ inputs.command }}" == "bump" ]; then
+          RESULT=$(npx --yes @chitrank2050/git-hygiene@latest bump --json)
+          echo "releaseType=$(echo $RESULT | jq -r .releaseType)" >> $GITHUB_OUTPUT
+          echo "reason=$(echo $RESULT | jq -r .reason)" >> $GITHUB_OUTPUT
+          # Also print for logs
+          npx --yes @chitrank2050/git-hygiene@latest bump
+        elif [ -n "${{ inputs.value }}" ]; then
           npx --yes @chitrank2050/git-hygiene@latest ${{ inputs.command }} "${{ inputs.value }}"
         else
           npx --yes @chitrank2050/git-hygiene@latest ${{ inputs.command }}

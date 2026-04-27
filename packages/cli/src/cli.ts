@@ -26,6 +26,7 @@ ${pc.bold('Commands:')}
   ${pc.cyan('bump')}            Suggest the next semantic version
 
 ${pc.bold('Options:')}
+  --json            Output result as JSON (useful for CI)
   --help, -h        Show this help message
   --version, -v     Show version number
 `;
@@ -36,6 +37,7 @@ async function main() {
       options: {
         help: { type: 'boolean', short: 'h' },
         version: { type: 'boolean', short: 'v' },
+        json: { type: 'boolean' },
       },
       allowPositionals: true,
       strict: false,
@@ -53,7 +55,7 @@ async function main() {
       case 'branch': {
         const branchToValidate =
           arg || execSync('git rev-parse --abbrev-ref HEAD').toString().trim();
-        report(await validateBranch(branchToValidate));
+        report(await validateBranch(branchToValidate), !!values.json);
         break;
       }
       case 'title': {
@@ -61,7 +63,7 @@ async function main() {
           console.error(pc.red('❌ Error: PR title is required.'));
           process.exit(1);
         }
-        report(await validateTitle(arg));
+        report(await validateTitle(arg), !!values.json);
         break;
       }
       case 'commit': {
@@ -77,13 +79,18 @@ async function main() {
           messageToValidate = fs.readFileSync(arg, 'utf8').trim();
         }
 
-        report(await validateCommit(messageToValidate));
+        report(await validateCommit(messageToValidate), !!values.json);
         break;
       }
       case 'bump': {
-        const { releaseType, reason } = await getRecommendedBump();
-        console.log(`\n${pc.bold('Recommended Bump:')} ${pc.green(pc.underline(releaseType))}`);
-        console.log(`${pc.dim('Reason:')} ${reason}\n`);
+        const { releaseType, reason, level } = await getRecommendedBump();
+
+        if (values.json) {
+          console.log(JSON.stringify({ releaseType, reason, level }));
+        } else {
+          console.log(`\n${pc.bold('Recommended Bump:')} ${pc.green(pc.underline(releaseType))}`);
+          console.log(`${pc.dim('Reason:')} ${reason}\n`);
+        }
         process.exit(0);
         break;
       }
@@ -98,7 +105,12 @@ async function main() {
   }
 }
 
-function report(result: ValidationResult) {
+function report(result: ValidationResult, isJson: boolean = false) {
+  if (isJson) {
+    console.log(JSON.stringify(result));
+    process.exit(result.valid ? 0 : 1);
+  }
+
   if (result.valid) {
     console.log(`${pc.green('✅')} ${result.message}`);
     process.exit(0);

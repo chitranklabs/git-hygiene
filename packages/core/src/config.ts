@@ -47,6 +47,7 @@ export async function loadConfig(): Promise<ResolvedConfig> {
 export async function resolveConfig(
   userConfig: Partial<GitHygieneConfig>,
 ): Promise<ResolvedConfig> {
+  validateUserConfig(userConfig);
   const mergedConfig: GitHygieneConfig = {
     extends: userConfig.extends || [],
     rules: userConfig.rules || {},
@@ -116,6 +117,30 @@ export async function resolveConfig(
   };
 
   return resolved;
+}
+
+/**
+ * @description
+ * Lightweight validation for the user-provided configuration.
+ * Warns about common type mismatches.
+ */
+function validateUserConfig(config: Record<string, unknown>): void {
+  const checks: Record<string, string> = {
+    types: 'object', // Array is object
+    ignoreBranches: 'object',
+    maxHeaderLength: 'number',
+    maxBodyLength: 'number',
+    minBodyLength: 'number',
+    allowEmptyScope: 'boolean',
+  };
+
+  for (const [key, type] of Object.entries(checks)) {
+    if (config[key] !== undefined && typeof config[key] !== type) {
+      console.warn(
+        `[git-hygiene] Warning: Invalid type for "${key}". Expected ${type}, got ${typeof config[key]}.`,
+      );
+    }
+  }
 }
 
 /**
