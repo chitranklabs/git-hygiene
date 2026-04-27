@@ -59,6 +59,9 @@ importers:
 
   packages/core:
     dependencies:
+      '@commitlint/config-conventional':
+        specifier: ^19.8.0
+        version: 19.8.1
       '@commitlint/lint':
         specifier: ^20.5.0
         version: 20.5.0
@@ -68,6 +71,13 @@ importers:
         version: 25.6.0
 
 packages:
+  '@commitlint/config-conventional@19.8.1':
+    resolution:
+      {
+        integrity: sha512-/AZHJL6F6B/G959CsMAzrPKKZjeEiAVifRyEwXxcT6qtqbPwGw+iQxmNS+Bu+i09OCtdNRW6pNpBvgPrtMr9EQ==,
+      }
+    engines: { node: '>=v18' }
+
   '@commitlint/ensure@20.5.0':
     resolution:
       {
@@ -114,6 +124,13 @@ packages:
     resolution:
       {
         integrity: sha512-2l9gmwiCRqZNWgV+pX1X7z4yP0b3ex/86UmUFgoRt672Ez6cAM2lOQeHFRUTuE6sPpi8XBCGnd8Kh3bMoyHwJw==,
+      }
+    engines: { node: '>=v18' }
+
+  '@commitlint/types@19.8.1':
+    resolution:
+      {
+        integrity: sha512-/yCrWGCoA1SVKOks25EGadP9Pnj0oAIHGpl2wH2M2Y46dPM2ueb8wyCVOD7O3WCTkaJ0IkKvzhl1JY7+uCT2Dw==,
       }
     engines: { node: '>=v18' }
 
@@ -749,6 +766,12 @@ packages:
     cpu: [arm64]
     os: [win32]
 
+  '@types/conventional-commits-parser@5.0.2':
+    resolution:
+      {
+        integrity: sha512-BgT2szDXnVypgpNxOK8aL5SGjUdaQbC++WZNjF1Qge3Og2+zhHj+RWhmehLhYyvQwqAmvezruVfOf8+3m74W+g==,
+      }
+
   '@types/debug@4.1.13':
     resolution:
       {
@@ -963,6 +986,13 @@ packages:
       }
     engines: { node: '>=8' }
 
+  chalk@5.6.2:
+    resolution:
+      {
+        integrity: sha512-7NzBL0rN6fMUW+f7A6Io4h40qQlG+xGmtMxfbnH/K7TAtt8JQWVQK+6g0UXKMeVJoyV5EkkNsErQ8pVD3bLHbA==,
+      }
+    engines: { node: ^12.17.0 || ^14.13 || >=16.0.0 }
+
   character-entities-legacy@3.0.0:
     resolution:
       {
@@ -1034,6 +1064,13 @@ packages:
         integrity: sha512-6gfI3otXK5Ph5DfCOI1dblr+kN3FAm5a97hYoQkqNZxOaYa5WKfXH+AnpsmS+iUH2mgVC2Cg2Qw9m5OKcmNrIg==,
       }
     engines: { node: '>=18' }
+
+  conventional-changelog-conventionalcommits@7.0.2:
+    resolution:
+      {
+        integrity: sha512-NKXYmMR/Hr1DevQegFB4MwfM5Vv0m4UIxKZTTYuD98lpTknaZlSRrDOG4X7wIXpGkfsYxZTghUN+Qq+T0YQI7w==,
+      }
+    engines: { node: '>=16' }
 
   conventional-commits-parser@6.4.0:
     resolution:
@@ -2188,6 +2225,11 @@ packages:
     engines: { node: '>=10' }
 
 snapshots:
+  '@commitlint/config-conventional@19.8.1':
+    dependencies:
+      '@commitlint/types': 19.8.1
+      conventional-changelog-conventionalcommits: 7.0.2
+
   '@commitlint/ensure@20.5.0':
     dependencies:
       '@commitlint/types': 20.5.0
@@ -2225,6 +2267,11 @@ snapshots:
       '@commitlint/types': 20.5.0
 
   '@commitlint/to-lines@20.0.0': {}
+
+  '@commitlint/types@19.8.1':
+    dependencies:
+      '@types/conventional-commits-parser': 5.0.2
+      chalk: 5.6.2
 
   '@commitlint/types@20.5.0':
     dependencies:
@@ -2468,6 +2515,10 @@ snapshots:
   '@turbo/windows-arm64@2.9.6':
     optional: true
 
+  '@types/conventional-commits-parser@5.0.2':
+    dependencies:
+      '@types/node': 25.6.0
+
   '@types/debug@4.1.13':
     dependencies:
       '@types/ms': 2.1.0
@@ -2613,6 +2664,8 @@ snapshots:
 
   cac@6.7.14: {}
 
+  chalk@5.6.2: {}
+
   character-entities-legacy@3.0.0: {}
 
   character-entities@2.0.2: {}
@@ -2639,6 +2692,10 @@ snapshots:
   consola@3.4.2: {}
 
   conventional-changelog-angular@8.3.1:
+    dependencies:
+      compare-func: 2.0.0
+
+  conventional-changelog-conventionalcommits@7.0.2:
     dependencies:
       compare-func: 2.0.0
 

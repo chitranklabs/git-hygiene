@@ -50,6 +50,7 @@
     "format:check": "prettier --check src/**/*.ts"
   },
   "dependencies": {
+    "@commitlint/config-conventional": "^19.8.0",
     "@commitlint/lint": "^20.5.0"
   },
   "devDependencies": {

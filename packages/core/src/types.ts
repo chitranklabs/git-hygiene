@@ -46,6 +46,18 @@ export interface GitHygieneConfig {
    * Default is 'never'.
    */
   subjectFullStop?: 'always' | 'never';
+
+  /**
+   * Optional configurations to extend from.
+   * Supports @commitlint/config-conventional or other standard configs.
+   */
+  extends?: string[];
+
+  /**
+   * Raw commitlint rules to merge.
+   * Allows power users to override any rule directly.
+   */
+  rules?: Record<string, unknown>;
 }
 
 /**

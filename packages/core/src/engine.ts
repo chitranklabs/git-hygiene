@@ -68,6 +68,7 @@ export async function validateCommit(message: string): Promise<ValidationResult>
     'header-max-length': [2, 'always', config.maxHeaderLength],
     'body-max-line-length': [2, 'always', config.maxBodyLength],
     'body-min-length': [2, 'always', config.minBodyLength],
+    ...config.rules,
   };
 
   const report = await lint(message, rules);

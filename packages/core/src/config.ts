@@ -2,6 +2,9 @@ import fs from 'node:fs';
 import path from 'node:path';
 import type { GitHygieneConfig, ResolvedConfig } from './types.ts';
 import { DEFAULT_CONFIG } from './constants.ts';
+import { createRequire } from 'node:module';
+
+const require = createRequire(import.meta.url);
 
 let cachedConfig: ResolvedConfig | null = null;
 
@@ -30,6 +33,8 @@ export function loadConfig(): ResolvedConfig {
   }
 
   const mergedConfig: GitHygieneConfig = {
+    extends: userConfig.extends || [],
+    rules: userConfig.rules || {},
     types: userConfig.types || DEFAULT_CONFIG.types,
     ignoreBranches: userConfig.ignoreBranches || DEFAULT_CONFIG.ignoreBranches,
     maxHeaderLength: userConfig.maxHeaderLength || DEFAULT_CONFIG.maxHeaderLength,
@@ -40,6 +45,28 @@ export function loadConfig(): ResolvedConfig {
     allowEmptyScope: userConfig.allowEmptyScope ?? DEFAULT_CONFIG.allowEmptyScope,
     subjectFullStop: userConfig.subjectFullStop || DEFAULT_CONFIG.subjectFullStop,
   };
+
+  // Basic support for extending @commitlint/config-conventional
+  if (mergedConfig.extends?.includes('@commitlint/config-conventional')) {
+    try {
+      const conventional = require('@commitlint/config-conventional');
+      const convRules = conventional.default?.rules || conventional.rules || {};
+
+      if (convRules['type-enum']) {
+        const convTypes = convRules['type-enum'][2];
+        if (Array.isArray(convTypes)) {
+          mergedConfig.types = Array.from(new Set([...mergedConfig.types, ...convTypes]));
+        }
+      }
+
+      // Merge other properties from conventional rules if not explicitly set
+      if (!userConfig.maxHeaderLength && convRules['header-max-length']) {
+        mergedConfig.maxHeaderLength = convRules['header-max-length'][2];
+      }
+    } catch {
+      console.warn('Failed to load @commitlint/config-conventional. Is it installed?');
+    }
+  }
 
   const typesPattern = mergedConfig.types.join('|');
   const branchesPattern = mergedConfig.ignoreBranches.join('|');

@@ -199,13 +199,16 @@ const { valid, error } = validateBranch('feat/new-ui');
 | `scopeCase`       | Case requirement for scopes               | `lower-case`                                | `lower-case`, `upper-case`, `camel-case`, etc. |
 | `allowEmptyScope` | Whether scope is optional                 | `true`                                      | `boolean`                                      |
 | `subjectFullStop` | Whether subject can end with a period     | `never`                                     | `always`, `never`                              |
+| `extends`         | Standard configs to extend from           | `[]`                                        | `['@commitlint/config-conventional']`          |
+| `rules`           | Raw commitlint rules to merge/override    | `{}`                                        | `Record<string, any>`                          |
 
 ### Example `package.json`
 
 ```json
 {
   "git-hygiene": {
-    "types": ["feat", "fix", "chore", "docs", "refactor", "test"],
+    "extends": ["@commitlint/config-conventional"],
+    "types": ["feat", "fix", "chore", "docs", "refactor", "test", "renovate"],
     "ignoreBranches": ["main", "develop", "release/*"],
     "maxHeaderLength": 100,
     "allowEmptyScope": false
