@@ -28,6 +28,12 @@
   <a href="https://scorecard.dev/viewer/?uri=github.com/chitranklabs/git-hygiene">
     <img src="https://api.scorecard.dev/projects/github.com/chitranklabs/git-hygiene/badge" alt="OpenSSF Scorecard" />
   </a>
+  <a href="https://github.com/gitleaks/gitleaks">
+    <img src="https://img.shields.io/badge/Security-Gitleaks-brightgreen?logo=gitleaks" alt="Gitleaks Hardened" />
+  </a>
+  <a href="https://github.com/woodruffw/zizmor">
+    <img src="https://img.shields.io/badge/Actions-Zizmor-blue?logo=github-actions" alt="Zizmor Audited" />
+  </a>
   <a href="https://codecov.io/gh/chitranklabs/git-hygiene">
     <img src="https://codecov.io/gh/chitranklabs/git-hygiene/branch/main/graph/badge.svg" alt="Code Coverage" />
   </a>
@@ -121,7 +127,7 @@ Just drop the action into your PR workflow. It will automatically detect the con
 
 ```yaml
 - name: Git Hygiene 🌊
-  uses: chitranklabs/git-hygiene@<SHA>
+  uses: chitranklabs/git-hygiene@7cd725abdbcd12d0e14b77fa94c423dd9ddf8933
 ```
 
 #### **Manual Mode**
@@ -131,14 +137,14 @@ For granular control over specific commands.
 ```yaml
 # Validate PR Title explicitly
 - name: Validate PR Title 🏷️
-  uses: chitranklabs/git-hygiene@<SHA>
+  uses: chitranklabs/git-hygiene@7cd725abdbcd12d0e14b77fa94c423dd9ddf8933
   with:
     command: 'title'
     value: '${{ github.event.pull_request.title }}'
 
 # Validate Branch Name
 - name: Validate Branch Name 🌿
-  uses: chitranklabs/git-hygiene@<SHA>
+  uses: chitranklabs/git-hygiene@7cd725abdbcd12d0e14b77fa94c423dd9ddf8933
   with:
     command: 'branch'
     value: '${{ github.head_ref }}'
@@ -180,7 +186,7 @@ jobs:
     steps:
       - name: Validate PR Title 🌊
         id: hygiene
-        uses: chitranklabs/git-hygiene@<SHA>
+        uses: chitranklabs/git-hygiene@7cd725abdbcd12d0e14b77fa94c423dd9ddf8933
         with:
           command: 'title'
           value: ${{ github.event.pull_request.title }}
@@ -197,7 +203,7 @@ When using the `bump` command, the action provides the following outputs:
 ```yaml
 - name: Get Bump 🚀
   id: bump
-  uses: chitranklabs/git-hygiene@<SHA>
+  uses: chitranklabs/git-hygiene@7cd725abdbcd12d0e14b77fa94c423dd9ddf8933
   with:
     command: 'bump'
 
