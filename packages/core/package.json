@@ -1,6 +1,6 @@
 {
   "name": "@chitrank2050/git-hygiene-core",
-  "version": "0.4.9",
+  "version": "0.4.10",
   "description": "Core validation engine for git-hygiene. Validates conventional commits, branch names, and PR titles.",
   "author": {
     "name": "Chitrank Agnihotri",
