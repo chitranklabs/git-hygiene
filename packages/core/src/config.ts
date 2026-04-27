@@ -11,7 +11,6 @@ let cachedConfig: ResolvedConfig | null = null;
 /**
  * @description
  * Loads the user's config from package.json and merges it with the defaults.
- * Dynamically generates the Regex patterns to enforce Unity across the tool.
  *
  * @returns {ResolvedConfig} The fully resolved and compiled configuration
  */
@@ -32,6 +31,19 @@ export function loadConfig(): ResolvedConfig {
     // Silently fallback to defaults if package.json is missing or invalid
   }
 
+  cachedConfig = resolveConfig(userConfig);
+  return cachedConfig;
+}
+
+/**
+ * @description
+ * Resolves a partial user configuration by merging it with defaults and
+ * applying extensions (like @commitlint/config-conventional).
+ *
+ * @param userConfig - The partial configuration provided by the user
+ * @returns {ResolvedConfig} The resolved configuration with compiled patterns
+ */
+export function resolveConfig(userConfig: Partial<GitHygieneConfig>): ResolvedConfig {
   const mergedConfig: GitHygieneConfig = {
     extends: userConfig.extends || [],
     rules: userConfig.rules || {},
@@ -44,6 +56,7 @@ export function loadConfig(): ResolvedConfig {
     scopeCase: userConfig.scopeCase || DEFAULT_CONFIG.scopeCase,
     allowEmptyScope: userConfig.allowEmptyScope ?? DEFAULT_CONFIG.allowEmptyScope,
     subjectFullStop: userConfig.subjectFullStop || DEFAULT_CONFIG.subjectFullStop,
+    parserPreset: userConfig.parserPreset,
   };
 
   // Basic support for extending @commitlint/config-conventional
@@ -63,6 +76,10 @@ export function loadConfig(): ResolvedConfig {
       if (!userConfig.maxHeaderLength && convRules['header-max-length']) {
         mergedConfig.maxHeaderLength = convRules['header-max-length'][2];
       }
+
+      if (!userConfig.parserPreset && conventional.default?.parserPreset) {
+        mergedConfig.parserPreset = conventional.default.parserPreset;
+      }
     } catch {
       console.warn('Failed to load @commitlint/config-conventional. Is it installed?');
     }
@@ -72,15 +89,16 @@ export function loadConfig(): ResolvedConfig {
   const branchesPattern = mergedConfig.ignoreBranches.join('|');
 
   const scopePattern = mergedConfig.allowEmptyScope ? '(\\([a-z0-9-]+\\))?' : '(\\([a-z0-9-]+\\))';
-  cachedConfig = {
+
+  const resolved = {
     ...mergedConfig,
     patterns: {
       branch: new RegExp(`^(${branchesPattern})$|^(${typesPattern})/.+$`),
-      title: new RegExp(`^(${typesPattern})${scopePattern}: .+$`),
+      title: new RegExp(`^(${typesPattern})(!)?${scopePattern}: .+$`),
     },
   };
 
-  return cachedConfig;
+  return resolved;
 }
 
 /**

@@ -1,6 +1,9 @@
 import lint from '@commitlint/lint';
 import { loadConfig } from './config.ts';
 import type { ValidationResult } from './types.ts';
+import { createRequire } from 'node:module';
+
+const require = createRequire(import.meta.url);
 
 /**
  * @description
@@ -71,7 +74,20 @@ export async function validateCommit(message: string): Promise<ValidationResult>
     ...config.rules,
   };
 
-  const report = await lint(message, rules);
+  const lintOpts: any = {};
+  if (config.parserPreset) {
+    const preset =
+      typeof config.parserPreset === 'string' ? require(config.parserPreset) : config.parserPreset;
+
+    // Handle presets that are functions (like conventional-changelog-conventionalcommits)
+    if (typeof preset === 'function') {
+      lintOpts.parserOpts = await preset();
+    } else {
+      lintOpts.parserOpts = preset;
+    }
+  }
+
+  const report = await lint(message, rules, lintOpts);
   if (report.valid) return { valid: true, message: 'Commit message is valid.' };
 
   const errors = report.errors.map((err: { message: string; name: string }) => ({

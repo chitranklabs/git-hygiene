@@ -58,6 +58,11 @@ export interface GitHygieneConfig {
    * Allows power users to override any rule directly.
    */
   rules?: Record<string, unknown>;
+
+  /**
+   * Optional parser preset for commitlint.
+   */
+  parserPreset?: any;
 }
 
 /**

@@ -1,8 +1,13 @@
-import { describe, it } from 'node:test';
+import { describe, it, afterEach } from 'node:test';
 import assert from 'node:assert';
 import { validateBranch, validateTitle, validateCommit } from '../src/engine.ts';
+import { clearConfigCache } from '../src/config.ts';
 
 describe('Validation Engine', () => {
+  afterEach(() => {
+    clearConfigCache();
+  });
+
   describe('validateBranch', () => {
     it('should accept valid branch names', () => {
       assert.strictEqual(validateBranch('feat/login-screen').valid, true);
@@ -32,13 +37,39 @@ describe('Validation Engine', () => {
       assert.strictEqual(validateTitle('just a title').valid, false);
       assert.strictEqual(validateTitle('feat:missing-space').valid, false);
       assert.strictEqual(validateTitle('unknown: type').valid, false);
-      assert.strictEqual(validateTitle('feat(): empty scope').valid, false);
+    });
+
+    it('should respect allowEmptyScope setting in title pattern', () => {
+      assert.strictEqual(validateTitle('feat: title').valid, true);
+      assert.strictEqual(validateTitle('feat(scope): title').valid, true);
+    });
+
+    it('should reject titles with invalid casing', () => {
+      assert.strictEqual(validateTitle('FEAT: title').valid, false);
+      assert.strictEqual(validateTitle('feat(Scope): title').valid, false);
     });
   });
 
   describe('validateCommit', async () => {
     it('should accept valid commits', async () => {
       const res = await validateCommit('feat: working commit');
+      assert.strictEqual(res.valid, true);
+    });
+
+    it('should accept commits with scopes', async () => {
+      const res = await validateCommit('feat(ui): add button');
+      assert.strictEqual(res.valid, true);
+    });
+
+    it('should accept multi-line bodies', async () => {
+      const message = 'feat: subject\n\nFirst line of body\nSecond line of body';
+      const res = await validateCommit(message);
+      assert.strictEqual(res.valid, true);
+    });
+
+    it('should accept footers', async () => {
+      const message = 'feat: subject\n\nbody\n\nBREAKING CHANGE: this is breaking';
+      const res = await validateCommit(message);
       assert.strictEqual(res.valid, true);
     });
 
@@ -61,9 +92,11 @@ describe('Validation Engine', () => {
       assert.ok(res.errors?.some(e => e.name === 'subject-full-stop'));
     });
 
-    it('should enforce body length rules', async () => {
-      const longBody = 'feat: subject\n\n' + 'a'.repeat(1001);
-      const res = await validateCommit(longBody);
+    it('should enforce body line length rules', async () => {
+      // body-max-line-length is 1000 by default
+      const longLine = 'a'.repeat(1001);
+      const message = `feat: subject\n\n${longLine}`;
+      const res = await validateCommit(message);
       assert.strictEqual(res.valid, false);
       assert.ok(res.errors?.some(e => e.name === 'body-max-line-length'));
     });
