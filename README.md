@@ -31,8 +31,9 @@
   </a>
   <br/>
   <br/>
-  <a href="https://ko-fi.com/D1D71U581P" target="_blank"><b>Support</b></a>
-  <br/>
+    <a href="https://ko-fi.com/D1D71U581P" target="_blank">
+      <img src="https://ko-fi.com/img/githubbutton_sm.svg" alt="Buy me a coffee at ko-fi.com">
+    </a>
   <br/>
 
 [Features](#features) • [Installation](#installation) • [Usage](#usage) • [Architecture](#architecture) • [Contributing](#contributing)
