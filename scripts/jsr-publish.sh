@@ -50,8 +50,9 @@ for pkg in "${PACKAGES[@]}"; do
       cp "$pkg/package.json" "$pkg/package.json.bak"
 
       if [ "$pkg" == "packages/cli" ]; then
-        jq "{name, version, dependencies} | .dependencies[\"@chitrank2050/git-hygiene-core\"] = \"^$CLEAN_VERSION\"" "$pkg/package.json" > "$pkg/package.json.tmp" && mv "$pkg/package.json.tmp" "$pkg/package.json"
-        # Also sync JSR imports
+        # Remove JSR dependencies from package.json as they are handled in jsr.json imports
+        jq "{name, version, dependencies} | del(.dependencies[\"@chitrank2050/git-hygiene-core\"])" "$pkg/package.json" > "$pkg/package.json.tmp" && mv "$pkg/package.json.tmp" "$pkg/package.json"
+        # Sync JSR imports
         jq ".imports[\"@chitrank2050/git-hygiene-core\"] = \"jsr:@chitrank2050/git-hygiene-core@^$CLEAN_VERSION\"" "$pkg/jsr.json" > "$pkg/jsr.json.tmp" && mv "$pkg/jsr.json.tmp" "$pkg/jsr.json"
       else
         jq "{name, version, dependencies}" "$pkg/package.json" > "$pkg/package.json.tmp" && mv "$pkg/package.json.tmp" "$pkg/package.json"
