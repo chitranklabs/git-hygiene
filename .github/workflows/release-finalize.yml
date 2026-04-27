@@ -143,6 +143,10 @@ jobs:
             if [ -f "$pkg/jsr.json" ]; then
               echo "🚀 Publishing $pkg to JSR via OIDC..."
 
+              # Update version in jsr.json
+              echo "Updating version in $pkg/jsr.json to $CLEAN_VERSION"
+              jq ".version = \"$CLEAN_VERSION\"" "$pkg/jsr.json" > "$pkg/jsr.json.tmp" && mv "$pkg/jsr.json.tmp" "$pkg/jsr.json"
+
               # Deep-clean package.json for JSR: Keep only name, version, and dependencies.
               if [ -f "$pkg/package.json" ]; then
                 if [ "$pkg" == "packages/cli" ]; then
@@ -153,6 +157,9 @@ jobs:
                 echo "--- Cleaned package.json for JSR ($pkg) ---"
                 cat "$pkg/package.json"
               fi
+
+              echo "🔍 Running JSR dry-run..."
+              (cd "$pkg" && npx -y jsr publish --dry-run --allow-slow-types --allow-dirty)
 
               (cd "$pkg" && npx jsr publish --allow-slow-types --allow-dirty)
             fi
