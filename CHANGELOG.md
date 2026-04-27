@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ## [0.2.0] - 2026-04-27
 
+### 🚜 Refactor
+
+- Migrate from CommonJS require to ESM dynamic imports & refine JSR package publishing logic ([100b8a5](100b8a5095b520ecb74235ac4ee0dff02398e3f6)) by @chitrank2050
+
+## [0.2.0] - 2026-04-27
+
 ### 🚀 Features
 
 - Added support for extends and custom rules configuration ([47b5c78](47b5c78065acbbd5231945c0d0ef81d832a07eef)) by @chitrank2050
@@ -16,6 +22,10 @@ All notable changes to this project will be documented in this file.
 - Granularize CI checks and automate release versioning using git-hygiene recommendations ([736402f](736402f10418e57b33c3ca22d58902439894c2b6)) by @chitrank2050
 - Integrate Gitleaks installation into release preparation workflow and configure in lefthook ([31cb24f](31cb24f9120ab7a57cfdf04778d85cf50ff41dd9)) by @chitrank2050
 - Export releaseType and reason as action outputs ([b1af537](b1af537a72d221181f31f6f4fa19ce54bd5a2017)) by @chitrank2050
+
+### 🐛 Bug Fixes
+
+- Restrict package.json to essential fields before JSR publication to prevent parser errors ([9bb73cf](9bb73cfb94ea79c621a9641d6a9565aeaf5ec3f9)) by @chitrank2050
 
 ### 🚜 Refactor
 
@@ -34,6 +44,8 @@ All notable changes to this project will be documented in this file.
 - **release:** Bump version to v0.2.0 ([577bcc8](577bcc8441a61b6c7a6a94ec27f3f1944d54a684)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
 - **release:** Bump version to v0.3.0 ([016aec6](016aec62cb5a288f1a0413d3769ce8d505336212)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
 - Strip scripts and update core dependency version in package.json before JSR publication ([bc2e9d5](bc2e9d5202c6abd1594758810dbdb382dbed6c7c)) by @chitrank2050
+- **release:** Bump version to v0.2.0 ([c98ed0a](c98ed0a21d49175025a9fc0ee80e1dd70b6211a6)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
+- Reorder NPM publish step after JSR publish in release workflow ([e5d52dc](e5d52dcd16d45f7369cddc4365320308bcf1f363)) by @chitrank2050
 
 ## [0.1.6] - 2026-04-26
 
