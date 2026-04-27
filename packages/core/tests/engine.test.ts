@@ -9,44 +9,44 @@ describe('Validation Engine', () => {
   });
 
   describe('validateBranch', () => {
-    it('should accept valid branch names', () => {
-      assert.strictEqual(validateBranch('feat/login-screen').valid, true);
+    it('should accept valid branch names', async () => {
+      assert.strictEqual((await validateBranch('feat/login-screen')).valid, true);
     });
 
-    it('should accept ignored base branches natively', () => {
-      assert.strictEqual(validateBranch('main').valid, true);
-      assert.strictEqual(validateBranch('master').valid, true);
-      assert.strictEqual(validateBranch('development').valid, true);
+    it('should accept ignored base branches natively', async () => {
+      assert.strictEqual((await validateBranch('main')).valid, true);
+      assert.strictEqual((await validateBranch('master')).valid, true);
+      assert.strictEqual((await validateBranch('development')).valid, true);
     });
 
-    it('should reject invalid branch names', () => {
-      assert.strictEqual(validateBranch('wrong-name').valid, false);
-      assert.strictEqual(validateBranch('feat-login').valid, false);
-      assert.strictEqual(validateBranch('unknown/branch').valid, false);
-      assert.strictEqual(validateBranch('feat/').valid, false);
+    it('should reject invalid branch names', async () => {
+      assert.strictEqual((await validateBranch('wrong-name')).valid, false);
+      assert.strictEqual((await validateBranch('feat-login')).valid, false);
+      assert.strictEqual((await validateBranch('unknown/branch')).valid, false);
+      assert.strictEqual((await validateBranch('feat/')).valid, false);
     });
   });
 
   describe('validateTitle', () => {
-    it('should accept valid PR titles', () => {
-      assert.strictEqual(validateTitle('feat: add auth').valid, true);
-      assert.strictEqual(validateTitle('fix(core): resolve memory leak').valid, true);
+    it('should accept valid PR titles', async () => {
+      assert.strictEqual((await validateTitle('feat: add auth')).valid, true);
+      assert.strictEqual((await validateTitle('fix(core): resolve memory leak')).valid, true);
     });
 
-    it('should reject invalid PR titles', () => {
-      assert.strictEqual(validateTitle('just a title').valid, false);
-      assert.strictEqual(validateTitle('feat:missing-space').valid, false);
-      assert.strictEqual(validateTitle('unknown: type').valid, false);
+    it('should reject invalid PR titles', async () => {
+      assert.strictEqual((await validateTitle('just a title')).valid, false);
+      assert.strictEqual((await validateTitle('feat:missing-space')).valid, false);
+      assert.strictEqual((await validateTitle('unknown: type')).valid, false);
     });
 
-    it('should respect allowEmptyScope setting in title pattern', () => {
-      assert.strictEqual(validateTitle('feat: title').valid, true);
-      assert.strictEqual(validateTitle('feat(scope): title').valid, true);
+    it('should respect allowEmptyScope setting in title pattern', async () => {
+      assert.strictEqual((await validateTitle('feat: title')).valid, true);
+      assert.strictEqual((await validateTitle('feat(scope): title')).valid, true);
     });
 
-    it('should reject titles with invalid casing', () => {
-      assert.strictEqual(validateTitle('FEAT: title').valid, false);
-      assert.strictEqual(validateTitle('feat(Scope): title').valid, false);
+    it('should reject titles with invalid casing', async () => {
+      assert.strictEqual((await validateTitle('FEAT: title')).valid, false);
+      assert.strictEqual((await validateTitle('feat(Scope): title')).valid, false);
     });
   });
 

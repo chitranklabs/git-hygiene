@@ -3,6 +3,7 @@ import path from 'node:path';
 import type { GitHygieneConfig, ResolvedConfig } from './types.ts';
 import { DEFAULT_CONFIG } from './constants.ts';
 import { createRequire } from 'node:module';
+import { loadPreset } from 'conventional-changelog-preset-loader';
 
 const require = createRequire(import.meta.url);
 
@@ -12,9 +13,9 @@ let cachedConfig: ResolvedConfig | null = null;
  * @description
  * Loads the user's config from package.json and merges it with the defaults.
  *
- * @returns {ResolvedConfig} The fully resolved and compiled configuration
+ * @returns {Promise<ResolvedConfig>} The fully resolved and compiled configuration
  */
-export function loadConfig(): ResolvedConfig {
+export async function loadConfig(): Promise<ResolvedConfig> {
   if (cachedConfig) return cachedConfig;
 
   let userConfig: Partial<GitHygieneConfig> = {};
@@ -31,7 +32,7 @@ export function loadConfig(): ResolvedConfig {
     // Silently fallback to defaults if package.json is missing or invalid
   }
 
-  cachedConfig = resolveConfig(userConfig);
+  cachedConfig = await resolveConfig(userConfig);
   return cachedConfig;
 }
 
@@ -41,9 +42,11 @@ export function loadConfig(): ResolvedConfig {
  * applying extensions (like @commitlint/config-conventional).
  *
  * @param userConfig - The partial configuration provided by the user
- * @returns {ResolvedConfig} The resolved configuration with compiled patterns
+ * @returns {Promise<ResolvedConfig>} The resolved configuration with compiled patterns
  */
-export function resolveConfig(userConfig: Partial<GitHygieneConfig>): ResolvedConfig {
+export async function resolveConfig(
+  userConfig: Partial<GitHygieneConfig>,
+): Promise<ResolvedConfig> {
   const mergedConfig: GitHygieneConfig = {
     extends: userConfig.extends || [],
     rules: userConfig.rules || {},
@@ -59,29 +62,43 @@ export function resolveConfig(userConfig: Partial<GitHygieneConfig>): ResolvedCo
     parserPreset: userConfig.parserPreset,
   };
 
-  // Basic support for extending @commitlint/config-conventional
-  if (mergedConfig.extends?.includes('@commitlint/config-conventional')) {
-    try {
-      const conventional = require('@commitlint/config-conventional');
-      const convRules = conventional.default?.rules || conventional.rules || {};
+  // Process extensions
+  for (const extension of mergedConfig.extends || []) {
+    // Specialized support for @commitlint/config-conventional
+    if (extension === '@commitlint/config-conventional') {
+      try {
+        const conventional = require('@commitlint/config-conventional');
+        const convRules = conventional.default?.rules || conventional.rules || {};
 
-      if (convRules['type-enum']) {
-        const convTypes = convRules['type-enum'][2];
-        if (Array.isArray(convTypes)) {
-          mergedConfig.types = Array.from(new Set([...mergedConfig.types, ...convTypes]));
+        if (convRules['type-enum']) {
+          const convTypes = convRules['type-enum'][2];
+          if (Array.isArray(convTypes)) {
+            mergedConfig.types = Array.from(new Set([...mergedConfig.types, ...convTypes]));
+          }
         }
-      }
 
-      // Merge other properties from conventional rules if not explicitly set
-      if (!userConfig.maxHeaderLength && convRules['header-max-length']) {
-        mergedConfig.maxHeaderLength = convRules['header-max-length'][2];
-      }
+        if (!userConfig.maxHeaderLength && convRules['header-max-length']) {
+          mergedConfig.maxHeaderLength = convRules['header-max-length'][2];
+        }
 
-      if (!userConfig.parserPreset && conventional.default?.parserPreset) {
-        mergedConfig.parserPreset = conventional.default.parserPreset;
+        if (!userConfig.parserPreset && conventional.default?.parserPreset) {
+          mergedConfig.parserPreset = conventional.default.parserPreset;
+        }
+      } catch {
+        console.warn(`Failed to load ${extension}. Is it installed?`);
       }
-    } catch {
-      console.warn('Failed to load @commitlint/config-conventional. Is it installed?');
+    } else {
+      // Generic preset support using conventional-changelog-preset-loader
+      try {
+        const preset = (await loadPreset(extension)) as any;
+        const parserOpts = preset?.parserOpts || preset?.parser;
+        if (parserOpts?.headerPattern) {
+          // If the preset has its own parser options, use it as the parserPreset
+          mergedConfig.parserPreset = preset;
+        }
+      } catch {
+        // Fallback or ignore if it's not a valid preset
+      }
     }
   }
 

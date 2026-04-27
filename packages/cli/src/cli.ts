@@ -47,7 +47,7 @@ async function main() {
       case 'branch': {
         const branchToValidate =
           arg || execSync('git rev-parse --abbrev-ref HEAD').toString().trim();
-        report(validateBranch(branchToValidate));
+        report(await validateBranch(branchToValidate));
         break;
       }
       case 'title': {
@@ -55,7 +55,7 @@ async function main() {
           console.error(pc.red('❌ Error: PR title is required.'));
           process.exit(1);
         }
-        report(validateTitle(arg));
+        report(await validateTitle(arg));
         break;
       }
       case 'commit': {

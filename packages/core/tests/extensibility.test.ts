@@ -3,8 +3,8 @@ import assert from 'node:assert';
 import { resolveConfig } from '../src/config.ts';
 
 describe('Configuration Extensibility', () => {
-  it('should merge user-defined types with defaults', () => {
-    const config = resolveConfig({
+  it('should merge user-defined types with defaults', async () => {
+    const config = await resolveConfig({
       types: ['feat', 'fix', 'custom'],
     });
 
@@ -13,8 +13,8 @@ describe('Configuration Extensibility', () => {
     assert.strictEqual(config.types.length, 3);
   });
 
-  it('should load types from @commitlint/config-conventional when extended', () => {
-    const config = resolveConfig({
+  it('should load types from @commitlint/config-conventional when extended', async () => {
+    const config = await resolveConfig({
       extends: ['@commitlint/config-conventional'],
     });
 
@@ -25,8 +25,8 @@ describe('Configuration Extensibility', () => {
     assert.ok(config.types.length >= 10);
   });
 
-  it('should load parserPreset from conventional config', () => {
-    const config = resolveConfig({
+  it('should load parserPreset from conventional config', async () => {
+    const config = await resolveConfig({
       extends: ['@commitlint/config-conventional'],
     });
 
@@ -34,23 +34,23 @@ describe('Configuration Extensibility', () => {
     assert.strictEqual(typeof config.parserPreset, 'string');
   });
 
-  it('should override maxHeaderLength from conventional config', () => {
-    const config = resolveConfig({
+  it('should override maxHeaderLength from conventional config', async () => {
+    const config = await resolveConfig({
       extends: ['@commitlint/config-conventional'],
     });
 
     // Conventional config defines header-max-length as 100
     assert.strictEqual(config.maxHeaderLength, 100);
 
-    const customConfig = resolveConfig({
+    const customConfig = await resolveConfig({
       extends: ['@commitlint/config-conventional'],
       maxHeaderLength: 50,
     });
     assert.strictEqual(customConfig.maxHeaderLength, 50);
   });
 
-  it('should support raw commitlint rules', () => {
-    const config = resolveConfig({
+  it('should support raw commitlint rules', async () => {
+    const config = await resolveConfig({
       rules: {
         'subject-case': [2, 'always', 'sentence-case'],
       },
@@ -59,8 +59,8 @@ describe('Configuration Extensibility', () => {
     assert.deepStrictEqual(config.rules?.['subject-case'], [2, 'always', 'sentence-case']);
   });
 
-  it('should compile regex patterns with extended types', () => {
-    const config = resolveConfig({
+  it('should compile regex patterns with extended types', async () => {
+    const config = await resolveConfig({
       types: ['extra'],
     });
 

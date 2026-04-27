@@ -68,6 +68,9 @@ importers:
       conventional-changelog-conventionalcommits:
         specifier: ^8.0.0
         version: 8.0.0
+      conventional-changelog-preset-loader:
+        specifier: ^5.0.0
+        version: 5.0.0
     devDependencies:
       '@types/node':
         specifier: ^25.6.0
@@ -1059,6 +1062,13 @@ packages:
     resolution:
       {
         integrity: sha512-dTYtpIacRpcZgrvBYvBfArMmK2xvIpv2TaxM0/ZI5CBtNUzvF2x0t15HsbRABWprS6UPmvj+PzHVjSx4qAVKyw==,
+      }
+    engines: { node: '>=18' }
+
+  conventional-changelog-preset-loader@5.0.0:
+    resolution:
+      {
+        integrity: sha512-SetDSntXLk8Jh1NOAl1Gu5uLiCNSYenB5tm0YVeZKePRIgDW9lQImromTwLa3c/Gae298tsgOM+/CYT9XAl0NA==,
       }
     engines: { node: '>=18' }
 
@@ -2681,6 +2691,8 @@ snapshots:
   conventional-changelog-conventionalcommits@9.3.1:
     dependencies:
       compare-func: 2.0.0
+
+  conventional-changelog-preset-loader@5.0.0: {}
 
   conventional-commits-parser@6.4.0:
     dependencies:

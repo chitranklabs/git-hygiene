@@ -11,10 +11,10 @@ const require = createRequire(import.meta.url);
  * Automatically accepts configured base branches (e.g., 'main').
  *
  * @param branchName - The raw string name of the branch to validate
- * @returns {ValidationResult} The status and messaging of the validation
+ * @returns {Promise<ValidationResult>} The status and messaging of the validation
  */
-export function validateBranch(branchName: string): ValidationResult {
-  const config = loadConfig();
+export async function validateBranch(branchName: string): Promise<ValidationResult> {
+  const config = await loadConfig();
   const isValid = config.patterns.branch.test(branchName);
 
   if (isValid) return { valid: true, message: `Branch name "${branchName}" is valid.` };
@@ -32,10 +32,10 @@ export function validateBranch(branchName: string): ValidationResult {
  * Validates a Pull Request title against the loaded configuration.
  *
  * @param title - The PR title to validate (e.g., 'feat: add login')
- * @returns {ValidationResult} The status and messaging of the validation
+ * @returns {Promise<ValidationResult>} The status and messaging of the validation
  */
-export function validateTitle(title: string): ValidationResult {
-  const config = loadConfig();
+export async function validateTitle(title: string): Promise<ValidationResult> {
+  const config = await loadConfig();
   const isValid = config.patterns.title.test(title);
 
   if (isValid) return { valid: true, message: `PR title "${title}" is valid.` };
@@ -57,7 +57,7 @@ export function validateTitle(title: string): ValidationResult {
  * @returns {Promise<ValidationResult>} The status and messaging of the validation
  */
 export async function validateCommit(message: string): Promise<ValidationResult> {
-  const config = loadConfig();
+  const config = await loadConfig();
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const rules: any = {
@@ -83,7 +83,8 @@ export async function validateCommit(message: string): Promise<ValidationResult>
     if (typeof preset === 'function') {
       lintOpts.parserOpts = await preset();
     } else {
-      lintOpts.parserOpts = preset;
+      // Normalize parserOpts from various preset formats
+      lintOpts.parserOpts = preset.parserOpts || preset.parser || preset;
     }
   }
 
