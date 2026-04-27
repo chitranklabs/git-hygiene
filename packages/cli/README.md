@@ -59,6 +59,15 @@ Suggests the next semantic version number (patch, minor, or major) based on your
 npx @chitrank2050/git-hygiene bump
 ```
 
+### `--json` 🤖
+
+Output results as machine-readable JSON. Perfect for CI/CD pipelines.
+
+```bash
+npx @chitrank2050/git-hygiene bump --json
+npx @chitrank2050/git-hygiene title "feat: test" --json
+```
+
 ## ⚙️ Configuration
 
 `git-hygiene` is designed to be zero-config, but you can easily customize the rules by adding a `git-hygiene` block to your root `package.json`.

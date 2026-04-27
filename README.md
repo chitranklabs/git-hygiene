@@ -147,6 +147,9 @@ npx @chitrank2050/git-hygiene title "fix(core): resolve memory leak"
 
 # Suggest the next semantic version bump
 npx @chitrank2050/git-hygiene bump
+
+# Output result as JSON (useful for automation)
+npx @chitrank2050/git-hygiene bump --json
 ```
 
 ---
@@ -157,17 +160,37 @@ You can easily integrate `git-hygiene` into your CI/CD pipeline using the offici
 
 ### Usage Example
 
-```yaml
+````yaml
 jobs:
   hygiene:
     runs-on: ubuntu-latest
     steps:
       - name: Validate PR Title 🌊
+        id: hygiene
         uses: chitranklabs/git-hygiene@<SHA>
         with:
           command: 'title'
           value: ${{ github.event.pull_request.title }}
-```
+
+### Action Outputs 📤
+
+When using the `bump` command, the action provides the following outputs:
+
+| Output        | Description                                     |
+| ------------- | ----------------------------------------------- |
+| `releaseType` | Recommended bump (`patch`, `minor`, or `major`) |
+| `reason`      | Explanation for the recommendation              |
+
+```yaml
+- name: Get Bump 🚀
+  id: bump
+  uses: chitranklabs/git-hygiene@<SHA>
+  with:
+    command: 'bump'
+
+- name: Tag Release 🏷️
+  run: echo "Next version is ${{ steps.bump.outputs.releaseType }}"
+````
 
 > **Note on Pinning to a SHA:** For maximum security and stability, we highly recommend pinning the `uses` directive to a specific commit SHA instead of a branch like `@main`. You can get the commit SHA by navigating to the [Commits page](https://github.com/chitranklabs/git-hygiene/commits/main) of this repository and copying the 40-character hash (e.g. `uses: chitranklabs/git-hygiene@8f3d...`).
 
@@ -178,9 +201,14 @@ jobs:
 Import the engine directly into your TypeScript project.
 
 ```typescript
-import { validateBranch } from '@chitrank2050/git-hygiene-core';
+import { validateBranch, resolveConfig } from '@chitrank2050/git-hygiene-core';
 
-const { valid, error } = validateBranch('feat/new-ui');
+// Standard usage (auto-loads package.json)
+const { valid } = await validateBranch('feat/new-ui');
+
+// Programmatic usage with config override
+const customConfig = await resolveConfig({ types: ['feat', 'fix'] });
+const result = await validateBranch('feat/new-ui', customConfig);
 ```
 
 ---

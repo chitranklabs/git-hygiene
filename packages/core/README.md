@@ -58,6 +58,10 @@ if (commitResult.valid) {
 // 4. Suggest a semantic version bump
 const bump = await getRecommendedBump();
 console.log(`Recommended bump: ${bump.releaseType} (Reason: ${bump.reason})`);
+
+// 5. Programmatic usage with config override
+const customConfig = await resolveConfig({ types: ['feat', 'fix'], allowEmptyScope: false });
+const result = await validateCommit('feat: manual override', customConfig);
 ```
 
 ## ⚙️ Configuration
