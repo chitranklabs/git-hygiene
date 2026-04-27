@@ -55,25 +55,31 @@ npx @chitrank2050/git-hygiene title "feat(cli): add colors"
 
 `git-hygiene` is designed to be zero-config, but you can easily customize the rules by adding a `git-hygiene` block to your root `package.json`.
 
-| Property          | Description                           | Default                                     | Possible Values                  |
-| ----------------- | ------------------------------------- | ------------------------------------------- | -------------------------------- |
-| `types`           | Allowed commit types                  | `feat`, `fix`, `chore`, etc.                | `string[]`                       |
-| `ignoreBranches`  | Branches to skip validation           | `main`, `master`, `development`, `gh-pages` | `string[]`                       |
-| `maxHeaderLength` | Max length of the commit header       | `100`                                       | `number`                         |
-| `maxBodyLength`   | Max length of a single body line      | `1000`                                      | `number`                         |
-| `minBodyLength`   | Min length of the commit body         | `0`                                         | `number`                         |
-| `typeCase`        | Case requirement for types            | `lower-case`                                | `lower-case`, `upper-case`, etc. |
-| `scopeCase`       | Case requirement for scopes           | `lower-case`                                | `lower-case`, `upper-case`, etc. |
-| `allowEmptyScope` | Whether scope is optional             | `true`                                      | `boolean`                        |
-| `subjectFullStop` | Whether subject can end with a period | `never`                                     | `always`, `never`                |
+| Property          | Description                            | Default                                     | Possible Values                  |
+| ----------------- | -------------------------------------- | ------------------------------------------- | -------------------------------- |
+| `types`           | Allowed commit types                   | `feat`, `fix`, `chore`, etc.                | `string[]`                       |
+| `ignoreBranches`  | Branches to skip validation            | `main`, `master`, `development`, `gh-pages` | `string[]`                       |
+| `maxHeaderLength` | Max length of the commit header        | `100`                                       | `number`                         |
+| `maxBodyLength`   | Max length of a single body line       | `1000`                                      | `number`                         |
+| `minBodyLength`   | Min length of the commit body          | `0`                                         | `number`                         |
+| `typeCase`        | Case requirement for types             | `lower-case`                                | `lower-case`, `upper-case`, etc. |
+| `scopeCase`       | Case requirement for scopes            | `lower-case`                                | `lower-case`, `upper-case`, etc. |
+| `allowEmptyScope` | Whether scope is optional              | `true`                                      | `boolean`                        |
+| `subjectFullStop` | Whether subject can end with a period  | `never`                                     | `always`, `never`                |
+| `extends`         | Standard configs to extend from        | `[]`                                        | `string[]`                       |
+| `rules`           | Raw commitlint rules to merge/override | `{}`                                        | `Record<string, any>`            |
 
 ```json
 {
   "git-hygiene": {
-    "types": ["feat", "fix", "chore", "docs", "refactor", "test"],
+    "extends": ["@commitlint/config-conventional"],
+    "types": ["feat", "fix", "chore", "docs", "refactor", "test", "renovate"],
     "ignoreBranches": ["main", "develop", "release/*"],
     "maxHeaderLength": 100,
-    "allowEmptyScope": false
+    "allowEmptyScope": false,
+    "rules": {
+      "subject-case": [2, "always", "sentence-case"]
+    }
   }
 }
 ```

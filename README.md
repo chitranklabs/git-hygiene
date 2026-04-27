@@ -211,8 +211,33 @@ const { valid, error } = validateBranch('feat/new-ui');
     "types": ["feat", "fix", "chore", "docs", "refactor", "test", "renovate"],
     "ignoreBranches": ["main", "develop", "release/*"],
     "maxHeaderLength": 100,
-    "allowEmptyScope": false
+    "allowEmptyScope": false,
+    "rules": {
+      "subject-case": [2, "always", "sentence-case"],
+      "header-max-length": [2, "always", 72]
+    }
   }
+}
+```
+
+### Extending Configurations 🔌
+
+`git-hygiene` now supports extending standard configurations. The most common use case is extending `@commitlint/config-conventional` to inherit the industry-standard types and rules.
+
+When you extend a configuration:
+
+- **Types are merged**: Your local types are combined with the types from the extended config.
+- **Rules are inherited**: Standard rules (like `header-max-length`) are automatically applied.
+- **Parser Presets**: Advanced syntax (like the `!` breaking change indicator) is automatically supported.
+
+### Raw Commitlint Rules 🛠️
+
+For power users, the `rules` property allows you to pass any raw `commitlint` rule directly to the underlying engine. This gives you full control over every aspect of your commit validation.
+
+```json
+"rules": {
+  "body-leading-blank": [2, "always"],
+  "footer-leading-blank": [1, "always"]
 }
 ```
 
