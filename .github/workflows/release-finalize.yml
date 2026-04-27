@@ -155,8 +155,8 @@ jobs:
           TAG_NAME: ${{ steps.vars.outputs.tag_name }}
         run: |
           CLEAN_VERSION=$(echo "$TAG_NAME" | sed 's/^v//')
-          for pkg in packages/*; do
-            if [ -f "$pkg/jsr.json" ]; then
+          for pkg in packages/core packages/cli; do
+            if [ -d "$pkg" ] && [ -f "$pkg/jsr.json" ]; then
               echo "🚀 Publishing $pkg to JSR via OIDC..."
 
               # Update version in jsr.json

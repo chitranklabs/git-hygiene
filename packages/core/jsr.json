@@ -5,6 +5,6 @@
   "license": "MIT",
   "exports": "./src/index.ts",
   "publish": {
-    "exclude": ["tests", "scratch", ".github"]
+    "exclude": ["tests", "scratch", ".github", ".turbo", "dist", "coverage", "**/*.test.ts"]
   }
 }
