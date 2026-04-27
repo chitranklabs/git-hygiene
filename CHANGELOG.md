@@ -2,11 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.4.1] - 2026-04-27
+## [0.4.0] - 2026-04-27
 
 ### 🚀 Features
 
+- Update jsr.json version and add dry-run step to release workflow ([60311e6](60311e6fb4247a8586ba7868ae9adc59668d183c)) by @chitrank2050
+- Add scoped binary name to cli and reformat jsr exclude lists ([d60a1d8](d60a1d858523a07e0a26392f39de710ac82974a1)) by @chitrank2050
 - Update package exclusion rules ([f644133](f644133934d51e09b171c9da5298520b8075b70f)) by @chitrank2050
+
+### 🐛 Bug Fixes
+
+- Implement fallback authentication mechanism for tag pushing in release workflow ([0641d3e](0641d3e2a5200a8daf171cb8e211e18e087c29c9)) by @chitrank2050
 
 ### 🚜 Refactor
 
@@ -14,24 +20,11 @@ All notable changes to this project will be documented in this file.
 
 ### ⚙️ Miscellaneous Tasks
 
-- **release:** Bump version to v0.4.1 ([26b69e3](26b69e3b2c094d7e4f8de7d448bd74ce7caf1b46)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
-
-## [0.4.0] - 2026-04-27
-
-### 🚀 Features
-
-- Update jsr.json version and add dry-run step to release workflow ([60311e6](60311e6fb4247a8586ba7868ae9adc59668d183c)) by @chitrank2050
-- Add scoped binary name to cli and reformat jsr exclude lists ([d60a1d8](d60a1d858523a07e0a26392f39de710ac82974a1)) by @chitrank2050
-
-### 🐛 Bug Fixes
-
-- Implement fallback authentication mechanism for tag pushing in release workflow ([0641d3e](0641d3e2a5200a8daf171cb8e211e18e087c29c9)) by @chitrank2050
-
-### ⚙️ Miscellaneous Tasks
-
 - Migrate JSR release process from npx to Deno CLI ([72f60f7](72f60f7c23caf5c188b7adbd2d9aba694fb88ce8)) by @chitrank2050
 - Update JSR config with refined publish excludes & explicit package paths for release workflow ([2fd9650](2fd9650fa52289074afb0a8c727b369fd0baa0ea)) by @chitrank2050
 - **release:** Bump version to v0.4.0 ([1c54194](1c541942404182763d44222f708b5beedba70ce8)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
+- **release:** Bump version to v0.4.1 ([26b69e3](26b69e3b2c094d7e4f8de7d448bd74ce7caf1b46)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
+- **release:** Bump version to v0.4.2 ([18b8120](18b8120b347f7efaf0fa3cb8dac520f4b18719f6)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
 
 ## [0.3.1] - 2026-04-27
 
