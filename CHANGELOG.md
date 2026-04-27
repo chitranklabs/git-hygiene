@@ -8,6 +8,10 @@ All notable changes to this project will be documented in this file.
 
 - Sync CLI imports to JSR registry in release workflow ([ee76e83](ee76e83cc1d4fe7f938a3370e6fba131ccb2248b)) by @chitrank2050
 
+### ⚙️ Miscellaneous Tasks
+
+- **release:** Bump version to v0.4.4 ([7925c43](7925c43f71cb089afd2e6ea006c5180589f04ee3)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
+
 ## [0.4.3] - 2026-04-27
 
 ### ⚙️ Miscellaneous Tasks
