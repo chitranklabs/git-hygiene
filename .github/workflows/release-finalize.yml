@@ -89,11 +89,22 @@ jobs:
           git config user.name "chitrank-actions[bot]"
           git config user.email "actions@github.com"
 
-          # Use the token for authentication
+          # 1. Try pushing with the Bot Token (Preferred)
           git remote set-url origin https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}
+          if git tag "$TAG_NAME" && git push origin "$TAG_NAME"; then
+            echo "✅ Tag pushed successfully with Bot Token."
+          else
+            echo "⚠️ Bot push failed (likely missing 'workflows' permission). Trying GITHUB_TOKEN fallback..."
 
-          git tag "$TAG_NAME"
-          git push origin "$TAG_NAME"
+            # 2. Try pushing with the default GITHUB_TOKEN
+            git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+            if git push origin "$TAG_NAME"; then
+              echo "✅ Tag pushed successfully with GITHUB_TOKEN."
+            else
+              echo "❌ Tag push failed. Please push the tag manually: git tag $TAG_NAME && git push origin $TAG_NAME"
+              echo "Continuing with release steps..."
+            fi
+          fi
 
       - name: Generate release notes 📝
         uses: orhun/git-cliff-action@f50e11560dce63f7c33227798f90b924471a88b5 # v4.8.0
