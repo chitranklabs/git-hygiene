@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.4.3] - 2026-04-27
+
+### ⚙️ Miscellaneous Tasks
+
+- **release:** Bump version to v0.4.3 ([42fd4b2](42fd4b290bd233f295e69863607378b3c74e24ef)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
+- Fix jsr publish flags and metadata ([b86fdcc](b86fdcca99138e764ee3a94a5299fb3867eca54f)) by @chitrank2050
+
 ## [0.4.0] - 2026-04-27
 
 ### 🚀 Features
