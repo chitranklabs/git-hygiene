@@ -111,12 +111,25 @@ npx @chitrank2050/git-hygiene commit $1
 npx @chitrank2050/git-hygiene branch
 ```
 
-### 3. GitHub Actions (CI)
+### 3. GitHub Actions (CI) 🤖
 
-Validate PR metadata natively. We recommend pinning to a specific SHA.
+Validate your metadata natively in CI. We recommend pinning to a specific SHA.
+
+#### **Smart Zero-Config Mode (Recommended)**
+
+Just drop the action into your PR workflow. It will automatically detect the context, validate your PR title and branch name, and suggest a version bump.
 
 ```yaml
-# Validate PR Title
+- name: Git Hygiene 🌊
+  uses: chitranklabs/git-hygiene@<SHA>
+```
+
+#### **Manual Mode**
+
+For granular control over specific commands.
+
+```yaml
+# Validate PR Title explicitly
 - name: Validate PR Title 🏷️
   uses: chitranklabs/git-hygiene@<SHA>
   with:

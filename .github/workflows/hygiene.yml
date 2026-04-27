@@ -51,17 +51,9 @@ jobs:
       - name: Build Project 🏗️
         run: pnpm build
 
-      - name: Validate PR Title 🏷️
-        env:
-          PR_TITLE: ${{ github.event.pull_request.title }}
-        run: |
-          node --experimental-strip-types packages/cli/src/cli.ts title "$PR_TITLE"
-
-      - name: Validate Branch Name 🌿
-        env:
-          BRANCH_NAME: ${{ github.head_ref }}
-        run: |
-          node --experimental-strip-types packages/cli/src/cli.ts branch "$BRANCH_NAME"
+      - name: Git Hygiene 🌊
+        uses: ./
+        # No inputs needed! Omni-mode handles Title, Branch, and Bump.
 
       - name: Validate Commit History 📜
         run: |
@@ -74,9 +66,5 @@ jobs:
           for sha in $COMMITS; do
             MSG=$(git log -1 --pretty=%B "$sha")
             echo "Checking commit $sha..."
-            node --experimental-strip-types packages/cli/src/cli.ts commit "$MSG"
+            node packages/cli/dist/cli.js commit "$MSG"
           done
-
-      - name: Recommended Bump (Dry-run) 🚀
-        run: |
-          node --experimental-strip-types packages/cli/src/cli.ts bump --json

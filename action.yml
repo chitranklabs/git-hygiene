@@ -8,8 +8,9 @@ branding:
 
 inputs:
   command:
-    description: 'The validation command to run (branch, title, commit)'
-    required: true
+    description: 'The validation command to run (branch, title, commit, bump). Leave empty for "Omni-Mode" (auto-detect).'
+    required: false
+    default: 'omni'
   value:
     description: 'The value to validate (for title and commit commands)'
     required: false
@@ -26,14 +27,48 @@ runs:
     - name: Run Git Hygiene 🌊
       shell: bash
       run: |
-        if [ "${{ inputs.command }}" == "bump" ]; then
-          RESULT=$(npx --yes @chitrank2050/git-hygiene@latest bump --json)
+        # 1. Determine Binary (Prefer local build for dogfooding, else npx)
+        if [ -f "packages/cli/dist/cli.js" ]; then
+          HYGIENE_BIN="node packages/cli/dist/cli.js"
+        else
+          HYGIENE_BIN="npx --yes @chitrank2050/git-hygiene@latest"
+        fi
+
+        COMMAND="${{ inputs.command }}"
+
+        # 2. Handle "Omni-Mode" (Auto-detect)
+        if [ "$COMMAND" == "omni" ]; then
+          echo "::group::🌊 Git Hygiene Omni-Mode"
+          
+          # Validate PR Title if in PR context
+          if [ -n "${{ github.event.pull_request.title }}" ]; then
+            echo "Checking PR Title..."
+            $HYGIENE_BIN title "${{ github.event.pull_request.title }}"
+          fi
+
+          # Validate Branch Name if in PR context
+          if [ -n "${{ github.head_ref }}" ]; then
+            echo "Checking Branch Name..."
+            $HYGIENE_BIN branch "${{ github.head_ref }}"
+          fi
+
+          # Always show Recommended Bump
+          echo "Calculating Recommended Bump..."
+          RESULT=$($HYGIENE_BIN bump --json)
           echo "releaseType=$(echo $RESULT | jq -r .releaseType)" >> $GITHUB_OUTPUT
           echo "reason=$(echo $RESULT | jq -r .reason)" >> $GITHUB_OUTPUT
-          # Also print for logs
-          npx --yes @chitrank2050/git-hygiene@latest bump
+          $HYGIENE_BIN bump
+          
+          echo "::endgroup::"
+
+        # 3. Handle Explicit Commands
+        elif [ "$COMMAND" == "bump" ]; then
+          RESULT=$($HYGIENE_BIN bump --json)
+          echo "releaseType=$(echo $RESULT | jq -r .releaseType)" >> $GITHUB_OUTPUT
+          echo "reason=$(echo $RESULT | jq -r .reason)" >> $GITHUB_OUTPUT
+          $HYGIENE_BIN bump
         elif [ -n "${{ inputs.value }}" ]; then
-          npx --yes @chitrank2050/git-hygiene@latest ${{ inputs.command }} "${{ inputs.value }}"
+          $HYGIENE_BIN $COMMAND "${{ inputs.value }}"
         else
-          npx --yes @chitrank2050/git-hygiene@latest ${{ inputs.command }}
+          $HYGIENE_BIN $COMMAND
         fi
