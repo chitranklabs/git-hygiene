@@ -46,7 +46,7 @@
   <br/>
 </div>
 
-`git-hygiene` is a high-performance, **zero-dependency** engine designed to enforce perfect metadata across your entire Git lifecycle. Built natively for **Node.js 24+**, it validates Conventional Commits, branch naming patterns, and Pull Request titles with microsecond startup times.
+`git-hygiene` is a high-performance, **zero-dependency** engine designed to enforce perfect metadata across your entire Git lifecycle. Built natively for **Node.js 24 (Stable)**, it validates Conventional Commits, branch naming patterns, and Pull Request titles with microsecond startup times.
 
 ---
 
@@ -79,6 +79,9 @@
 ```bash
 # Using pnpm (Recommended)
 pnpm add -D @chitrank2050/git-hygiene
+
+# Using JSR (For Deno / Modern Node)
+npx jsr add @chitrank2050/git-hygiene
 
 # Using npm
 npm install --save-dev @chitrank2050/git-hygiene
@@ -127,7 +130,7 @@ Just drop the action into your PR workflow. It will automatically detect the con
 
 ```yaml
 - name: Git Hygiene 🌊
-  uses: chitranklabs/git-hygiene@7cd725abdbcd12d0e14b77fa94c423dd9ddf8933
+  uses: chitranklabs/git-hygiene@8abac926a6afcde68889b34f9ec3d1acefd69538
 ```
 
 #### **Manual Mode**
@@ -137,14 +140,14 @@ For granular control over specific commands.
 ```yaml
 # Validate PR Title explicitly
 - name: Validate PR Title 🏷️
-  uses: chitranklabs/git-hygiene@7cd725abdbcd12d0e14b77fa94c423dd9ddf8933
+  uses: chitranklabs/git-hygiene@8abac926a6afcde68889b34f9ec3d1acefd69538
   with:
     command: 'title'
     value: '${{ github.event.pull_request.title }}'
 
 # Validate Branch Name
 - name: Validate Branch Name 🌿
-  uses: chitranklabs/git-hygiene@7cd725abdbcd12d0e14b77fa94c423dd9ddf8933
+  uses: chitranklabs/git-hygiene@8abac926a6afcde68889b34f9ec3d1acefd69538
   with:
     command: 'branch'
     value: '${{ github.head_ref }}'
@@ -156,7 +159,7 @@ Run any check manually from the terminal.
 
 ```bash
 # Check a specific commit message
-npx @chitrank2050/git-hygiene commit --value "feat: my awesome commit"
+npx @chitrank2050/git-hygiene commit "feat: my awesome commit"
 
 # Check a branch name string
 npx @chitrank2050/git-hygiene branch "feature/cool-stuff"
@@ -186,7 +189,7 @@ jobs:
     steps:
       - name: Validate PR Title 🌊
         id: hygiene
-        uses: chitranklabs/git-hygiene@7cd725abdbcd12d0e14b77fa94c423dd9ddf8933
+        uses: chitranklabs/git-hygiene@8abac926a6afcde68889b34f9ec3d1acefd69538
         with:
           command: 'title'
           value: ${{ github.event.pull_request.title }}
@@ -203,7 +206,7 @@ When using the `bump` command, the action provides the following outputs:
 ```yaml
 - name: Get Bump 🚀
   id: bump
-  uses: chitranklabs/git-hygiene@7cd725abdbcd12d0e14b77fa94c423dd9ddf8933
+  uses: chitranklabs/git-hygiene@8abac926a6afcde68889b34f9ec3d1acefd69538
   with:
     command: 'bump'
 

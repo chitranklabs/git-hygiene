@@ -4,14 +4,14 @@
 **The standalone validation engine behind `git-hygiene`.**
 
 [![NPM Version](https://img.shields.io/npm/v/@chitrank2050/git-hygiene-core?color=blue&label=npm)](https://www.npmjs.com/package/@chitrank2050/git-hygiene-core)
-[![JSR Version](https://img.shields.io/jsr/v/@chitrank2050/git-hygiene-core?color=yellow&label=jsr)](https://jsr.io/@chitrank2050/git-hygiene-core)
+[![JSR Version](https://jsr.io/badges/@chitrank2050/git-hygiene-core)](https://jsr.io/@chitrank2050/git-hygiene-core)
 [![License](https://img.shields.io/github/license/chitranklabs/git-hygiene)](../../LICENSE)
 
 </div>
 
 <br />
 
-`@chitrank2050/git-hygiene-core` provides the core validation logic for modern Git workflows. Built as a **Native ESM** engine for **Node.js 24+**, it offers high-performance validation with zero external dependencies (built on top of the standard `commitlint` engine).
+`@chitrank2050/git-hygiene-core` provides the core validation logic for modern Git workflows. Built as a **Native ESM** engine for **Node.js 24 (Stable)**, it offers high-performance validation with zero external dependencies (built on top of the standard `commitlint` engine).
 
 ## Features ✨
 
@@ -26,6 +26,9 @@
 # Using pnpm
 pnpm add @chitrank2050/git-hygiene-core
 
+# Using JSR
+npx jsr add @chitrank2050/git-hygiene-core
+
 # Using npm
 npm install @chitrank2050/git-hygiene-core
 ```
@@ -33,7 +36,13 @@ npm install @chitrank2050/git-hygiene-core
 ## 🛠️ Usage
 
 ```typescript
-import { validateBranch, validateTitle, validateCommit } from '@chitrank2050/git-hygiene-core';
+import {
+  validateBranch,
+  validateTitle,
+  validateCommit,
+  resolveConfig,
+  getRecommendedBump,
+} from '@chitrank2050/git-hygiene-core';
 
 // 1. Validate a branch name
 const branchResult = await validateBranch('feat/add-login');

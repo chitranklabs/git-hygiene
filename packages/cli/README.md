@@ -4,20 +4,23 @@
 **The ultimate zero-dependency metadata validator for modern Git workflows.**
 
 [![NPM Version](https://img.shields.io/npm/v/@chitrank2050/git-hygiene?color=blue&label=npm)](https://www.npmjs.com/package/@chitrank2050/git-hygiene)
-[![JSR Version](https://img.shields.io/jsr/v/@chitrank2050/git-hygiene?color=yellow&label=jsr)](https://jsr.io/@chitrank2050/git-hygiene)
+[![JSR Version](https://jsr.io/badges/@chitrank2050/git-hygiene)](https://jsr.io/@chitrank2050/git-hygiene)
 [![License](https://img.shields.io/github/license/chitranklabs/git-hygiene)](../../LICENSE)
 
 </div>
 
 <br />
 
-`git-hygiene` is a high-performance, **zero-dependency** CLI tool that enforces **Conventional Commits**, **branch naming patterns**, and **PR titles** using a single, unified engine. Built natively for **Node.js 24+** with microsecond startup times.
+`git-hygiene` is a high-performance, **zero-dependency** CLI tool that enforces **Conventional Commits**, **branch naming patterns**, and **PR titles** using a single, unified engine. Built natively for **Node.js 24 (Stable)** with microsecond startup times.
 
 ## 📦 Installation
 
 ```bash
 # Recommended: Install as a dev dependency
 pnpm add -D @chitrank2050/git-hygiene
+
+# Or using JSR
+npx jsr add @chitrank2050/git-hygiene
 
 # Or run instantly via npx
 npx @chitrank2050/git-hygiene --help
