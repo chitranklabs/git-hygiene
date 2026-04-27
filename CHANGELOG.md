@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.4.9] - 2026-04-27
+
+### 🚜 Refactor
+
+- Remove core pkg dep from package.json in favor of jsr.json imports during release/publish ([12b65d9](12b65d9a6d40040bb26e2d336443a242b6a4b75f)) by @chitrank2050
+
+## [0.4.8] - 2026-04-27
+
+### ⚙️ Miscellaneous Tasks
+
+- **release:** Bump version to v0.4.8 ([625763a](625763a955008fad28cc21bc9e0e18288f8bc818)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
+
 ## [0.4.7] - 2026-04-27
 
 ### ⚙️ Miscellaneous Tasks
