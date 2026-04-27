@@ -64,12 +64,10 @@ jobs:
           BRANCH_NAME: ${{ github.event.pull_request.head.ref }}
           INPUT_VERSION: ${{ github.event.inputs.version }}
         run: |
-          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
-            TAG_NAME="$INPUT_VERSION"
-          else
-            # Extract version from branch name (chore/changelog-vX.Y.Z)
-            TAG_NAME=$(echo "$BRANCH_NAME" | sed 's/chore\/changelog-//')
-          fi
+          # Robust extraction: find the first version-like string (X.Y.Z) in the input
+          RAW_INPUT="${INPUT_VERSION:-$BRANCH_NAME}"
+          TAG_NAME=$(echo "$RAW_INPUT" | grep -oE '[0-9]+\.[0-9]+\.[0-9]+(-.*)?' | head -1)
+
 
           if [[ ! "$TAG_NAME" =~ ^v?[0-9]+\.[0-9]+\.[0-9]+(-.*)?$ ]]; then
             echo "❌ Error: Could not extract valid tag. Got: $TAG_NAME"
