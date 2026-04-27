@@ -2,12 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.4.4] - 2026-04-27
+
+### 🚀 Features
+
+- Sync CLI imports to JSR registry in release workflow ([ee76e83](ee76e83cc1d4fe7f938a3370e6fba131ccb2248b)) by @chitrank2050
+
 ## [0.4.3] - 2026-04-27
 
 ### ⚙️ Miscellaneous Tasks
 
 - **release:** Bump version to v0.4.3 ([42fd4b2](42fd4b290bd233f295e69863607378b3c74e24ef)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
 - Fix jsr publish flags and metadata ([b86fdcc](b86fdcca99138e764ee3a94a5299fb3867eca54f)) by @chitrank2050
+- **release:** Bump version to v0.4.3 ([2a7a918](2a7a9188edc9fad49771dc14b0bb79ae83630de7)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
 
 ## [0.4.0] - 2026-04-27
 
