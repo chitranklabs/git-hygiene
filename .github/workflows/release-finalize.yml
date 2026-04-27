@@ -151,9 +151,9 @@ jobs:
             if [ -f "$pkg/jsr.json" ]; then
               echo "🚀 Publishing $pkg to JSR via OIDC..."
 
-              # Transform workspace:* to real version for JSR compatibility
+              # Transform workspace:* to real version and strip scripts for JSR compatibility
               if [ -f "$pkg/package.json" ]; then
-                jq ".dependencies[\"@chitrank2050/git-hygiene-core\"] = \"^$CLEAN_VERSION\"" "$pkg/package.json" > "$pkg/package.json.tmp" && mv "$pkg/package.json.tmp" "$pkg/package.json"
+                jq "del(.scripts) | .dependencies[\"@chitrank2050/git-hygiene-core\"] = \"^$CLEAN_VERSION\"" "$pkg/package.json" > "$pkg/package.json.tmp" && mv "$pkg/package.json.tmp" "$pkg/package.json"
               fi
 
               (cd "$pkg" && npx jsr publish --allow-slow-types --allow-dirty)
