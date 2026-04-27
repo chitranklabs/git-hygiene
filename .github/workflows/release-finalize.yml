@@ -143,9 +143,12 @@ jobs:
             if [ -f "$pkg/jsr.json" ]; then
               echo "🚀 Publishing $pkg to JSR via OIDC..."
 
-              # Transform workspace:* to real version and strip scripts for JSR compatibility
+              # Deep-clean package.json for JSR: Keep only name, version, and dependencies.
+              # This removes hyphens/symbols in scripts, author, and other fields that trip up the JSR parser.
               if [ -f "$pkg/package.json" ]; then
-                jq "del(.scripts) | .dependencies[\"@chitrank2050/git-hygiene-core\"] = \"^$CLEAN_VERSION\"" "$pkg/package.json" > "$pkg/package.json.tmp" && mv "$pkg/package.json.tmp" "$pkg/package.json"
+                jq "{name, version, dependencies} | .dependencies[\"@chitrank2050/git-hygiene-core\"] = \"^$CLEAN_VERSION\"" "$pkg/package.json" > "$pkg/package.json.tmp" && mv "$pkg/package.json.tmp" "$pkg/package.json"
+                echo "--- Cleaned package.json for JSR ---"
+                cat "$pkg/package.json"
               fi
 
               (cd "$pkg" && npx jsr publish --allow-slow-types --allow-dirty)
