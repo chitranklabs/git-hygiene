@@ -71,6 +71,14 @@ We follow **Conventional Commits**. Please format your commit messages as:
 3. **Automated Feedback**: Our CI jobs will automatically validate your branch name, PR title, and commit history.
 4. **Approval**: Once the CI passes, a maintainer will review your code.
 
+## Release Process 🚀
+
+We use an automated release flow powered by `git-hygiene` itself:
+
+1. **Preparation**: Run the **Release 1 - Prepare PR** action. Leave the tag empty to let the tool decide the version based on the commit history.
+2. **Review**: Review the generated PR, which includes the updated `package.json` and `CHANGELOG.md`.
+3. **Finalization**: Merge the PR. The **Release 2 - Finalize** action will automatically tag the repo and publish to NPM/JSR.
+
 ## Need Help?
 
 If you have questions, feel free to open a **GitHub Discussion**!
