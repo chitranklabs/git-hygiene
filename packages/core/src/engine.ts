@@ -1,10 +1,7 @@
 import lint from '@commitlint/lint';
 import { loadConfig } from './config.ts';
 import type { ValidationResult, ResolvedConfig } from './types.ts';
-import { createRequire } from 'node:module';
 import { Bumper } from 'conventional-recommended-bump';
-
-const require = createRequire(import.meta.url);
 
 /**
  * @description
@@ -85,15 +82,23 @@ export async function validateCommit(
 
   const lintOpts: { parserOpts?: unknown } = {};
   if (config.parserPreset) {
-    const preset =
-      typeof config.parserPreset === 'string' ? require(config.parserPreset) : config.parserPreset;
+    let preset: Record<string, unknown>;
+    if (typeof config.parserPreset === 'string') {
+      const mod = (await import(config.parserPreset)) as Record<string, unknown>;
+      preset = (mod.default || mod) as Record<string, unknown>;
+    } else {
+      preset = config.parserPreset as Record<string, unknown>;
+    }
 
     // Handle presets that are functions (like conventional-changelog-conventionalcommits)
     if (typeof preset === 'function') {
-      lintOpts.parserOpts = await preset();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      lintOpts.parserOpts = await (preset as any)();
     } else {
       // Normalize parserOpts from various preset formats
-      lintOpts.parserOpts = preset.parserOpts || preset.parser || preset;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const p = preset as any;
+      lintOpts.parserOpts = p.parserOpts || p.parser || p;
     }
   }
 

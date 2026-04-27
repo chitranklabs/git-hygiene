@@ -2,10 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import type { GitHygieneConfig, ResolvedConfig, ParserPreset } from './types.ts';
 import { DEFAULT_CONFIG } from './constants.ts';
-import { createRequire } from 'node:module';
 import { loadPreset } from 'conventional-changelog-preset-loader';
-
-const require = createRequire(import.meta.url);
 
 let cachedConfig: ResolvedConfig | null = null;
 
@@ -68,8 +65,10 @@ export async function resolveConfig(
     // Specialized support for @commitlint/config-conventional
     if (extension === '@commitlint/config-conventional') {
       try {
-        const conventional = require('@commitlint/config-conventional');
-        const convRules = conventional.default?.rules || conventional.rules || {};
+        const mod = (await import('@commitlint/config-conventional')) as Record<string, unknown>;
+        const conventional = (mod.default || mod) as Record<string, unknown>;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const convRules = (conventional.rules as Record<string, any>) || {};
 
         if (convRules['type-enum']) {
           const convTypes = convRules['type-enum'][2];
@@ -82,8 +81,9 @@ export async function resolveConfig(
           mergedConfig.maxHeaderLength = convRules['header-max-length'][2];
         }
 
-        if (!userConfig.parserPreset && conventional.default?.parserPreset) {
-          mergedConfig.parserPreset = conventional.default.parserPreset;
+        if (!userConfig.parserPreset && conventional.parserPreset) {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          mergedConfig.parserPreset = conventional.parserPreset as any;
         }
       } catch {
         console.warn(`Failed to load ${extension}. Is it installed?`);

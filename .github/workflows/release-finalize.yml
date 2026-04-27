@@ -144,10 +144,13 @@ jobs:
               echo "🚀 Publishing $pkg to JSR via OIDC..."
 
               # Deep-clean package.json for JSR: Keep only name, version, and dependencies.
-              # This removes hyphens/symbols in scripts, author, and other fields that trip up the JSR parser.
               if [ -f "$pkg/package.json" ]; then
-                jq "{name, version, dependencies} | .dependencies[\"@chitrank2050/git-hygiene-core\"] = \"^$CLEAN_VERSION\"" "$pkg/package.json" > "$pkg/package.json.tmp" && mv "$pkg/package.json.tmp" "$pkg/package.json"
-                echo "--- Cleaned package.json for JSR ---"
+                if [ "$pkg" == "packages/cli" ]; then
+                  jq "{name, version, dependencies} | .dependencies[\"@chitrank2050/git-hygiene-core\"] = \"^$CLEAN_VERSION\"" "$pkg/package.json" > "$pkg/package.json.tmp" && mv "$pkg/package.json.tmp" "$pkg/package.json"
+                else
+                  jq "{name, version, dependencies}" "$pkg/package.json" > "$pkg/package.json.tmp" && mv "$pkg/package.json.tmp" "$pkg/package.json"
+                fi
+                echo "--- Cleaned package.json for JSR ($pkg) ---"
                 cat "$pkg/package.json"
               fi
 
