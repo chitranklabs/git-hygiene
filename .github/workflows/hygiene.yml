@@ -76,3 +76,7 @@ jobs:
             echo "Checking commit $sha..."
             node --experimental-strip-types packages/cli/src/cli.ts commit "$MSG"
           done
+
+      - name: Recommended Bump (Dry-run) 🚀
+        run: |
+          node --experimental-strip-types packages/cli/src/cli.ts bump --json

@@ -45,13 +45,14 @@
     "lint:fix": "turbo lint:fix",
     "lint:md": "markdownlint --fix \"**/*.md\" --ignore node_modules",
     "lint:branch": "node --experimental-strip-types packages/cli/src/cli.ts branch",
+    "lint:commit": "node --experimental-strip-types packages/cli/src/cli.ts commit",
     "format": "turbo format",
     "format:check": "turbo format:check",
     "dev": "turbo dev",
     "deps:update": "pnpm update --interactive --latest -r",
     "changelog": "bash scripts/generate-changelog.sh",
     "tag": "bash scripts/git-tag.sh",
-    "release": "pnpm build && pnpm changelog && echo 'Ready to publish!'"
+    "release": "pnpm build && node --experimental-strip-types packages/cli/src/cli.ts bump && pnpm changelog && echo 'Ready to publish!'"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
