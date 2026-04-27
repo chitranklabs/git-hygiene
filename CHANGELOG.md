@@ -8,6 +8,14 @@ All notable changes to this project will be documented in this file.
 
 - Update package exclusion rules ([f644133](f644133934d51e09b171c9da5298520b8075b70f)) by @chitrank2050
 
+### 🚜 Refactor
+
+- Optimize JSR compatibility by isolating dynamic imports & streamlining CI/publish scripts ([67da4c8](67da4c861783d4f5605ff3cbc2e1154d2077ee01)) by @chitrank2050
+
+### ⚙️ Miscellaneous Tasks
+
+- **release:** Bump version to v0.4.1 ([26b69e3](26b69e3b2c094d7e4f8de7d448bd74ce7caf1b46)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
+
 ## [0.4.0] - 2026-04-27
 
 ### 🚀 Features
