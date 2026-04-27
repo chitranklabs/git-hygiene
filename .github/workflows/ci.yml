@@ -1,5 +1,5 @@
 # =============================================================
-# CI & Security Analysis ⚡️
+# CI: Continuous Integration 🌊
 #
 # Primary pipeline for code quality and security.
 # Optimized to run only when relevant files change.
