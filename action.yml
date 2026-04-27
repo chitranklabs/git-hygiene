@@ -18,13 +18,16 @@ inputs:
 outputs:
   releaseType:
     description: 'The recommended release type (patch, minor, major) for the bump command'
+    value: ${{ steps.hygiene.outputs.releaseType }}
   reason:
     description: 'The reason for the recommended bump'
+    value: ${{ steps.hygiene.outputs.reason }}
 
 runs:
   using: 'composite'
   steps:
-    - name: Run Git Hygiene 🌊
+    - id: hygiene
+      name: Run Git Hygiene 🌊
       shell: bash
       run: |
         # 1. Determine Binary (Prefer local build for dogfooding, else npx)
@@ -39,7 +42,7 @@ runs:
         # 2. Handle "Omni-Mode" (Auto-detect)
         if [ "$COMMAND" == "omni" ]; then
           echo "::group::🌊 Git Hygiene Omni-Mode"
-          
+
           # Validate PR Title if in PR context
           if [ -n "${{ github.event.pull_request.title }}" ]; then
             echo "Checking PR Title..."
@@ -58,7 +61,7 @@ runs:
           echo "releaseType=$(echo $RESULT | jq -r .releaseType)" >> $GITHUB_OUTPUT
           echo "reason=$(echo $RESULT | jq -r .reason)" >> $GITHUB_OUTPUT
           $HYGIENE_BIN bump
-          
+
           echo "::endgroup::"
 
         # 3. Handle Explicit Commands
