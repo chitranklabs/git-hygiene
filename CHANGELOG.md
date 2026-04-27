@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.2.0] - 2026-04-27
+## [0.3.0] - 2026-04-27
 
 ### 🚀 Features
 
@@ -21,6 +21,7 @@ All notable changes to this project will be documented in this file.
 
 - Make config loading and validation async to support dynamic preset resolution ([84ca6bf](84ca6bf6bca724ec3a59c1947fe07a29de527afc)) by @chitrank2050
 - Improve type safety, add support for function-based parser presets & update documentation ([8df2e95](8df2e95115e192aae091fdec2b1995d754a397e6)) by @chitrank2050
+- Improve tag extraction logic to support both workflow inputs and branch naming conventions ([ca57cab](ca57cab37cefa39f9546cd9159c9f1a45da9c756)) by @chitrank2050
 
 ### 📚 Documentation
 
@@ -30,6 +31,7 @@ All notable changes to this project will be documented in this file.
 ### ⚙️ Miscellaneous Tasks
 
 - Update lefthook configuration to improve git hook execution ([5c0f4ad](5c0f4adc48f44c8156f628fe6acdcc796c0bb03a)) by @chitrank2050
+- **release:** Bump version to v0.2.0 ([577bcc8](577bcc8441a61b6c7a6a94ec27f3f1944d54a684)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
 
 ## [0.1.6] - 2026-04-26
 
