@@ -134,14 +134,6 @@ jobs:
       - name: Build Project 🏗️
         run: pnpm build
 
-      - name: Publish to NPM 📦
-        if: env.NPM_TOKEN != ''
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: |
-          pnpm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN
-          pnpm -r publish --access public --no-git-checks
-
       - name: Publish to JSR 🦖
         env:
           TAG_NAME: ${{ steps.vars.outputs.tag_name }}
@@ -159,6 +151,14 @@ jobs:
               (cd "$pkg" && npx jsr publish --allow-slow-types --allow-dirty)
             fi
           done
+
+      - name: Publish to NPM 📦
+        if: env.NPM_TOKEN != ''
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          pnpm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN
+          pnpm -r publish --access public --no-git-checks
 
       - name: Attest Release Artifacts 📜
         uses: actions/attest-build-provenance@a2bbfa25375fe432b6a289bc6b6cd05ecd0c4c32 # v4.1.0
