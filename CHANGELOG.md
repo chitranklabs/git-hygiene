@@ -25,6 +25,7 @@ All notable changes to this project will be documented in this file.
 - **release:** Bump version to v0.4.0 ([1c54194](1c541942404182763d44222f708b5beedba70ce8)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
 - **release:** Bump version to v0.4.1 ([26b69e3](26b69e3b2c094d7e4f8de7d448bd74ce7caf1b46)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
 - **release:** Bump version to v0.4.2 ([18b8120](18b8120b347f7efaf0fa3cb8dac520f4b18719f6)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
+- **release:** Bump version to v0.4.0 ([61252ae](61252aed2ad518c3b5fe13415152fef81fee7629)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
 
 ## [0.3.1] - 2026-04-27
 
