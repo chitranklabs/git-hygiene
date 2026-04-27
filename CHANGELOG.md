@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.3.0] - 2026-04-27
+## [0.2.0] - 2026-04-27
 
 ### 🚀 Features
 
@@ -32,6 +32,8 @@ All notable changes to this project will be documented in this file.
 
 - Update lefthook configuration to improve git hook execution ([5c0f4ad](5c0f4adc48f44c8156f628fe6acdcc796c0bb03a)) by @chitrank2050
 - **release:** Bump version to v0.2.0 ([577bcc8](577bcc8441a61b6c7a6a94ec27f3f1944d54a684)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
+- **release:** Bump version to v0.3.0 ([016aec6](016aec62cb5a288f1a0413d3769ce8d505336212)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
+- Strip scripts and update core dependency version in package.json before JSR publication ([bc2e9d5](bc2e9d5202c6abd1594758810dbdb382dbed6c7c)) by @chitrank2050
 
 ## [0.1.6] - 2026-04-26
 
