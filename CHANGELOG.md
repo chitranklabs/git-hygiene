@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.4.6] - 2026-04-27
+
+### 🚜 Refactor
+
+- Remove unnecessary unstable deno publish flags from workflow and script ([c082717](c0827170905eeb81b2b840b81ac97a7eee570078)) by @chitrank2050
+
+## [0.4.5] - 2026-04-27
+
+### 🚀 Features
+
+- Add commitlint dependencies to core and introduce JSR local publication script ([0611eba](0611eba3c6cd236d2e18e0ce27e20a8f737931ec)) by @chitrank2050
+
+### ⚙️ Miscellaneous Tasks
+
+- **release:** Bump version to v0.4.5 ([d0ab07a](d0ab07abf802072e7c0e44eff7290b4e66617564)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
+
 ## [0.4.4] - 2026-04-27
 
 ### 🚀 Features
