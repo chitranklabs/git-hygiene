@@ -5,7 +5,7 @@
 
 [![NPM Version](https://img.shields.io/npm/v/@chitrank2050/git-hygiene-core?color=blue&label=npm)](https://www.npmjs.com/package/@chitrank2050/git-hygiene-core)
 [![JSR Version](https://jsr.io/badges/@chitrank2050/git-hygiene-core)](https://jsr.io/@chitrank2050/git-hygiene-core)
-[![License](https://img.shields.io/github/license/chitranklabs/git-hygiene)](../../LICENSE)
+[![License](https://img.shields.io/github/license/chitranklabs/git-hygiene)](./LICENSE)
 
 </div>
 
