@@ -44,3 +44,4 @@ gitleaks.tar.gz
 .gemini/
 scratch/
 git-cliff/
+coverage

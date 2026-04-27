@@ -203,7 +203,7 @@ const { valid, error } = validateBranch('feat/new-ui');
 | `allowEmptyScope` | Whether scope is optional                 | `true`                                      | `boolean`                                      |
 | `subjectFullStop` | Whether subject can end with a period     | `never`                                     | `always`, `never`                              |
 | `extends`         | Standard configs to extend from           | `[]`                                        | `['@commitlint/config-conventional']`          |
-| `rules`           | Raw commitlint rules to merge/override    | `{}`                                        | `Record<string, any>`                          |
+| `rules`           | Raw commitlint rules to merge/override    | `{}`                                        | `Record<string, unknown>`                      |
 
 ### Example `package.json`
 

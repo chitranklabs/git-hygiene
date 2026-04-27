@@ -60,8 +60,7 @@ export async function validateTitle(title: string): Promise<ValidationResult> {
 export async function validateCommit(message: string): Promise<ValidationResult> {
   const config = await loadConfig();
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const rules: any = {
+  const rules: Record<string, unknown> = {
     'type-enum': [2, 'always', config.types],
     'type-case': [2, 'always', config.typeCase],
     'type-empty': [2, 'never'],
@@ -75,7 +74,7 @@ export async function validateCommit(message: string): Promise<ValidationResult>
     ...config.rules,
   };
 
-  const lintOpts: any = {};
+  const lintOpts: { parserOpts?: unknown } = {};
   if (config.parserPreset) {
     const preset =
       typeof config.parserPreset === 'string' ? require(config.parserPreset) : config.parserPreset;
@@ -89,7 +88,8 @@ export async function validateCommit(message: string): Promise<ValidationResult>
     }
   }
 
-  const report = await lint(message, rules, lintOpts);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const report = await lint(message, rules as any, lintOpts as any);
   if (report.valid) return { valid: true, message: 'Commit message is valid.' };
 
   const errors = report.errors.map((err: { message: string; name: string }) => ({
@@ -112,18 +112,31 @@ export async function validateCommit(message: string): Promise<ValidationResult>
  *
  * @returns {Promise<{ releaseType: string; reason: string; level: number }>} The recommended bump info
  */
-export async function getRecommendedBump() {
+export async function getRecommendedBump(): Promise<{
+  releaseType: string;
+  reason: string;
+  level: number;
+}> {
   const config = await loadConfig();
   const bumper = new Bumper(process.cwd());
 
   if (config.parserPreset) {
-    // If we have a resolved preset (object with parserOpts), use it
-    if (typeof config.parserPreset === 'object') {
-      bumper.config(config.parserPreset);
-    } else {
+    // If it's a function (dynamic preset), execute it and use the resulting config
+    if (typeof config.parserPreset === 'function') {
+      const preset = await config.parserPreset();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      bumper.config(preset as any);
+    }
+    // If it's already a resolved object, use it
+    else if (typeof config.parserPreset === 'object') {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      bumper.config(config.parserPreset as any);
+    }
+    // If it's a string, load it as a named preset
+    else {
       await bumper.loadPreset(config.parserPreset);
     }
   }
 
-  return await bumper.bump();
+  return (await bumper.bump()) as { releaseType: string; reason: string; level: number };
 }

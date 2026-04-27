@@ -36,13 +36,13 @@ npm install @chitrank2050/git-hygiene-core
 import { validateBranch, validateTitle, validateCommit } from '@chitrank2050/git-hygiene-core';
 
 // 1. Validate a branch name
-const branchResult = validateBranch('feat/add-login');
+const branchResult = await validateBranch('feat/add-login');
 if (!branchResult.valid) {
-  console.error(`Invalid branch: ${branchResult.error}`);
+  console.error(`Invalid branch: ${branchResult.message}`);
 }
 
 // 2. Validate a PR title
-const titleResult = validateTitle('feat: implement oauth2');
+const titleResult = await validateTitle('feat: implement oauth2');
 console.log(`Title valid: ${titleResult.valid}`);
 
 // 3. Validate a commit message (Async)
@@ -76,7 +76,7 @@ console.log(`Recommended bump: ${bump.releaseType} (Reason: ${bump.reason})`);
 | `allowEmptyScope` | Whether scope is optional              | `true`                                      | `boolean`                        |
 | `subjectFullStop` | Whether subject can end with a period  | `never`                                     | `always`, `never`                |
 | `extends`         | Standard configs to extend from        | `[]`                                        | `string[]`                       |
-| `rules`           | Raw commitlint rules to merge/override | `{}`                                        | `Record<string, any>`            |
+| `rules`           | Raw commitlint rules to merge/override | `{}`                                        | `Record<string, unknown>`        |
 
 ```json
 {

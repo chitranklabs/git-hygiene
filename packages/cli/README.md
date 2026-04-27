@@ -75,7 +75,7 @@ npx @chitrank2050/git-hygiene bump
 | `allowEmptyScope` | Whether scope is optional              | `true`                                      | `boolean`                        |
 | `subjectFullStop` | Whether subject can end with a period  | `never`                                     | `always`, `never`                |
 | `extends`         | Standard configs to extend from        | `[]`                                        | `string[]`                       |
-| `rules`           | Raw commitlint rules to merge/override | `{}`                                        | `Record<string, any>`            |
+| `rules`           | Raw commitlint rules to merge/override | `{}`                                        | `Record<string, unknown>`        |
 
 ```json
 {

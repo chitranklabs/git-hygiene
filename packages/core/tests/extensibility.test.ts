@@ -67,4 +67,23 @@ describe('Configuration Extensibility', () => {
     assert.ok(config.patterns.title.test('extra: some title'));
     assert.ok(config.patterns.branch.test('extra/some-branch'));
   });
+
+  it('should handle missing extensions gracefully', async () => {
+    const config = await resolveConfig({
+      extends: ['non-existent-config'],
+    });
+    assert.ok(config.types.includes('feat')); // Should still have defaults
+  });
+
+  it('should support parserPreset as an object', async () => {
+    const customPreset = {
+      parserOpts: {
+        headerPattern: /^(\w*): (.*)$/,
+      },
+    };
+    const config = await resolveConfig({
+      parserPreset: customPreset,
+    });
+    assert.deepStrictEqual(config.parserPreset, customPreset);
+  });
 });

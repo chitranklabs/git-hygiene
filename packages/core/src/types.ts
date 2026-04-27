@@ -62,7 +62,19 @@ export interface GitHygieneConfig {
   /**
    * Optional parser preset for commitlint.
    */
-  parserPreset?: any;
+  parserPreset?: string | ParserPreset | (() => ParserPreset) | (() => Promise<ParserPreset>);
+}
+
+/**
+ * @description
+ * Structure for commitlint parser presets.
+ */
+export interface ParserPreset {
+  headerPattern?: RegExp | string;
+  headerCorrespondence?: string[];
+  parserOpts?: Record<string, unknown>;
+  parser?: Record<string, unknown>;
+  [key: string]: unknown;
 }
 
 /**

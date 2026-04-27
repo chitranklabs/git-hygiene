@@ -81,7 +81,7 @@ async function main() {
         break;
       }
       case 'bump': {
-        const { releaseType, reason } = (await getRecommendedBump()) as any;
+        const { releaseType, reason } = await getRecommendedBump();
         console.log(`\n${pc.bold('Recommended Bump:')} ${pc.green(pc.underline(releaseType))}`);
         console.log(`${pc.dim('Reason:')} ${reason}\n`);
         process.exit(0);

@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import type { GitHygieneConfig, ResolvedConfig } from './types.ts';
+import type { GitHygieneConfig, ResolvedConfig, ParserPreset } from './types.ts';
 import { DEFAULT_CONFIG } from './constants.ts';
 import { createRequire } from 'node:module';
 import { loadPreset } from 'conventional-changelog-preset-loader';
@@ -90,7 +90,7 @@ export async function resolveConfig(
     } else {
       // Generic preset support using conventional-changelog-preset-loader
       try {
-        const preset = (await loadPreset(extension)) as any;
+        const preset = (await loadPreset(extension)) as ParserPreset;
         const parserOpts = preset?.parserOpts || preset?.parser;
         if (parserOpts?.headerPattern) {
           // If the preset has its own parser options, use it as the parserPreset
