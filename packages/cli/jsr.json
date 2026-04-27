@@ -8,6 +8,16 @@
     "@chitrank2050/git-hygiene-core": "../core/src/index.ts"
   },
   "publish": {
-    "exclude": ["tests", "scratch", ".github", ".turbo", "dist", "coverage", "**/*.test.ts"]
+    "exclude": [
+      "node_modules",
+      "tests",
+      "scratch",
+      ".github",
+      ".turbo",
+      "dist",
+      "coverage",
+      "**/*.test.ts",
+      "*.bak"
+    ]
   }
 }
