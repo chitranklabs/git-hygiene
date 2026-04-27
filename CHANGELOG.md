@@ -8,6 +8,10 @@ All notable changes to this project will be documented in this file.
 
 - Remove unnecessary unstable deno publish flags from workflow and script ([c082717](c0827170905eeb81b2b840b81ac97a7eee570078)) by @chitrank2050
 
+### ⚙️ Miscellaneous Tasks
+
+- **release:** Bump version to v0.4.6 ([a5aeb20](a5aeb203eb69e035e00f110e6b234fe4833f9b6f)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
+
 ## [0.4.5] - 2026-04-27
 
 ### 🚀 Features
