@@ -11,7 +11,7 @@
 
 <br />
 
-`@chitrank2050/git-hygiene-core` provides the core validation logic for modern Git workflows. Built natively for **Node.js 24+**, it offers high-performance validation with zero external dependencies (other than the standard `commitlint` engine).
+`@chitrank2050/git-hygiene-core` provides the core validation logic for modern Git workflows. Built as a **Native ESM** engine for **Node.js 24+**, it offers high-performance validation with zero external dependencies (built on top of the standard `commitlint` engine).
 
 ## Features ✨
 

@@ -11,7 +11,7 @@
 
 <br />
 
-`git-hygiene` is a high-performance CLI tool that enforces **Conventional Commits**, **branch naming patterns**, and **PR titles** using a single, unified engine. Built with native Node.js APIs for blazing-fast microsecond startup times.
+`git-hygiene` is a high-performance, **zero-dependency** CLI tool that enforces **Conventional Commits**, **branch naming patterns**, and **PR titles** using a single, unified engine. Built natively for **Node.js 24+** with microsecond startup times.
 
 ## 📦 Installation
 
