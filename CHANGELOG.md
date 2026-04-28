@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.4.12] - 2026-04-28
+
+### 🚀 Features
+
+- Update project documentation and expand build artifact attestation scope ([f0c9969](f0c99694b432520ba067dbad9db4808549920bc6)) by @chitrank2050
+- Default to conventionalcommits preset when no configuration is provided ([6a2143f](6a2143f793f53dc74f9f5984b092c59dce391dc4)) by @chitrank2050
+
+### 🚜 Refactor
+
+- Remove redundant deps installation & build steps from release workflow & update CI header ([78ec8a7](78ec8a74b995774dce979188c178c3716ea76a25)) by @chitrank2050
+
 ## [0.4.11] - 2026-04-27
 
 ### 📚 Documentation
@@ -12,6 +23,7 @@ All notable changes to this project will be documented in this file.
 ### ⚙️ Miscellaneous Tasks
 
 - Update Ko-fi support links to use visual badges across README files ([38b975d](38b975df2181d39a4ad7feca2838ab568c25459b)) by @chitrank2050
+- **release:** Bump version to v0.4.11 ([aa8da98](aa8da98514e2641c607bdb845b469c558afa2563)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
 
 ## [0.4.10] - 2026-04-27
 
