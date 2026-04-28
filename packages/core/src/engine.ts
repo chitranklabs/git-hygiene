@@ -143,6 +143,9 @@ export async function getRecommendedBump(configOverride?: ResolvedConfig): Promi
     else {
       await bumper.loadPreset(config.parserPreset);
     }
+  } else {
+    // Fallback to conventionalcommits if no preset is provided
+    await bumper.loadPreset('conventionalcommits');
   }
 
   return (await bumper.bump()) as { releaseType: string; reason: string; level: number };
