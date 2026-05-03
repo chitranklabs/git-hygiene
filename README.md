@@ -335,12 +335,15 @@ We ❤️ contributions! Whether you're fixing a bug, adding a feature, or impro
 
 ---
 
-## 📜 License
+## 🛡️ Security & Quality
 
-MIT - see [LICENSE](LICENSE) for details.
-
-If you use `git-hygiene` in your project, a star or credit is appreciated. ✨
+- **Secret Scanning**: Gitleaks prevents credential leaks in every commit.
+- **Workflow Auditing**: Zizmor ensures GitHub Actions follow security best practices.
+- **Supply Chain**: All GitHub Actions are pinned to secure commit SHAs.
+- **Provenace**: Automated build attestations for every release.
 
 ---
 
-❤️ Developed by [Chitrank Agnihotri](https://www.chitrankagnihotri.com)
+Developed with ❤️ by [Chitrank Agnihotri](https://www.chitrankagnihotri.com)
+
+_If you use this in your project, a credit or star is appreciated._ ✨
