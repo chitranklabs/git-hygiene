@@ -235,7 +235,7 @@ const result = await validateBranch('feat/new-ui', customConfig);
 
 ## 🚀 Automated Releases
 
-`git-hygiene` isn't just a validator—it's a release companion. You can use its outputs to automate your entire versioning pipeline. Check out our own [release-prepare.yml](.github/workflows/release-prepare.yml) to see how we use the `bump` output to automate version increments.
+`git-hygiene` isn't just a validator-it's a release companion. You can use its outputs to automate your entire versioning pipeline. Check out our own [release-prepare.yml](.github/workflows/release-prepare.yml) to see how we use the `bump` output to automate version increments.
 
 ---
 
