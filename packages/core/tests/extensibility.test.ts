@@ -75,6 +75,24 @@ describe('Configuration Extensibility', () => {
     assert.ok(config.types.includes('feat')); // Should still have defaults
   });
 
+  it('should escape regex special characters in user-defined types', async () => {
+    const config = await resolveConfig({
+      types: ['fix.*'],
+    });
+    // 'fix.' should NOT match because '.' is literal, not a wildcard
+    assert.strictEqual(config.patterns.title.test('fix.: bad type'), false);
+    // The literal type 'fix.*' should not match 'fixabc: msg' via wildcard
+    assert.strictEqual(config.patterns.title.test('fixabc: wildcard match'), false);
+  });
+
+  it('should escape regex special characters in ignoreBranches', async () => {
+    const config = await resolveConfig({
+      ignoreBranches: ['main', 'release+'],
+    });
+    // 'release+' as literal should NOT match 'releaseee' via + quantifier
+    assert.strictEqual(config.patterns.branch.test('releaseee'), false);
+  });
+
   it('should respect explicit zero values and not override with defaults', async () => {
     const config = await resolveConfig({
       minBodyLength: 0,

@@ -103,8 +103,9 @@ export async function resolveConfig(
     }
   }
 
-  const typesPattern = mergedConfig.types.join('|');
-  const branchesPattern = mergedConfig.ignoreBranches.join('|');
+  const escapeRegex = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const typesPattern = mergedConfig.types.map(escapeRegex).join('|');
+  const branchesPattern = mergedConfig.ignoreBranches.map(escapeRegex).join('|');
 
   const scopePattern = mergedConfig.allowEmptyScope ? '(\\([a-z0-9-]+\\))?' : '(\\([a-z0-9-]+\\))';
 
