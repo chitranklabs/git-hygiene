@@ -99,7 +99,7 @@ export async function validateCommit(
   const report = await lint(message, rules as any, lintOpts as any);
   if (report.valid) return { valid: true, message: 'Commit message is valid.' };
 
-  const errors = report.errors.map((err: { message: string; name: string }) => ({
+  const errors = (report.errors ?? []).map((err: { message: string; name: string }) => ({
     message: err.message,
     name: err.name,
   }));
@@ -161,8 +161,15 @@ async function loadParserPreset(preset: string | unknown): Promise<any> {
   if (typeof preset === 'string') {
     // Dynamic import of arbitrary strings is unanalyzable by JSR,
     // but moving it to a private helper helps avoid score penalties.
-    const mod = await import(preset);
-    return mod.default || mod;
+    try {
+      const mod = await import(preset);
+      return mod.default ?? mod;
+    } catch (err) {
+      throw new Error(
+        `Failed to load parser preset "${preset}": ${err instanceof Error ? err.message : String(err)}`,
+        { cause: err },
+      );
+    }
   }
   return preset;
 }

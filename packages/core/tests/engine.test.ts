@@ -128,6 +128,29 @@ describe('Validation Engine', () => {
     });
   });
 
+  describe('validateCommit error resilience', () => {
+    it('should throw a descriptive error when a string parserPreset module does not exist', async () => {
+      const config = await resolveConfig({
+        parserPreset: 'non-existent-preset-module-xyz-abc',
+      });
+      await assert.rejects(
+        () => validateCommit('feat: test', config),
+        (err: unknown) => {
+          assert.ok(err instanceof Error);
+          assert.ok(
+            err.message.startsWith('Failed to load parser preset'),
+            `Expected wrapped error message, got: ${err.message}`,
+          );
+          assert.ok(
+            err.message.includes('non-existent-preset-module-xyz-abc'),
+            `Expected error to include the preset name, got: ${err.message}`,
+          );
+          return true;
+        },
+      );
+    });
+  });
+
   describe('validateCommit with custom parser', () => {
     it('should support function-based parserPreset', async () => {
       // Create a mock preset function
