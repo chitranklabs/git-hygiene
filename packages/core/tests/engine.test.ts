@@ -53,6 +53,19 @@ describe('Validation Engine', () => {
       assert.strictEqual((await validateTitle('FEAT: title')).valid, false);
       assert.strictEqual((await validateTitle('feat(Scope): title')).valid, false);
     });
+
+    it('should accept breaking change with scope (feat(scope)!: msg)', async () => {
+      assert.strictEqual((await validateTitle('feat(scope)!: breaking change')).valid, true);
+      assert.strictEqual((await validateTitle('fix(core)!: remove deprecated api')).valid, true);
+    });
+
+    it('should accept breaking change without scope (feat!: msg)', async () => {
+      assert.strictEqual((await validateTitle('feat!: breaking change')).valid, true);
+    });
+
+    it('should reject wrong order (feat!(scope): msg)', async () => {
+      assert.strictEqual((await validateTitle('feat!(scope): breaking change')).valid, false);
+    });
   });
 
   describe('validateCommit', async () => {

@@ -112,7 +112,7 @@ export async function resolveConfig(
     ...mergedConfig,
     patterns: {
       branch: new RegExp(`^(${branchesPattern})$|^(${typesPattern})/.+$`),
-      title: new RegExp(`^(${typesPattern})(!)?${scopePattern}: .+$`),
+      title: new RegExp(`^(${typesPattern})${scopePattern}(!)?:\\s.+$`),
     },
   };
 
