@@ -53,7 +53,7 @@
     "@commitlint/config-conventional": "^21.0.0",
     "@commitlint/lint": "^21.0.0",
     "conventional-changelog-conventionalcommits": "^9.3.1",
-    "conventional-changelog-preset-loader": "^5.0.0",
+    "conventional-changelog-preset-loader": "^6.0.0",
     "conventional-recommended-bump": "^11.2.0"
   },
   "devDependencies": {
