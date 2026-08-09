@@ -3,7 +3,7 @@ packages:
 overrides:
   esbuild: '^0.28.1'
   js-yaml: '^5.0.0'
-  linkify-it: '^5.0.1'
+  linkify-it: '^6.0.0'
   markdown-it: '^14.2.0'
 allowBuilds:
   esbuild: true
