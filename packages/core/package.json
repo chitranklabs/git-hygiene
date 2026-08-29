@@ -31,8 +31,8 @@
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
     }
   },
   "files": [
@@ -41,7 +41,7 @@
     "LICENSE"
   ],
   "scripts": {
-    "build": "tsup src/index.ts --format esm --dts --clean --minify",
+    "build": "tsup src/index.ts --format esm --clean --minify && tsc --emitDeclarationOnly --rootDir src",
     "test": "node --experimental-strip-types --test tests/**/*.test.ts",
     "test:cov": "mkdir -p coverage && node --experimental-strip-types --test --experimental-test-coverage --test-reporter=lcov --test-reporter-destination=coverage/lcov.info tests/**/*.test.ts",
     "lint": "eslint src/**/*.ts",
