@@ -1,5 +1,8 @@
 import { describe, it, afterEach } from 'node:test';
 import assert from 'node:assert';
+import fs from 'node:fs';
+import path from 'node:path';
+import { execSync } from 'node:child_process';
 import {
   validateBranch,
   validateTitle,
@@ -122,9 +125,28 @@ describe('Validation Engine', () => {
 
   describe('getRecommendedBump', () => {
     it('should return a recommended bump result', async () => {
-      const res = await getRecommendedBump();
-      assert.ok(res.releaseType);
-      assert.ok(res.reason);
+      const tempDir = path.resolve(process.cwd(), `temp-git-test-${Date.now()}`);
+      fs.mkdirSync(tempDir, { recursive: true });
+
+      const originalCwd = process.cwd();
+      try {
+        execSync('git init', { cwd: tempDir, stdio: 'ignore' });
+        execSync('git config user.name "Test"', { cwd: tempDir, stdio: 'ignore' });
+        execSync('git config user.email "test@example.com"', { cwd: tempDir, stdio: 'ignore' });
+        fs.writeFileSync(path.join(tempDir, 'file.txt'), 'hello');
+        execSync('git add file.txt', { cwd: tempDir, stdio: 'ignore' });
+        execSync('git commit -m "feat: initial commit"', { cwd: tempDir, stdio: 'ignore' });
+
+        // Temporarily change cwd to tempDir so getRecommendedBump runs there
+        process.chdir(tempDir);
+
+        const res = await getRecommendedBump();
+        assert.strictEqual(res.releaseType, 'minor');
+        assert.ok(res.reason);
+      } finally {
+        process.chdir(originalCwd);
+        fs.rmSync(tempDir, { recursive: true, force: true });
+      }
     });
   });
 

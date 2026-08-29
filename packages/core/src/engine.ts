@@ -86,7 +86,8 @@ export async function validateCommit(
     // Handle presets that are functions (like conventional-changelog-conventionalcommits)
     if (typeof preset === 'function') {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      lintOpts.parserOpts = await (preset as any)();
+      const resolved = await (preset as any)();
+      lintOpts.parserOpts = resolved.parserOpts || resolved.parser || resolved;
     } else {
       // Normalize parserOpts from various preset formats
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
