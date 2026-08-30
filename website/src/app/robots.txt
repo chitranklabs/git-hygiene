@@ -1,0 +1,18 @@
+# ==================================================
+#  git-hygiene
+#  https://githygiene.chitrankagnihotri.com
+#
+#  The zero-dependency metadata validator for modern Git workflows.
+#
+#  -----
+#  Built by Chitrank Agnihotri
+#  Senior Technical Lead & AI Engineer
+#  https://chitrankagnihotri.com
+#  -----
+#
+# ==================================================
+
+User-agent: *
+Allow: /
+
+Sitemap: https://githygiene.chitrankagnihotri.com/sitemap.xml

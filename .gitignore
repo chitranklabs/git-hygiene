@@ -1,9 +1,13 @@
 # Dependencies
 node_modules
 
-# Build
+# Build & Framework
 dist
+.next
+out
+.vercel
 *.tsbuildinfo
+next-env.d.ts
 .turbo
 
 # Logs
