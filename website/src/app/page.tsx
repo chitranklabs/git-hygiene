@@ -1,5 +1,4 @@
 import type { Metadata } from "next"
-import Link from "next/link"
 
 import { Button } from "@chitrank2050/monoline-ui/button"
 import { Card } from "@chitrank2050/monoline-ui/card"
@@ -7,6 +6,7 @@ import { Container } from "@chitrank2050/monoline-ui/container"
 import { SectionHead } from "@chitrank2050/monoline-ui/section-head"
 import { Status } from "@chitrank2050/monoline-ui/status"
 
+import { InstallCommand } from "@/src/components/install-command"
 import { IntegrationTabs } from "@/src/components/integration-tabs"
 import JsonLd, {
 	createWebPageJsonLd,
@@ -35,25 +35,25 @@ export const metadata: Metadata = createPageMetadata({
 
 const benchmarks = [
 	{
-		metric: "Cold Startup Time",
+		metric: "Cold Startup Latency",
 		hygiene: "< 5 ms",
 		traditional: "~220 ms",
-		note: "Native Node.js 24+ type-stripping execution without transpile step.",
+		note: "Native Node.js 24+ type-stripping execution with microsecond CLI response.",
 	},
 	{
 		metric: "Runtime Dependencies",
-		hygiene: "0",
+		hygiene: "0 packages",
 		traditional: "38+ packages",
-		note: "Zero transitive dependencies. Zero install overhead.",
+		note: "Pure native Node.js built-ins. Zero transitive dependency attack surface.",
 	},
 	{
-		metric: "Supply Chain Provenance",
+		metric: "Supply Chain Security",
 		hygiene: "SLSA Level 3",
 		traditional: "Unverified",
-		note: "100% SHA-pinned workflows with OpenSSF & Zizmor security audits.",
+		note: "100% SHA-pinned GitHub workflows with OpenSSF & Zizmor security audits.",
 	},
 	{
-		metric: "Multi-Registry Support",
+		metric: "Multi-Registry Distribution",
 		hygiene: "NPM + JSR + Action",
 		traditional: "NPM only",
 		note: "TypeScript-native distribution on JSR and automated GitHub Marketplace Action.",
@@ -72,21 +72,21 @@ const distributionPackages = [
 		name: "JSR Registry",
 		package: "@chitrank2050/git-hygiene",
 		href: "https://jsr.io/@chitrank2050/git-hygiene",
-		description: "TypeScript-native package with zero build artifact for Deno & Node 24+ runtimes.",
+		description: "TypeScript-native package with zero build step for Deno and Node 24+ runtimes.",
 		badge: "TypeScript",
 	},
 	{
 		name: "GitHub Action",
 		package: "chitranklabs/git-hygiene",
 		href: "https://github.com/marketplace/actions/git-hygiene-validator",
-		description: "Automated PR title & branch validator with automatic semantic release recommendation.",
+		description: "Automated PR title & branch validator with semantic release bump outputs.",
 		badge: "CI / CD",
 	},
 	{
 		name: "Core Engine",
 		package: "@chitrank2050/git-hygiene-core",
 		href: "https://www.npmjs.com/package/@chitrank2050/git-hygiene-core",
-		description: "Programmatic TypeScript API for custom CI pipelines and internal development tooling.",
+		description: "Programmatic TypeScript API for custom CI pipelines and internal developer tooling.",
 		badge: "Library",
 	},
 ]
@@ -142,11 +142,11 @@ export default async function HomePage() {
 		<div className="relative min-h-screen gh-hero-glow">
 			<JsonLd data={jsonLd} />
 
-			<Container as="main" id="main-content" tabIndex={-1} className="pt-ml-12 pb-ml-24">
+			<Container as="main" id="main-content" tabIndex={-1} className="pt-ml-10 pb-ml-24">
 				{/* ── HERO SECTION ── */}
-				<section className="text-center max-w-4xl mx-auto pt-ml-8 pb-ml-12">
+				<section className="text-center max-w-4xl mx-auto pt-ml-6 pb-ml-10">
 					{/* Badge Pill */}
-					<div className="inline-flex items-center gap-2 rounded-full border border-border bg-surface-2/80 px-3.5 py-1 backdrop-blur-md shadow-xs mb-ml-6">
+					<div className="inline-flex items-center gap-2.5 rounded-full border border-border bg-surface p-1 pr-3.5 backdrop-blur-md shadow-xs mb-ml-6">
 						<Status variant="accent" size="sm">
 							{release.version}
 						</Status>
@@ -156,16 +156,16 @@ export default async function HomePage() {
 					</div>
 
 					{/* High-Conviction Product Headline */}
-					<h1 className="font-mono text-text text-[clamp(2.4rem,5vw,3.8rem)] font-bold tracking-tight leading-[1.08]">
+					<h1 className="font-sans text-text text-[clamp(2.5rem,5.4vw,4.2rem)] font-extrabold tracking-tight leading-[1.08]">
 						The zero-dependency metadata validator for <span className="text-accent">modern Git</span>.
 					</h1>
 
 					{/* Problem & Value Prop Subtitle */}
-					<p className="mt-ml-6 text-text-secondary text-base md:text-lg font-normal leading-relaxed max-w-2xl mx-auto font-sans">
+					<p className="mt-ml-5 text-text-secondary text-base md:text-lg font-normal leading-relaxed max-w-2xl mx-auto font-sans">
 						Enforce conventional commits, branch naming patterns, and PR titles with native Node.js 24+ type-stripping speed. Stop broken branch names and non-standard commits in CI before they happen.
 					</p>
 
-					{/* Action Buttons & Install Command */}
+					{/* Action Buttons */}
 					<div className="mt-ml-8 flex flex-wrap items-center justify-center gap-ml-3">
 						<Button asChild size="md">
 							<a href="#sandbox">
@@ -184,35 +184,34 @@ export default async function HomePage() {
 						</Button>
 					</div>
 
-					{/* Quick Install Pill */}
-					<div className="mt-ml-6 inline-flex items-center gap-2 font-mono text-xs text-text-muted bg-surface/90 border border-border px-ml-4 py-ml-2 rounded-xl shadow-xs">
-						<span className="text-accent font-semibold">$</span>
-						<code className="text-text font-mono">pnpm add -D @chitrank2050/git-hygiene</code>
+					{/* Interactive One-Click Install Pill */}
+					<div className="mt-ml-5 flex justify-center">
+						<InstallCommand command="pnpm add -D @chitrank2050/git-hygiene" />
 					</div>
 
 					{/* Quick Proof Metrics */}
 					<div className="mt-ml-12 grid grid-cols-2 sm:grid-cols-4 gap-ml-4 border-t border-border pt-ml-8 text-center font-mono">
-						<div>
-							<strong className="block text-xl font-bold text-text tabular-nums">0</strong>
+						<div className="p-ml-2">
+							<strong className="block text-2xl font-bold text-text tabular-nums">0</strong>
 							<span className="text-3xs uppercase tracking-wider text-accent font-semibold">Runtime Deps</span>
 						</div>
-						<div>
-							<strong className="block text-xl font-bold text-text tabular-nums">&lt; 5ms</strong>
+						<div className="p-ml-2">
+							<strong className="block text-2xl font-bold text-text tabular-nums">&lt; 5ms</strong>
 							<span className="text-3xs uppercase tracking-wider text-accent font-semibold">Cold Startup</span>
 						</div>
-						<div>
-							<strong className="block text-xl font-bold text-text tabular-nums">SLSA-3</strong>
+						<div className="p-ml-2">
+							<strong className="block text-2xl font-bold text-text tabular-nums">SLSA-3</strong>
 							<span className="text-3xs uppercase tracking-wider text-accent font-semibold">Provenance</span>
 						</div>
-						<div>
-							<strong className="block text-xl font-bold text-text tabular-nums">Node 24+</strong>
-							<span className="text-3xs uppercase tracking-wider text-accent font-semibold">Type Stripping</span>
+						<div className="p-ml-2">
+							<strong className="block text-2xl font-bold text-text tabular-nums">Node 24+</strong>
+							<span className="text-3xs uppercase tracking-wider text-accent font-semibold">Native Types</span>
 						</div>
 					</div>
 				</section>
 
 				{/* ── LIVE INTERACTIVE SANDBOX ── */}
-				<section id="sandbox" className="mt-ml-12 scroll-mt-ml-12">
+				<section id="sandbox" className="mt-ml-10 scroll-mt-ml-12">
 					<SectionHead
 						eyebrow="Interactive Demo"
 						title="Test your Git metadata rules live in the browser."
@@ -240,8 +239,10 @@ export default async function HomePage() {
 							<Card key={b.metric} size="md">
 								<Card.Body>
 									<div className="flex items-center justify-between border-b border-border pb-ml-2 mb-ml-3 font-mono">
-										<span className="text-xs font-semibold text-text-muted">{b.metric}</span>
-										<span className="text-xs font-bold text-accent">{b.hygiene}</span>
+										<span className="text-xs font-semibold text-text">{b.metric}</span>
+										<span className="rounded bg-accent-soft px-2 py-0.5 text-xs font-bold text-accent border border-accent/30">
+											{b.hygiene}
+										</span>
 									</div>
 									<div className="flex items-center justify-between text-2xs font-mono text-text-muted mb-ml-2">
 										<span>Traditional Tooling:</span>
