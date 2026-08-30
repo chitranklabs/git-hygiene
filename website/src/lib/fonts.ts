@@ -1,36 +1,33 @@
-import { Caveat, IBM_Plex_Mono, Inter, Manrope } from 'next/font/google';
+import { Geist, Geist_Mono, JetBrains_Mono, Newsreader } from 'next/font/google';
 
-const sansFont = Inter({
+const geistSans = Geist({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-inter-sans',
+  variable: '--font-sans',
 });
 
-const monoFont = IBM_Plex_Mono({
+const geistMono = Geist_Mono({
   subsets: ['latin'],
   display: 'swap',
-  preload: false,
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-plex-mono',
+  variable: '--font-mono',
 });
 
-const scriptFont = Caveat({
+const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
   display: 'swap',
-  preload: false,
-  weight: ['700'],
-  variable: '--font-caveat-script',
+  variable: '--font-code',
 });
 
-const headlineFont = Manrope({
+const displaySerif = Newsreader({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-manrope-headline',
+  style: ['normal', 'italic'],
+  variable: '--font-display-serif',
 });
 
 export const monolineFontClassName = [
-  sansFont.variable,
-  monoFont.variable,
-  scriptFont.variable,
-  headlineFont.variable,
+  geistSans.variable,
+  geistMono.variable,
+  jetbrainsMono.variable,
+  displaySerif.variable,
 ].join(' ');

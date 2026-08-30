@@ -10,11 +10,10 @@ export function SiteHeader() {
 			<div className="flex min-w-0 items-center gap-ml-3">
 				<Link
 					href="/"
-					className="ml-navbar__brand"
-					data-text-style="monoline"
+					className="group inline-flex items-center gap-2.5 text-text no-underline"
 				>
-					<span className="ml-navbar__brand-label font-mono font-bold tracking-tight">
-						git-hygiene
+					<span className="font-mono text-sm font-bold tracking-tight text-text">
+						🌊 git-hygiene
 					</span>
 				</Link>
 			</div>
@@ -27,7 +26,7 @@ export function SiteHeader() {
 					<a href="#usage">Usage</a>
 				</Navbar.Link>
 				<Navbar.Link asChild>
-					<a href="#configuration">Config</a>
+					<a href="#configuration">Configuration</a>
 				</Navbar.Link>
 				<Navbar.Link asChild>
 					<a href="#architecture">Architecture</a>
@@ -37,8 +36,10 @@ export function SiteHeader() {
 						href="https://github.com/chitranklabs/git-hygiene"
 						target="_blank"
 						rel="noopener noreferrer"
+						className="inline-flex items-center gap-1"
 					>
-						GitHub ↗
+						GitHub
+						<span className="text-text-muted text-xs">↗</span>
 					</a>
 				</Navbar.Link>
 			</Navbar.Nav>

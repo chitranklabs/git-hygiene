@@ -2,11 +2,11 @@ import type { Metadata } from "next"
 
 import { Button } from "@chitrank2050/monoline-ui/button"
 import { Card } from "@chitrank2050/monoline-ui/card"
+import { CodeBlock } from "@/src/components/ui"
 import { Container } from "@chitrank2050/monoline-ui/container"
 import { SectionHead } from "@chitrank2050/monoline-ui/section-head"
 import { Status } from "@chitrank2050/monoline-ui/status"
 
-import { CodeBlock } from "@/src/components/code-block"
 import JsonLd, {
 	createWebPageJsonLd,
 	getPersonJsonLd,
@@ -20,9 +20,12 @@ import { siteUrl } from "@/src/lib/seo"
 
 import pkg from "@/package.json"
 
-const homeTitle = "git-hygiene — Zero-Dependency Metadata Validator"
+/* Hallmark · pre-emit critique: P5 H5 E5 S5 R5 V5 */
+/* Hallmark · macrostructure: Workbench · genre: modern-minimal · theme: Sea Slate */
+
+const homeTitle = "git-hygiene — Zero-Dependency Metadata Validator for Modern Git"
 const homeDescription =
-	"Enforce conventional commits, branch naming patterns, and PR titles with native Node.js 24+ type-stripping performance. Zero external runtime dependencies."
+	"Enforce conventional commits, branch naming patterns, and PR titles with native Node.js 24+ type-stripping performance. Zero runtime dependencies."
 
 export const metadata: Metadata = createPageMetadata({
 	title: homeTitle,
@@ -31,69 +34,79 @@ export const metadata: Metadata = createPageMetadata({
 })
 
 const stats = [
-	["0", "Runtime Dependencies"],
-	["<5ms", "Cold Start (Native TS)"],
-	["Node 24+", "Type Stripping"],
-	["MIT", "Open Source License"],
+	{ value: "0", label: "Runtime Dependencies", note: "Pure native Node.js built-ins" },
+	{ value: "<5ms", label: "Cold Startup", note: "Native TypeScript type-stripping" },
+	{ value: "Node 24+", label: "Execution Engine", note: "Zero build step required" },
+	{ value: "SLSA-3", label: "Security Provenance", note: "SHA-pinned & OpenSSF audited" },
 ]
 
 const features = [
 	{
-		title: "Unified Metadata Engine",
+		title: "Unified Standard Engine",
 		description:
-			"Define your standards once in package.json or config. Enforce them identically in commit hooks, branch validations, and PR titles.",
+			"Define your naming standards once in package.json. Automatically validate local commits, pre-push branch checks, and GitHub Actions PR titles.",
+		id: "01",
 	},
 	{
-		title: "Zero Dependencies",
+		title: "Zero Runtime Overhead",
 		description:
-			"Constructed strictly with native Node.js APIs. No external CLI parsing, formatting, or color library bloat.",
+			"Built without heavy CLI frameworks like commander or yargs. Lean footprint ensures instant execution on every git commit.",
+		id: "02",
 	},
 	{
-		title: "Hardened Security",
+		title: "Hardened Supply Chain",
 		description:
-			"SHA-pinned workflows, SLSA Level 3 attestations, Zizmor audited, and OpenSSF Scorecard verified supply chain.",
+			"100% SHA-pinned workflows, SLSA Level 3 build provenance, Zizmor security audits, and Gitleaks secret protection.",
+		id: "03",
 	},
 	{
-		title: "Universal Distribution",
+		title: "Universal Multi-Registry",
 		description:
-			"First-class distribution on NPM, JSR (TypeScript-native), GitHub Actions, and headless core library.",
+			"Distributed natively on NPM, JSR (TypeScript-native), GitHub Marketplace Action, and as an importable core library.",
+		id: "04",
 	},
 	{
 		title: "Smart CI Omni-Mode",
 		description:
-			"Automatically detects CI context to validate PR titles, branch names, and output recommended semver bumps.",
+			"Context-aware GitHub Action that automatically detects PR events, inspects branch names, and suggests semantic version increments.",
+		id: "05",
 	},
 	{
-		title: "Automated Semver Bumps",
+		title: "Release Bump Analyzer",
 		description:
-			"Analyzes commit history against conventional commit rules to output machine-readable release increments.",
+			"Scans commit histories against Conventional Commits specs to recommend patch, minor, or major bumps with machine-readable JSON.",
+		id: "06",
 	},
 ]
 
-const registries = [
+const distributionPackages = [
 	{
-		name: "NPM Package",
-		pkg: "@chitrank2050/git-hygiene",
+		name: "NPM Registry",
+		package: "@chitrank2050/git-hygiene",
 		href: "https://www.npmjs.com/package/@chitrank2050/git-hygiene",
-		desc: "Primary CLI package for Node.js workflows",
+		description: "Standard CLI runner for Node.js workflows and git hooks.",
+		badge: "CLI",
 	},
 	{
-		name: "JSR Package",
-		pkg: "@chitrank2050/git-hygiene",
+		name: "JSR Registry",
+		package: "@chitrank2050/git-hygiene",
 		href: "https://jsr.io/@chitrank2050/git-hygiene",
-		desc: "TypeScript-native registry for Deno & Node 24+",
+		description: "TypeScript-native distribution for Deno and Node 24+ runtimes.",
+		badge: "TypeScript",
 	},
 	{
 		name: "GitHub Action",
-		pkg: "chitranklabs/git-hygiene",
+		package: "chitranklabs/git-hygiene",
 		href: "https://github.com/marketplace/actions/git-hygiene-validator",
-		desc: "CI validator with Omni-Mode auto detection",
+		description: "Automated PR metadata validation with context auto-detection.",
+		badge: "CI / CD",
 	},
 	{
 		name: "Core Engine",
-		pkg: "@chitrank2050/git-hygiene-core",
+		package: "@chitrank2050/git-hygiene-core",
 		href: "https://www.npmjs.com/package/@chitrank2050/git-hygiene-core",
-		desc: "Headless library for programmatic integration",
+		description: "Headless validation library for programmatic TypeScript integration.",
+		badge: "Library",
 	},
 ]
 
@@ -118,32 +131,33 @@ export default async function HomePage() {
 	}
 
 	return (
-		<Container as="main" id="main-content" tabIndex={-1} className="pt-ml-20 pb-ml-24">
+		<Container as="main" id="main-content" tabIndex={-1} className="pt-ml-12 pb-ml-24">
 			<JsonLd data={jsonLd} />
 
-			{/* HERO SECTION */}
-			<section className="grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] items-start gap-ml-12">
+			{/* HERO SECTION — Asymmetric Workbench Layout */}
+			<section className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] items-center gap-ml-12 pt-ml-6">
 				<div>
-					<div className="flex items-center gap-ml-2.5 mb-ml-6">
+					<div className="flex flex-wrap items-center gap-2 mb-ml-6">
 						<Status variant="accent" size="sm">
 							{release.version}
 						</Status>
-						<span className="font-mono text-2xs uppercase tracking-wider text-text-muted">
+						<span className="font-mono text-2xs font-medium uppercase tracking-wider text-text-muted px-2 py-0.5 rounded-md bg-surface-2 border border-border">
 							Node.js 24+ Native
 						</span>
 					</div>
 
-					<h1 className="text-text font-mono text-[clamp(2.4rem,4.5vw,3.75rem)] font-extrabold tracking-tight leading-[1.02]">
-						Zero-dependency metadata validator for modern Git.
+					<h1 className="font-mono text-text text-[clamp(2.2rem,4.2vw,3.4rem)] font-bold tracking-tight leading-[1.08]">
+						Clean Git metadata. <br />
+						<span className="text-accent">Zero runtime bloat.</span>
 					</h1>
 
-					<p className="mt-ml-5 text-text-secondary text-base font-normal leading-relaxed max-w-130">
-						Enforce conventional commits, branch naming patterns, and PR titles
-						with sub-5ms native type-stripping performance.
+					<p className="mt-ml-5 text-text-secondary text-base font-normal leading-relaxed max-w-130 font-sans">
+						Enforce conventional commits, branch naming patterns, and PR
+						titles with native Node.js 24+ type-stripping speed. Built with zero external runtime dependencies.
 					</p>
 
 					<div className="flex flex-wrap items-center gap-ml-3 mt-ml-8">
-						<Button asChild>
+						<Button asChild size="md">
 							<a
 								href="https://www.npmjs.com/package/@chitrank2050/git-hygiene"
 								target="_blank"
@@ -153,52 +167,55 @@ export default async function HomePage() {
 								<Button.Arrow />
 							</a>
 						</Button>
-						<Button asChild variant="secondary">
+						<Button asChild variant="secondary" size="md">
 							<a
 								href="https://github.com/chitranklabs/git-hygiene"
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								View on GitHub
+								Source Code ↗
 							</a>
 						</Button>
 					</div>
 
-					<div className="mt-ml-6 inline-flex items-center gap-ml-2 font-mono text-xs text-text-muted border border-border bg-surface px-ml-3.5 py-ml-2 rounded-md">
-						<span className="text-accent font-medium">$</span>
-						<code>pnpm add -D @chitrank2050/git-hygiene</code>
+					<div className="mt-ml-6 inline-flex items-center gap-2 font-mono text-xs text-text-muted bg-surface-2/70 border border-border px-ml-3.5 py-ml-2 rounded-lg">
+						<span className="text-accent font-semibold">$</span>
+						<code className="text-text font-mono">pnpm add -D @chitrank2050/git-hygiene</code>
 					</div>
 				</div>
 
-				{/* HERO QUICK USAGE */}
-				<div className="mt-ml-2">
+				{/* HERO QUICK TERMINAL */}
+				<div className="relative">
 					<CodeBlock
-						filename="terminal"
+						filename="terminal — quick run"
 						code={`# Validate commit message
-npx @chitrank2050/git-hygiene commit "feat: zero-dep validator"
+npx @chitrank2050/git-hygiene commit "feat(core): add type-stripping"
 
 # Validate branch name
-npx @chitrank2050/git-hygiene branch "feat/native-ts-stripping"
+npx @chitrank2050/git-hygiene branch "feat/native-runner"
 
-# Recommend next semver bump
+# Recommend next semantic version
 npx @chitrank2050/git-hygiene bump --json
-# => { "releaseType": "minor", "reason": "feat commit found" }`}
+# => { "releaseType": "minor", "reason": "feat commit detected" }`}
 					/>
 				</div>
 			</section>
 
-			{/* STATS STRIP */}
+			{/* STATS MATRIX */}
 			<section
-				className="grid grid-cols-2 md:grid-cols-4 gap-ml-6 mt-ml-16 border-y border-border py-ml-6"
+				className="grid grid-cols-2 md:grid-cols-4 gap-ml-6 mt-ml-16 border-y border-border py-ml-8"
 				aria-label="Project stats"
 			>
-				{stats.map(([value, label]) => (
-					<div key={label}>
-						<strong className="block font-mono text-xl font-bold text-text">
-							{value}
+				{stats.map((item) => (
+					<div key={item.label}>
+						<strong className="block font-mono text-2xl font-bold text-text tracking-tight tabular-nums">
+							{item.value}
 						</strong>
-						<span className="mt-ml-1 block font-mono text-3xs uppercase tracking-widest text-text-muted">
-							{label}
+						<span className="mt-1 block font-mono text-2xs font-semibold uppercase tracking-wider text-accent">
+							{item.label}
+						</span>
+						<span className="block text-3xs text-text-muted mt-0.5 font-sans">
+							{item.note}
 						</span>
 					</div>
 				))}
@@ -208,28 +225,31 @@ npx @chitrank2050/git-hygiene bump --json
 			<section className="mt-ml-20">
 				<SectionHead
 					eyebrow="Distribution"
-					title="One unified engine. Available everywhere."
+					title="One unified engine. Available across registries."
 					size="sm"
 					level={2}
 				/>
-				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-ml-3 mt-ml-6">
-					{registries.map((reg) => (
-						<Card key={reg.name} size="sm" asChild>
+				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-ml-4 mt-ml-6">
+					{distributionPackages.map((pkgItem) => (
+						<Card key={pkgItem.name} size="sm" asChild>
 							<a
-								href={reg.href}
+								href={pkgItem.href}
 								target="_blank"
 								rel="noopener noreferrer"
-								className="block h-full transition-colors"
+								className="block h-full no-underline transition-all hover:border-border-strong"
 							>
 								<Card.Body>
-									<span className="font-mono text-3xs font-bold text-accent uppercase tracking-wider block mb-ml-1">
-										{reg.name}
-									</span>
-									<h3 className="text-xs font-mono font-bold text-text truncate">
-										{reg.pkg}
+									<div className="flex items-center justify-between mb-ml-2">
+										<span className="font-mono text-3xs font-bold text-accent uppercase tracking-wider">
+											{pkgItem.badge}
+										</span>
+										<span className="text-text-muted text-xs">↗</span>
+									</div>
+									<h3 className="font-mono text-xs font-bold text-text truncate">
+										{pkgItem.package}
 									</h3>
-									<p className="mt-ml-1.5 text-xs text-text-muted leading-normal">
-										{reg.desc}
+									<p className="mt-1.5 text-xs text-text-muted leading-normal font-sans">
+										{pkgItem.description}
 									</p>
 								</Card.Body>
 							</a>
@@ -238,25 +258,25 @@ npx @chitrank2050/git-hygiene bump --json
 				</div>
 			</section>
 
-			{/* FEATURES */}
+			{/* FEATURES GRID */}
 			<section id="features" className="mt-ml-20 pt-ml-8 border-t border-border">
 				<SectionHead
-					eyebrow="Capabilities"
-					title="Purpose-built for speed, strictness, and zero bloat."
+					eyebrow="Engine Design"
+					title="Engineered for velocity, strictness, and reliability."
 					size="sm"
 					level={2}
 				/>
 				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-ml-4 mt-ml-6">
-					{features.map((feat, index) => (
+					{features.map((feat) => (
 						<Card key={feat.title} size="md">
 							<Card.Body>
 								<span className="mb-ml-2 block font-mono text-2xs font-bold text-accent">
-									0{index + 1}
+									{feat.id}
 								</span>
-								<h3 className="m-0 mb-ml-1.5 text-sm font-semibold tracking-tight text-text">
+								<h3 className="m-0 mb-1.5 text-sm font-semibold tracking-tight text-text font-sans">
 									{feat.title}
 								</h3>
-								<p className="m-0 text-xs text-text-muted leading-relaxed">
+								<p className="m-0 text-xs text-text-muted leading-relaxed font-sans">
 									{feat.description}
 								</p>
 							</Card.Body>
@@ -265,18 +285,18 @@ npx @chitrank2050/git-hygiene bump --json
 				</div>
 			</section>
 
-			{/* USAGE */}
+			{/* WORKFLOW SETUP */}
 			<section id="usage" className="mt-ml-20 pt-ml-8 border-t border-border">
 				<SectionHead
 					eyebrow="Integration"
-					title="Set up in seconds across hooks & CI."
+					title="Drop into local hooks or CI workflows in seconds."
 					size="sm"
 					level={2}
 				/>
 				<div className="grid grid-cols-1 lg:grid-cols-3 gap-ml-6 mt-ml-6">
 					<div>
-						<h3 className="text-xs font-mono font-bold text-text mb-ml-2">
-							1. Lefthook
+						<h3 className="text-xs font-mono font-bold text-text mb-ml-2 flex items-center gap-1.5">
+							<span className="text-accent">01.</span> Lefthook (Recommended)
 						</h3>
 						<CodeBlock
 							filename="lefthook.yml"
@@ -293,8 +313,8 @@ pre-push:
 					</div>
 
 					<div>
-						<h3 className="text-xs font-mono font-bold text-text mb-ml-2">
-							2. Husky
+						<h3 className="text-xs font-mono font-bold text-text mb-ml-2 flex items-center gap-1.5">
+							<span className="text-accent">02.</span> Husky
 						</h3>
 						<CodeBlock
 							filename=".husky/commit-msg"
@@ -307,25 +327,25 @@ npx @chitrank2050/git-hygiene branch`}
 					</div>
 
 					<div>
-						<h3 className="text-xs font-mono font-bold text-text mb-ml-2">
-							3. GitHub Actions
+						<h3 className="text-xs font-mono font-bold text-text mb-ml-2 flex items-center gap-1.5">
+							<span className="text-accent">03.</span> GitHub Actions
 						</h3>
 						<CodeBlock
 							filename=".github/workflows/ci.yml"
 							code={`- name: Git Hygiene 🌊
-  uses: chitranklabs/git-hygiene@8abac926a6afcde68889b34f9ec3d1acefd69538
-  # Auto-detects PR context &
+  uses: chitranklabs/git-hygiene@v0.4.12
+  # Auto-detects PR title & branch
   # outputs next semver bump`}
 						/>
 					</div>
 				</div>
 			</section>
 
-			{/* CONFIGURATION */}
+			{/* CONFIGURATION SPECIFICATION */}
 			<section id="configuration" className="mt-ml-20 pt-ml-8 border-t border-border">
 				<SectionHead
 					eyebrow="Configuration"
-					title="Zero-config defaults. Fully customizable in package.json."
+					title="Zero-config defaults. Easily tuned in package.json."
 					size="sm"
 					level={2}
 				/>
@@ -354,10 +374,10 @@ npx @chitrank2050/git-hygiene branch`}
 						<Card size="sm">
 							<Card.Body>
 								<h4 className="font-mono text-xs font-bold text-text mb-1">
-									Commitlint Compatibility
+									Commitlint Rule Inheritance
 								</h4>
-								<p className="text-xs text-text-muted leading-normal">
-									Inherit <code>@commitlint/config-conventional</code> with zero extra dependencies. Custom types and rules seamlessly merge.
+								<p className="text-xs text-text-muted leading-relaxed font-sans">
+									Seamlessly extend standard presets like <code>@commitlint/config-conventional</code> with zero extra config. Custom types merge automatically.
 								</p>
 							</Card.Body>
 						</Card>
@@ -365,10 +385,10 @@ npx @chitrank2050/git-hygiene branch`}
 						<Card size="sm">
 							<Card.Body>
 								<h4 className="font-mono text-xs font-bold text-text mb-1">
-									Native Type-Stripping
+									Native Type-Stripping Performance
 								</h4>
-								<p className="text-xs text-text-muted leading-normal">
-									Runs natively via Node 24+ type stripping (<code>node --experimental-strip-types</code>). Zero build delay during Git hooks.
+								<p className="text-xs text-text-muted leading-relaxed font-sans">
+									Executes via Node 24+ native type stripping (<code>node --experimental-strip-types</code>). Instant execution with zero transpile step.
 								</p>
 							</Card.Body>
 						</Card>
@@ -376,10 +396,10 @@ npx @chitrank2050/git-hygiene branch`}
 						<Card size="sm">
 							<Card.Body>
 								<h4 className="font-mono text-xs font-bold text-text mb-1">
-									Headless Library API
+									Headless TypeScript Library
 								</h4>
-								<p className="text-xs text-text-muted leading-normal">
-									Import <code>validateBranch</code> and <code>resolveConfig</code> directly from <code>@chitrank2050/git-hygiene-core</code>.
+								<p className="text-xs text-text-muted leading-relaxed font-sans">
+									Import <code>validateBranch</code> and <code>resolveConfig</code> directly from <code>@chitrank2050/git-hygiene-core</code> for programmatic scripts.
 								</p>
 							</Card.Body>
 						</Card>
@@ -387,30 +407,30 @@ npx @chitrank2050/git-hygiene branch`}
 				</div>
 			</section>
 
-			{/* ARCHITECTURE */}
+			{/* ARCHITECTURE DIAGRAM */}
 			<section id="architecture" className="mt-ml-20 pt-ml-8 border-t border-border">
 				<SectionHead
 					eyebrow="Architecture"
-					title="Engineered from the ground up for minimal overhead."
+					title="Designed from the core up for minimal overhead."
 					size="sm"
 					level={2}
 				/>
-				<div className="mt-ml-6 p-ml-6 rounded-lg border border-border bg-surface">
+				<div className="mt-ml-6 p-ml-6 rounded-xl border border-border bg-surface">
 					<div className="grid grid-cols-1 md:grid-cols-4 gap-ml-3 text-center font-mono">
-						<div className="p-ml-4 rounded-md border border-border bg-surface-2">
-							<span className="text-3xs text-text-muted uppercase block">Trigger</span>
-							<strong className="text-xs text-text block mt-1">Lefthook / Husky</strong>
+						<div className="p-ml-4 rounded-lg border border-border bg-surface-2">
+							<span className="text-3xs text-text-muted uppercase tracking-wider block">Trigger</span>
+							<strong className="text-xs text-text block mt-1">Lefthook / Husky / CI</strong>
 						</div>
-						<div className="p-ml-4 rounded-md border border-border bg-surface-2">
-							<span className="text-3xs text-text-muted uppercase block">Entry</span>
+						<div className="p-ml-4 rounded-lg border border-border bg-surface-2">
+							<span className="text-3xs text-text-muted uppercase tracking-wider block">CLI Entry</span>
 							<strong className="text-xs text-text block mt-1">@chitrank2050/git-hygiene</strong>
 						</div>
-						<div className="p-ml-4 rounded-md border border-border bg-surface-2">
-							<span className="text-3xs text-text-muted uppercase block">Core</span>
+						<div className="p-ml-4 rounded-lg border border-border bg-surface-2">
+							<span className="text-3xs text-text-muted uppercase tracking-wider block">Engine</span>
 							<strong className="text-xs text-text block mt-1">git-hygiene-core</strong>
 						</div>
-						<div className="p-ml-4 rounded-md border border-border bg-surface-2">
-							<span className="text-3xs text-accent uppercase block">Runtime</span>
+						<div className="p-ml-4 rounded-lg border border-accent/40 bg-surface-2">
+							<span className="text-3xs text-accent uppercase tracking-wider font-bold block">Runtime</span>
 							<strong className="text-xs text-text block mt-1">Node 24+ Native</strong>
 						</div>
 					</div>
