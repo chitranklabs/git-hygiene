@@ -140,6 +140,10 @@
 	color: var(--text);
 }
 
+html {
+	scroll-behavior: smooth;
+}
+
 html,
 body {
 	overflow-x: clip;

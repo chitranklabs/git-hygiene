@@ -211,11 +211,11 @@ export default async function HomePage() {
 				</section>
 
 				{/* ── LIVE INTERACTIVE SANDBOX ── */}
-				<section id="sandbox" className="mt-ml-10 scroll-mt-ml-12">
+				<section id="sandbox" className="mt-ml-10 scroll-mt-24">
 					<SectionHead
 						eyebrow="Interactive Demo"
 						title="Test your Git metadata rules live in the browser."
-						description="Type a commit message or branch name below to inspect validation results and semantic release recommendations in real-time."
+						lede="Type a commit message or branch name below to inspect validation results and semantic release recommendations in real-time."
 						size="sm"
 						level={2}
 					/>
@@ -225,11 +225,11 @@ export default async function HomePage() {
 				</section>
 
 				{/* ── WHY ZERO DEPS / BENCHMARK COMPARISON ── */}
-				<section id="benchmark" className="mt-ml-24 pt-ml-8 border-t border-border scroll-mt-ml-12">
+				<section id="benchmark" className="mt-ml-24 pt-ml-8 border-t border-border scroll-mt-24">
 					<SectionHead
 						eyebrow="Performance & Architecture"
 						title="Engineered for microsecond execution and zero bloat."
-						description="Why install dozens of transitive packages just to validate a string? git-hygiene is built purely on Node.js built-in APIs."
+						lede="Why install dozens of transitive packages just to validate a string? git-hygiene is built purely on Node.js built-in APIs."
 						size="sm"
 						level={2}
 					/>
@@ -248,9 +248,9 @@ export default async function HomePage() {
 										<span>Traditional Tooling:</span>
 										<span className="line-through text-text-muted/70">{b.traditional}</span>
 									</div>
-									<p className="text-xs text-text-secondary leading-relaxed font-sans mt-ml-2">
+									<Card.Description className="text-xs text-text-secondary leading-relaxed font-sans mt-ml-2">
 										{b.note}
-									</p>
+									</Card.Description>
 								</Card.Body>
 							</Card>
 						))}
@@ -258,7 +258,7 @@ export default async function HomePage() {
 				</section>
 
 				{/* ── CORE PILLARS / FEATURES ── */}
-				<section id="features" className="mt-ml-24 pt-ml-8 border-t border-border">
+				<section id="features" className="mt-ml-24 pt-ml-8 border-t border-border scroll-mt-24">
 					<SectionHead
 						eyebrow="Standard Capabilities"
 						title="Everything you need for strict, automated Git hygiene."
@@ -273,12 +273,12 @@ export default async function HomePage() {
 									<span className="block font-mono text-2xs font-bold text-accent mb-ml-2">
 										{pillar.number}
 									</span>
-									<h3 className="text-sm font-bold text-text font-mono mb-ml-2">
+									<Card.Title className="text-sm font-bold text-text font-mono mb-ml-2">
 										{pillar.title}
-									</h3>
-									<p className="text-xs text-text-secondary leading-relaxed font-sans">
+									</Card.Title>
+									<Card.Description className="text-xs text-text-secondary leading-relaxed font-sans">
 										{pillar.description}
-									</p>
+									</Card.Description>
 								</Card.Body>
 							</Card>
 						))}
@@ -286,11 +286,11 @@ export default async function HomePage() {
 				</section>
 
 				{/* ── INTERACTIVE INTEGRATIONS ── */}
-				<section id="integrations" className="mt-ml-24 pt-ml-8 border-t border-border scroll-mt-ml-12">
+				<section id="integrations" className="mt-ml-24 pt-ml-8 border-t border-border scroll-mt-24">
 					<SectionHead
 						eyebrow="Developer Workflows"
 						title="Integrates in seconds into your existing hooks & CI."
-						description="Switch between Lefthook, Husky, or GitHub Actions to see the exact drop-in configuration."
+						lede="Switch between Lefthook, Husky, or GitHub Actions to see the exact drop-in configuration."
 						size="sm"
 						level={2}
 					/>
@@ -298,11 +298,11 @@ export default async function HomePage() {
 				</section>
 
 				{/* ── CONFIGURATION SHOWCASE ── */}
-				<section id="configuration" className="mt-ml-24 pt-ml-8 border-t border-border">
+				<section id="configuration" className="mt-ml-24 pt-ml-8 border-t border-border scroll-mt-24">
 					<SectionHead
 						eyebrow="Configuration"
 						title="Zero-config defaults. Easily customized in package.json."
-						description="Works out of the box with standard Conventional Commits. Customize allowed types, branch patterns, and scopes directly in your package.json."
+						lede="Works out of the box with standard Conventional Commits. Customize allowed types, branch patterns, and scopes directly in your package.json."
 						size="sm"
 						level={2}
 					/>
@@ -331,34 +331,34 @@ export default async function HomePage() {
 						<div className="space-y-ml-4">
 							<Card size="sm">
 								<Card.Body>
-									<h4 className="font-mono text-xs font-bold text-text mb-1">
+									<Card.Title className="font-mono text-xs font-bold text-text mb-1">
 										Commitlint Rules Inheritance
-									</h4>
-									<p className="text-xs text-text-muted leading-relaxed font-sans">
+									</Card.Title>
+									<Card.Description className="text-xs text-text-muted leading-relaxed font-sans">
 										Seamlessly extends <code>@commitlint/config-conventional</code> with zero extra configuration. Custom types merge automatically.
-									</p>
+									</Card.Description>
 								</Card.Body>
 							</Card>
 
 							<Card size="sm">
 								<Card.Body>
-									<h4 className="font-mono text-xs font-bold text-text mb-1">
+									<Card.Title className="font-mono text-xs font-bold text-text mb-1">
 										Programmatic Library
-									</h4>
-									<p className="text-xs text-text-muted leading-relaxed font-sans">
+									</Card.Title>
+									<Card.Description className="text-xs text-text-muted leading-relaxed font-sans">
 										Import <code>validateCommit</code>, <code>validateBranch</code>, and <code>analyzeBump</code> directly from <code>@chitrank2050/git-hygiene-core</code>.
-									</p>
+									</Card.Description>
 								</Card.Body>
 							</Card>
 
 							<Card size="sm">
 								<Card.Body>
-									<h4 className="font-mono text-xs font-bold text-text mb-1">
+									<Card.Title className="font-mono text-xs font-bold text-text mb-1">
 										SLSA Level 3 Provenance
-									</h4>
-									<p className="text-xs text-text-muted leading-relaxed font-sans">
+									</Card.Title>
+									<Card.Description className="text-xs text-text-muted leading-relaxed font-sans">
 										Every release includes SHA-pinned GitHub workflows, Zizmor security audits, and Gitleaks secret scanning.
-									</p>
+									</Card.Description>
 								</Card.Body>
 							</Card>
 						</div>
@@ -366,11 +366,11 @@ export default async function HomePage() {
 				</section>
 
 				{/* ── CORE PROGRAMMATIC API SHOWCASE ── */}
-				<section id="core-api" className="mt-ml-24 pt-ml-8 border-t border-border scroll-mt-ml-12">
+				<section id="core-api" className="mt-ml-24 pt-ml-8 border-t border-border scroll-mt-24">
 					<SectionHead
 						eyebrow="Programmatic TypeScript API"
 						title="Headless validation engine with @chitrank2050/git-hygiene-core"
-						description="Embed git-hygiene directly into custom scripts, bot runners, or internal platform tooling without process spawning or CLI overhead."
+						lede="Embed git-hygiene directly into custom scripts, bot runners, or internal platform tooling without process spawning or CLI overhead."
 						size="sm"
 						level={2}
 					/>
@@ -405,32 +405,32 @@ console.log(bump.releaseType); // 'minor'`}
 							<Card size="sm">
 								<Card.Body>
 									<div className="flex items-center justify-between mb-1">
-										<h4 className="font-mono text-xs font-bold text-text">
+										<Card.Title className="font-mono text-xs font-bold text-text">
 											100% Typed & Tree-Shakeable
-										</h4>
+										</Card.Title>
 										<span className="rounded bg-accent-soft px-1.5 py-0.5 font-mono text-3xs font-bold text-accent">
 											ESM Native
 										</span>
 									</div>
-									<p className="text-xs text-text-muted leading-relaxed font-sans">
+									<Card.Description className="text-xs text-text-muted leading-relaxed font-sans">
 										Ships with first-class TypeScript declarations, standard ESM exports, and zero binary CLI wrapper overhead.
-									</p>
+									</Card.Description>
 								</Card.Body>
 							</Card>
 
 							<Card size="sm">
 								<Card.Body>
 									<div className="flex items-center justify-between mb-1">
-										<h4 className="font-mono text-xs font-bold text-text">
+										<Card.Title className="font-mono text-xs font-bold text-text">
 											Automated Release Analyzer
-										</h4>
+										</Card.Title>
 										<span className="rounded bg-surface-2 px-1.5 py-0.5 font-mono text-3xs font-semibold text-text-muted">
 											Semver Engine
 										</span>
 									</div>
-									<p className="text-xs text-text-muted leading-relaxed font-sans">
+									<Card.Description className="text-xs text-text-muted leading-relaxed font-sans">
 										Pass git commit history arrays to compute recommended semantic bumps (<code>major</code>, <code>minor</code>, <code>patch</code>) with exact justification.
-									</p>
+									</Card.Description>
 								</Card.Body>
 							</Card>
 
@@ -438,16 +438,17 @@ console.log(bump.releaseType); // 'minor'`}
 								<span className="block font-mono text-2xs font-semibold text-text-muted uppercase tracking-wider mb-2">
 									Install Core Library:
 								</span>
-								<code className="block rounded-lg bg-surface-2 px-3 py-2 font-mono text-xs text-text border border-border">
-									pnpm add @chitrank2050/git-hygiene-core
-								</code>
+								<InstallCommand
+									command="pnpm add @chitrank2050/git-hygiene-core"
+									className="w-full bg-surface-2"
+								/>
 							</div>
 						</div>
 					</div>
 				</section>
 
 				{/* ── DISTRIBUTION REGISTRIES ── */}
-				<section id="registries" className="mt-ml-24 pt-ml-8 border-t border-border scroll-mt-ml-12">
+				<section id="registries" className="mt-ml-24 pt-ml-8 border-t border-border scroll-mt-24">
 					<SectionHead
 						eyebrow="Multi-Registry Distribution"
 						title="Available wherever you write and ship code."
@@ -457,28 +458,27 @@ console.log(bump.releaseType); // 'minor'`}
 
 					<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-ml-4 mt-ml-8">
 						{distributionPackages.map((pkgItem) => (
-							<Card key={pkgItem.name} size="sm" asChild>
-								<a
-									href={pkgItem.href}
-									target="_blank"
-									rel="noopener noreferrer"
-									className="block h-full no-underline transition-all hover:border-border-strong"
-								>
-									<Card.Body>
-										<div className="flex items-center justify-between mb-ml-2">
-											<span className="font-mono text-3xs font-bold text-accent uppercase tracking-wider">
-												{pkgItem.badge}
-											</span>
-											<span className="text-text-muted text-xs">↗</span>
-										</div>
-										<h3 className="font-mono text-xs font-bold text-text truncate">
-											{pkgItem.package}
-										</h3>
-										<p className="mt-1.5 text-xs text-text-muted leading-normal font-sans">
-											{pkgItem.description}
-										</p>
-									</Card.Body>
-								</a>
+							<Card
+								key={pkgItem.name}
+								size="sm"
+								href={pkgItem.href}
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								<Card.Body>
+									<div className="flex items-center justify-between mb-ml-2">
+										<span className="font-mono text-3xs font-bold text-accent uppercase tracking-wider">
+											{pkgItem.badge}
+										</span>
+										<Card.Arrow />
+									</div>
+									<Card.Title className="font-mono text-xs font-bold text-text truncate">
+										{pkgItem.package}
+									</Card.Title>
+									<Card.Description className="mt-1.5 text-xs text-text-muted leading-normal font-sans">
+										{pkgItem.description}
+									</Card.Description>
+								</Card.Body>
 							</Card>
 						))}
 					</div>
