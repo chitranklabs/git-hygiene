@@ -1,5 +1,3 @@
-import type * as React from "react"
-
 import Link from "next/link"
 
 import { Footer } from "@chitrank2050/monoline-ui/footer"
@@ -26,7 +24,7 @@ const footerGroups = [
 				external: true,
 			},
 			{
-				title: "Core Package",
+				title: "Core Library",
 				href: "https://www.npmjs.com/package/@chitrank2050/git-hygiene-core",
 				external: true,
 			},
@@ -71,7 +69,7 @@ const footerGroups = [
 				external: true,
 			},
 			{
-				title: "GitHub Organization",
+				title: "GitHub Org",
 				href: "https://github.com/chitranklabs",
 				external: true,
 			},
@@ -90,7 +88,7 @@ export async function SiteFooter() {
 		<Footer
 			brand={
 				<Link href="/" className="font-mono font-bold tracking-tight flex items-center gap-2">
-					<span className="text-text">git-hygiene</span>
+					<span className="text-text">🌊 git-hygiene</span>
 				</Link>
 			}
 			description="Zero-dependency metadata validator for modern Git workflows. Built for Node.js 24+ with native TypeScript performance. MIT licensed."

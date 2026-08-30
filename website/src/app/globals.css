@@ -2,68 +2,64 @@
 @import "@chitrank2050/monoline-ui/theme.css";
 
 /* =============================================================================
- * git-hygiene Design System (Crafted via Hallmark & Frontend-Design Skills)
+ * git-hygiene Design System (Modern Technical Precision)
  * ─────────────────────────────────────────────────────────────────────────────
- * Genre: Modern-Minimal / Technical Engineering
- * Palette: Deep Sea Slate & Signal Phosphor Cyan (OKLCH perceptually uniform)
- *
- * Rules:
- * - No pure #000 or #fff extremes. All neutrals carry a subtle chroma tint.
- * - Single precise accent: Signal Cyan (Hue 210, Chroma 0.16) occupying <3% of viewport.
- * - Layered elevation in dark mode: lighter by +2-4% per level.
+ * Color Space: OKLCH perceptually uniform
+ * Dark Theme: Obsidian Indigo Slate with Emerald Phosphor highlights
+ * Light Theme: Crisp Alabaster Paper with High-Contrast Deep Emerald
  * ========================================================================== */
 
 /* ─── DARK THEME (Default) ─── */
 :root,
 .dark,
 [data-theme="dark"] {
-	/* Base surfaces (Sea Slate - Hue 220, subtle chroma) */
-	--background: oklch(14% 0.015 225);
-	--foreground: oklch(95% 0.008 220);
+	--background: oklch(13% 0.015 250);
+	--foreground: oklch(96% 0.008 240);
 
-	--surface: oklch(18% 0.018 225);
-	--surface-2: oklch(22% 0.02 225);
-	--surface-3: oklch(28% 0.022 225);
+	--surface: oklch(17% 0.018 250);
+	--surface-2: oklch(21% 0.022 250);
+	--surface-3: oklch(26% 0.025 250);
+	--surface-code: oklch(11% 0.015 250);
 
-	--card: oklch(18% 0.018 225);
-	--card-foreground: oklch(95% 0.008 220);
+	--card: oklch(17% 0.018 250);
+	--card-foreground: oklch(96% 0.008 240);
 
-	--popover: oklch(18% 0.018 225);
-	--popover-foreground: oklch(95% 0.008 220);
+	--popover: oklch(17% 0.018 250);
+	--popover-foreground: oklch(96% 0.008 240);
 
-	--primary: oklch(95% 0.008 220);
-	--primary-foreground: oklch(14% 0.015 225);
+	--primary: oklch(96% 0.008 240);
+	--primary-foreground: oklch(13% 0.015 250);
 
-	--secondary: oklch(22% 0.02 225);
-	--secondary-foreground: oklch(92% 0.008 220);
+	--secondary: oklch(21% 0.022 250);
+	--secondary-foreground: oklch(92% 0.008 240);
 
-	--muted: oklch(22% 0.02 225);
-	--muted-foreground: oklch(68% 0.015 220);
+	--muted: oklch(21% 0.022 250);
+	--muted-foreground: oklch(68% 0.015 240);
 
-	/* Signal Phosphor Cyan Accent */
-	--accent: oklch(76% 0.14 210);
-	--accent-soft: oklch(76% 0.14 210 / 0.1);
-	--accent-foreground: oklch(14% 0.015 225);
+	/* High-Visibility Glowing Mint / Emerald */
+	--accent: oklch(78% 0.18 155);
+	--accent-soft: oklch(78% 0.18 155 / 0.14);
+	--accent-foreground: oklch(11% 0.015 250);
 
-	--border: oklch(25% 0.018 225);
-	--border-strong: oklch(34% 0.022 225);
-	--input: oklch(25% 0.018 225);
-	--ring: oklch(76% 0.14 210);
+	--border: oklch(24% 0.018 250);
+	--border-strong: oklch(34% 0.024 250);
+	--input: oklch(24% 0.018 250);
+	--ring: oklch(78% 0.18 155);
 
-	--text: oklch(95% 0.008 220);
-	--text-primary: oklch(95% 0.008 220);
-	--text-secondary: oklch(72% 0.012 220);
-	--text-muted: oklch(52% 0.01 220);
-	--text-body: oklch(82% 0.01 220);
+	--text: oklch(96% 0.008 240);
+	--text-primary: oklch(96% 0.008 240);
+	--text-secondary: oklch(76% 0.014 240);
+	--text-muted: oklch(54% 0.012 240);
+	--text-body: oklch(84% 0.012 240);
 
-	--code: oklch(11% 0.015 225);
-	--code-text: oklch(84% 0.11 210);
-	--button: oklch(22% 0.02 225);
-	--button-hover: oklch(27% 0.022 225);
+	--code: oklch(11% 0.015 250);
+	--code-text: oklch(92% 0.01 240);
+	--button: oklch(21% 0.022 250);
+	--button-hover: oklch(27% 0.026 250);
 
-	--shadow-xs: 0 1px 2px oklch(5% 0.02 225 / 0.4);
-	--shadow-md: 0 8px 24px -4px oklch(5% 0.02 225 / 0.5);
-	--shadow-lg: 0 16px 36px -6px oklch(5% 0.02 225 / 0.6);
+	--shadow-xs: 0 1px 2px oklch(5% 0.02 250 / 0.4);
+	--shadow-md: 0 8px 24px -4px oklch(5% 0.02 250 / 0.5);
+	--shadow-lg: 0 18px 42px -6px oklch(5% 0.02 250 / 0.65);
 
 	color-scheme: dark;
 }
@@ -71,58 +67,58 @@
 /* ─── LIGHT THEME ─── */
 .light,
 [data-theme="light"] {
-	/* Crisp Paper with cool mineral undertone */
-	--background: oklch(97% 0.006 220);
-	--foreground: oklch(18% 0.018 225);
+	--background: oklch(98% 0.005 240);
+	--foreground: oklch(16% 0.02 250);
 
 	--surface: oklch(100% 0 0);
-	--surface-2: oklch(94% 0.008 220);
-	--surface-3: oklch(89% 0.01 220);
+	--surface-2: oklch(95% 0.008 240);
+	--surface-3: oklch(91% 0.012 240);
+	--surface-code: oklch(95% 0.008 240);
 
 	--card: oklch(100% 0 0);
-	--card-foreground: oklch(18% 0.018 225);
+	--card-foreground: oklch(16% 0.02 250);
 
 	--popover: oklch(100% 0 0);
-	--popover-foreground: oklch(18% 0.018 225);
+	--popover-foreground: oklch(16% 0.02 250);
 
-	--primary: oklch(18% 0.018 225);
-	--primary-foreground: oklch(98% 0.004 220);
+	--primary: oklch(16% 0.02 250);
+	--primary-foreground: oklch(98% 0.005 240);
 
-	--secondary: oklch(94% 0.008 220);
-	--secondary-foreground: oklch(18% 0.018 225);
+	--secondary: oklch(95% 0.008 240);
+	--secondary-foreground: oklch(16% 0.02 250);
 
-	--muted: oklch(94% 0.008 220);
-	--muted-foreground: oklch(48% 0.014 220);
+	--muted: oklch(95% 0.008 240);
+	--muted-foreground: oklch(48% 0.015 240);
 
-	/* Deep Deep Oceanic Blue Accent */
-	--accent: oklch(52% 0.16 235);
-	--accent-soft: oklch(52% 0.16 235 / 0.08);
+	/* Deep Forest Emerald Accent with >7:1 WCAG Contrast */
+	--accent: oklch(40% 0.16 155);
+	--accent-soft: oklch(40% 0.16 155 / 0.12);
 	--accent-foreground: oklch(100% 0 0);
 
-	--border: oklch(90% 0.008 220);
-	--border-strong: oklch(78% 0.012 220);
-	--input: oklch(90% 0.008 220);
-	--ring: oklch(52% 0.16 235);
+	--border: oklch(88% 0.01 240);
+	--border-strong: oklch(76% 0.016 240);
+	--input: oklch(88% 0.01 240);
+	--ring: oklch(40% 0.16 155);
 
-	--text: oklch(18% 0.018 225);
-	--text-primary: oklch(18% 0.018 225);
-	--text-secondary: oklch(38% 0.014 220);
-	--text-muted: oklch(55% 0.01 220);
-	--text-body: oklch(30% 0.014 220);
+	--text: oklch(16% 0.02 250);
+	--text-primary: oklch(16% 0.02 250);
+	--text-secondary: oklch(34% 0.016 240);
+	--text-muted: oklch(52% 0.012 240);
+	--text-body: oklch(24% 0.016 240);
 
-	--code: oklch(15% 0.018 225);
-	--code-text: oklch(86% 0.11 210);
-	--button: oklch(94% 0.008 220);
-	--button-hover: oklch(89% 0.01 220);
+	--code: oklch(94% 0.01 240);
+	--code-text: oklch(20% 0.03 250);
+	--button: oklch(95% 0.008 240);
+	--button-hover: oklch(91% 0.012 240);
 
-	--shadow-xs: 0 1px 2px oklch(20% 0.02 220 / 0.04);
-	--shadow-md: 0 8px 24px -4px oklch(20% 0.02 220 / 0.07);
-	--shadow-lg: 0 16px 36px -6px oklch(20% 0.02 220 / 0.11);
+	--shadow-xs: 0 1px 2px oklch(20% 0.02 240 / 0.04);
+	--shadow-md: 0 8px 24px -4px oklch(20% 0.02 240 / 0.07);
+	--shadow-lg: 0 16px 36px -6px oklch(20% 0.02 240 / 0.12);
 
 	color-scheme: light;
 }
 
-/* ─── Typography Setup ─── */
+/* ─── Typography & Foundations ─── */
 .font-sans {
 	font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
 }
@@ -136,19 +132,32 @@
 }
 
 .font-display {
-	font-family: var(--font-mono), ui-monospace, monospace;
+	font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
 }
 
-/* ─── Subtle Engineering Details ─── */
 ::selection {
 	background: var(--accent-soft);
 	color: var(--text);
 }
 
-/* Subtle hairline grid and borders */
-.gh-grid-bg {
-	background-image: linear-gradient(to right, var(--border) 1px, transparent 1px),
-		linear-gradient(to bottom, var(--border) 1px, transparent 1px);
-	background-size: 32px 32px;
-	mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
+html,
+body {
+	overflow-x: clip;
+}
+
+/* Ambient Radial Backdrop Glow */
+.gh-hero-glow {
+	background: radial-gradient(
+		ellipse 65% 50% at 50% -10%,
+		oklch(76% 0.16 155 / 0.12),
+		transparent 70%
+	);
+}
+
+.dark .gh-hero-glow {
+	background: radial-gradient(
+		ellipse 70% 55% at 50% -10%,
+		oklch(76% 0.16 155 / 0.15),
+		transparent 75%
+	);
 }
