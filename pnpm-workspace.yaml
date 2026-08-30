@@ -9,3 +9,5 @@ overrides:
 allowBuilds:
   esbuild: true
   lefthook: true
+minimumReleaseAgeExclude:
+  - '@chitrank2050/monoline-ui@0.3.0'

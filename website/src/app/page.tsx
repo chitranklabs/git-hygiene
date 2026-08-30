@@ -144,36 +144,36 @@ export default async function HomePage() {
 
 			<Container as="main" id="main-content" tabIndex={-1} className="pt-ml-10 pb-ml-24">
 				{/* ── HERO SECTION ── */}
-				<section className="text-center max-w-4xl mx-auto pt-ml-6 pb-ml-10">
+				<section className="text-center max-w-4xl mx-auto pt-4 sm:pt-ml-6 pb-ml-10 px-2 sm:px-0">
 					{/* Badge Pill */}
-					<div className="inline-flex items-center gap-2.5 rounded-full border border-border bg-surface p-1 pr-3.5 backdrop-blur-md shadow-xs mb-ml-6">
+					<div className="inline-flex max-w-full flex-wrap items-center justify-center gap-2 rounded-full border border-border bg-surface p-1 sm:pr-3.5 backdrop-blur-md shadow-xs mb-ml-6">
 						<Status variant="accent" size="sm">
 							{release.version}
 						</Status>
-						<span className="font-mono text-2xs font-semibold text-text-muted uppercase tracking-wider">
+						<span className="font-mono text-3xs sm:text-2xs font-semibold text-text-muted uppercase tracking-wider">
 							Node.js 24+ Native · Zero Dependencies
 						</span>
 					</div>
 
 					{/* High-Conviction Product Headline */}
-					<h1 className="font-sans text-text text-[clamp(2.5rem,5.4vw,4.2rem)] font-extrabold tracking-tight leading-[1.08]">
+					<h1 className="font-sans text-text text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.15] sm:leading-[1.08]">
 						The zero-dependency metadata validator for <span className="text-accent">modern Git</span>.
 					</h1>
 
 					{/* Problem & Value Prop Subtitle */}
-					<p className="mt-ml-5 text-text-secondary text-base md:text-lg font-normal leading-relaxed max-w-2xl mx-auto font-sans">
+					<p className="mt-4 sm:mt-ml-5 text-text-secondary text-sm sm:text-base md:text-lg font-normal leading-relaxed max-w-2xl mx-auto font-sans">
 						Enforce conventional commits, branch naming patterns, and PR titles with native Node.js 24+ type-stripping speed. Stop broken branch names and non-standard commits in CI before they happen.
 					</p>
 
 					{/* Action Buttons */}
-					<div className="mt-ml-8 flex flex-wrap items-center justify-center gap-ml-3">
-						<Button asChild size="md">
+					<div className="mt-6 sm:mt-ml-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+						<Button asChild size="md" className="w-full sm:w-auto">
 							<a href="#sandbox">
 								Try Live Sandbox
 								<Button.Arrow />
 							</a>
 						</Button>
-						<Button asChild variant="secondary" size="md">
+						<Button asChild variant="secondary" size="md" className="w-full sm:w-auto">
 							<a
 								href="https://github.com/chitranklabs/git-hygiene"
 								target="_blank"
@@ -185,26 +185,26 @@ export default async function HomePage() {
 					</div>
 
 					{/* Interactive One-Click Install Pill */}
-					<div className="mt-ml-5 flex justify-center">
+					<div className="mt-4 sm:mt-ml-5 flex justify-center max-w-full overflow-x-auto">
 						<InstallCommand command="pnpm add -D @chitrank2050/git-hygiene" />
 					</div>
 
 					{/* Quick Proof Metrics */}
-					<div className="mt-ml-12 grid grid-cols-2 sm:grid-cols-4 gap-ml-4 border-t border-border pt-ml-8 text-center font-mono">
-						<div className="p-ml-2">
-							<strong className="block text-2xl font-bold text-text tabular-nums">0</strong>
+					<div className="mt-8 sm:mt-ml-12 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-ml-4 border-t border-border pt-6 sm:pt-ml-8 text-center font-mono">
+						<div className="p-1 sm:p-ml-2">
+							<strong className="block text-xl sm:text-2xl font-bold text-text tabular-nums">0</strong>
 							<span className="text-3xs uppercase tracking-wider text-accent font-semibold">Runtime Deps</span>
 						</div>
-						<div className="p-ml-2">
-							<strong className="block text-2xl font-bold text-text tabular-nums">&lt; 5ms</strong>
+						<div className="p-1 sm:p-ml-2">
+							<strong className="block text-xl sm:text-2xl font-bold text-text tabular-nums">&lt; 5ms</strong>
 							<span className="text-3xs uppercase tracking-wider text-accent font-semibold">Cold Startup</span>
 						</div>
-						<div className="p-ml-2">
-							<strong className="block text-2xl font-bold text-text tabular-nums">SLSA-3</strong>
+						<div className="p-1 sm:p-ml-2">
+							<strong className="block text-xl sm:text-2xl font-bold text-text tabular-nums">SLSA-3</strong>
 							<span className="text-3xs uppercase tracking-wider text-accent font-semibold">Provenance</span>
 						</div>
-						<div className="p-ml-2">
-							<strong className="block text-2xl font-bold text-text tabular-nums">Node 24+</strong>
+						<div className="p-1 sm:p-ml-2">
+							<strong className="block text-xl sm:text-2xl font-bold text-text tabular-nums">Node 24+</strong>
 							<span className="text-3xs uppercase tracking-wider text-accent font-semibold">Native Types</span>
 						</div>
 					</div>
@@ -308,9 +308,10 @@ export default async function HomePage() {
 					/>
 
 					<div className="mt-ml-8 grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-ml-6 items-start">
-						<CodeBlock
-							filename="package.json"
-							code={`{
+						<div className="min-w-0 max-w-full overflow-hidden">
+							<CodeBlock
+								filename="package.json"
+								code={`{
   "git-hygiene": {
     "extends": ["@commitlint/config-conventional"],
     "types": [
@@ -326,7 +327,8 @@ export default async function HomePage() {
     }
   }
 }`}
-						/>
+							/>
+						</div>
 
 						<div className="space-y-ml-4">
 							<Card size="sm">
@@ -376,7 +378,7 @@ export default async function HomePage() {
 					/>
 
 					<div className="mt-ml-8 grid grid-cols-1 lg:grid-cols-[1.3fr_0.9fr] gap-ml-6 items-start">
-						<div>
+						<div className="min-w-0 max-w-full overflow-hidden">
 							<CodeBlock
 								filename="validate.ts"
 								code={`import { 

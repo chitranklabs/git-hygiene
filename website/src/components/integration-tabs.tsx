@@ -62,15 +62,15 @@ export function IntegrationTabs() {
 	const active = INTEGRATIONS.find((i) => i.id === activeId) || INTEGRATIONS[0]
 
 	return (
-		<div className="mt-ml-8 rounded-2xl border border-border bg-surface/60 p-ml-6 md:p-ml-8 shadow-md">
+		<div className="mt-ml-8 rounded-2xl border border-border bg-surface/60 p-4 sm:p-6 md:p-8 shadow-md">
 			{/* Tab Selector */}
-			<div className="flex flex-wrap items-center gap-2 border-b border-border pb-ml-4">
+			<div className="flex items-center gap-2 overflow-x-auto pb-3 border-b border-border max-w-full">
 				{INTEGRATIONS.map((tab) => (
 					<button
 						key={tab.id}
 						type="button"
 						onClick={() => setActiveId(tab.id)}
-						className={`cursor-pointer inline-flex items-center gap-2 rounded-lg border px-3.5 py-2 font-mono text-xs font-semibold transition-all ${
+						className={`shrink-0 cursor-pointer inline-flex items-center gap-2 rounded-lg border px-3 py-1.5 sm:px-3.5 sm:py-2 font-mono text-xs font-semibold transition-all ${
 							activeId === tab.id
 								? "border-accent bg-surface-2 text-text shadow-xs"
 								: "border-transparent bg-transparent text-text-muted hover:bg-surface-2/60 hover:text-text"
@@ -91,7 +91,7 @@ export function IntegrationTabs() {
 			</div>
 
 			{/* Tab Content */}
-			<div className="mt-ml-6 grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-ml-8 items-start">
+			<div className="mt-6 grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-6 lg:gap-8 items-start">
 				<div>
 					<h3 className="font-mono text-base font-bold text-text">
 						{active.title} Integration
@@ -100,7 +100,7 @@ export function IntegrationTabs() {
 						{active.description}
 					</p>
 
-					<div className="mt-ml-6 space-y-3 font-mono text-xs text-text-muted border-t border-border pt-ml-4">
+					<div className="mt-4 sm:mt-6 space-y-2.5 sm:space-y-3 font-mono text-xs text-text-muted border-t border-border pt-4">
 						<div className="flex items-center gap-2">
 							<span className="text-accent">✓</span>
 							<span>Validates standard Conventional Commits</span>
@@ -116,7 +116,7 @@ export function IntegrationTabs() {
 					</div>
 				</div>
 
-				<div>
+				<div className="min-w-0 max-w-full overflow-hidden">
 					<CodeBlock filename={active.filename} code={active.code} />
 				</div>
 			</div>

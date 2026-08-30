@@ -40,8 +40,8 @@ const footerGroups = [
 			},
 			{
 				title: "Changelog",
-				href: "https://github.com/chitranklabs/git-hygiene/blob/main/CHANGELOG.md",
-				external: true,
+				href: "/changelog",
+				external: false,
 			},
 			{
 				title: "Security Policy",

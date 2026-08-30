@@ -114,6 +114,40 @@ export function getSoftwareSourceCodeJsonLd(
 	return jsonLd
 }
 
+export function createBreadcrumbJsonLd(items: readonly { name: string; path: `/${string}` }[]) {
+	return {
+		"@type": "BreadcrumbList",
+		itemListElement: items.map((item, index) => ({
+			"@type": "ListItem",
+			position: index + 1,
+			name: item.name,
+			item: absoluteUrl(item.path),
+		})),
+	}
+}
+
+export function createCollectionPageJsonLd({
+	title,
+	description,
+	path,
+	items,
+}: PageJsonLdInput & { items: ReadonlyArray<{ name: string; path: `/${string}` }> }) {
+	return {
+		...createWebPageJsonLd({ title, description, path }),
+		"@type": "CollectionPage",
+		mainEntity: {
+			"@type": "ItemList",
+			numberOfItems: items.length,
+			itemListElement: items.map((item, index) => ({
+				"@type": "ListItem",
+				position: index + 1,
+				name: item.name,
+				url: absoluteUrl(item.path),
+			})),
+		},
+	}
+}
+
 export function createWebPageJsonLd({
 	title,
 	description,

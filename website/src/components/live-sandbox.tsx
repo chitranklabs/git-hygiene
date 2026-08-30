@@ -248,9 +248,9 @@ export function LiveSandbox() {
 	}
 
 	return (
-		<div className="rounded-2xl border border-border bg-surface p-ml-6 md:p-ml-8 shadow-md backdrop-blur-md">
+		<div className="rounded-2xl border border-border bg-surface p-4 sm:p-6 md:p-8 shadow-md backdrop-blur-md">
 			{/* Inspector Header */}
-			<div className="flex flex-wrap items-center justify-between gap-ml-4 border-b border-border pb-ml-5">
+			<div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border pb-4 sm:pb-5">
 				<div>
 					<div className="flex items-center gap-2">
 						<span className="flex size-2.5 rounded-full bg-accent animate-pulse" />
@@ -263,7 +263,7 @@ export function LiveSandbox() {
 					</p>
 				</div>
 
-				<div className="flex flex-wrap items-center gap-2">
+				<div className="flex flex-wrap items-center gap-2 justify-end">
 					{/* Config Toggle Button */}
 					<button
 						type="button"
@@ -283,33 +283,33 @@ export function LiveSandbox() {
 						<button
 							type="button"
 							onClick={() => setMode("commit")}
-							className={`rounded-lg px-3.5 py-1.5 font-medium transition-all cursor-pointer ${
+							className={`rounded-lg px-2.5 sm:px-3.5 py-1.5 font-medium transition-all cursor-pointer ${
 								mode === "commit"
 									? "bg-accent text-accent-foreground font-semibold shadow-xs"
 									: "text-text-muted hover:text-text"
 							}`}
 						>
-							Commit Message
+							Commit
 						</button>
 						<button
 							type="button"
 							onClick={() => setMode("branch")}
-							className={`rounded-lg px-3.5 py-1.5 font-medium transition-all cursor-pointer ${
+							className={`rounded-lg px-2.5 sm:px-3.5 py-1.5 font-medium transition-all cursor-pointer ${
 								mode === "branch"
 									? "bg-accent text-accent-foreground font-semibold shadow-xs"
 									: "text-text-muted hover:text-text"
 							}`}
 						>
-							Branch Name
+							Branch
 						</button>
 					</div>
 				</div>
 			</div>
 
 			{/* Presets Bar */}
-			<div className="mt-ml-5 flex flex-wrap items-center justify-between gap-ml-3">
-				<div className="flex flex-wrap items-center gap-2">
-					<span className="font-mono text-2xs text-text-muted uppercase tracking-wider font-semibold">
+			<div className="mt-4 sm:mt-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+				<div className="flex items-center gap-2 overflow-x-auto pb-1.5 max-w-full">
+					<span className="font-mono text-2xs text-text-muted uppercase tracking-wider font-semibold shrink-0">
 						Presets:
 					</span>
 					{PRESETS.map((p) => (
@@ -320,22 +320,22 @@ export function LiveSandbox() {
 								setCommitInput(p.commit)
 								setBranchInput(p.branch)
 							}}
-							className="cursor-pointer rounded-lg border border-border bg-surface-2/60 px-3 py-1 font-mono text-2xs text-text-secondary transition-all hover:border-accent hover:text-text active:scale-98"
+							className="shrink-0 cursor-pointer rounded-lg border border-border bg-surface-2/60 px-2.5 py-1 font-mono text-2xs text-text-secondary transition-all hover:border-accent hover:text-text active:scale-98"
 						>
 							{p.label}
 						</button>
 					))}
 				</div>
 
-				<span className="font-mono text-3xs text-text-muted">
-					{activeTypes.length} configured types · Max {maxHeaderLength} chars
+				<span className="font-mono text-3xs text-text-muted shrink-0">
+					{activeTypes.length} types · Max {maxHeaderLength} chars
 				</span>
 			</div>
 
 			{/* LIVE CONFIGURATION DRAWER (package.json simulator) */}
 			{showConfig && (
-				<div className="mt-ml-6 rounded-xl border border-accent/30 bg-surface-2/70 p-ml-5 animate-in fade-in duration-200">
-					<div className="flex items-center justify-between border-b border-border pb-ml-3 mb-ml-4">
+				<div className="mt-5 rounded-xl border border-accent/30 bg-surface-2/70 p-4 sm:p-5 animate-in fade-in duration-200">
+					<div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-border pb-3 mb-4">
 						<div className="flex items-center gap-2">
 							<span className="font-mono text-xs font-bold text-text">
 								package.json &quot;git-hygiene&quot; Config Editor
@@ -347,13 +347,13 @@ export function LiveSandbox() {
 						<button
 							type="button"
 							onClick={copyConfig}
-							className="font-mono text-2xs text-accent hover:underline cursor-pointer"
+							className="self-start sm:self-auto font-mono text-2xs text-accent hover:underline cursor-pointer"
 						>
 							{configCopied ? "✓ Copied JSON" : "Copy package.json block"}
 						</button>
 					</div>
 
-					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-ml-4">
+					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
 						{/* Allowed Types Input */}
 						<div className="lg:col-span-2">
 							<label htmlFor="cfg-types" className="block font-mono text-2xs font-semibold text-text-muted uppercase tracking-wider mb-1">
@@ -400,7 +400,7 @@ export function LiveSandbox() {
 					</div>
 
 					{/* Allow Empty Scope Toggle */}
-					<div className="mt-ml-4 pt-ml-3 border-t border-border flex items-center justify-between text-xs font-mono">
+					<div className="mt-4 pt-3 border-t border-border flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs font-mono">
 						<label className="flex items-center gap-2 cursor-pointer text-text-secondary">
 							<input
 								type="checkbox"
@@ -408,7 +408,7 @@ export function LiveSandbox() {
 								onChange={(e) => setAllowEmptyScope(e.target.checked)}
 								className="rounded border-border accent-accent size-4"
 							/>
-							<span>Allow empty scope (e.g. <code>feat: description</code> without <code>(scope)</code>)</span>
+							<span>Allow empty scope (e.g. <code>feat: description</code>)</span>
 						</label>
 						<button
 							type="button"
@@ -418,7 +418,7 @@ export function LiveSandbox() {
 								setIgnoreBranches("main, master, develop")
 								setAllowEmptyScope(true)
 							}}
-							className="text-2xs text-text-muted hover:text-text underline cursor-pointer"
+							className="self-start sm:self-auto text-2xs text-text-muted hover:text-text underline cursor-pointer"
 						>
 							Reset Defaults
 						</button>
