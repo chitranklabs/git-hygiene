@@ -84,8 +84,10 @@ export function getSoftwareSourceCodeJsonLd(
 		sameAs: [
 			"https://github.com/chitranklabs/git-hygiene",
 			"https://www.npmjs.com/package/@chitrank2050/git-hygiene",
+			"https://www.npmjs.com/package/@chitrank2050/git-hygiene-core",
 			"https://jsr.io/@chitrank2050/git-hygiene",
 			"https://github.com/marketplace/actions/git-hygiene-validator",
+			"https://chitrankagnihotri.com/project/git-hygiene",
 		],
 		downloadUrl: "https://www.npmjs.com/package/@chitrank2050/git-hygiene",
 		softwareRequirements: "Node.js >=24.0.0",

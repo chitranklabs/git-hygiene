@@ -40,7 +40,7 @@ export function createPageMetadata({ title, description, path }: PageMetadataInp
       images: [socialImage],
     },
     alternates: {
-      canonical: path,
+      canonical: url,
     },
   };
 }

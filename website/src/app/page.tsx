@@ -23,7 +23,7 @@ import { siteUrl } from "@/src/lib/seo"
 
 import pkg from "@/package.json"
 
-const homeTitle = "git-hygiene — Zero-Dependency Metadata Validator for Modern Git"
+const homeTitle = "git-hygiene - Zero-Dependency Metadata Validator for Modern Git"
 const homeDescription =
 	"Enforce conventional commits, branch naming patterns, and PR titles with native Node.js 24+ type-stripping speed. Zero runtime dependencies."
 
@@ -361,6 +361,87 @@ export default async function HomePage() {
 									</p>
 								</Card.Body>
 							</Card>
+						</div>
+					</div>
+				</section>
+
+				{/* ── CORE PROGRAMMATIC API SHOWCASE ── */}
+				<section id="core-api" className="mt-ml-24 pt-ml-8 border-t border-border scroll-mt-ml-12">
+					<SectionHead
+						eyebrow="Programmatic TypeScript API"
+						title="Headless validation engine with @chitrank2050/git-hygiene-core"
+						description="Embed git-hygiene directly into custom scripts, bot runners, or internal platform tooling without process spawning or CLI overhead."
+						size="sm"
+						level={2}
+					/>
+
+					<div className="mt-ml-8 grid grid-cols-1 lg:grid-cols-[1.3fr_0.9fr] gap-ml-6 items-start">
+						<div>
+							<CodeBlock
+								filename="validate.ts"
+								code={`import { 
+  validateCommit, 
+  validateBranch, 
+  validateTitle,
+  analyzeReleaseBump 
+} from '@chitrank2050/git-hygiene-core';
+
+// 1. Validate Commit Message
+const commit = await validateCommit('feat(api): add webhook support');
+console.log(commit.valid); // true
+console.log(commit.type);  // 'feat'
+
+// 2. Validate Git Branch
+const branch = await validateBranch('feat/webhook-retry-policy');
+console.log(branch.valid); // true
+
+// 3. Programmatic Semantic Release Recommendation
+const bump = await analyzeReleaseBump(['feat: auth', 'fix: crash']);
+console.log(bump.releaseType); // 'minor'`}
+							/>
+						</div>
+
+						<div className="space-y-ml-4">
+							<Card size="sm">
+								<Card.Body>
+									<div className="flex items-center justify-between mb-1">
+										<h4 className="font-mono text-xs font-bold text-text">
+											100% Typed & Tree-Shakeable
+										</h4>
+										<span className="rounded bg-accent-soft px-1.5 py-0.5 font-mono text-3xs font-bold text-accent">
+											ESM Native
+										</span>
+									</div>
+									<p className="text-xs text-text-muted leading-relaxed font-sans">
+										Ships with first-class TypeScript declarations, standard ESM exports, and zero binary CLI wrapper overhead.
+									</p>
+								</Card.Body>
+							</Card>
+
+							<Card size="sm">
+								<Card.Body>
+									<div className="flex items-center justify-between mb-1">
+										<h4 className="font-mono text-xs font-bold text-text">
+											Automated Release Analyzer
+										</h4>
+										<span className="rounded bg-surface-2 px-1.5 py-0.5 font-mono text-3xs font-semibold text-text-muted">
+											Semver Engine
+										</span>
+									</div>
+									<p className="text-xs text-text-muted leading-relaxed font-sans">
+										Pass git commit history arrays to compute recommended semantic bumps (<code>major</code>, <code>minor</code>, <code>patch</code>) with exact justification.
+									</p>
+								</Card.Body>
+							</Card>
+
+							<div className="rounded-xl border border-border bg-surface p-ml-4">
+								<span className="block font-mono text-2xs font-semibold text-text-muted uppercase tracking-wider mb-2">
+									Install Core Library:
+								</span>
+								<code className="block rounded-lg bg-surface-2 px-3 py-2 font-mono text-xs text-text border border-border">
+									pnpm add @chitrank2050/git-hygiene-core
+								</code>
+							</div>
 						</div>
 					</div>
 				</section>

@@ -32,6 +32,9 @@ export function SiteHeader() {
 					<a href="#integrations">Integrations</a>
 				</Navbar.Link>
 				<Navbar.Link asChild>
+					<a href="#core-api">Core API</a>
+				</Navbar.Link>
+				<Navbar.Link asChild>
 					<a href="#registries">Registries</a>
 				</Navbar.Link>
 				<Navbar.Link asChild>

@@ -8,7 +8,7 @@ export default function NotFound() {
 	return (
 		<Container as="main" className="pt-ml-24 pb-ml-24 text-center">
 			<SectionHead
-				eyebrow="404 — Not Found"
+				eyebrow="404 - Not Found"
 				title="This page could not be found."
 				size="md"
 				level={1}

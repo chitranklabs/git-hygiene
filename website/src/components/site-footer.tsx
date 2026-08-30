@@ -64,6 +64,11 @@ const footerGroups = [
 				external: true,
 			},
 			{
+				title: "Portfolio Case Study",
+				href: "https://chitrankagnihotri.com/project/git-hygiene",
+				external: true,
+			},
+			{
 				title: "Monoline UI",
 				href: "https://monolineui.chitrankagnihotri.com",
 				external: true,
