@@ -119,11 +119,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
 
-      - name: Update website/src/lib/changelog.json 📄
+      - name: Update app/src/lib/changelog.json 📄
         uses: orhun/git-cliff-action@f50e11560dce63f7c33227798f90b924471a88b5 # v4.8.0
         with:
           config: cliff.toml
-          args: --context --tag ${{ steps.vars.outputs.tag_name }} --output website/src/lib/changelog.json
+          args: --context --tag ${{ steps.vars.outputs.tag_name }} --output app/src/lib/changelog.json
         env:
           GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
 
@@ -137,7 +137,7 @@ jobs:
           body: |
             <!-- autofill-start -->
             - chore(release): update CHANGELOG.md
-            - chore(release): update website/src/lib/changelog.json
+            - chore(release): update app/src/lib/changelog.json
             - chore(release): sync workspace versions (NPM & JSR)
             - chore(release): bump recommendation from git-hygiene (${{ steps.hygiene.outputs.releaseType }})
             <!-- autofill-end -->
@@ -150,7 +150,7 @@ jobs:
           assignees: chitrank2050
           add-paths: |
             CHANGELOG.md
-            website/src/lib/changelog.json
+            app/src/lib/changelog.json
             package.json
             packages/*/package.json
             packages/*/jsr.json

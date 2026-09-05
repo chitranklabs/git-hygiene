@@ -1,12 +1,13 @@
 {
-  "name": "git-hygiene-website",
+  "name": "git-hygiene-app",
   "version": "0.1.0",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "next dev --port 3005",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "clean": "rm -rf .next out"
   },
   "dependencies": {
     "@chitrank2050/monoline-ui": "^0.3.0",

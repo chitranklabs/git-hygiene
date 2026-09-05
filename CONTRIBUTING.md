@@ -19,6 +19,7 @@ This is a monorepo managed with **pnpm workspaces** and **Turborepo**:
 
 - `packages/core`: 🧠 The core validation engine. Pure logic, shared by CLI and Action.
 - `packages/cli`: 🌊 The command-line interface. Built on top of core.
+- `app`: 🌐 Next.js documentation and interactive web application.
 
 ### Local Setup
 
@@ -38,7 +39,7 @@ This is a monorepo managed with **pnpm workspaces** and **Turborepo**:
 3. **Build the project**:
 
    ```bash
-   pnpm run build
+   pnpm build
    ```
 
 ## Development Workflow
@@ -50,13 +51,23 @@ We enforce strict branch naming via CI. Please use the following format:
 
 Allowed types: `feat`, `fix`, `chore`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`, `revert`, `maintenance`.
 
-### 🧪 Testing & Linting
+### 🧪 Testing, Linting & Maintenance
 
 Before pushing, please ensure your changes pass our quality checks:
 
 ```bash
-pnpm run lint
-pnpm run test
+# Run tests across all workspace packages
+pnpm test
+
+# Run tests with coverage reports
+pnpm test:cov
+
+# Run code style and static analysis
+pnpm lint
+pnpm format:check
+
+# Clean all build outputs and caches across packages
+pnpm clean
 ```
 
 ### 💬 Commit Messages

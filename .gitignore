@@ -2,7 +2,9 @@
 node_modules
 
 # Build & Framework
-dist
+packages/*/dist
+dist/*
+!dist/action.js
 .next
 out
 .vercel
