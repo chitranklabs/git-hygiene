@@ -52,11 +52,14 @@
     "format:check": "turbo format:check",
     "dev": "turbo dev",
     "deps:update": "pnpm update --interactive --latest -r",
+    "changeset": "changeset",
+    "version:packages": "changeset version && node scripts/sync-jsr-versions.mjs",
     "changelog": "bash scripts/generate-changelog.sh",
     "tag": "bash scripts/git-tag.sh",
     "release": "pnpm build && node --experimental-strip-types packages/cli/src/cli.ts bump && pnpm changelog && echo 'Ready to publish!'"
   },
   "devDependencies": {
+    "@changesets/cli": "^3.0.1",
     "@eslint/js": "^10.0.1",
     "@types/node": "^25.6.0",
     "esbuild": "^0.28.2",
