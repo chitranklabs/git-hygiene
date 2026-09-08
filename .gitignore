@@ -5,10 +5,13 @@ node_modules
 packages/*/dist
 dist/*
 !dist/action.js
+release-artifacts/
+*.tgz
 .next
 out
 .vercel
 *.tsbuildinfo
+deno.lock
 next-env.d.ts
 app/src/lib/changelog.json
 .turbo
@@ -41,7 +44,7 @@ pnpm-debug.log*
 Thumbs.db
 
 # Test & CI
-/coverage/
+coverage/
 /.ci-status/
 osv-scanner
 gitleaks
@@ -51,4 +54,3 @@ gitleaks.tar.gz
 .gemini/
 scratch/
 git-cliff/
-coverage
