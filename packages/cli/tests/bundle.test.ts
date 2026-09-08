@@ -1,6 +1,7 @@
 import { describe, it, before } from 'node:test';
 import assert from 'node:assert';
-import { execSync } from 'node:child_process';
+import { execSync, execFileSync } from 'node:child_process';
+import { tmpdir } from 'node:os';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import fs from 'node:fs';
@@ -73,11 +74,51 @@ describe('Standalone Action Bundle', () => {
     assert.match(res.stderr, /Invalid commit message/);
   });
 
-  it('should compute recommended bump as JSON', () => {
-    const res = runBundle('bump --json');
-    assert.strictEqual(res.status, 0);
-    const parsed = JSON.parse(res.stdout.trim());
-    assert.ok(parsed.releaseType);
+  it('should compute recommended bump as JSON', t => {
+    // CI may only have a merge commit. Test known history, not the checkout's history.
+    const cwd = fs.mkdtempSync(resolve(tmpdir(), 'git-hygiene-bump-'));
+    t.after(() => fs.rmSync(cwd, { recursive: true, force: true }));
+    const git = (...args: string[]) =>
+      execFileSync('git', args, {
+        cwd,
+        encoding: 'utf8',
+        env: {
+          ...process.env,
+          GIT_CONFIG_NOSYSTEM: '1',
+          GIT_CONFIG_GLOBAL: '/dev/null',
+          GIT_AUTHOR_NAME: 'Test',
+          GIT_AUTHOR_EMAIL: 'test@example.com',
+          GIT_COMMITTER_NAME: 'Test',
+          GIT_COMMITTER_EMAIL: 'test@example.com',
+        },
+      });
+    git('init', '--quiet', '--initial-branch=main');
+    git(
+      '-c',
+      'core.hooksPath=/dev/null',
+      'commit',
+      '--quiet',
+      '--allow-empty',
+      '-m',
+      'chore: initial',
+    );
+    git('tag', 'v1.0.0');
+    git(
+      '-c',
+      'core.hooksPath=/dev/null',
+      'commit',
+      '--quiet',
+      '--allow-empty',
+      '-m',
+      'feat: add example',
+    );
+
+    const stdout = execFileSync(process.execPath, [BUNDLE_PATH, 'bump', '--json'], {
+      cwd,
+      encoding: 'utf8',
+    });
+    const parsed = JSON.parse(stdout.trim());
+    assert.strictEqual(parsed.releaseType, 'minor');
     assert.ok(parsed.reason);
   });
 });
