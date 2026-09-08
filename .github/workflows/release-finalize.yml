@@ -1,3 +1,16 @@
+# =============================================================
+# Release Finalization Workflow
+#
+# Triggered automatically when a Release PR is merged to main.
+#   1. Validates release tag, commit identity, and credentials.
+#   2. Builds packages and tests packed tarballs in clean consumer.
+#   3. Validates JSR workspace with type-checking.
+#   4. Attests the exact distributed artifacts (.tgz and action bundle).
+#   5. Publishes verified artifacts to npm and JSR.
+#   6. Pushes the verified Git tag.
+#   7. Finalizes the public GitHub Release with release notes & assets.
+# =============================================================
+
 name: Release 2 - Finalize Tag 🏷️
 
 on:
@@ -30,6 +43,7 @@ jobs:
       id-token: write
       attestations: write
     env:
+      NODE_VERSION: 24
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
       RELEASE_ARTIFACTS: ${{ runner.temp }}/release-artifacts
     steps:
@@ -51,7 +65,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
-          node-version: 24
+          node-version: ${{ env.NODE_VERSION }}
           cache: pnpm
           registry-url: https://registry.npmjs.org
 
