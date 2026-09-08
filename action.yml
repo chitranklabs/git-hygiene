@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-action.json
 name: 'Git Hygiene Validator'
 description: 'Zero-dependency metadata validator for Commits, Branches, and PR Titles'
 author: 'Chitrank Agnihotri'
@@ -30,12 +31,9 @@ runs:
       name: Run Git Hygiene 🌊
       shell: bash
       run: |
-        # 1. Determine Binary (Prefer local build for dogfooding, else npx)
-        if [ -f "packages/cli/dist/cli.js" ]; then
-          HYGIENE_BIN="node packages/cli/dist/cli.js"
-        else
-          HYGIENE_BIN="npx --yes @chitrank2050/git-hygiene@latest"
-        fi
+        # 1. Execute standalone action bundle from the action repository
+        ACTION_DIR="${{ github.action_path }}"
+        HYGIENE_BIN="node ${ACTION_DIR:-.}/dist/action.js"
 
         COMMAND="${{ inputs.command }}"
 

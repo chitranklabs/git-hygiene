@@ -19,6 +19,7 @@ This is a monorepo managed with **pnpm workspaces** and **Turborepo**:
 
 - `packages/core`: 🧠 The core validation engine. Pure logic, shared by CLI and Action.
 - `packages/cli`: 🌊 The command-line interface. Built on top of core.
+- `app`: 🌐 Next.js documentation and interactive web application.
 
 ### Local Setup
 
@@ -38,7 +39,7 @@ This is a monorepo managed with **pnpm workspaces** and **Turborepo**:
 3. **Build the project**:
 
    ```bash
-   pnpm run build
+   pnpm build
    ```
 
 ## Development Workflow
@@ -50,19 +51,37 @@ We enforce strict branch naming via CI. Please use the following format:
 
 Allowed types: `feat`, `fix`, `chore`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`, `revert`, `maintenance`.
 
-### 🧪 Testing & Linting
+### 🧪 Testing, Linting & Maintenance
 
 Before pushing, please ensure your changes pass our quality checks:
 
 ```bash
-pnpm run lint
-pnpm run test
+# Run tests across all workspace packages
+pnpm test
+
+# Run tests with coverage reports
+pnpm test:cov
+
+# Run code style and static analysis
+pnpm lint
+pnpm format:check
+
+# Clean all build outputs and caches across packages
+pnpm clean
 ```
 
-### 💬 Commit Messages
+### 💬 Commit Messages & Changesets
 
-We follow **Conventional Commits**. Please format your commit messages as:
-`type(scope): description`
+- **Conventional Commits**: Format your commit messages as:
+  `type(scope): description`
+- **Changesets (for library changes)**:
+  If your PR introduces consumer-facing fixes, features, or breaking changes to `@chitrank2050/git-hygiene` or `@chitrank2050/git-hygiene-core`, please include a changeset:
+
+  ```bash
+  pnpm changeset
+  ```
+
+  Follow the interactive CLI to choose the bump type (`patch`, `minor`, `major`) and add a concise summary. Changes solely affecting the website (`app/`), internal CI, or documentation do not need a changeset (or can use `pnpm changeset --empty`).
 
 ## Pull Request Process
 
@@ -73,11 +92,11 @@ We follow **Conventional Commits**. Please format your commit messages as:
 
 ## Release Process 🚀
 
-We use an automated release flow powered by `git-hygiene` itself:
+We use an automated monorepo release flow powered by **Changesets** and **git-cliff**:
 
-1. **Preparation**: Run the **Release 1 - Prepare PR** action. Leave the tag empty to let the tool decide the version based on the commit history.
-2. **Review**: Review the generated PR, which includes the updated `package.json` and `CHANGELOG.md`.
-3. **Finalization**: Merge the PR. The **Release 2 - Finalize** action will automatically tag the repo and publish to NPM/JSR.
+1. **Preparation**: Trigger the **Release 1 - Prepare PR** action on `main`. It consumes pending `.changeset/*.md` files, synchronizes package and JSR versions, and updates `CHANGELOG.md`.
+2. **Review**: Review the generated release PR (`chore/release-vX.Y.Z`).
+3. **Finalization**: Merge the PR. The **Release 2 - Finalize** action automatically tags the verified commit, publishes packages to NPM & JSR, builds SLSA attestations, and drafts the GitHub Release.
 
 ## Need Help?
 

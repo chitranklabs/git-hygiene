@@ -66,9 +66,11 @@ jobs:
           filters: |
             src:
               - 'packages/**'
+              - 'app/**'
             deps:
               - 'pnpm-lock.yaml'
               - 'package.json'
+              - 'pnpm-workspace.yaml'
             lint:
               - 'eslint.config.mjs'
               - 'tsconfig.json'
@@ -109,25 +111,32 @@ jobs:
       - name: Install dependencies 🛠️
         run: pnpm install --frozen-lockfile --prefer-offline
 
+      - name: Build Project 🏗️
+        if: needs.changes.outputs.src == 'true' || needs.changes.outputs.deps == 'true'
+        run: pnpm build
+
       - name: Run Parallel Checks ⚡️
         id: run_checks
         env:
           HAS_SRC: ${{ needs.changes.outputs.src }}
-          HAS_DEPS: ${{ needs.changes.outputs.deps }}
         run: |
           echo "::group::Starting Parallel Checks"
           mkdir -p .ci-status
-          if [ "$HAS_SRC" == "true" ] || [ "$HAS_DEPS" == "true" ]; then
-            (pnpm build > .ci-status/build.log 2>&1 || echo "1" > .ci-status/build.fail) &
-          fi
           if [ "$HAS_SRC" == "true" ]; then
             (pnpm test:cov > .ci-status/test.log 2>&1 || echo "1" > .ci-status/test.fail) &
           fi
           (pnpm lint > .ci-status/lint.log 2>&1 || echo "1" > .ci-status/lint.fail) &
           (pnpm lint:md > .ci-status/md.log 2>&1 || echo "1" > .ci-status/md.fail) &
-          curl -L https://github.com/google/osv-scanner/releases/download/v2.3.5/osv-scanner_linux_amd64 -o osv-scanner
-          chmod +x osv-scanner
-          (./osv-scanner --lockfile=pnpm-lock.yaml > .ci-status/osv.log 2>&1 || echo "1" > .ci-status/osv.fail) &
+          (
+            if curl -sSfL --retry 5 --retry-delay 2 --retry-all-errors \
+              https://github.com/google/osv-scanner/releases/download/v2.3.5/osv-scanner_linux_amd64 -o osv-scanner; then
+              chmod +x osv-scanner
+              ./osv-scanner --lockfile=pnpm-lock.yaml > .ci-status/osv.log 2>&1 || echo "1" > .ci-status/osv.fail
+            else
+              echo "❌ Failed to download osv-scanner after 5 retries" > .ci-status/osv.log
+              echo "1" > .ci-status/osv.fail
+            fi
+          ) &
           wait
           echo "::endgroup::"
 

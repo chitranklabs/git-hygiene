@@ -1,5 +1,6 @@
 packages:
   - packages/*
+  - app
 overrides:
   esbuild: '^0.28.1'
   js-yaml: '^5.0.0'
@@ -8,3 +9,5 @@ overrides:
 allowBuilds:
   esbuild: true
   lefthook: true
+minimumReleaseAgeExclude:
+  - '@chitrank2050/monoline-ui@0.3.0'

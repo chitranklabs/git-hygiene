@@ -38,7 +38,9 @@
   "type": "module",
   "scripts": {
     "prepare": "lefthook install",
-    "build": "turbo build",
+    "clean": "turbo clean && rm -rf .turbo coverage",
+    "build": "turbo build && pnpm build:action",
+    "build:action": "esbuild packages/cli/src/cli.ts --bundle --platform=node --target=node24 --format=esm --outfile=dist/action.js --minify",
     "test": "turbo test",
     "test:cov": "turbo test:cov",
     "lint": "turbo lint",
@@ -50,13 +52,17 @@
     "format:check": "turbo format:check",
     "dev": "turbo dev",
     "deps:update": "pnpm update --interactive --latest -r",
+    "changeset": "changeset",
+    "version:packages": "changeset version && node scripts/sync-jsr-versions.mjs",
     "changelog": "bash scripts/generate-changelog.sh",
     "tag": "bash scripts/git-tag.sh",
     "release": "pnpm build && node --experimental-strip-types packages/cli/src/cli.ts bump && pnpm changelog && echo 'Ready to publish!'"
   },
   "devDependencies": {
+    "@changesets/cli": "^3.0.1",
     "@eslint/js": "^10.0.1",
     "@types/node": "^25.6.0",
+    "esbuild": "^0.28.2",
     "eslint": "^10.2.1",
     "eslint-config-prettier": "^10.0.2",
     "globals": "^17.5.0",

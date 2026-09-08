@@ -1,0 +1,401 @@
+@import "tailwindcss";
+@import "@chitrank2050/monoline-ui/theme.css";
+
+/* =============================================================================
+ * git-hygiene Design System (Modern Technical Precision)
+ * ─────────────────────────────────────────────────────────────────────────────
+ * Color Space: OKLCH perceptually uniform
+ * Dark Theme: Obsidian Indigo Slate with Emerald Phosphor highlights
+ * Light Theme: Crisp Alabaster Paper with High-Contrast Deep Emerald
+ * ========================================================================== */
+
+/* ─── DARK THEME (Default) ─── */
+:root,
+.dark,
+[data-theme="dark"] {
+	--background: oklch(13% 0.015 250);
+	--foreground: oklch(96% 0.008 240);
+
+	--surface: oklch(17% 0.018 250);
+	--surface-2: oklch(21% 0.022 250);
+	--surface-3: oklch(26% 0.025 250);
+	--surface-code: oklch(11% 0.015 250);
+
+	--card: oklch(17% 0.018 250);
+	--card-foreground: oklch(96% 0.008 240);
+
+	--popover: oklch(17% 0.018 250);
+	--popover-foreground: oklch(96% 0.008 240);
+
+	--primary: oklch(96% 0.008 240);
+	--primary-foreground: oklch(13% 0.015 250);
+
+	--secondary: oklch(21% 0.022 250);
+	--secondary-foreground: oklch(92% 0.008 240);
+
+	--muted: oklch(21% 0.022 250);
+	--muted-foreground: oklch(68% 0.015 240);
+
+	/* High-Visibility Glowing Mint / Emerald */
+	--accent: oklch(78% 0.18 155);
+	--accent-soft: oklch(78% 0.18 155 / 0.14);
+	--accent-foreground: oklch(11% 0.015 250);
+
+	--border: oklch(24% 0.018 250);
+	--border-strong: oklch(34% 0.024 250);
+	--input: oklch(24% 0.018 250);
+	--ring: oklch(78% 0.18 155);
+
+	--text: oklch(96% 0.008 240);
+	--text-primary: oklch(96% 0.008 240);
+	--text-secondary: oklch(76% 0.014 240);
+	--text-muted: oklch(54% 0.012 240);
+	--text-body: oklch(84% 0.012 240);
+
+	--code: oklch(11% 0.015 250);
+	--code-text: oklch(92% 0.01 240);
+	--button: oklch(21% 0.022 250);
+	--button-hover: oklch(27% 0.026 250);
+
+	--shadow-xs: 0 1px 2px oklch(5% 0.02 250 / 0.4);
+	--shadow-md: 0 8px 24px -4px oklch(5% 0.02 250 / 0.5);
+	--shadow-lg: 0 18px 42px -6px oklch(5% 0.02 250 / 0.65);
+
+	color-scheme: dark;
+}
+
+/* ─── LIGHT THEME ─── */
+.light,
+[data-theme="light"] {
+	--background: oklch(98% 0.005 240);
+	--foreground: oklch(16% 0.02 250);
+
+	--surface: oklch(100% 0 0);
+	--surface-2: oklch(95% 0.008 240);
+	--surface-3: oklch(91% 0.012 240);
+	--surface-code: oklch(95% 0.008 240);
+
+	--card: oklch(100% 0 0);
+	--card-foreground: oklch(16% 0.02 250);
+
+	--popover: oklch(100% 0 0);
+	--popover-foreground: oklch(16% 0.02 250);
+
+	--primary: oklch(16% 0.02 250);
+	--primary-foreground: oklch(98% 0.005 240);
+
+	--secondary: oklch(95% 0.008 240);
+	--secondary-foreground: oklch(16% 0.02 250);
+
+	--muted: oklch(95% 0.008 240);
+	--muted-foreground: oklch(48% 0.015 240);
+
+	/* Deep Forest Emerald Accent with >7:1 WCAG Contrast */
+	--accent: oklch(40% 0.16 155);
+	--accent-soft: oklch(40% 0.16 155 / 0.12);
+	--accent-foreground: oklch(100% 0 0);
+
+	--border: oklch(88% 0.01 240);
+	--border-strong: oklch(76% 0.016 240);
+	--input: oklch(88% 0.01 240);
+	--ring: oklch(40% 0.16 155);
+
+	--text: oklch(16% 0.02 250);
+	--text-primary: oklch(16% 0.02 250);
+	--text-secondary: oklch(34% 0.016 240);
+	--text-muted: oklch(52% 0.012 240);
+	--text-body: oklch(24% 0.016 240);
+
+	--code: oklch(94% 0.01 240);
+	--code-text: oklch(20% 0.03 250);
+	--button: oklch(95% 0.008 240);
+	--button-hover: oklch(91% 0.012 240);
+
+	--shadow-xs: 0 1px 2px oklch(20% 0.02 240 / 0.04);
+	--shadow-md: 0 8px 24px -4px oklch(20% 0.02 240 / 0.07);
+	--shadow-lg: 0 16px 36px -6px oklch(20% 0.02 240 / 0.12);
+
+	color-scheme: light;
+}
+
+/* ─── Typography & Foundations ─── */
+.font-sans {
+	font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+.font-mono {
+	font-family: var(--font-mono), ui-monospace, monospace;
+}
+
+.font-code {
+	font-family: var(--font-code), var(--font-mono), ui-monospace, monospace;
+}
+
+.font-display {
+	font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+::selection {
+	background: var(--accent-soft);
+	color: var(--text);
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+html,
+body {
+	overflow-x: clip;
+}
+
+/* Ambient Radial Backdrop Glow */
+.gh-hero-glow {
+	background: radial-gradient(
+		ellipse 65% 50% at 50% -10%,
+		oklch(76% 0.16 155 / 0.12),
+		transparent 70%
+	);
+}
+
+.dark .gh-hero-glow {
+	background: radial-gradient(
+		ellipse 70% 55% at 50% -10%,
+		oklch(76% 0.16 155 / 0.15),
+		transparent 75%
+	);
+}
+
+/* ─── Changelog Two-Column Layout ─────────────────────────── */
+.changelog-layout {
+	display: grid;
+	grid-template-columns: 11rem minmax(0, 1fr);
+	align-items: start;
+	gap: 2.5rem;
+}
+
+.changelog-layout__toc {
+	position: sticky;
+	top: 5.5rem;
+	max-height: calc(100vh - 6rem);
+	overflow-y: auto;
+	scrollbar-width: none;
+}
+
+.changelog-layout__toc::-webkit-scrollbar {
+	display: none;
+}
+
+.changelog-layout__toc-inner {
+	padding-top: 0.25rem;
+}
+
+.changelog-layout__content {
+	min-width: 0;
+}
+
+@media (max-width: 768px) {
+	.changelog-layout {
+		grid-template-columns: 1fr;
+	}
+
+	.changelog-layout__toc {
+		position: static;
+		max-height: none;
+	}
+}
+
+/* ─── Monoline UI Changelog Timeline Styles ───────────────── */
+.ml-changelog {
+	position: relative;
+	font-family: var(--font-sans);
+	color: var(--text);
+	display: flex;
+	flex-direction: column;
+	gap: 3rem;
+}
+
+/* The Timeline Line down the side */
+.ml-changelog::before {
+	content: "";
+	position: absolute;
+	left: 0.75rem;
+	top: 0.5rem;
+	bottom: 0.5rem;
+	width: 1px;
+	background: var(--border-strong, var(--border));
+}
+
+/* ─── Release Layout ─── */
+.ml-changelog-release {
+	display: grid;
+	grid-template-columns: 1.5rem 1fr;
+	gap: 1.25rem;
+}
+
+.ml-changelog-release-node {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	padding-top: 0.25rem;
+}
+
+.ml-changelog-release-dot {
+	position: absolute;
+	width: 8px;
+	height: 8px;
+	border-radius: 9999px;
+	background: var(--background);
+	border: 1.5px solid var(--accent);
+	z-index: 1;
+	top: 0.375rem;
+}
+
+.ml-changelog-release-content {
+	display: flex;
+	flex-direction: column;
+	gap: 1.25rem;
+}
+
+/* ─── Release Header ─── */
+.ml-changelog-release-header {
+	display: flex;
+	flex-direction: row;
+	align-items: baseline;
+	gap: 0.75rem;
+}
+
+.ml-changelog-release-version {
+	font-family: var(--font-mono);
+	font-size: 1rem;
+	font-weight: 700;
+	color: var(--text);
+	line-height: 1;
+}
+
+.ml-changelog-release-link {
+	color: inherit;
+	text-decoration: none;
+	transition: color 0.15s ease;
+}
+
+.ml-changelog-release-link:hover {
+	color: var(--accent);
+}
+
+.ml-changelog-release-date {
+	font-family: var(--font-mono);
+	font-size: 0.75rem;
+	color: var(--text-muted);
+	font-weight: 400;
+}
+
+/* ─── Commit Groups ─── */
+.ml-changelog-group {
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+}
+
+.ml-changelog-group-title {
+	font-family: var(--font-mono);
+	font-size: 0.6875rem;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--text-muted);
+	font-weight: 600;
+}
+
+.ml-changelog-commits {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+	padding-left: 0.25rem;
+	border-left: 1px solid var(--border);
+}
+
+/* ─── Commit Items ─── */
+.ml-changelog-commit-item {
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
+	padding-left: 0.75rem;
+}
+
+.ml-changelog-commit-row {
+	display: flex;
+	align-items: flex-start;
+	gap: 0.5rem;
+	flex-wrap: wrap;
+}
+
+.ml-changelog-commit-scope {
+	font-family: var(--font-mono);
+	font-weight: 600;
+	font-size: 0.625rem;
+	color: var(--text);
+	background: var(--surface-2);
+	padding: 0.125rem 0.25rem;
+	border-radius: 0.25rem;
+	border: 1px solid var(--border);
+	white-space: nowrap;
+	flex-shrink: 0;
+	margin-top: 2px;
+}
+
+.ml-changelog-commit-message {
+	font-family: var(--font-sans);
+	font-size: 0.875rem;
+	color: var(--text-secondary);
+	line-height: 1.5;
+	min-width: 0;
+	flex: 1;
+	text-wrap: pretty;
+}
+
+/* Meta row — SHA, PR, author */
+.ml-changelog-commit-meta {
+	display: inline-flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	font-size: 0.6875rem;
+	font-family: var(--font-mono);
+	color: var(--text-muted);
+}
+
+.ml-changelog-commit-link {
+	font-family: var(--font-mono);
+	color: var(--text-muted);
+	text-decoration: none;
+	transition: color 0.15s ease;
+}
+
+.ml-changelog-commit-link:hover {
+	color: var(--accent);
+}
+
+.ml-changelog-commit-author {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.25rem;
+	color: var(--text-muted);
+	text-decoration: none;
+	transition: color 0.15s ease;
+}
+
+.ml-changelog-commit-author:hover {
+	color: var(--accent);
+}
+
+.ml-changelog-more {
+	margin-top: 0.25rem;
+	padding-left: 0.75rem;
+	font-family: var(--font-mono);
+	font-size: 0.6875rem;
+	color: var(--text-muted);
+	letter-spacing: 0.05em;
+}
