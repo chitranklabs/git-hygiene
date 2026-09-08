@@ -45,7 +45,6 @@ jobs:
     env:
       NODE_VERSION: 24
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-      RELEASE_ARTIFACTS: ${{ runner.temp }}/release-artifacts
     steps:
       - name: Harden Runner 🛡️
         uses: step-security/harden-runner@e14015d583714f6e62063499dc959a02595150a1 # v2.21.1
@@ -58,6 +57,9 @@ jobs:
           ref: ${{ github.event.pull_request.merge_commit_sha || github.sha }}
           fetch-depth: 0
           persist-credentials: false
+
+      - name: Configure release environment
+        run: echo "RELEASE_ARTIFACTS=${RUNNER_TEMP}/release-artifacts" >> "$GITHUB_ENV"
 
       - name: Setup pnpm
         uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6.0.10
