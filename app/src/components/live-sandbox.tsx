@@ -503,7 +503,7 @@ export function LiveSandbox() {
 								<div className="flex items-center justify-between">
 									<span className="text-text-muted">Type:</span>
 									<span className="text-text font-bold">
-										{commitResult.type || "—"}
+										{commitResult.type || "-"}
 									</span>
 								</div>
 								<div className="flex items-center justify-between">
@@ -515,7 +515,7 @@ export function LiveSandbox() {
 								<div className="flex items-center justify-between">
 									<span className="text-text-muted">Semver Release:</span>
 									<span className="font-bold text-accent">
-										{commitResult.bump ? `+${commitResult.bump}` : "—"}
+										{commitResult.bump ? `+${commitResult.bump}` : "-"}
 									</span>
 								</div>
 								{commitResult.isBreaking && (
@@ -530,13 +530,13 @@ export function LiveSandbox() {
 								<div className="flex items-center justify-between">
 									<span className="text-text-muted">Type:</span>
 									<span className="text-text font-bold">
-										{branchResult.isIgnoredBase ? "Base Branch (Protected)" : (branchResult.type || "—")}
+										{branchResult.isIgnoredBase ? "Base Branch (Protected)" : (branchResult.type || "-")}
 									</span>
 								</div>
 								<div className="flex items-center justify-between">
 									<span className="text-text-muted">Slug:</span>
 									<span className="text-text">
-										{branchResult.description || "—"}
+										{branchResult.description || "-"}
 									</span>
 								</div>
 							</div>

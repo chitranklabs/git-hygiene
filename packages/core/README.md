@@ -14,7 +14,17 @@
 
 <br />
 
-`@chitrank2050/git-hygiene-core` provides the core validation logic for modern Git workflows. Built as a **Native ESM** engine for **Node.js 24 (Stable)**, it offers high-performance validation with zero external dependencies (built on top of the standard `commitlint` engine).
+`@chitrank2050/git-hygiene-core` is the published programmatic engine used by the CLI. Use it to integrate validation into Node.js tools without invoking a CLI process.
+
+## Technical Specification
+
+- Requires Node.js 24+; npm exports ESM JavaScript and TypeScript declarations.
+- Uses commitlint and conventional-changelog dependencies; it is not dependency-free or a browser library.
+- Reads and caches configuration from the current working directory's `package.json`. Use `resolveConfig` and an explicit override for independent configurations.
+- `getRecommendedBump` reads the current Git repository and needs its relevant history/tags. No qualifying commits may produce no `releaseType`; handle that before automating releases.
+- Ignored branches are exact names, not globs. Custom bump presets must supply a `whatBump` function.
+
+See the [contribution guide](https://github.com/chitranklabs/git-hygiene/blob/main/CONTRIBUTING.md) for workspace builds, tests, and Changesets.
 
 ---
 
@@ -75,7 +85,7 @@ if (commitResult.valid) {
   console.log('✅ Commit follows standards');
 } else {
   console.log('❌ Commit validation failed:');
-  commitResult.errors.forEach(err => console.log(`- ${err.message}`));
+  commitResult.errors?.forEach(err => console.log(`- ${err.message}`));
 }
 
 // 4. Suggest a semantic version bump
@@ -84,7 +94,7 @@ console.log(`Recommended bump: ${bump.releaseType} (Reason: ${bump.reason})`);
 
 // 5. Programmatic usage with config override
 const customConfig = await resolveConfig({ types: ['feat', 'fix'], allowEmptyScope: false });
-const result = await validateCommit('feat: manual override', customConfig);
+const result = await validateCommit('feat(core): manual override', customConfig);
 ```
 
 ## ⚙️ Configuration
@@ -110,7 +120,7 @@ const result = await validateCommit('feat: manual override', customConfig);
   "git-hygiene": {
     "extends": ["@commitlint/config-conventional"],
     "types": ["feat", "fix", "chore", "docs", "refactor", "test", "renovate"],
-    "ignoreBranches": ["main", "develop", "release/*"],
+    "ignoreBranches": ["main", "develop"],
     "maxHeaderLength": 100,
     "allowEmptyScope": false,
     "rules": {
@@ -122,4 +132,4 @@ const result = await validateCommit('feat: manual override', customConfig);
 
 ## 📜 License
 
-MIT - see [LICENSE](../../LICENSE) for details.
+MIT - see [LICENSE](./LICENSE) for details.

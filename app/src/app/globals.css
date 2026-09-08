@@ -356,7 +356,7 @@ body {
 	text-wrap: pretty;
 }
 
-/* Meta row — SHA, PR, author */
+/* Meta row - SHA, PR, author */
 .ml-changelog-commit-meta {
 	display: inline-flex;
 	align-items: center;

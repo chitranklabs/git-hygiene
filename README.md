@@ -2,7 +2,7 @@
   <img src="./assets/logo.png" alt="Git Hygiene Hero Banner" width="160" height="auto"/>
 
   <h1>git-hygiene 🌊</h1>
-  <p>The ultimate zero-dependency metadata validator for modern Git workflows.</p>
+  <p>Validate commits, branch names, and pull request titles with shared rules.</p>
 
   <p>
   <a href="https://github.com/chitranklabs/git-hygiene/actions/workflows/ci.yml">
@@ -44,7 +44,23 @@
   <br/>
 </div>
 
-`git-hygiene` is a high-performance, **zero-dependency** engine designed to enforce perfect metadata across your entire Git lifecycle. Built for **Node.js 24+**, it leverages **native TypeScript type-stripping** for microsecond startup times and zero-compilation runtime performance.
+`git-hygiene` validates Git metadata and recommends semantic version bumps. This pnpm/Turborepo monorepo contains two published packages, a private website, and a GitHub Action.
+
+## Workspace guide
+
+| Location                       | Purpose                                       | Documentation                          |
+| ------------------------------ | --------------------------------------------- | -------------------------------------- |
+| `packages/cli`                 | Published command-line tool                   | [CLI README](packages/cli/README.md)   |
+| `packages/core`                | Published programmatic engine                 | [Core README](packages/core/README.md) |
+| `app`                          | Private Next.js website                       | [App README](app/README.md)            |
+| `action.yml`, `dist/action.js` | Composite action and committed runtime bundle | [Action definition](action.yml)        |
+
+## Technical Specification
+
+- Runtime: Node.js 24+; Git for history-based commands.
+- Workspace: use the exact pnpm version in `package.json#packageManager`; Turbo coordinates package tasks.
+- Dependencies: the CLI uses core and picocolors; core uses commitlint and conventional-changelog tooling. These packages are not dependency-free.
+- The current action source runs a committed JavaScript bundle without an npm install. Older action revisions may still download the CLI; verify the revision you pin.
 
 ---
 
@@ -62,13 +78,13 @@
 
 ## Features <a id="features"></a> ✨
 
-| Feature                       | Description                                                                 |
-| ----------------------------- | --------------------------------------------------------------------------- |
-| 🧼 **Unified Engine**         | Define your standards once. Enforce them in commits, branches, and PRs.     |
-| ⚡ **Zero Dependencies**      | Built using native Node.js APIs. No `commander`, `yargs`, or `chalk` bloat. |
-| 🛡️ **Hardened Security**      | 100% SHA-pinned workflows & OpenSSF Scorecard verified.                     |
-| 📦 **Universal Distribution** | Native support for **NPM**, **JSR**, and **GitHub Actions**.                |
-| 🧠 **Context Aware**          | Automatically detects `.git` environment and CI context.                    |
+| Feature                       | Description                                                             |
+| ----------------------------- | ----------------------------------------------------------------------- |
+| 🧼 **Unified Engine**         | Define your standards once. Enforce them in commits, branches, and PRs. |
+| ⚡ **Bundled Action**         | The current action includes its runtime dependencies.                   |
+| 🛡️ **Hardened Security**      | 100% SHA-pinned workflows & OpenSSF Scorecard verified.                 |
+| 📦 **Universal Distribution** | Native support for **NPM**, **JSR**, and **GitHub Actions**.            |
+| 🧠 **Context Aware**          | Automatically detects `.git` environment and CI context.                |
 
 ---
 
@@ -112,7 +128,7 @@ For projects using Husky 9+.
 
 ```bash
 # .husky/commit-msg
-npx @chitrank2050/git-hygiene commit $1
+npx @chitrank2050/git-hygiene commit "$1"
 
 # .husky/pre-push
 npx @chitrank2050/git-hygiene branch
@@ -120,7 +136,9 @@ npx @chitrank2050/git-hygiene branch
 
 ### 3. GitHub Actions (CI) 🤖
 
-Validate your metadata natively in CI. We recommend pinning to a specific SHA.
+Validate metadata in CI. Pin a reviewed action revision. The examples below retain an older revision and do not demonstrate the new bundled runtime; update the pin after the bundle changes are merged and verified.
+
+Provide Node.js 24+, Bash, and jq for the composite action. Check out the consumer repository to load its configuration. For `bump` or Omni-mode, fetch history and tags (`fetch-depth: 0` on checkout); explicit title/branch validation does not need full history.
 
 #### **Smart Zero-Config Mode (Recommended)**
 
@@ -160,7 +178,7 @@ Run any check manually from the terminal.
 npx @chitrank2050/git-hygiene commit "feat: my awesome commit"
 
 # Check a branch name string
-npx @chitrank2050/git-hygiene branch "feature/cool-stuff"
+npx @chitrank2050/git-hygiene branch "feat/cool-stuff"
 
 # Check a PR title
 npx @chitrank2050/git-hygiene title "fix(core): resolve memory leak"
@@ -180,7 +198,7 @@ You can easily integrate `git-hygiene` into your CI/CD pipeline using the offici
 
 ### Usage Example
 
-````yaml
+```yaml
 jobs:
   hygiene:
     runs-on: ubuntu-latest
@@ -191,6 +209,7 @@ jobs:
         with:
           command: 'title'
           value: ${{ github.event.pull_request.title }}
+```
 
 ### Action Outputs 📤
 
@@ -210,7 +229,7 @@ When using the `bump` command, the action provides the following outputs:
 
 - name: Tag Release 🏷️
   run: echo "Next version is ${{ steps.bump.outputs.releaseType }}"
-````
+```
 
 > **Note on Pinning to a SHA:** For maximum security and stability, we highly recommend pinning the `uses` directive to a specific commit SHA instead of a branch like `@main`. You can get the commit SHA by navigating to the [Commits page](https://github.com/chitranklabs/git-hygiene/commits/main) of this repository and copying the 40-character hash (e.g. `uses: chitranklabs/git-hygiene@8f3d...`).
 
@@ -235,7 +254,9 @@ const result = await validateBranch('feat/new-ui', customConfig);
 
 ## 🚀 Automated Releases
 
-`git-hygiene` isn't just a validator-it's a release companion. You can use its outputs to automate your entire versioning pipeline. Check out our own [release-prepare.yml](.github/workflows/release-prepare.yml) to see how we use the `bump` output to automate version increments.
+The CLI's `bump` command recommends a release type from Git history; it does not publish or change package versions. A history with no qualifying changes may have no `releaseType`.
+
+This repository uses Changesets for package versioning. CLI and core are a fixed version group; the private app is ignored. See [Contributing](CONTRIBUTING.md#release-process-🚀) for preparation and publication. git-cliff supplies the repository and website history, separate from package Changesets.
 
 ---
 
@@ -266,7 +287,7 @@ const result = await validateBranch('feat/new-ui', customConfig);
   "git-hygiene": {
     "extends": ["@commitlint/config-conventional"],
     "types": ["feat", "fix", "chore", "docs", "refactor", "test", "renovate"],
-    "ignoreBranches": ["main", "develop", "release/*"],
+    "ignoreBranches": ["main", "develop"],
     "maxHeaderLength": 100,
     "allowEmptyScope": false,
     "rules": {
@@ -284,7 +305,7 @@ const result = await validateBranch('feat/new-ui', customConfig);
 When you extend a configuration:
 
 - **Types are merged**: Your local types are combined with the types from the extended config.
-- **Rules are inherited**: Standard rules (like `header-max-length`) are automatically applied.
+- **Selected defaults are inherited**: The conventional config supplies types, the default header length, and parser preset; it does not import every commitlint rule. Set additional rules explicitly.
 - **Parser Presets**: Advanced syntax (like the `!` breaking change indicator) is automatically supported.
 
 ### Raw Commitlint Rules 🛠️
@@ -301,6 +322,8 @@ For power users, the `rules` property allows you to pass any raw `commitlint` ru
 ---
 
 ## Architecture <a id="architecture"></a> 🏛️
+
+Configuration is read from `package.json` in the current working directory, not automatically discovered at the workspace root. `ignoreBranches` contains exact names, not glob patterns.
 
 ```mermaid
 graph TD

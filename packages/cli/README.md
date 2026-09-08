@@ -1,7 +1,7 @@
 <div align="center">
   <h1>@chitrank2050/git-hygiene 🌊</h1>
 
-**The ultimate zero-dependency metadata validator for modern Git workflows.**
+**Validate commits, branches, and pull request titles from the command line.**
 
 [![NPM Version](https://img.shields.io/npm/v/@chitrank2050/git-hygiene?color=blue&label=npm)](https://www.npmjs.com/package/@chitrank2050/git-hygiene)
 [![JSR Version](https://jsr.io/badges/@chitrank2050/git-hygiene)](https://jsr.io/@chitrank2050/git-hygiene)
@@ -14,7 +14,16 @@
 
 <br />
 
-`git-hygiene` is a high-performance, **zero-dependency** CLI tool that enforces **Conventional Commits**, **branch naming patterns**, and **PR titles** using a single, unified engine. Built natively for **Node.js 24 (Stable)** with microsecond startup times.
+`git-hygiene` is the published CLI package. It delegates validation and release recommendations to `@chitrank2050/git-hygiene-core`. The GitHub Action is distributed separately from the repository root.
+
+## Technical Specification
+
+- Requires Node.js 24+ and Git for current-branch detection and release recommendations.
+- Published as ESM JavaScript on npm; depends on core and picocolors.
+- Reads configuration from `package.json` in the current working directory. Ignored branches are exact names, not globs.
+- Validation exits with code 0 for valid input and 1 for invalid input or errors. `bump` recommends a release type, not a version number, and may return no release type when history contains no qualifying changes.
+
+For workspace development and bundle maintenance, see the [contribution guide](https://github.com/chitranklabs/git-hygiene/blob/main/CONTRIBUTING.md).
 
 ---
 
@@ -108,7 +117,7 @@ npx @chitrank2050/git-hygiene title "feat: test" --json
   "git-hygiene": {
     "extends": ["@commitlint/config-conventional"],
     "types": ["feat", "fix", "chore", "docs", "refactor", "test", "renovate"],
-    "ignoreBranches": ["main", "develop", "release/*"],
+    "ignoreBranches": ["main", "develop"],
     "maxHeaderLength": 100,
     "allowEmptyScope": false,
     "rules": {
@@ -142,7 +151,7 @@ For projects using Husky 9+:
 
 ```bash
 # .husky/commit-msg
-npx @chitrank2050/git-hygiene commit $1
+npx @chitrank2050/git-hygiene commit "$1"
 
 # .husky/pre-push
 npx @chitrank2050/git-hygiene branch
@@ -150,4 +159,4 @@ npx @chitrank2050/git-hygiene branch
 
 ## 📜 License
 
-MIT - see [LICENSE](../../LICENSE) for details.
+MIT - see [LICENSE](./LICENSE) for details.

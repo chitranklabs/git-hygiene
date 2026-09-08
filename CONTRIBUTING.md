@@ -11,13 +11,13 @@ By participating in this project, you agree to abide by our [Code of Conduct](./
 ### Prerequisites
 
 - **Node.js**: v24 (Stable) or higher
-- **pnpm**: v10 (Stable) or higher
+- **pnpm**: use the exact `packageManager` version in the root `package.json` (currently 11.25.0).
 
 ### Repository Structure
 
 This is a monorepo managed with **pnpm workspaces** and **Turborepo**:
 
-- `packages/core`: 🧠 The core validation engine. Pure logic, shared by CLI and Action.
+- `packages/core`: 🧠 The validation engine, including configuration and Git-history access. See its [README](packages/core/README.md).
 - `packages/cli`: 🌊 The command-line interface. Built on top of core.
 - `app`: 🌐 Next.js documentation and interactive web application.
 
@@ -33,7 +33,7 @@ This is a monorepo managed with **pnpm workspaces** and **Turborepo**:
 2. **Install dependencies**:
 
    ```bash
-   pnpm install
+   pnpm install --frozen-lockfile
    ```
 
 3. **Build the project**:
@@ -43,6 +43,24 @@ This is a monorepo managed with **pnpm workspaces** and **Turborepo**:
    ```
 
 ## Development Workflow
+
+### Package-specific work
+
+Run commands from the repository root:
+
+```bash
+pnpm --filter @chitrank2050/git-hygiene-core test
+pnpm --filter @chitrank2050/git-hygiene test
+pnpm --filter git-hygiene-app dev
+```
+
+Build first when testing the CLI so workspace dependencies and the action bundle exist. Do not launch separate `pnpm build` and `pnpm test:cov` processes concurrently in the same checkout; both can write build outputs.
+
+### Action bundle maintenance
+
+`action.yml` runs the tracked `dist/action.js`, not an npm download. After CLI/core source or runtime dependency changes, run `pnpm build` and include the resulting bundle changes. `pnpm build:action` alone assumes the core build is already current.
+
+Run the CLI tests after regeneration. Review generated changes alongside their source; a source-only fix does not update the bundle consumed by a pinned action.
 
 ### 🌿 Branch Naming
 
@@ -96,7 +114,9 @@ We use an automated monorepo release flow powered by **Changesets** and **git-cl
 
 1. **Preparation**: Trigger the **Release 1 - Prepare PR** action on `main`. It consumes pending `.changeset/*.md` files, synchronizes package and JSR versions, and updates `CHANGELOG.md`.
 2. **Review**: Review the generated release PR (`chore/release-vX.Y.Z`).
-3. **Finalization**: Merge the PR. The **Release 2 - Finalize** action automatically tags the verified commit, publishes packages to NPM & JSR, builds SLSA attestations, and drafts the GitHub Release.
+3. **Finalization**: Merging a qualifying release PR triggers **Release 2 - Finalize**. The workflow tags, builds, publishes to npm and JSR, and creates build-provenance attestations. Consult the workflow before running a release; a build passing locally does not verify registry credentials or publication.
+
+CLI and core form a fixed version group in `.changeset/config.json`; `app` is private and ignored. Each published package keeps its own README. The root README introduces the repository and action; the app README covers website development.
 
 ## Need Help?
 
