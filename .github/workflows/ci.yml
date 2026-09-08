@@ -127,9 +127,16 @@ jobs:
           fi
           (pnpm lint > .ci-status/lint.log 2>&1 || echo "1" > .ci-status/lint.fail) &
           (pnpm lint:md > .ci-status/md.log 2>&1 || echo "1" > .ci-status/md.fail) &
-          curl -L https://github.com/google/osv-scanner/releases/download/v2.3.5/osv-scanner_linux_amd64 -o osv-scanner
-          chmod +x osv-scanner
-          (./osv-scanner --lockfile=pnpm-lock.yaml > .ci-status/osv.log 2>&1 || echo "1" > .ci-status/osv.fail) &
+          (
+            if curl -sSfL --retry 5 --retry-delay 2 --retry-all-errors \
+              https://github.com/google/osv-scanner/releases/download/v2.3.5/osv-scanner_linux_amd64 -o osv-scanner; then
+              chmod +x osv-scanner
+              ./osv-scanner --lockfile=pnpm-lock.yaml > .ci-status/osv.log 2>&1 || echo "1" > .ci-status/osv.fail
+            else
+              echo "❌ Failed to download osv-scanner after 5 retries" > .ci-status/osv.log
+              echo "1" > .ci-status/osv.fail
+            fi
+          ) &
           wait
           echo "::endgroup::"
 
