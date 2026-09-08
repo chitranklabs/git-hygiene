@@ -35,7 +35,7 @@ const releases = (changelogJson as unknown as GitCliffRelease[])
 			...commit,
 			group: commit.group
 				? commit.group.replace(/<!--.*?-->/g, "").replace(/^[^\w]+/, "").trim() || commit.group
-				: "Miscellaneous Tasks",
+				: "Maintenance",
 		})),
 	}))
 
@@ -113,6 +113,7 @@ export default function ChangelogPage() {
 								"Performance",
 								"Documentation",
 								"Security",
+								"Maintenance",
 								"Miscellaneous Tasks",
 							]}
 						/>
