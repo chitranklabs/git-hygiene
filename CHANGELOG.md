@@ -2,6 +2,45 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.5.0] - 2026-09-08
+
+### 🚀 Features
+
+- Standalone bundle action and added changeset for better version management ([4daf031](4daf031b302a39fa8dd64df07d8c800012226533)) by @chitrank2050
+
+### 🐛 Bug Fixes
+
+- **deps:** Update commitlint monorepo to v21 ([65f0bda](65f0bdae6d6502154b2cb59d991cafba33eba287)) by [renovate[bot]](https://github.com/apps/renovate)
+- **core:** Correct breaking change with scope regex order ([8e09e10](8e09e1063bdb554e0354902a0f8a5311014d72ac)) by @chitrank2050
+- **core:** Use nullish coalescing to respect explicit zero values ([444a0ef](444a0ef08d5ca6bbc9bc320812bf633107cc6df9)) by @chitrank2050
+- **core:** Escape regex special characters in user-supplied types and branches ([1286ad4](1286ad46c9da26a9b3bac1fec72f2ddddd34e4c6)) by @chitrank2050
+- **core:** Null-guard report.errors and wrap preset load errors ([8a16df6](8a16df64276574a86825fa8859e7cf01d0bcca70)) by @chitrank2050
+- **build:** Remove wrong entry from root tsup config and correct target ([795658f](795658f5b767aed3c6023783b18f25a4ab8efaa1)) by @chitrank2050
+- **turbo:** Add inputs to lint/format tasks and globalDependencies for root configs ([2f317e3](2f317e3907f2c4f0f0f17cc9dfa028244d87ee4f)) by @chitrank2050
+- **hooks:** Make gitleaks hook optional like zizmor ([d5d50e6](d5d50e66cf0c21d1c0b030cfe3c04bc5ffc36632)) by @chitrank2050
+- **scripts:** Set -euo pipefail, fix unquoted command array, remove hardcoded username ([10992fe](10992fed10b73e06b430c0bbdec432c7ba6b0afa)) by @chitrank2050
+- **deps:** Update dependency conventional-changelog-preset-loader to v6 ([36307ee](36307ee80a96132385ecc21dfc86adad20598e48)) by [renovate[bot]](https://github.com/apps/renovate)
+- **deps:** Update dependency conventional-recommended-bump to v12 ([cbc5706](cbc57068b75c81af5c81717dcd3900c89cc29c04)) by [renovate[bot]](https://github.com/apps/renovate)
+- **deps:** Update dependency conventional-changelog-conventionalcommits to v10 ([603bf1f](603bf1fd525ff4dce6602db2fe4dd990b3f68516)) by [renovate[bot]](https://github.com/apps/renovate)
+- **ci:** Build core before creating release commit ([386980d](386980d2081aee603ed952b6677b2be4aec351f2)) by @chitrank2050
+
+### 🚜 Refactor
+
+- Move pnpm dependency overrides from package.json to pnpm-workspace.yaml ([7dbc54c](7dbc54cd500d0beff77ab33f4edbd5e180701c9b)) by @chitrank2050
+
+### 📚 Documentation
+
+- Fix punctuation in README release documentation ([e9f916c](e9f916c7cea867deae32f0a971e39c562f7e239d)) by @chitrank2050
+- Overhaul documentation ([c416e23](c416e2329d50361464bd3c8fca478c7bb25ef946)) by @chitrank2050
+
+### ⚙️ Miscellaneous Tasks
+
+- Update Readme.md ([ac35b61](ac35b61a250e3b8804c8fe58d38b35528afb8ae3)) by @chitrank2050
+- Update renovate schedule and add vulnerability alert configuration ([8b6fd3d](8b6fd3db2aea73a5c51a9095a5924c3d72baa5ea)) by @chitrank2050
+- Update scorecard workflow to fetch full history and add repository token ([01a3bbe](01a3bbe061ebc6700692ed83e3084e9b284b4b2b)) by @chitrank2050
+- Update dependencies in package.json and pnpm-lock.yaml ([b8e9f48](b8e9f48742e217e04cbcea6fa801e725c3071ac3)) by @chitrank2050
+- Update pnpm version to 11.9.0 and migrate to allowBuilds configuration ([5939521](5939521792213f69de4cf32cdb575ab6342fbe78)) by @chitrank2050
+
 ## [0.4.12] - 2026-04-28
 
 ### 🚀 Features
@@ -12,6 +51,10 @@ All notable changes to this project will be documented in this file.
 ### 🚜 Refactor
 
 - Remove redundant deps installation & build steps from release workflow & update CI header ([78ec8a7](78ec8a74b995774dce979188c178c3716ea76a25)) by @chitrank2050
+
+### ⚙️ Miscellaneous Tasks
+
+- **release:** Bump version to v0.4.12 ([22783c7](22783c72540d66e1b851295d1961c19b6db81856)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
 
 ## [0.4.11] - 2026-04-27
 
@@ -52,6 +95,7 @@ All notable changes to this project will be documented in this file.
 
 ### ⚙️ Miscellaneous Tasks
 
+- Bump version to 0.4.6 and enable auto nodeModulesDir in JSR configuration ([cc56132](cc561324e45304d16c74e9c043e89b8ff5158550)) by @chitrank2050
 - **release:** Bump version to v0.4.8 ([625763a](625763a955008fad28cc21bc9e0e18288f8bc818)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
 
 ## [0.4.7] - 2026-04-27
@@ -62,20 +106,19 @@ All notable changes to this project will be documented in this file.
 
 ## [0.4.6] - 2026-04-27
 
+### 🚀 Features
+
+- Add commitlint dependencies to core and introduce JSR local publication script ([0611eba](0611eba3c6cd236d2e18e0ce27e20a8f737931ec)) by @chitrank2050
+
 ### 🚜 Refactor
 
 - Remove unnecessary unstable deno publish flags from workflow and script ([c082717](c0827170905eeb81b2b840b81ac97a7eee570078)) by @chitrank2050
 
 ### ⚙️ Miscellaneous Tasks
 
-- Bump version to 0.4.6 and enable auto nodeModulesDir in JSR configuration ([cc56132](cc561324e45304d16c74e9c043e89b8ff5158550)) by @chitrank2050
 - **release:** Bump version to v0.4.6 ([a5aeb20](a5aeb203eb69e035e00f110e6b234fe4833f9b6f)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
 
 ## [0.4.5] - 2026-04-27
-
-### 🚀 Features
-
-- Add commitlint dependencies to core and introduce JSR local publication script ([0611eba](0611eba3c6cd236d2e18e0ce27e20a8f737931ec)) by @chitrank2050
 
 ### ⚙️ Miscellaneous Tasks
 
@@ -163,6 +206,7 @@ All notable changes to this project will be documented in this file.
 
 ### 📚 Documentation
 
+- Add GitHub Marketplace action badge and registry link to README ([2555faa](2555faa0a9512380c5516faf804073d0b71596a4)) by @chitrank2050
 - Update documentation for JSON output support and programmatic configuration usage ([221177a](221177aa434cfd29528a9bdcbe22f4fe1d495f4d)) by @chitrank2050
 - Add automated release process documentation to CONTRIBUTING.md and README.md ([c3e2549](c3e254945ebc927158f4d6401550c0eab5836edd)) by @chitrank2050
 
@@ -178,19 +222,16 @@ All notable changes to this project will be documented in this file.
 
 ## [0.1.6] - 2026-04-26
 
-### 📚 Documentation
-
-- Add GitHub Marketplace action badge and registry link to README ([2555faa](2555faa0a9512380c5516faf804073d0b71596a4)) by @chitrank2050
-
-### ⚙️ Miscellaneous Tasks
-
-- **release:** Bump version to v0.1.6 ([df91567](df915671bcf396c4b24cf0d5791004b2600413a7)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
-
-## [0.1.5] - 2026-04-26
-
 ### 🚀 Features
 
 - Add branding icon and color to action metadata ([5c2582d](5c2582de363071757b34738875df170864f863ea)) by @chitrank2050
+
+### ⚙️ Miscellaneous Tasks
+
+- Update permissions and add strict error handling to auto-approve workflow scripts ([34b2359](34b2359d7a73290f7b484af8443312a283c4ae1a)) by @chitrank2050
+- **release:** Bump version to v0.1.6 ([df91567](df915671bcf396c4b24cf0d5791004b2600413a7)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
+
+## [0.1.5] - 2026-04-26
 
 ### 🚜 Refactor
 
@@ -204,28 +245,32 @@ All notable changes to this project will be documented in this file.
 
 ### ⚙️ Miscellaneous Tasks
 
+- Trim commit messages in changelog template ([54cf3de](54cf3deb1fddb9773b298adbb2822a6c79daacba)) by @chitrank2050
 - Update changelog with v0.1.4 release and clean up formatting ([0e9a240](0e9a240a308e93fda4580611b835473a65a3f13a)) by @chitrank2050
 - Update workflow trigger name and document GitHub Action usage in README ([d7e6038](d7e60380ddbcd6728ea003c0df759b328b4999b8)) by @chitrank2050
-- Update permissions and add strict error handling to auto-approve workflow scripts ([34b2359](34b2359d7a73290f7b484af8443312a283c4ae1a)) by @chitrank2050
 - **release:** Bump version to v0.1.5 ([6b623be](6b623be6a739545498d8d274788a61aeb85919df)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
 
 ## [0.1.4] - 2026-04-26
 
 ### ⚙️ Miscellaneous Tasks
 
+- Update JSR metadata with descriptions and publication filters ([cd4076e](cd4076ec433a7d7188244575145a2674fa599cd0)) by @chitrank2050
 - Update JSR metadata and bump version to v0.1.3 ([8a45c23](8a45c2397754d93bfc12f7f3e15bb1476f7194f7)) by @chitrank2050
 - Update tag pattern and standardize version formatting in release workflow ([8e8787d](8e8787d76f93eb11cc5375ae39a91771acfe6db8)) by @chitrank2050
-- Trim commit messages in changelog template ([54cf3de](54cf3deb1fddb9773b298adbb2822a6c79daacba)) by @chitrank2050
 - **release:** Bump version to v0.1.4 ([0dbb79e](0dbb79ed0596591f0530c047d61b8f22cfb92f19)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
 
 ## [0.1.3] - 2026-04-26
 
 ### ⚙️ Miscellaneous Tasks
 
-- Update JSR metadata with descriptions and publication filters ([cd4076e](cd4076ec433a7d7188244575145a2674fa599cd0)) by @chitrank2050
+- Dynamically update core package dependency versions during JSR publication ([7f44522](7f44522ce8c09f6d99885ef8a9e062b6b2bb691c)) by @chitrank2050
 - **release:** Bump version to v0.1.3 ([f10e8be](f10e8beebde9ecbb137ec4faadabead7445d5ae4)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
 
 ## [0.1.2] - 2026-04-26
+
+### 🚀 Features
+
+- Add configuration for allowed commit types to package manifest files ([78e8a93](78e8a931d9ad67ef50621598918156b22571e3eb)) by @chitrank2050
 
 ### 🚜 Refactor
 
@@ -236,6 +281,7 @@ All notable changes to this project will be documented in this file.
 
 ### ⚙️ Miscellaneous Tasks
 
+- Add MIT license field to jsr.json files in core and cli packages ([f385a7e](f385a7e6442d18f24be9a473f8e2eadaa669062a)) by @chitrank2050
 - Renovate config to include merge confidence, refine matching rules & group actions deps ([feab45a](feab45af018de9e9e07edfbdf1b88620ead6aa36)) by @chitrank2050
 - Update contents permission to write in auto-approve workflow ([b0a44cc](b0a44cc2d5a8f5edd848516f169ca37909aded1d)) by @chitrank2050
 - Update gitignore and allow dirty state in jsr publish workflow ([72d661c](72d661c31a90933ff7c0b2f992dbe5f6af706b7b)) by @chitrank2050
@@ -245,23 +291,23 @@ All notable changes to this project will be documented in this file.
 - Update release workflow to sync versioning for both NPM and JSR packages ([047f4d8](047f4d8ae50751d6ff36b1867e65b9713056f51e)) by @chitrank2050
 - **release:** Bump version to v0.1.2 ([7fe59ba](7fe59ba1af525ce354321b516cdd6c8e8b101c4a)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
 - **release:** Bump version to v0.1.2 ([899bd2f](899bd2f53d54697e0295767ae8f010868a962c46)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
-- Dynamically update core package dependency versions during JSR publication ([7f44522](7f44522ce8c09f6d99885ef8a9e062b6b2bb691c)) by @chitrank2050
 - **release:** Bump version to v0.1.2 ([2181482](2181482afeac483bbdfddb8ede12380ca5ff50e3)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
 
 ## [0.1.1] - 2026-04-26
 
 ### 🚀 Features
 
-- Add configuration for allowed commit types to package manifest files ([78e8a93](78e8a931d9ad67ef50621598918156b22571e3eb)) by @chitrank2050
+- Expose detailed validation errors in engine & update docs with configuration references ([98c776b](98c776bf0e5606ae1cd78d4aaddadd21bc6e7fae)) by @chitrank2050
 
 ### 📚 Documentation
 
+- Add OpenSSF Scorecard badge to README ([d9b342e](d9b342e9181c9d1fb33bc28300d602e397cae16b)) by @chitrank2050
+- Enhance project doc with badges & improved formatting while setting action pkg to private ([acd0a25](acd0a2521b73cce60c2269adbfc6855f41e28522)) by @chitrank2050
 - Add repository structure to CONTRIBUTING.md and clean up redundant engine test assertion ([a40917f](a40917fb98bb2e8eceed9d7f5a1ecc58e56f2a24)) by @chitrank2050
 - Add input table to README and migrate Gitleaks scan to official GitHub Action ([858f6c4](858f6c41df7f11b062ed7b61e4e3514726b38601)) by @chitrank2050
 
 ### ⚙️ Miscellaneous Tasks
 
-- Add MIT license field to jsr.json files in core and cli packages ([f385a7e](f385a7e6442d18f24be9a473f8e2eadaa669062a)) by @chitrank2050
 - **release:** Bump version to 0.1.1 ([6490c0f](6490c0f7a7a7f1f89c01fda4adabbac04079f00f)) by [chitrank-actions[bot]](https://github.com/apps/chitrank-actions)
 
 ## [0.1.0] - 2026-04-26
@@ -285,7 +331,6 @@ All notable changes to this project will be documented in this file.
 - Enhance CI/CD security by adding gitleaks & zizmor lint to lefthook and updating action deps ([3239d1b](3239d1b089780eaf704127a6064eebd35110ce07)) by @chitrank2050
 - Branch validation for specific args & improve cov report generation by ensuring dir existence ([0e45da4](0e45da4aabf2fdba1f9752d6c8b6bc3667546f6d)) by @chitrank2050
 - Add workflow_dispatch trigger to release-finalize & optimize dep install with --prefer-offline ([4719c57](4719c571805c1fb15f642e5d14835d024bbb927b)) by @chitrank2050
-- Expose detailed validation errors in engine & update docs with configuration references ([98c776b](98c776bf0e5606ae1cd78d4aaddadd21bc6e7fae)) by @chitrank2050
 
 ### 🐛 Bug Fixes
 
@@ -305,8 +350,6 @@ All notable changes to this project will be documented in this file.
 - Overhaul README with updated features, installation instructions, and project architecture details ([6358d3c](6358d3cfad10661569fde87592a6bb6c743b7f68)) by @chitrank2050
 - Overhaul README with enhanced feat list, installation examples & architectural documentation ([8d09a18](8d09a189de3e29f242038b4539c26af036e67428)) by @chitrank2050
 - Update security policy with disclosure process, add assets, and refresh README header branding ([9ace73a](9ace73a5c414c95f0052759a348d8bfd60a7399a)) by @chitrank2050
-- Add OpenSSF Scorecard badge to README ([d9b342e](d9b342e9181c9d1fb33bc28300d602e397cae16b)) by @chitrank2050
-- Enhance project doc with badges & improved formatting while setting action pkg to private ([acd0a25](acd0a2521b73cce60c2269adbfc6855f41e28522)) by @chitrank2050
 
 ### ⚙️ Miscellaneous Tasks
 
