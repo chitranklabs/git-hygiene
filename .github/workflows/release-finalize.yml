@@ -1,26 +1,19 @@
-# =============================================================
-# Release Finalization Workflow
-#
-# Triggered automatically when a Release PR is merged to main.
-#   1. Pushes the verified version tag.
-#   2. Creates the GitHub Release with generated notes.
-#   3. Publishes packages to NPM and JSR.
-#   4. Generates SLSA Build Provenance (Attestation).
-# =============================================================
-
 name: Release 2 - Finalize Tag 🏷️
 
 on:
   pull_request:
-    types:
-      - closed
-    branches:
-      - main
+    types: [closed]
+    branches: [main]
   workflow_dispatch:
     inputs:
       version:
-        description: 'Version to finalize (e.g. v0.1.0)'
+        description: 'Stable version to finalize (e.g. v0.5.0). Run against its release commit.'
         required: true
+
+# Never interrupt a registry publish or run two releases at once.
+concurrency:
+  group: release-publishing
+  cancel-in-progress: false
 
 jobs:
   finalize:
@@ -31,168 +24,119 @@ jobs:
       contains(github.event.pull_request.labels.*.name, 'release')) ||
       (github.event_name == 'workflow_dispatch' && github.actor == 'chitrank2050')
     runs-on: ubuntu-latest
-    env:
-      NODE_VERSION: 24
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+    timeout-minutes: 20
     permissions:
       contents: write
       id-token: write
       attestations: write
-      pull-requests: write
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+      RELEASE_ARTIFACTS: ${{ runner.temp }}/release-artifacts
     steps:
       - name: Harden Runner 🛡️
         uses: step-security/harden-runner@e14015d583714f6e62063499dc959a02595150a1 # v2.21.1
         with:
           egress-policy: audit
 
-      - name: Checkout repository 📥
+      - name: Checkout release commit 📥
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          ref: ${{ github.event.pull_request.merge_commit_sha || github.sha }}
           fetch-depth: 0
           persist-credentials: false
 
-      - name: Create Bot Token 🤖🔑
-        id: generate_token
-        uses: ./.github/actions/setup-bot
-        with:
-          client-id: ${{ secrets.CHITRANK_BOT_CLIENT_ID }}
-          private-key: ${{ secrets.CHITRANK_BOT_PRIVATE_KEY }}
-
-      - name: Extract Tag Name 🏷️
-        id: vars
-        env:
-          BRANCH_NAME: ${{ github.event.pull_request.head.ref }}
-          INPUT_VERSION: ${{ github.event.inputs.version }}
-        run: |
-          # Robust extraction: find the first version-like string (X.Y.Z) in the input
-          RAW_INPUT="${INPUT_VERSION:-$BRANCH_NAME}"
-          TAG_NAME=$(echo "$RAW_INPUT" | grep -oE '[0-9]+\.[0-9]+\.[0-9]+(-.*)?' | head -1)
-
-
-          if [[ ! "$TAG_NAME" =~ ^v?[0-9]+\.[0-9]+\.[0-9]+(-.*)?$ ]]; then
-            echo "❌ Error: Could not extract valid tag. Got: $TAG_NAME"
-            exit 1
-          fi
-
-          # Ensure tag starts with 'v' for consistency with cliff.toml
-          if [[ ! "$TAG_NAME" =~ ^v ]]; then
-            TAG_NAME="v$TAG_NAME"
-          fi
-          echo "tag_name=$TAG_NAME" >> $GITHUB_OUTPUT
-
-      - name: Push Verified Tag 🏷️
-        env:
-          GH_TOKEN: ${{ steps.generate_token.outputs.token }}
-          TAG_NAME: ${{ steps.vars.outputs.tag_name }}
-        run: |
-          echo "Pushing verified tag: $TAG_NAME"
-          git config user.name "chitrank-actions[bot]"
-          git config user.email "actions@github.com"
-
-          # 1. Try pushing with the Bot Token (Preferred)
-          git remote set-url origin https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}
-          if git tag "$TAG_NAME" && git push origin "$TAG_NAME"; then
-            echo "✅ Tag pushed successfully with Bot Token."
-          else
-            echo "⚠️ Bot push failed (likely missing 'workflows' permission). Trying GITHUB_TOKEN fallback..."
-
-            # 2. Try pushing with the default GITHUB_TOKEN
-            git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
-            if git push origin "$TAG_NAME"; then
-              echo "✅ Tag pushed successfully with GITHUB_TOKEN."
-            else
-              echo "❌ Tag push failed. Please push the tag manually: git tag $TAG_NAME && git push origin $TAG_NAME"
-              echo "Continuing with release steps..."
-            fi
-          fi
-
-      - name: Generate release notes 📝
-        uses: orhun/git-cliff-action@3d96a18cc4ec17e9dc69ddcc424ccafaf1f78ce2 # v4.9.0
-        id: git-cliff
-        with:
-          config: cliff.toml
-          args: --latest --strip all
-        env:
-          GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
-
-      - name: Create GitHub Release ✨
-        env:
-          GH_TOKEN: ${{ steps.generate_token.outputs.token }}
-          TAG_NAME: ${{ steps.vars.outputs.tag_name }}
-          RELEASE_NOTES: ${{ steps.git-cliff.outputs.content }}
-        run: |
-          PRERELEASE_FLAG=""
-          if [[ "$TAG_NAME" == *"-"* ]]; then
-            PRERELEASE_FLAG="--prerelease"
-          fi
-          gh release create "$TAG_NAME" \
-            --title "$TAG_NAME" \
-            --notes "$RELEASE_NOTES" \
-            $PRERELEASE_FLAG
-
-      - name: Setup Publishing Environment 🛠️
+      - name: Setup pnpm
         uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6.0.10
 
-      - name: Setup Node.js 🟢
+      - name: Setup Node
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: 'pnpm'
+          node-version: 24
+          cache: pnpm
+          registry-url: https://registry.npmjs.org
 
-      - name: Install dependencies 📥
+      - name: Validate release identity and credentials
+        id: release
+        env:
+          INPUT_VERSION: ${{ inputs.version }}
+          BRANCH_NAME: ${{ github.event.pull_request.head.ref }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          set -euo pipefail
+          test -n "$NODE_AUTH_TOKEN" || { echo '::error::NPM_TOKEN must be configured before releasing'; exit 1; }
+          RELEASE_TAG="${INPUT_VERSION:-${BRANCH_NAME#chore/release-}}"
+          [[ "$RELEASE_TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]] || { echo '::error::Expected a stable vX.Y.Z release'; exit 1; }
+          export RELEASE_TAG
+          node scripts/release-artifacts.mjs check
+          echo "tag=$RELEASE_TAG" >> "$GITHUB_OUTPUT"
+
+      - name: Install dependencies
         run: pnpm install --frozen-lockfile --prefer-offline
 
-      - name: Build Project 🏗️
-        run: pnpm build
+      - name: Build packages and verify committed action
+        run: |
+          pnpm --filter @chitrank2050/git-hygiene-core build
+          pnpm --filter @chitrank2050/git-hygiene build
+          pnpm build:action
+          git diff --exit-code -- dist/action.js
+          pnpm test
 
-      - name: Setup Deno 🦕
+      - name: Pack and test npm artifacts in a clean consumer
+        run: node scripts/release-artifacts.mjs pack
+
+      - name: Setup Deno
         uses: denoland/setup-deno@22d081ff2d3a40755e97629de92e3bcbfa7cf2ed # v2.0.5
         with:
           deno-version: v2.x
 
-      - name: Publish to NPM 📦
-        if: env.NPM_TOKEN != ''
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: |
-          pnpm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN
-          pnpm -r publish --access public --no-git-checks
+      - name: Validate JSR workspace without publishing
+        run: deno publish --dry-run --allow-slow-types
 
-      - name: Publish to JSR 🦖
-        env:
-          TAG_NAME: ${{ steps.vars.outputs.tag_name }}
-        run: |
-          CLEAN_VERSION=$(echo "$TAG_NAME" | sed 's/^v//')
-          for pkg in packages/core packages/cli; do
-            if [ -d "$pkg" ] && [ -f "$pkg/jsr.json" ]; then
-              echo "🚀 Publishing $pkg to JSR via OIDC..."
-
-              # Update version in jsr.json
-              echo "Updating version in $pkg/jsr.json to $CLEAN_VERSION"
-              jq ".version = \"$CLEAN_VERSION\"" "$pkg/jsr.json" > "$pkg/jsr.json.tmp" && mv "$pkg/jsr.json.tmp" "$pkg/jsr.json"
-
-              # Deep-clean package.json for JSR: Keep only name, version, and dependencies.
-              if [ -f "$pkg/package.json" ]; then
-                if [ "$pkg" == "packages/cli" ]; then
-                  # Remove JSR dependencies from package.json as they are handled in jsr.json imports
-                  jq "{name, version, dependencies} | del(.dependencies[\"@chitrank2050/git-hygiene-core\"])" "$pkg/package.json" > "$pkg/package.json.tmp" && mv "$pkg/package.json.tmp" "$pkg/package.json"
-                  # Sync JSR imports
-                  jq ".imports[\"@chitrank2050/git-hygiene-core\"] = \"jsr:@chitrank2050/git-hygiene-core@^$CLEAN_VERSION\"" "$pkg/jsr.json" > "$pkg/jsr.json.tmp" && mv "$pkg/jsr.json.tmp" "$pkg/jsr.json"
-                else
-                  jq "{name, version, dependencies}" "$pkg/package.json" > "$pkg/package.json.tmp" && mv "$pkg/package.json.tmp" "$pkg/package.json"
-                fi
-                echo "--- Cleaned package.json for JSR ($pkg) ---"
-                cat "$pkg/package.json"
-              fi
-
-              (cd "$pkg" && deno publish --unstable-bare-node-builtins --no-check --allow-slow-types --allow-dirty --no-provenance)
-            fi
-          done
-
-      - name: Attest Build Artifacts 📜
+      - name: Attest the artifacts being distributed
         uses: actions/attest-build-provenance@4d101475d8b20a2381f78447822ac1eab6504dd8 # v4.2.2
         with:
           subject-path: |
-            packages/*/dist/**
-            CHANGELOG.md
-          push-to-registry: false
+            ${{ runner.temp }}/release-artifacts/*.tgz
+            dist/action.js
+
+      - name: Publish verified npm tarballs
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: node scripts/release-artifacts.mjs publish-npm
+
+      # Deno publishes core before its dependent CLI. Keep type checks and provenance enabled.
+      - name: Publish JSR workspace
+        run: deno publish --allow-slow-types
+
+      - name: Create verified tag
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_TAG: ${{ steps.release.outputs.tag }}
+        run: |
+          set -euo pipefail
+          node scripts/release-artifacts.mjs check
+          if ! git show-ref --verify --quiet "refs/tags/$RELEASE_TAG"; then
+            # API failure stops the release; never fall back to a different identity.
+            gh api --method POST "repos/$GH_REPO/git/refs" -f "ref=refs/tags/$RELEASE_TAG" -f "sha=$(git rev-parse HEAD)"
+          fi
+          git fetch origin "refs/tags/$RELEASE_TAG:refs/tags/$RELEASE_TAG"
+          node scripts/release-artifacts.mjs check
+
+      - name: Generate release notes
+        id: notes
+        uses: orhun/git-cliff-action@3d96a18cc4ec17e9dc69ddcc424ccafaf1f78ce2 # v4.9.0
+        with:
+          config: cliff.toml
+          args: --latest --strip all
+
+      - name: Finalize public GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_TAG: ${{ steps.release.outputs.tag }}
+          RELEASE_NOTES: ${{ steps.notes.outputs.content }}
+        run: |
+          set -euo pipefail
+          # A failed create (including an existing release) requires explicit review, not overwrite.
+          gh release create "$RELEASE_TAG" --verify-tag --title "$RELEASE_TAG" --notes "$RELEASE_NOTES" "$RELEASE_ARTIFACTS"/*.tgz dist/action.js

@@ -77,6 +77,8 @@ jobs:
             workflows:
               - '.github/workflows/**'
               - '.github/actions/**'
+              - 'scripts/**'
+              - 'deno.json'
 
   # ─── QUALITY ASSURANCE ───────────────────────────────────────
   quality:
@@ -114,6 +116,9 @@ jobs:
       - name: Build Project 🏗️
         if: needs.changes.outputs.src == 'true' || needs.changes.outputs.deps == 'true'
         run: pnpm build
+
+      - name: Test release guards
+        run: node --test scripts/tests/release-artifacts.test.mjs
 
       - name: Run Parallel Checks ⚡️
         id: run_checks

@@ -110,6 +110,15 @@ pnpm clean
 
 ## Release Process 🚀
 
+Release finalization validates the tag against all package versions and the checked-out commit before publishing. npm credentials must be configured; missing credentials fail rather than silently skipping npm.
+
+The workflow builds only the packages, checks that the committed action bundle is current, tests packed npm tarballs in a clean consumer, and runs a type-checked JSR workspace dry run. The exact npm tarballs and action bundle receive build attestations. Registry publishing precedes the public GitHub Release, which includes the npm tarballs and action bundle as assets.
+
+For local validation, run `node --test scripts/tests/release-artifacts.test.mjs`, build both packages, then run `node scripts/release-artifacts.mjs pack` with a fresh `RELEASE_ARTIFACTS` directory. Run `deno publish --dry-run --allow-slow-types` for JSR (add `--allow-dirty` only for local uncommitted work). Never remove type checking to make a release pass. Slow types remain explicitly allowed because of the existing preset API.
+
+> [!IMPORTANT]
+> Publishing across npm, JSR, and GitHub is not atomic. After partial failure, inspect registry state and rerun only against the same release commit. npm skips an existing version only when its integrity matches the prepared tarball. Tag conflicts stop the workflow; existing GitHub Releases are not overwritten automatically. JSR publication errors stop finalization and require inspection before retrying. No fallback credentials or forced tag updates are used.
+
 We use an automated monorepo release flow powered by **Changesets** and **git-cliff**:
 
 1. **Preparation**: Trigger the **Release 1 - Prepare PR** action on `main`. It consumes pending `.changeset/*.md` files, synchronizes package and JSR versions, and updates `CHANGELOG.md`.
