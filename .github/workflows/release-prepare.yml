@@ -118,6 +118,12 @@ jobs:
           pnpm install --lockfile-only --ignore-scripts --prefer-offline
           pnpm exec prettier --write CHANGELOG.md package.json packages/*/package.json packages/*/jsr.json packages/*/CHANGELOG.md 2>/dev/null || true
 
+      # The commit-msg hook runs the source CLI, whose core import resolves to dist.
+      # Build only that dependency; release preparation does not need the website.
+      - name: Build release hook dependency 🏗️
+        if: steps.vars.outputs.release_ready == 'true'
+        run: pnpm --filter @chitrank2050/git-hygiene-core build
+
       - name: Create Pull Request for Release 🔀
         id: cpr
         if: steps.vars.outputs.release_ready == 'true'
