@@ -111,17 +111,17 @@ jobs:
       - name: Install dependencies 🛠️
         run: pnpm install --frozen-lockfile --prefer-offline
 
+      - name: Build Project 🏗️
+        if: needs.changes.outputs.src == 'true' || needs.changes.outputs.deps == 'true'
+        run: pnpm build
+
       - name: Run Parallel Checks ⚡️
         id: run_checks
         env:
           HAS_SRC: ${{ needs.changes.outputs.src }}
-          HAS_DEPS: ${{ needs.changes.outputs.deps }}
         run: |
           echo "::group::Starting Parallel Checks"
           mkdir -p .ci-status
-          if [ "$HAS_SRC" == "true" ] || [ "$HAS_DEPS" == "true" ]; then
-            (pnpm build > .ci-status/build.log 2>&1 || echo "1" > .ci-status/build.fail) &
-          fi
           if [ "$HAS_SRC" == "true" ]; then
             (pnpm test:cov > .ci-status/test.log 2>&1 || echo "1" > .ci-status/test.fail) &
           fi
