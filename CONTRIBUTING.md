@@ -112,18 +112,20 @@ pnpm clean
 
 Release finalization validates the tag against all package versions and the checked-out commit before publishing. npm credentials must be configured; missing credentials fail rather than silently skipping npm.
 
-The workflow builds only the packages, checks that the committed action bundle is current, tests packed npm tarballs in a clean consumer, and runs a type-checked JSR workspace dry run. The exact npm tarballs and action bundle receive build attestations. Registry publishing precedes the public GitHub Release, which includes the npm tarballs and action bundle as assets.
+The workflow builds one release candidate, checks that the committed action bundle is current, tests packed npm tarballs in a clean consumer, and runs a type-checked JSR workspace dry run. The tarballs, action bundle, and checksum manifest receive build attestations and are uploaded as one immutable workflow artifact. npm and JSR then publish independently in parallel. The public GitHub Release is created only after both registries contain the expected version.
 
 For local validation, run `node --test scripts/tests/release-artifacts.test.mjs`, build both packages, then run `node scripts/release-artifacts.mjs pack` with a fresh `RELEASE_ARTIFACTS` directory. Run `deno publish --dry-run --allow-slow-types` for JSR (add `--allow-dirty` only for local uncommitted work). Never remove type checking to make a release pass. Slow types remain explicitly allowed because of the existing preset API.
 
 > [!IMPORTANT]
-> Publishing across npm, JSR, and GitHub is not atomic. After partial failure, inspect registry state and rerun only against the same release commit. npm skips an existing version only when its integrity matches the prepared tarball. Tag conflicts stop the workflow; existing GitHub Releases are not overwritten automatically. JSR publication errors stop finalization and require inspection before retrying. No fallback credentials or forced tag updates are used.
+> Publishing across npm, JSR, and GitHub is not atomic. Use **Re-run failed jobs** for an immediate retry. For later recovery, manually dispatch **Release 2 - Finalize Tag** with the existing `vX.Y.Z` tag and select `npm`, `jsr`, or `github-release`. npm accepts an existing version only when its normalized unpacked contents match the prepared tarball. Existing JSR versions are skipped because registry versions are immutable. Tag conflicts and conflicting GitHub Release assets stop the workflow; nothing is overwritten silently.
+
+JSR provenance is required for normal releases. `disabled-for-recovery` is an explicit manual-only escape hatch for a confirmed upstream provenance outage; it must not be selected to bypass package validation or type checking.
 
 We use an automated monorepo release flow powered by **Changesets** and **git-cliff**:
 
 1. **Preparation**: Trigger the **Release 1 - Prepare PR** action on `main`. It consumes pending `.changeset/*.md` files, synchronizes package and JSR versions, and updates `CHANGELOG.md`.
 2. **Review**: Review the generated release PR (`chore/release-vX.Y.Z`).
-3. **Finalization**: Merging a qualifying release PR triggers **Release 2 - Finalize**. The workflow tags, builds, publishes to npm and JSR, and creates build-provenance attestations. Consult the workflow before running a release; a build passing locally does not verify registry credentials or publication.
+3. **Finalization**: Merging a qualifying release PR triggers **Release 2 - Finalize Tag**. The workflow builds and attests one candidate, anchors its tag, publishes npm and JSR in parallel, verifies both registries, and creates the GitHub Release. Consult the workflow before running a release; a build passing locally does not verify registry credentials or publication.
 
 CLI and core form a fixed version group in `.changeset/config.json`; `app` is private and ignored. Each published package keeps its own README. The root README introduces the repository and action; the app README covers website development.
 
