@@ -1,10 +1,12 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, mkdirSync, copyFileSync, writeFileSync, rmSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, copyFileSync, readFileSync, writeFileSync, rmSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { tmpdir } from 'node:os';
 import { execFileSync, spawnSync } from 'node:child_process';
+import { normalizedTarballDigest } from '../release-artifacts.mjs';
 
 function fixture(t) {
   const dir = mkdtempSync(join(tmpdir(), 'hygiene-release-check-'));
@@ -80,4 +82,39 @@ test('rejects JSR dependency drift', t => {
   const result = check();
   assert.notEqual(result.status, 0);
   assert.match(result.stderr, /JSR dependency mismatch/);
+});
+
+test('compares tarball contents instead of unstable gzip metadata', t => {
+  const dir = mkdtempSync(join(tmpdir(), 'hygiene-tarball-digest-'));
+  t.after(() => rmSync(dir, { recursive: true, force: true }));
+  mkdirSync(join(dir, 'package'));
+  writeFileSync(join(dir, 'package', 'package.json'), '{"name":"fixture","version":"1.0.0"}');
+  execFileSync('tar', ['-czf', join(dir, 'first.tgz'), 'package'], { cwd: dir });
+  const changedHeader = readFileSync(join(dir, 'first.tgz'));
+  changedHeader.writeUInt32LE(123456789, 4);
+  writeFileSync(join(dir, 'second.tgz'), changedHeader);
+  assert.notDeepEqual(readFileSync(join(dir, 'first.tgz')), readFileSync(join(dir, 'second.tgz')));
+  assert.equal(
+    normalizedTarballDigest(join(dir, 'first.tgz')),
+    normalizedTarballDigest(join(dir, 'second.tgz')),
+  );
+  writeFileSync(join(dir, 'package', 'package.json'), '{"name":"changed","version":"1.0.0"}');
+  execFileSync('tar', ['-czf', join(dir, 'changed.tgz'), 'package'], { cwd: dir });
+  assert.notEqual(
+    normalizedTarballDigest(join(dir, 'first.tgz')),
+    normalizedTarballDigest(join(dir, 'changed.tgz')),
+  );
+});
+
+test('release workflow isolates registries and exposes targeted recovery', () => {
+  const workflow = readFileSync(
+    resolve(import.meta.dirname, '../../.github/workflows/release-finalize.yml'),
+    'utf8',
+  );
+  assert.match(workflow, /options: \[all, npm, jsr, github-release\]/);
+  assert.match(workflow, /publish-npm:[\s\S]*needs: \[build, tag\]/);
+  assert.match(workflow, /publish-jsr:[\s\S]*needs: \[build, tag\]/);
+  assert.match(workflow, /for package in core cli/);
+  assert.match(workflow, /inputs\.version \|\| github\.event\.pull_request\.merge_commit_sha/);
+  assert.match(workflow, /Use \*\*Re-run failed jobs\*\*/);
 });
