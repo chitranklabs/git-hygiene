@@ -10,6 +10,8 @@ on:
     types: [opened, synchronize, reopened]
   workflow_dispatch:
 
+permissions: {}
+
 env:
   NODE_VERSION: 24
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
@@ -44,6 +46,8 @@ jobs:
         with:
           client-id: ${{ secrets.CHITRANK_BOT_CLIENT_ID }}
           private-key: ${{ secrets.CHITRANK_BOT_PRIVATE_KEY }}
+          permission-contents: read
+          permission-pull-requests: write
 
       - name: Generate Commit Summary
         id: cliff

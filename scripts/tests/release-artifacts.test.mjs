@@ -2,7 +2,15 @@
 // @ts-nocheck
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, mkdirSync, copyFileSync, readFileSync, writeFileSync, rmSync } from 'node:fs';
+import {
+  mkdtempSync,
+  mkdirSync,
+  copyFileSync,
+  readFileSync,
+  readdirSync,
+  writeFileSync,
+  rmSync,
+} from 'node:fs';
 import { join, resolve } from 'node:path';
 import { tmpdir } from 'node:os';
 import { execFileSync, spawnSync } from 'node:child_process';
@@ -117,4 +125,39 @@ test('release workflow isolates registries and exposes targeted recovery', () =>
   assert.match(workflow, /for package in core cli/);
   assert.match(workflow, /inputs\.version \|\| github\.event\.pull_request\.merge_commit_sha/);
   assert.match(workflow, /Use \*\*Re-run failed jobs\*\*/);
+});
+
+test('workflows default deny and bot tokens request explicit permissions', () => {
+  const workflowDirectory = resolve(import.meta.dirname, '../../.github/workflows');
+  for (const filename of readdirSync(workflowDirectory).filter(file => file.endsWith('.yml'))) {
+    const workflow = readFileSync(join(workflowDirectory, filename), 'utf8');
+    assert.match(
+      workflow,
+      /\npermissions: (?:\{\}|read-all)|\npermissions:\n(?=[\s\S]*\njobs:)/,
+      `${filename} must declare top-level permissions`,
+    );
+  }
+
+  const setupBot = readFileSync(
+    resolve(import.meta.dirname, '../../.github/actions/setup-bot/action.yml'),
+    'utf8',
+  );
+  assert.match(setupBot, /permission-contents:\n[\s\S]*required: true/);
+  assert.match(setupBot, /repositories: \$\{\{ github\.event\.repository\.name \}\}/);
+
+  for (const filename of readdirSync(workflowDirectory).filter(file => file.endsWith('.yml'))) {
+    const workflow = readFileSync(join(workflowDirectory, filename), 'utf8');
+    const callers = workflow.match(/uses: \.\/\.github\/actions\/setup-bot/g) ?? [];
+    const explicitPermissions = workflow.match(/permission-contents: (?:read|write)/g) ?? [];
+    assert.equal(
+      explicitPermissions.length,
+      callers.length,
+      `${filename} must scope every setup-bot token`,
+    );
+  }
+});
+
+test('git-cliff filters mechanical release commits', () => {
+  const config = readFileSync(resolve(import.meta.dirname, '../../cliff.toml'), 'utf8');
+  assert.match(config, /\^chore\\\\\(release\\\\\): \(prepare for\|bump version to\).*skip = true/);
 });

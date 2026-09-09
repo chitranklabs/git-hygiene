@@ -17,6 +17,8 @@ on:
         description: 'Manual tag override (e.g. v0.5.0). Leave empty to use Changesets plan.'
         required: false
 
+permissions: {}
+
 concurrency:
   group: release-prepare
   cancel-in-progress: false
@@ -27,8 +29,7 @@ jobs:
     if: github.actor == github.repository_owner || github.actor == 'chitrank2050'
     runs-on: ubuntu-latest
     permissions:
-      contents: write
-      pull-requests: write
+      contents: read
     env:
       NODE_VERSION: 24
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
@@ -67,6 +68,8 @@ jobs:
         with:
           client-id: ${{ secrets.CHITRANK_BOT_CLIENT_ID }}
           private-key: ${{ secrets.CHITRANK_BOT_PRIVATE_KEY }}
+          permission-contents: write
+          permission-pull-requests: write
 
       - name: Configure Authenticated Git 🔧
         env:

@@ -12,6 +12,8 @@ on:
     branches: [main]
     types: [opened, synchronize, reopened, edited]
 
+permissions: {}
+
 env:
   NODE_VERSION: 24
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
