@@ -20,7 +20,7 @@ on:
       - completed
 
 permissions:
-  contents: write
+  contents: read
   pull-requests: write
 
 concurrency:
@@ -94,10 +94,12 @@ jobs:
       - name: Create Bot Token 🤖🔑
         if: steps.guard.outputs.should_run == 'true'
         id: generate_token
-        uses: ./.github/actions/setup-bot
+        uses: $/.github/actions/setup-bot
         with:
           client-id: ${{ secrets.CHITRANK_BOT_CLIENT_ID }}
           private-key: ${{ secrets.CHITRANK_BOT_PRIVATE_KEY }}
+          permission-contents: write
+          permission-pull-requests: write
 
       - name: Verify All Checks & Mergeability 🕵️‍♂️
         if: steps.guard.outputs.should_run == 'true'
