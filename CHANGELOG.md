@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.5.1] - 2026-09-09
+
+### Refactor
+
+- Modernize action execution, improve release workflow, and enhance artifact handling ([c65bffd](https://github.com/chitranklabs/git-hygiene/commit/c65bffd0e1ac9531527a3db4523103f3eb579529))
+
 ## [0.5.0] - 2026-09-08
 
 ### Features
@@ -43,6 +49,7 @@ All notable changes to this project will be documented in this file.
 - Update dependencies in package.json and pnpm-lock.yaml ([b8e9f48](https://github.com/chitranklabs/git-hygiene/commit/b8e9f48742e217e04cbcea6fa801e725c3071ac3))
 - Update pnpm version to 11.9.0 and migrate to allowBuilds configuration ([5939521](https://github.com/chitranklabs/git-hygiene/commit/5939521792213f69de4cf32cdb575ab6342fbe78))
 - Migrate RELEASE_ARTIFACTS environment variable definition to dynamic step configuration ([a6c45aa](https://github.com/chitranklabs/git-hygiene/commit/a6c45aa71e022039b6231c4987f8cfbc5d8d8589))
+- **release:** Bump version to v0.5.0 ([658c59e](https://github.com/chitranklabs/git-hygiene/commit/658c59eb0c9dc4f93d808af7aa766fd961771773))
 
 ## [0.4.12] - 2026-04-28
 
