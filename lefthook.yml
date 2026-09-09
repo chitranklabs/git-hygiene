@@ -32,7 +32,7 @@ pre-commit:
     # 5. GitHub Actions - Security linting
     lint-actions:
       glob: '.github/workflows/*.yml'
-      run: if command -v zizmor > /dev/null; then zizmor {staged_files}; else echo "zizmor not found, skipping actions lint. Install with 'brew install zizmor'"; fi
+      run: if command -v zizmor > /dev/null; then zizmor -p .github/workflows; else echo "zizmor not found, skipping actions lint. Install with 'brew install zizmor'"; fi
 
 commit-msg:
   commands:

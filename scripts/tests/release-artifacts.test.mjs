@@ -147,7 +147,7 @@ test('workflows default deny and bot tokens request explicit permissions', () =>
 
   for (const filename of readdirSync(workflowDirectory).filter(file => file.endsWith('.yml'))) {
     const workflow = readFileSync(join(workflowDirectory, filename), 'utf8');
-    const callers = workflow.match(/uses: \.\/\.github\/actions\/setup-bot/g) ?? [];
+    const callers = workflow.match(/uses: (?:|\.|\$)\/\.github\/actions\/setup-bot/g) ?? [];
     const explicitPermissions = workflow.match(/permission-contents: (?:read|write)/g) ?? [];
     assert.equal(
       explicitPermissions.length,
