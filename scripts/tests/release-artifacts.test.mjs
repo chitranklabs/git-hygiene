@@ -125,6 +125,11 @@ test('release workflow isolates registries and exposes targeted recovery', () =>
   assert.match(workflow, /for package in core cli/);
   assert.match(workflow, /inputs\.version \|\| github\.event\.pull_request\.merge_commit_sha/);
   assert.match(workflow, /Use \*\*Re-run failed jobs\*\*/);
+  assert.doesNotMatch(
+    workflow,
+    /^    env:\n(?:      .*\n)*      RELEASE_ARTIFACTS:.*runner\.temp/m,
+    'runner context is unavailable in job-level env',
+  );
 });
 
 test('workflows default deny and bot tokens request explicit permissions', () => {

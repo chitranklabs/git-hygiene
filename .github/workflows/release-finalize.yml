@@ -191,7 +191,6 @@ jobs:
       id-token: write
     env:
       NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      RELEASE_ARTIFACTS: ${{ runner.temp }}/release-artifacts
     steps:
       - name: Harden Runner 🛡️
         uses: step-security/harden-runner@e14015d583714f6e62063499dc959a02595150a1 # v2.21.1
@@ -219,6 +218,7 @@ jobs:
       - name: Publish or verify npm packages
         env:
           RELEASE_TAG: ${{ needs.build.outputs.tag }}
+          RELEASE_ARTIFACTS: ${{ runner.temp }}/release-artifacts
         run: |
           test -n "$NODE_AUTH_TOKEN" || {
             echo '::error::NPM_TOKEN is required until trusted publishing is configured'
@@ -296,8 +296,6 @@ jobs:
     timeout-minutes: 10
     permissions:
       contents: read
-    env:
-      RELEASE_ARTIFACTS: ${{ runner.temp }}/release-artifacts
     steps:
       - name: Harden Runner 🛡️
         uses: step-security/harden-runner@e14015d583714f6e62063499dc959a02595150a1 # v2.21.1
@@ -320,6 +318,7 @@ jobs:
       - name: Verify both registries
         env:
           RELEASE_TAG: ${{ needs.build.outputs.tag }}
+          RELEASE_ARTIFACTS: ${{ runner.temp }}/release-artifacts
         run: |
           node scripts/release-artifacts.mjs verify-npm
           node scripts/release-artifacts.mjs verify-jsr
@@ -345,6 +344,7 @@ jobs:
           GH_REPO: ${{ github.repository }}
           RELEASE_TAG: ${{ needs.build.outputs.tag }}
           RELEASE_NOTES: ${{ steps.notes.outputs.content }}
+          RELEASE_ARTIFACTS: ${{ runner.temp }}/release-artifacts
         run: |
           set -euo pipefail
           if gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
@@ -362,7 +362,8 @@ jobs:
               fi
             done
           else
-            gh release create "$RELEASE_TAG" --verify-tag --title "$RELEASE_TAG" +              --notes "$RELEASE_NOTES" "$RELEASE_ARTIFACTS"/*
+            gh release create "$RELEASE_TAG" --verify-tag --title "$RELEASE_TAG" \
+              --notes "$RELEASE_NOTES" "$RELEASE_ARTIFACTS"/*
           fi
 
   release-summary:
