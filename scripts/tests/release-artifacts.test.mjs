@@ -119,15 +119,26 @@ test('release workflow isolates registries and exposes targeted recovery', () =>
     resolve(import.meta.dirname, '../../.github/workflows/release-finalize.yml'),
     'utf8',
   );
+  const prepareWorkflow = readFileSync(
+    resolve(import.meta.dirname, '../../.github/workflows/release-prepare.yml'),
+    'utf8',
+  );
+  assert.match(workflow, /pull_request:\n    types: \[closed\]/);
+  assert.match(workflow, /workflow_dispatch:\n    inputs:/);
+  assert.match(workflow, /github\.event\.pull_request\.merged == true/);
+  assert.match(workflow, /contains\(github\.event\.pull_request\.labels\.\*\.name, 'release'\)/);
+  assert.match(workflow, /github\.ref == 'refs\/heads\/main'/);
+  assert.match(workflow, /github\.actor == 'chitrank2050'/);
+  assert.match(workflow, /RELEASE_TAG="\$\{INPUT_VERSION:-\$\{BRANCH_NAME#chore\/release-\}\}"/);
+  assert.match(prepareWorkflow, /labels: \|\n\s+chore\n\s+release/);
+  assert.match(prepareWorkflow, /branch: 'chore\/release-\$\{\{ steps\.vars\.outputs\.tag_name \}\}'/);
   assert.match(workflow, /options: \[all, npm, jsr, github-release\]/);
   assert.match(workflow, /publish-npm:[\s\S]*needs: \[build, tag\]/);
   assert.match(workflow, /publish-jsr:[\s\S]*needs: \[build, tag\]/);
   assert.match(workflow, /for package in core cli/);
-  assert.match(
-    workflow,
-    /github\.event_name == 'workflow_dispatch' && github\.sha \|\| github\.event\.pull_request\.merge_commit_sha/,
-  );
+  assert.match(workflow, /ref: \$\{\{ github\.sha \}\}/);
   assert.doesNotMatch(workflow, /needs\.build\.outputs\.sha/);
+  assert.doesNotMatch(workflow, /git\/ref\/tags\/\$RELEASE_TAG[^\n]*\|\| true/);
   assert.match(workflow, /Use \*\*Re-run failed jobs\*\*/);
   assert.doesNotMatch(
     workflow,

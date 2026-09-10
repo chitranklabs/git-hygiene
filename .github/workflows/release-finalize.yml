@@ -63,7 +63,7 @@ jobs:
       - name: Checkout release commit 📥
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          ref: ${{ github.event_name == 'workflow_dispatch' && github.sha || github.event.pull_request.merge_commit_sha }}
+          ref: ${{ github.sha }}
           fetch-depth: 0
           persist-credentials: false
 
@@ -146,7 +146,7 @@ jobs:
       - name: Checkout verified release source
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          ref: ${{ github.event_name == 'workflow_dispatch' && github.sha || github.event.pull_request.merge_commit_sha }}
+          ref: ${{ github.sha }}
           persist-credentials: false
 
       - name: Create release token
@@ -161,12 +161,11 @@ jobs:
         env:
           GH_TOKEN: ${{ steps.release_token.outputs.token }}
           GH_REPO: ${{ github.repository }}
-          RELEASE_SHA: ${{ github.event_name == 'workflow_dispatch' && github.sha || github.event.pull_request.merge_commit_sha }}
+          RELEASE_SHA: ${{ github.sha }}
           RELEASE_TAG: ${{ needs.build.outputs.tag }}
         run: |
           set -euo pipefail
-          TAG_SHA="$(gh api "repos/$GH_REPO/git/ref/tags/$RELEASE_TAG" --jq '.object.sha' 2>/dev/null || true)"
-          if [ -n "$TAG_SHA" ]; then
+          if TAG_SHA="$(gh api "repos/$GH_REPO/git/ref/tags/$RELEASE_TAG" --jq '.object.sha' 2>/dev/null)"; then
             [ "$TAG_SHA" = "$RELEASE_SHA" ] || {
               echo "::error::Tag $RELEASE_TAG points to $TAG_SHA, expected $RELEASE_SHA"
               exit 1
