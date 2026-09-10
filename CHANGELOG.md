@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.5.1] - 2026-09-10
+
+### Bug Fixes
+
+- **security:** Harden workflow permissions and release changelog ([d889eb2](https://github.com/chitranklabs/git-hygiene/commit/d889eb228c8b13dfec9d7bc177f9c5f2bfb4fcaa))
+
+### Refactor
+
+- Modernize action execution, improve release workflow, and enhance artifact handling ([c65bffd](https://github.com/chitranklabs/git-hygiene/commit/c65bffd0e1ac9531527a3db4523103f3eb579529))
+
 ## [0.5.0] - 2026-09-08
 
 ### Features
@@ -55,10 +65,6 @@ All notable changes to this project will be documented in this file.
 
 - Remove redundant deps installation & build steps from release workflow & update CI header ([78ec8a7](https://github.com/chitranklabs/git-hygiene/commit/78ec8a74b995774dce979188c178c3716ea76a25))
 
-### Maintenance
-
-- **release:** Bump version to v0.4.12 ([22783c7](https://github.com/chitranklabs/git-hygiene/commit/22783c72540d66e1b851295d1961c19b6db81856))
-
 ## [0.4.11] - 2026-04-27
 
 ### Documentation
@@ -69,7 +75,6 @@ All notable changes to this project will be documented in this file.
 ### Maintenance
 
 - Update Ko-fi support links to use visual badges across README files ([38b975d](https://github.com/chitranklabs/git-hygiene/commit/38b975df2181d39a4ad7feca2838ab568c25459b))
-- **release:** Bump version to v0.4.11 ([aa8da98](https://github.com/chitranklabs/git-hygiene/commit/aa8da98514e2641c607bdb845b469c558afa2563))
 
 ## [0.4.10] - 2026-04-27
 
@@ -82,7 +87,6 @@ All notable changes to this project will be documented in this file.
 - Update documentation, JSR integration, and dependency requirements for Node.js 24 and pnpm 10 ([58c62db](https://github.com/chitranklabs/git-hygiene/commit/58c62db79a08b3776fb8dfc069be3baa69631cb5))
 - Add MIT license files and update relative documentation links in packages ([02927ca](https://github.com/chitranklabs/git-hygiene/commit/02927caab4edcdeb401bf09a13179df0f2b15cbf))
 - Move NPM publish step before JSR publish in release workflow ([b961e37](https://github.com/chitranklabs/git-hygiene/commit/b961e3730cf4edfdea81adcd53929db87e6ea2b5))
-- **release:** Bump version to v0.4.10 ([66f8dda](https://github.com/chitranklabs/git-hygiene/commit/66f8dda6686a20d9a767a4c84cc903287225d34d))
 
 ## [0.4.9] - 2026-04-27
 
@@ -90,22 +94,11 @@ All notable changes to this project will be documented in this file.
 
 - Remove core pkg dep from package.json in favor of jsr.json imports during release/publish ([12b65d9](https://github.com/chitranklabs/git-hygiene/commit/12b65d9a6d40040bb26e2d336443a242b6a4b75f))
 
-### Maintenance
-
-- **release:** Bump version to v0.4.9 ([8abac92](https://github.com/chitranklabs/git-hygiene/commit/8abac926a6afcde68889b34f9ec3d1acefd69538))
-
 ## [0.4.8] - 2026-04-27
 
 ### Maintenance
 
 - Bump version to 0.4.6 and enable auto nodeModulesDir in JSR configuration ([cc56132](https://github.com/chitranklabs/git-hygiene/commit/cc561324e45304d16c74e9c043e89b8ff5158550))
-- **release:** Bump version to v0.4.8 ([625763a](https://github.com/chitranklabs/git-hygiene/commit/625763a955008fad28cc21bc9e0e18288f8bc818))
-
-## [0.4.7] - 2026-04-27
-
-### Maintenance
-
-- **release:** Bump version to v0.4.7 ([d460da9](https://github.com/chitranklabs/git-hygiene/commit/d460da929b1cf8e9f33a6f91c952b8d6db9b55d8))
 
 ## [0.4.6] - 2026-04-27
 
@@ -117,33 +110,17 @@ All notable changes to this project will be documented in this file.
 
 - Remove unnecessary unstable deno publish flags from workflow and script ([c082717](https://github.com/chitranklabs/git-hygiene/commit/c0827170905eeb81b2b840b81ac97a7eee570078))
 
-### Maintenance
-
-- **release:** Bump version to v0.4.6 ([a5aeb20](https://github.com/chitranklabs/git-hygiene/commit/a5aeb203eb69e035e00f110e6b234fe4833f9b6f))
-
-## [0.4.5] - 2026-04-27
-
-### Maintenance
-
-- **release:** Bump version to v0.4.5 ([d0ab07a](https://github.com/chitranklabs/git-hygiene/commit/d0ab07abf802072e7c0e44eff7290b4e66617564))
-
 ## [0.4.4] - 2026-04-27
 
 ### Features
 
 - Sync CLI imports to JSR registry in release workflow ([ee76e83](https://github.com/chitranklabs/git-hygiene/commit/ee76e83cc1d4fe7f938a3370e6fba131ccb2248b))
 
-### Maintenance
-
-- **release:** Bump version to v0.4.4 ([7925c43](https://github.com/chitranklabs/git-hygiene/commit/7925c43f71cb089afd2e6ea006c5180589f04ee3))
-
 ## [0.4.3] - 2026-04-27
 
 ### Maintenance
 
-- **release:** Bump version to v0.4.3 ([42fd4b2](https://github.com/chitranklabs/git-hygiene/commit/42fd4b290bd233f295e69863607378b3c74e24ef))
 - Fix jsr publish flags and metadata ([b86fdcc](https://github.com/chitranklabs/git-hygiene/commit/b86fdcca99138e764ee3a94a5299fb3867eca54f))
-- **release:** Bump version to v0.4.3 ([2a7a918](https://github.com/chitranklabs/git-hygiene/commit/2a7a9188edc9fad49771dc14b0bb79ae83630de7))
 
 ## [0.4.0] - 2026-04-27
 
@@ -165,10 +142,6 @@ All notable changes to this project will be documented in this file.
 
 - Migrate JSR release process from npx to Deno CLI ([72f60f7](https://github.com/chitranklabs/git-hygiene/commit/72f60f7c23caf5c188b7adbd2d9aba694fb88ce8))
 - Update JSR config with refined publish excludes & explicit package paths for release workflow ([2fd9650](https://github.com/chitranklabs/git-hygiene/commit/2fd9650fa52289074afb0a8c727b369fd0baa0ea))
-- **release:** Bump version to v0.4.0 ([1c54194](https://github.com/chitranklabs/git-hygiene/commit/1c541942404182763d44222f708b5beedba70ce8))
-- **release:** Bump version to v0.4.1 ([26b69e3](https://github.com/chitranklabs/git-hygiene/commit/26b69e3b2c094d7e4f8de7d448bd74ce7caf1b46))
-- **release:** Bump version to v0.4.2 ([18b8120](https://github.com/chitranklabs/git-hygiene/commit/18b8120b347f7efaf0fa3cb8dac520f4b18719f6))
-- **release:** Bump version to v0.4.0 ([61252ae](https://github.com/chitranklabs/git-hygiene/commit/61252aed2ad518c3b5fe13415152fef81fee7629))
 
 ## [0.3.1] - 2026-04-27
 
@@ -176,10 +149,6 @@ All notable changes to this project will be documented in this file.
 
 - Add security badges and update action usage examples with latest release SHA ([362c615](https://github.com/chitranklabs/git-hygiene/commit/362c61509fcf38d74ae13c2cdeb8c22d9ab7e652))
 - Update package descriptions to clarify ESM support, runtime requirements and dependency status ([599ae6b](https://github.com/chitranklabs/git-hygiene/commit/599ae6b820dd681e10789afa7691ba37268efce0))
-
-### Maintenance
-
-- **release:** Bump version to v0.3.1 ([9a96697](https://github.com/chitranklabs/git-hygiene/commit/9a96697793e97aa33d6aba3523028fb328a9b658))
 
 ## [0.2.0] - 2026-04-27
 
@@ -216,12 +185,8 @@ All notable changes to this project will be documented in this file.
 ### Maintenance
 
 - Update lefthook configuration to improve git hook execution ([5c0f4ad](https://github.com/chitranklabs/git-hygiene/commit/5c0f4adc48f44c8156f628fe6acdcc796c0bb03a))
-- **release:** Bump version to v0.2.0 ([577bcc8](https://github.com/chitranklabs/git-hygiene/commit/577bcc8441a61b6c7a6a94ec27f3f1944d54a684))
-- **release:** Bump version to v0.3.0 ([016aec6](https://github.com/chitranklabs/git-hygiene/commit/016aec62cb5a288f1a0413d3769ce8d505336212))
 - Strip scripts and update core dependency version in package.json before JSR publication ([bc2e9d5](https://github.com/chitranklabs/git-hygiene/commit/bc2e9d5202c6abd1594758810dbdb382dbed6c7c))
-- **release:** Bump version to v0.2.0 ([c98ed0a](https://github.com/chitranklabs/git-hygiene/commit/c98ed0a21d49175025a9fc0ee80e1dd70b6211a6))
 - Reorder NPM publish step after JSR publish in release workflow ([e5d52dc](https://github.com/chitranklabs/git-hygiene/commit/e5d52dcd16d45f7369cddc4365320308bcf1f363))
-- **release:** Bump version to v0.2.0 ([7cd725a](https://github.com/chitranklabs/git-hygiene/commit/7cd725abdbcd12d0e14b77fa94c423dd9ddf8933))
 
 ## [0.1.6] - 2026-04-26
 
@@ -232,7 +197,6 @@ All notable changes to this project will be documented in this file.
 ### Maintenance
 
 - Update permissions and add strict error handling to auto-approve workflow scripts ([34b2359](https://github.com/chitranklabs/git-hygiene/commit/34b2359d7a73290f7b484af8443312a283c4ae1a))
-- **release:** Bump version to v0.1.6 ([df91567](https://github.com/chitranklabs/git-hygiene/commit/df915671bcf396c4b24cf0d5791004b2600413a7))
 
 ## [0.1.5] - 2026-04-26
 
@@ -251,7 +215,6 @@ All notable changes to this project will be documented in this file.
 - Trim commit messages in changelog template ([54cf3de](https://github.com/chitranklabs/git-hygiene/commit/54cf3deb1fddb9773b298adbb2822a6c79daacba))
 - Update changelog with v0.1.4 release and clean up formatting ([0e9a240](https://github.com/chitranklabs/git-hygiene/commit/0e9a240a308e93fda4580611b835473a65a3f13a))
 - Update workflow trigger name and document GitHub Action usage in README ([d7e6038](https://github.com/chitranklabs/git-hygiene/commit/d7e60380ddbcd6728ea003c0df759b328b4999b8))
-- **release:** Bump version to v0.1.5 ([6b623be](https://github.com/chitranklabs/git-hygiene/commit/6b623be6a739545498d8d274788a61aeb85919df))
 
 ## [0.1.4] - 2026-04-26
 
@@ -260,14 +223,12 @@ All notable changes to this project will be documented in this file.
 - Update JSR metadata with descriptions and publication filters ([cd4076e](https://github.com/chitranklabs/git-hygiene/commit/cd4076ec433a7d7188244575145a2674fa599cd0))
 - Update JSR metadata and bump version to v0.1.3 ([8a45c23](https://github.com/chitranklabs/git-hygiene/commit/8a45c2397754d93bfc12f7f3e15bb1476f7194f7))
 - Update tag pattern and standardize version formatting in release workflow ([8e8787d](https://github.com/chitranklabs/git-hygiene/commit/8e8787d76f93eb11cc5375ae39a91771acfe6db8))
-- **release:** Bump version to v0.1.4 ([0dbb79e](https://github.com/chitranklabs/git-hygiene/commit/0dbb79ed0596591f0530c047d61b8f22cfb92f19))
 
 ## [0.1.3] - 2026-04-26
 
 ### Maintenance
 
 - Dynamically update core package dependency versions during JSR publication ([7f44522](https://github.com/chitranklabs/git-hygiene/commit/7f44522ce8c09f6d99885ef8a9e062b6b2bb691c))
-- **release:** Bump version to v0.1.3 ([f10e8be](https://github.com/chitranklabs/git-hygiene/commit/f10e8beebde9ecbb137ec4faadabead7445d5ae4))
 
 ## [0.1.2] - 2026-04-26
 
@@ -288,13 +249,9 @@ All notable changes to this project will be documented in this file.
 - Renovate config to include merge confidence, refine matching rules & group actions deps ([feab45a](https://github.com/chitranklabs/git-hygiene/commit/feab45af018de9e9e07edfbdf1b88620ead6aa36))
 - Update contents permission to write in auto-approve workflow ([b0a44cc](https://github.com/chitranklabs/git-hygiene/commit/b0a44cc2d5a8f5edd848516f169ca37909aded1d))
 - Update gitignore and allow dirty state in jsr publish workflow ([72d661c](https://github.com/chitranklabs/git-hygiene/commit/72d661c31a90933ff7c0b2f992dbe5f6af706b7b))
-- **release:** Bump version to 0.1.2 ([a1f62c2](https://github.com/chitranklabs/git-hygiene/commit/a1f62c24c03c19a18ce8b97610350030afec56a5))
 - Update maxHeaderLength to 100 in constants and remove redundant config from package.json ([b1a838a](https://github.com/chitranklabs/git-hygiene/commit/b1a838ae59c30d46bd8316d5bf1baf2eb693e791))
 - Increase default maxHeaderLength from 72 to 100 across documentation and config ([ae99ac9](https://github.com/chitranklabs/git-hygiene/commit/ae99ac9d9b6306a723e14c8beb25350d5ba4ac24))
 - Update release workflow to sync versioning for both NPM and JSR packages ([047f4d8](https://github.com/chitranklabs/git-hygiene/commit/047f4d8ae50751d6ff36b1867e65b9713056f51e))
-- **release:** Bump version to v0.1.2 ([7fe59ba](https://github.com/chitranklabs/git-hygiene/commit/7fe59ba1af525ce354321b516cdd6c8e8b101c4a))
-- **release:** Bump version to v0.1.2 ([899bd2f](https://github.com/chitranklabs/git-hygiene/commit/899bd2f53d54697e0295767ae8f010868a962c46))
-- **release:** Bump version to v0.1.2 ([2181482](https://github.com/chitranklabs/git-hygiene/commit/2181482afeac483bbdfddb8ede12380ca5ff50e3))
 
 ## [0.1.1] - 2026-04-26
 
@@ -308,10 +265,6 @@ All notable changes to this project will be documented in this file.
 - Enhance project doc with badges & improved formatting while setting action pkg to private ([acd0a25](https://github.com/chitranklabs/git-hygiene/commit/acd0a2521b73cce60c2269adbfc6855f41e28522))
 - Add repository structure to CONTRIBUTING.md and clean up redundant engine test assertion ([a40917f](https://github.com/chitranklabs/git-hygiene/commit/a40917fb98bb2e8eceed9d7f5a1ecc58e56f2a24))
 - Add input table to README and migrate Gitleaks scan to official GitHub Action ([858f6c4](https://github.com/chitranklabs/git-hygiene/commit/858f6c41df7f11b062ed7b61e4e3514726b38601))
-
-### Maintenance
-
-- **release:** Bump version to 0.1.1 ([6490c0f](https://github.com/chitranklabs/git-hygiene/commit/6490c0f7a7a7f1f89c01fda4adabbac04079f00f))
 
 ## [0.1.0] - 2026-04-26
 
@@ -379,7 +332,5 @@ All notable changes to this project will be documented in this file.
 - Update release PR title format and optimize CI coverage upload condition ([1f02eb8](https://github.com/chitranklabs/git-hygiene/commit/1f02eb8259671b8c01ab0d5063e8e8d77700b026))
 - Add rocket emoji to release pull request title ([fef1a64](https://github.com/chitranklabs/git-hygiene/commit/fef1a64af80b3411483b96de290c7a338d16144d))
 - Update changelog template to link github users and add remote repository configuration ([ef71397](https://github.com/chitranklabs/git-hygiene/commit/ef713972906a0a6c47add22d721653cc17de719e))
-- **release:** Bump version to 0.1.0 ([7a12644](https://github.com/chitranklabs/git-hygiene/commit/7a12644c82a348bbfbd850c11b111c26717cc1a2))
-- **release:** Bump version to 0.1.0 ([2556b6f](https://github.com/chitranklabs/git-hygiene/commit/2556b6fec14e4e9740aa3bf85eed270b509ab2ca))
 
 <!-- generated by git-cliff -->
