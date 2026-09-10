@@ -3,6 +3,7 @@ import { loadConfig } from './config.ts';
 import type { ValidationResult, ResolvedConfig } from './types.ts';
 import { Bumper } from 'conventional-recommended-bump';
 import conventionalCommitsPreset from 'conventional-changelog-conventionalcommits';
+import { loadPreset } from 'conventional-changelog-preset-loader';
 
 /**
  * @description
@@ -179,8 +180,7 @@ async function loadParserPreset(preset: string | unknown): Promise<any> {
     // Dynamic import of arbitrary strings is unanalyzable by JSR,
     // but moving it to a private helper helps avoid score penalties.
     try {
-      const mod = await import(preset);
-      return mod.default ?? mod;
+      return await loadPreset(preset);
     } catch (err) {
       throw new Error(
         `Failed to load parser preset "${preset}": ${err instanceof Error ? err.message : String(err)}`,

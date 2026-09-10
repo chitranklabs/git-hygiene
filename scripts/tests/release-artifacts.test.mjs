@@ -133,11 +133,17 @@ test('release workflow isolates registries and exposes targeted recovery', () =>
   assert.match(prepareWorkflow, /labels: \|\n\s+chore\n\s+release/);
   assert.match(prepareWorkflow, /branch: 'chore\/release-\$\{\{ steps\.vars\.outputs\.tag_name \}\}'/);
   assert.match(workflow, /options: \[all, npm, jsr, github-release\]/);
+  assert.match(workflow, /retention-days: 10/);
   assert.match(workflow, /publish-npm:[\s\S]*needs: \[build, tag\]/);
   assert.match(workflow, /publish-jsr:[\s\S]*needs: \[build, tag\]/);
   assert.match(workflow, /for package in core cli/);
-  assert.match(workflow, /ref: \$\{\{ github\.sha \}\}/);
-  assert.doesNotMatch(workflow, /needs\.build\.outputs\.sha/);
+  assert.match(
+    workflow,
+    /ref: \$\{\{ github\.event_name == 'workflow_dispatch' && inputs\.version \|\| github\.sha \}\}/,
+  );
+  assert.match(workflow, /sha: \$\{\{ steps\.release\.outputs\.sha \}\}/);
+  assert.match(workflow, /echo "sha=\$\(git rev-parse HEAD\)"/);
+  assert.match(workflow, /RELEASE_SHA: \$\{\{ needs\.build\.outputs\.sha \}\}/);
   assert.doesNotMatch(workflow, /git\/ref\/tags\/\$RELEASE_TAG[^\n]*\|\| true/);
   assert.match(workflow, /Use \*\*Re-run failed jobs\*\*/);
   assert.doesNotMatch(

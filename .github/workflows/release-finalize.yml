@@ -54,6 +54,7 @@ jobs:
       attestations: write
     outputs:
       tag: ${{ steps.release.outputs.tag }}
+      sha: ${{ steps.release.outputs.sha }}
     steps:
       - name: Harden Runner 🛡️
         uses: step-security/harden-runner@e14015d583714f6e62063499dc959a02595150a1 # v2.21.1
@@ -63,7 +64,7 @@ jobs:
       - name: Checkout release commit 📥
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          ref: ${{ github.sha }}
+          ref: ${{ github.event_name == 'workflow_dispatch' && inputs.version || github.sha }}
           fetch-depth: 0
           persist-credentials: false
 
@@ -94,6 +95,7 @@ jobs:
           export RELEASE_TAG
           node scripts/release-artifacts.mjs check
           echo "tag=$RELEASE_TAG" >> "$GITHUB_OUTPUT"
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --prefer-offline
@@ -128,7 +130,7 @@ jobs:
           name: release-${{ steps.release.outputs.tag }}
           path: ${{ runner.temp }}/release-artifacts/
           if-no-files-found: error
-          retention-days: 30
+          retention-days: 10
 
   tag:
     name: Anchor Release Tag 🏷️
@@ -146,7 +148,7 @@ jobs:
       - name: Checkout verified release source
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          ref: ${{ github.sha }}
+          ref: ${{ needs.build.outputs.sha }}
           persist-credentials: false
 
       - name: Create release token
@@ -161,7 +163,7 @@ jobs:
         env:
           GH_TOKEN: ${{ steps.release_token.outputs.token }}
           GH_REPO: ${{ github.repository }}
-          RELEASE_SHA: ${{ github.sha }}
+          RELEASE_SHA: ${{ needs.build.outputs.sha }}
           RELEASE_TAG: ${{ needs.build.outputs.tag }}
         run: |
           set -euo pipefail
