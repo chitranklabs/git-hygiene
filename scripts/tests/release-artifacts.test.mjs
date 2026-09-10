@@ -127,6 +127,7 @@ test('release workflow isolates registries and exposes targeted recovery', () =>
     workflow,
     /github\.event_name == 'workflow_dispatch' && github\.sha \|\| github\.event\.pull_request\.merge_commit_sha/,
   );
+  assert.doesNotMatch(workflow, /needs\.build\.outputs\.sha/);
   assert.match(workflow, /Use \*\*Re-run failed jobs\*\*/);
   assert.doesNotMatch(
     workflow,
