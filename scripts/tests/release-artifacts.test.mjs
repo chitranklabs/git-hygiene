@@ -181,3 +181,10 @@ test('git-cliff filters mechanical release commits', () => {
   const config = readFileSync(resolve(import.meta.dirname, '../../cliff.toml'), 'utf8');
   assert.match(config, /\^chore\\\\\(release\\\\\): \(prepare for\|bump version to\).*skip = true/);
 });
+
+test('registry verification bypasses stale CDN responses', () => {
+  const script = readFileSync(resolve(import.meta.dirname, '../release-artifacts.mjs'), 'utf8');
+  assert.match(script, /cache: 'no-store'/);
+  assert.match(script, /searchParams\.set\('_'/);
+  assert.match(script, /attempt < 10/);
+});

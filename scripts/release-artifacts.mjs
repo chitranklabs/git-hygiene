@@ -68,7 +68,13 @@ async function registryJson(url) {
   for (let attempt = 0; attempt < 4; attempt += 1) {
     let response;
     try {
-      response = await fetch(url, { signal: AbortSignal.timeout(30_000) });
+      const requestUrl = new URL(url);
+      requestUrl.searchParams.set('_', `${Date.now()}-${attempt}`);
+      response = await fetch(requestUrl, {
+        cache: 'no-store',
+        headers: { 'cache-control': 'no-cache' },
+        signal: AbortSignal.timeout(30_000),
+      });
     } catch (error) {
       lastError = error;
     }
@@ -94,11 +100,13 @@ async function npmStatus(pkg) {
 }
 
 async function waitForPublished(status, label) {
-  for (let attempt = 0; attempt < 6; attempt += 1) {
+  for (let attempt = 0; attempt < 10; attempt += 1) {
     const result = await status();
     if (result) return result;
-    const delay = 500 * 2 ** attempt + Math.floor(Math.random() * 200);
-    await new Promise(resolveDelay => setTimeout(resolveDelay, delay));
+    if (attempt < 9) {
+      const delay = Math.min(1_000 * 2 ** attempt, 10_000) + Math.floor(Math.random() * 200);
+      await new Promise(resolveDelay => setTimeout(resolveDelay, delay));
+    }
   }
   assert.fail(`Registry did not expose ${label} after publishing`);
 }
