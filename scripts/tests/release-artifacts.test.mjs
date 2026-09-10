@@ -123,7 +123,10 @@ test('release workflow isolates registries and exposes targeted recovery', () =>
   assert.match(workflow, /publish-npm:[\s\S]*needs: \[build, tag\]/);
   assert.match(workflow, /publish-jsr:[\s\S]*needs: \[build, tag\]/);
   assert.match(workflow, /for package in core cli/);
-  assert.match(workflow, /inputs\.version \|\| github\.event\.pull_request\.merge_commit_sha/);
+  assert.match(
+    workflow,
+    /github\.event_name == 'workflow_dispatch' && github\.sha \|\| github\.event\.pull_request\.merge_commit_sha/,
+  );
   assert.match(workflow, /Use \*\*Re-run failed jobs\*\*/);
   assert.doesNotMatch(
     workflow,
