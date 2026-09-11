@@ -26,8 +26,9 @@ concurrency:
 jobs:
   prepare:
     name: Prepare Release PR 🚀
-    if: github.actor == github.repository_owner || github.actor == 'chitrank2050'
+    if: github.ref == 'refs/heads/main' && (github.actor == github.repository_owner || github.actor == 'chitrank2050')
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     permissions:
       contents: read
     env:
@@ -86,10 +87,11 @@ jobs:
           OLD_VERSION=$(jq -r .version packages/cli/package.json)
 
           if [ -n "$MANUAL_TAG" ]; then
-            CLEAN_TAG=$(echo "$MANUAL_TAG" | sed 's/^v//')
+            [[ "$MANUAL_TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]] || { echo '::error::Expected a stable vX.Y.Z tag'; exit 1; }
+            CLEAN_TAG="${MANUAL_TAG#v}"
             echo "Applying manual version override: $CLEAN_TAG"
             for pkg in packages/cli packages/core; do
-              jq ".version = \"$CLEAN_TAG\"" "$pkg/package.json" > "$pkg/package.json.tmp" && mv "$pkg/package.json.tmp" "$pkg/package.json"
+              jq --arg version "$CLEAN_TAG" '.version = $version' "$pkg/package.json" > "$pkg/package.json.tmp" && mv "$pkg/package.json.tmp" "$pkg/package.json"
             done
             node scripts/sync-jsr-versions.mjs
           else
@@ -105,6 +107,7 @@ jobs:
             echo "release_ready=false" >> "$GITHUB_OUTPUT"
             echo "⚠️ No package versions changed. Nothing to release."
           else
+            node --input-type=module -e 'import assert from "node:assert/strict"; const [oldVersion, nextVersion] = process.argv.slice(1).map(v => v.split(".").map(Number)); const index = nextVersion.findIndex((v, i) => v !== oldVersion[i]); assert(index >= 0 && nextVersion[index] > oldVersion[index], "Release version must increase");' "$OLD_VERSION" "$NEW_VERSION"
             echo "release_ready=true" >> "$GITHUB_OUTPUT"
             echo "clean_version=$NEW_VERSION" >> "$GITHUB_OUTPUT"
             echo "tag_name=v$NEW_VERSION" >> "$GITHUB_OUTPUT"
@@ -124,13 +127,18 @@ jobs:
         if: steps.vars.outputs.release_ready == 'true'
         run: |
           pnpm install --lockfile-only --ignore-scripts --prefer-offline
-          pnpm exec prettier --write CHANGELOG.md package.json packages/*/package.json packages/*/jsr.json packages/*/CHANGELOG.md 2>/dev/null || true
+          pnpm exec prettier --write CHANGELOG.md package.json 'packages/*/package.json' 'packages/*/jsr.json' 'packages/*/CHANGELOG.md' --no-error-on-unmatched-pattern
 
       # The commit-msg hook runs the source CLI, whose core import resolves to dist.
       # Build only that dependency; release preparation does not need the website.
       - name: Build release hook dependency 🏗️
         if: steps.vars.outputs.release_ready == 'true'
-        run: pnpm --filter @chitrank2050/git-hygiene-core build
+        env:
+          RELEASE_TAG: ${{ steps.vars.outputs.tag_name }}
+        run: |
+          node scripts/release-artifacts.mjs check
+          pnpm --filter @chitrank2050/git-hygiene-core build
+          pnpm build:action
 
       - name: Create Pull Request for Release 🔀
         id: cpr
@@ -156,6 +164,7 @@ jobs:
           delete-branch: true
           assignees: chitrank2050
           add-paths: |
+            dist/action.js
             .changeset/*.md
             CHANGELOG.md
             package.json

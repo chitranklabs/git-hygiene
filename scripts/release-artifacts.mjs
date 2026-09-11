@@ -3,6 +3,7 @@ import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import {
   copyFileSync,
+  existsSync,
   createWriteStream,
   mkdirSync,
   mkdtempSync,
@@ -129,13 +130,32 @@ async function verifyExistingNpm(pkg, metadata) {
 async function jsrStatus(pkg) {
   const packagePath = pkg.name.replace(/^@/, '');
   const metadata = await registryJson(`https://jsr.io/@${packagePath}/meta.json`);
-  return Boolean(metadata?.versions?.[version]);
+  if (!metadata?.versions?.[version]) return false;
+  const published = await registryJson(`https://jsr.io/@${packagePath}/${version}_meta.json`);
+  assert(published?.manifest, 'JSR version manifest is unavailable');
+  verifyJsrManifest(published.manifest, join(root, 'packages', pkg.dir));
+  return true;
+}
+
+export function verifyJsrManifest(manifest, directory) {
+  assert(Object.keys(manifest).length > 0, 'Empty JSR manifest');
+  for (const [name, entry] of Object.entries(manifest)) {
+    const file = resolve(directory, `.${name}`);
+    assert(name.startsWith('/') && file.startsWith(`${resolve(directory)}/`), 'Invalid JSR file path');
+    const checksum = `sha256-${createHash('sha256').update(readFileSync(file)).digest('hex')}`;
+    assert.equal(checksum, entry.checksum, `Published JSR file differs: ${name}`);
+  }
 }
 
 async function main(command, argument) {
   validateWorkspace();
 
   if (command === 'check') {
+    const changesets = join(root, '.changeset');
+    assert(
+      !existsSync(changesets) || !readdirSync(changesets).some(file => file.endsWith('.md') && file !== 'README.md'),
+      'Unconsumed changesets remain; prepare the release before publishing',
+    );
     const refs = capture('git', ['tag', '--list', `v${version}`]);
     if (refs)
       assert.equal(
@@ -276,4 +296,10 @@ async function main(command, argument) {
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href)
-  await main(process.argv[2], process.argv[3]);
+  try {
+    await main(process.argv[2], process.argv[3]);
+  } catch (error) {
+    console.error(error);
+    // Exit 1 is reserved for a confirmed absent JSR version.
+    process.exitCode = 2;
+  }

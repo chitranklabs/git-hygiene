@@ -274,6 +274,9 @@ jobs:
           for package in core cli; do
             if node scripts/release-artifacts.mjs jsr-exists "$package"; then
               continue
+            else
+              status=$?
+              [ "$status" -eq 1 ] || exit "$status"
             fi
             deno publish --config "packages/$package/jsr.json" "${PUBLISH_ARGS[@]}"
           done
