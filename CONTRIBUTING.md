@@ -119,6 +119,8 @@ For local validation, run `node --test scripts/tests/release-artifacts.test.mjs`
 > [!IMPORTANT]
 > Publishing across npm, JSR, and GitHub is not atomic. Use **Re-run failed jobs** for an immediate retry. For later recovery, manually dispatch **Release 2 - Finalize Tag** with the existing `vX.Y.Z` tag and select `npm`, `jsr`, or `github-release`. npm accepts an existing version only when its normalized unpacked contents match the prepared tarball. Existing JSR versions are skipped because registry versions are immutable. Tag conflicts and conflicting GitHub Release assets stop the workflow; nothing is overwritten silently.
 
+Existing JSR versions are accepted only after their published file checksums match the tagged source. Registry lookup failures stop publishing; only a confirmed absent version permits a publish attempt. Preparation runs on main, rejects unconsumed changesets and version downgrades, and rebuilds the committed action bundle after version changes.
+
 JSR provenance is required for normal releases. `disabled-for-recovery` is an explicit manual-only escape hatch for a confirmed upstream provenance outage; it must not be selected to bypass package validation or type checking.
 
 We use an automated monorepo release flow powered by **Changesets** and **git-cliff**:

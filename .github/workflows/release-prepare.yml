@@ -48,6 +48,9 @@ jobs:
 
       - name: Install pnpm 📦
         uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6.0.10
+        with:
+          version: 11.25.0
+          run_install: false
 
       - name: Setup Node.js 🟢
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
@@ -58,7 +61,7 @@ jobs:
       - name: Setup Deno 🦕
         uses: denoland/setup-deno@22d081ff2d3a40755e97629de92e3bcbfa7cf2ed # v2.0.5
         with:
-          deno-version: v2.x
+          deno-version: 2.9.6
 
       - name: Install dependencies 📥
         run: pnpm install --frozen-lockfile --prefer-offline

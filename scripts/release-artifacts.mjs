@@ -141,7 +141,10 @@ export function verifyJsrManifest(manifest, directory) {
   assert(Object.keys(manifest).length > 0, 'Empty JSR manifest');
   for (const [name, entry] of Object.entries(manifest)) {
     const file = resolve(directory, `.${name}`);
-    assert(name.startsWith('/') && file.startsWith(`${resolve(directory)}/`), 'Invalid JSR file path');
+    assert(
+      name.startsWith('/') && file.startsWith(`${resolve(directory)}/`),
+      'Invalid JSR file path',
+    );
     const checksum = `sha256-${createHash('sha256').update(readFileSync(file)).digest('hex')}`;
     assert.equal(checksum, entry.checksum, `Published JSR file differs: ${name}`);
   }
@@ -153,7 +156,8 @@ async function main(command, argument) {
   if (command === 'check') {
     const changesets = join(root, '.changeset');
     assert(
-      !existsSync(changesets) || !readdirSync(changesets).some(file => file.endsWith('.md') && file !== 'README.md'),
+      !existsSync(changesets) ||
+        !readdirSync(changesets).some(file => file.endsWith('.md') && file !== 'README.md'),
       'Unconsumed changesets remain; prepare the release before publishing',
     );
     const refs = capture('git', ['tag', '--list', `v${version}`]);

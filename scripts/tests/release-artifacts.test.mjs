@@ -14,7 +14,25 @@ import {
 import { join, resolve } from 'node:path';
 import { tmpdir } from 'node:os';
 import { execFileSync, spawnSync } from 'node:child_process';
-import { normalizedTarballDigest } from '../release-artifacts.mjs';
+import { normalizedTarballDigest, verifyJsrManifest } from '../release-artifacts.mjs';
+import { createHash } from 'node:crypto';
+
+test('JSR recovery rejects changed content and unsafe paths', t => {
+  const dir = mkdtempSync(join(tmpdir(), 'hygiene-jsr-'));
+  t.after(() => rmSync(dir, { recursive: true, force: true }));
+  writeFileSync(join(dir, 'index.ts'), 'export const value = 1;');
+  const checksum = `sha256-${createHash('sha256').update('export const value = 1;').digest('hex')}`;
+  verifyJsrManifest({ '/index.ts': { checksum } }, dir);
+  assert.throws(
+    () => verifyJsrManifest({ '/index.ts': { checksum: 'different' } }, dir),
+    /differs/,
+  );
+  assert.throws(
+    () => verifyJsrManifest({ '/../outside': { checksum } }, dir),
+    /Invalid JSR file path/,
+  );
+  assert.throws(() => verifyJsrManifest({}, dir), /Empty JSR manifest/);
+});
 
 function fixture(t) {
   const dir = mkdtempSync(join(tmpdir(), 'hygiene-release-check-'));
@@ -123,15 +141,18 @@ test('release workflow isolates registries and exposes targeted recovery', () =>
     resolve(import.meta.dirname, '../../.github/workflows/release-prepare.yml'),
     'utf8',
   );
-  assert.match(workflow, /pull_request:\n    types: \[closed\]/);
-  assert.match(workflow, /workflow_dispatch:\n    inputs:/);
+  assert.match(workflow, /pull_request:\n {4}types: \[closed\]/);
+  assert.match(workflow, /workflow_dispatch:\n {4}inputs:/);
   assert.match(workflow, /github\.event\.pull_request\.merged == true/);
   assert.match(workflow, /contains\(github\.event\.pull_request\.labels\.\*\.name, 'release'\)/);
   assert.match(workflow, /github\.ref == 'refs\/heads\/main'/);
   assert.match(workflow, /github\.actor == 'chitrank2050'/);
   assert.match(workflow, /RELEASE_TAG="\$\{INPUT_VERSION:-\$\{BRANCH_NAME#chore\/release-\}\}"/);
   assert.match(prepareWorkflow, /labels: \|\n\s+chore\n\s+release/);
-  assert.match(prepareWorkflow, /branch: 'chore\/release-\$\{\{ steps\.vars\.outputs\.tag_name \}\}'/);
+  assert.match(
+    prepareWorkflow,
+    /branch: 'chore\/release-\$\{\{ steps\.vars\.outputs\.tag_name \}\}'/,
+  );
   assert.match(workflow, /options: \[all, npm, jsr, github-release\]/);
   assert.match(workflow, /retention-days: 10/);
   assert.match(workflow, /publish-npm:[\s\S]*needs: \[build, tag\]/);
@@ -148,7 +169,7 @@ test('release workflow isolates registries and exposes targeted recovery', () =>
   assert.match(workflow, /Use \*\*Re-run failed jobs\*\*/);
   assert.doesNotMatch(
     workflow,
-    /^    env:\n(?:      .*\n)*      RELEASE_ARTIFACTS:.*runner\.temp/m,
+    /^ {4}env:\n(?: {6}.*\n)* {6}RELEASE_ARTIFACTS:.*runner\.temp/m,
     'runner context is unavailable in job-level env',
   );
 });
