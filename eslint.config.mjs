@@ -15,9 +15,7 @@ export default tseslint.config(
         ...globals.es2024,
       },
       parserOptions: {
-        projectService: {
-          allowDefaultProject: ['*.mjs', 'app/*.mjs', 'app/scripts/*.mjs'],
-        },
+        projectService: true,
         tsconfigRootDir: import.meta.dirname,
       },
     },
@@ -26,6 +24,10 @@ export default tseslint.config(
       '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
       'no-console': 'off', // CLI tool needs console
     },
+  },
+  {
+    files: ['**/*.js', '**/*.mjs', '**/*.cjs'],
+    ...tseslint.configs.disableTypeChecked,
   },
   {
     ignores: [

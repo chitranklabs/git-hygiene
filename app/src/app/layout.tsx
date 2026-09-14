@@ -118,12 +118,8 @@ export default function RootLayout({
 						<SiteFooter />
 					</div>
 				</ThemeProvider>
-				{isProduction && (
-					<>
-						<WebVitals />
-						<UmamiAnalytics />
-					</>
-				)}
+				<WebVitals />
+				{isProduction && <UmamiAnalytics />}
 			</body>
 		</html>
 	)
