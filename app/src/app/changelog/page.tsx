@@ -31,7 +31,7 @@ const releases = groupReleasesByMinor(changelogJson as unknown as GitCliffReleas
 
 export default function ChangelogPage() {
 	return (
-		<div className="apple-canvas relative min-h-screen overflow-x-hidden">
+		<div className="gh-canvas relative min-h-screen overflow-x-hidden">
 			<JsonLd
 				data={{
 					"@context": "https://schema.org",

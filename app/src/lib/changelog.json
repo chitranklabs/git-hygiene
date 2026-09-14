@@ -882,9 +882,80 @@
           "is_first_time": false
         },
         "raw_message": "refactor: migrate changelog to static json data and streamline styles"
+      },
+      {
+        "id": "6825b9ee3d04ae1def67968f196c1386f06c61c3",
+        "message": "remove emoji from footer brand and clear changelog data",
+        "body": null,
+        "footers": [],
+        "group": "<!-- 7 -->Maintenance",
+        "breaking_description": null,
+        "breaking": false,
+        "scope": null,
+        "links": [],
+        "author": {
+          "name": "chitrank2050",
+          "email": "chitrank2050@gmail.com",
+          "timestamp": 1789382282
+        },
+        "committer": {
+          "name": "chitrank2050",
+          "email": "chitrank2050@gmail.com",
+          "timestamp": 1789382282
+        },
+        "conventional": true,
+        "merge_commit": false,
+        "statistics": { "files_changed": 6, "additions": 413, "deletions": 291 },
+        "extra": null,
+        "github": {
+          "username": null,
+          "pr_author": null,
+          "pr_title": null,
+          "pr_number": null,
+          "pr_numbers": [],
+          "pr_labels": [],
+          "is_first_time": false
+        },
+        "gitlab": {
+          "username": null,
+          "pr_author": null,
+          "pr_title": null,
+          "pr_number": null,
+          "pr_numbers": [],
+          "pr_labels": [],
+          "is_first_time": false
+        },
+        "gitea": {
+          "username": null,
+          "pr_author": null,
+          "pr_title": null,
+          "pr_number": null,
+          "pr_numbers": [],
+          "pr_labels": [],
+          "is_first_time": false
+        },
+        "bitbucket": {
+          "username": null,
+          "pr_author": null,
+          "pr_title": null,
+          "pr_number": null,
+          "pr_numbers": [],
+          "pr_labels": [],
+          "is_first_time": false
+        },
+        "azure_devops": {
+          "username": null,
+          "pr_author": null,
+          "pr_title": null,
+          "pr_number": null,
+          "pr_numbers": [],
+          "pr_labels": [],
+          "is_first_time": false
+        },
+        "raw_message": "chore: remove emoji from footer brand and clear changelog data"
       }
     ],
-    "commit_id": "e77e263a3225b6f4190d15dab8d3188284ef6869",
+    "commit_id": "6825b9ee3d04ae1def67968f196c1386f06c61c3",
     "timestamp": null,
     "previous": {
       "version": "v0.5.1",
@@ -1433,13 +1504,13 @@
     "repository": "/Users/chitrank/dev/github-chitranklabs/git-hygiene",
     "commit_range": {
       "from": "509313be686cabf135cd671d0620031d76d29002",
-      "to": "e77e263a3225b6f4190d15dab8d3188284ef6869"
+      "to": "6825b9ee3d04ae1def67968f196c1386f06c61c3"
     },
     "submodule_commits": {},
     "statistics": {
-      "commit_count": 11,
+      "commit_count": 12,
       "commits_timespan": 4,
-      "conventional_commit_count": 11,
+      "conventional_commit_count": 12,
       "links": [],
       "days_passed_since_last_release": 4
     },

@@ -253,7 +253,7 @@ export function LiveSandbox() {
 			<div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border/80 pb-4 sm:pb-5">
 				<div>
 					<div className="flex items-center gap-2">
-						<span className="apple-status-dot" aria-hidden="true" />
+						<span className="gh-status-dot" aria-hidden="true" />
 						<h3 className="font-mono text-sm font-bold text-text tracking-tight">
 							Live Metadata Inspector
 						</h3>
@@ -516,7 +516,7 @@ export function LiveSandbox() {
 								Engine Analysis
 							</span>
 							{(mode === "commit" ? commitResult.valid : branchResult.valid) ? (
-								<span className="apple-badge text-2xs py-0.5 whitespace-nowrap shrink-0">
+								<span className="gh-badge text-2xs py-0.5 whitespace-nowrap shrink-0">
 									✓ VALID
 								</span>
 							) : (

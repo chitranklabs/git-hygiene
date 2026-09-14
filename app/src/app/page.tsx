@@ -140,7 +140,7 @@ export default async function HomePage() {
 	}
 
 	return (
-		<div className="relative min-h-screen apple-canvas">
+		<div className="relative min-h-screen gh-canvas">
 			<JsonLd data={jsonLd} />
 
 			<Container as="main" id="main-content" tabIndex={-1} className="pt-ml-10 pb-ml-24">
@@ -149,7 +149,7 @@ export default async function HomePage() {
 					{/* Status Eyebrow Badge */}
 					<div className="gh-glass inline-flex items-center justify-center gap-2 rounded-full px-3.5 py-1.5 shadow-xs mb-ml-6 cursor-default whitespace-nowrap max-w-full overflow-hidden">
 						<span className="inline-flex items-center gap-1.5 font-mono text-2xs font-semibold text-accent shrink-0">
-							<span className="apple-status-dot" aria-hidden="true" />
+							<span className="gh-status-dot" aria-hidden="true" />
 							{release.version}
 						</span>
 						<span className="text-border-strong font-mono text-xs select-none shrink-0">/</span>
@@ -173,7 +173,6 @@ export default async function HomePage() {
 						<Button asChild size="md" className="w-full sm:w-auto shadow-md hover:shadow-lg">
 							<a href="#sandbox">
 								Try Live Sandbox
-								<Button.Arrow />
 							</a>
 						</Button>
 						<Button asChild variant="secondary" size="md" className="w-full sm:w-auto">
@@ -192,24 +191,24 @@ export default async function HomePage() {
 						<InstallCommand command="pnpm add -D @chitrank2050/git-hygiene" />
 					</div>
 
-					{/* Integrated Apple Telemetry Spec Strip */}
-					<div className="mt-8 sm:mt-ml-12 apple-spec-strip">
-						<div className="apple-spec-item">
+					{/* Integrated Hardware Telemetry Spec Strip */}
+					<div className="mt-8 sm:mt-ml-12 gh-spec-strip">
+						<div className="gh-spec-item">
 							<strong className="block text-xl sm:text-2xl font-bold text-text font-mono tabular-nums tracking-tight">0</strong>
 							<span className="text-3xs uppercase tracking-[0.06em] text-accent font-semibold font-mono">Runtime Packages</span>
 							<p className="text-3xs text-text-muted leading-tight font-sans mt-0.5">Pure Node.js built-ins. Zero transitive dependency attack surface.</p>
 						</div>
-						<div className="apple-spec-item">
+						<div className="gh-spec-item">
 							<strong className="block text-xl sm:text-2xl font-bold text-text font-mono tabular-nums tracking-tight">&lt; 5 ms</strong>
 							<span className="text-3xs uppercase tracking-[0.06em] text-accent font-semibold font-mono">Cold Startup</span>
 							<p className="text-3xs text-text-muted leading-tight font-sans mt-0.5">Native Node 24+ type-stripping execution without transpilation overhead.</p>
 						</div>
-						<div className="apple-spec-item">
+						<div className="gh-spec-item">
 							<strong className="block text-xl sm:text-2xl font-bold text-text font-mono tabular-nums tracking-tight">SLSA-3</strong>
 							<span className="text-3xs uppercase tracking-[0.06em] text-accent font-semibold font-mono">Supply Chain</span>
 							<p className="text-3xs text-text-muted leading-tight font-sans mt-0.5">100% SHA-pinned workflows with OpenSSF & Zizmor security audits.</p>
 						</div>
-						<div className="apple-spec-item">
+						<div className="gh-spec-item">
 							<strong className="block text-xl sm:text-2xl font-bold text-text font-mono tabular-nums tracking-tight">Node 24+</strong>
 							<span className="text-3xs uppercase tracking-[0.06em] text-accent font-semibold font-mono">Native Types</span>
 							<p className="text-3xs text-text-muted leading-tight font-sans mt-0.5">Executes pure TypeScript directly via built-in experimental-strip-types.</p>
@@ -257,8 +256,8 @@ export default async function HomePage() {
 										<tr key={b.metric} className="hover:bg-surface-2/40 transition-colors">
 											<td className="py-3.5 px-4 sm:px-6 font-semibold text-text whitespace-nowrap">{b.metric}</td>
 											<td className="py-3.5 px-4 sm:px-6 font-bold text-accent whitespace-nowrap">
-												<span className="apple-badge">
-													<span className="apple-status-dot" aria-hidden="true" />
+												<span className="gh-badge">
+													<span className="gh-status-dot" aria-hidden="true" />
 													<span>{b.hygiene}</span>
 												</span>
 											</td>
