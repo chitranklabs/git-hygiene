@@ -147,34 +147,34 @@ export default async function HomePage() {
 				{/* ── HERO SECTION ── */}
 				<section className="text-center max-w-4xl mx-auto pt-4 sm:pt-ml-6 pb-ml-10 px-2 sm:px-0">
 					{/* Badge Pill */}
-					<div className="inline-flex max-w-full flex-wrap items-center justify-center gap-2 rounded-full border border-border bg-surface p-1 sm:pr-3.5 backdrop-blur-md shadow-xs mb-ml-6">
+					<div className="gh-glass gh-interactive inline-flex max-w-full flex-wrap items-center justify-center gap-2 rounded-full p-1 sm:pr-3.5 shadow-xs mb-ml-6 cursor-default">
 						<Status variant="accent" size="sm">
 							{release.version}
 						</Status>
-						<span className="font-mono text-3xs sm:text-2xs font-semibold text-text-muted uppercase tracking-wider">
+						<span className="font-mono text-3xs sm:text-2xs font-semibold text-text-muted uppercase tracking-[0.06em]">
 							Node.js 24+ Native · Zero Dependencies
 						</span>
 					</div>
 
 					{/* High-Conviction Product Headline */}
-					<h1 className="font-sans text-text text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.15] sm:leading-[1.08]">
+					<h1 className="display-title font-sans text-text text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] leading-[1.1] sm:leading-[1.05]">
 						The zero-dependency metadata validator for <span className="text-accent">modern Git</span>.
 					</h1>
 
 					{/* Problem & Value Prop Subtitle */}
-					<p className="mt-4 sm:mt-ml-5 text-text-secondary text-sm sm:text-base md:text-lg font-normal leading-relaxed max-w-2xl mx-auto font-sans">
+					<p className="subheading mt-4 sm:mt-ml-5 text-text-secondary text-sm sm:text-base md:text-lg font-normal leading-relaxed max-w-2xl mx-auto font-sans tracking-[-0.01em]">
 						Enforce conventional commits, branch naming patterns, and PR titles with native Node.js 24+ type-stripping speed. Stop broken branch names and non-standard commits in CI before they happen.
 					</p>
 
 					{/* Action Buttons */}
 					<div className="mt-6 sm:mt-ml-8 flex flex-col sm:flex-row items-center justify-center gap-3">
-						<Button asChild size="md" className="w-full sm:w-auto">
+						<Button asChild size="md" className="w-full sm:w-auto gh-interactive shadow-md hover:shadow-lg">
 							<a href="#sandbox">
 								Try Live Sandbox
 								<Button.Arrow />
 							</a>
 						</Button>
-						<Button asChild variant="secondary" size="md" className="w-full sm:w-auto">
+						<Button asChild variant="secondary" size="md" className="w-full sm:w-auto gh-interactive gh-glass border-border/80">
 							<a
 								href="https://github.com/chitranklabs/git-hygiene"
 								target="_blank"
@@ -191,22 +191,22 @@ export default async function HomePage() {
 					</div>
 
 					{/* Quick Proof Metrics */}
-					<div className="mt-8 sm:mt-ml-12 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-ml-4 border-t border-border pt-6 sm:pt-ml-8 text-center font-mono">
-						<div className="p-1 sm:p-ml-2">
-							<strong className="block text-xl sm:text-2xl font-bold text-text tabular-nums">0</strong>
-							<span className="text-3xs uppercase tracking-wider text-accent font-semibold">Runtime Deps</span>
+					<div className="mt-8 sm:mt-ml-12 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-ml-4 text-center font-mono">
+						<div className="gh-glass gh-interactive rounded-xl p-3 sm:p-ml-3.5">
+							<strong className="block text-xl sm:text-2xl font-bold text-text tabular-nums tracking-tight">0</strong>
+							<span className="text-3xs uppercase tracking-[0.06em] text-accent font-semibold">Runtime Deps</span>
 						</div>
-						<div className="p-1 sm:p-ml-2">
-							<strong className="block text-xl sm:text-2xl font-bold text-text tabular-nums">&lt; 5ms</strong>
-							<span className="text-3xs uppercase tracking-wider text-accent font-semibold">Cold Startup</span>
+						<div className="gh-glass gh-interactive rounded-xl p-3 sm:p-ml-3.5">
+							<strong className="block text-xl sm:text-2xl font-bold text-text tabular-nums tracking-tight">&lt; 5ms</strong>
+							<span className="text-3xs uppercase tracking-[0.06em] text-accent font-semibold">Cold Startup</span>
 						</div>
-						<div className="p-1 sm:p-ml-2">
-							<strong className="block text-xl sm:text-2xl font-bold text-text tabular-nums">SLSA-3</strong>
-							<span className="text-3xs uppercase tracking-wider text-accent font-semibold">Provenance</span>
+						<div className="gh-glass gh-interactive rounded-xl p-3 sm:p-ml-3.5">
+							<strong className="block text-xl sm:text-2xl font-bold text-text tabular-nums tracking-tight">SLSA-3</strong>
+							<span className="text-3xs uppercase tracking-[0.06em] text-accent font-semibold">Provenance</span>
 						</div>
-						<div className="p-1 sm:p-ml-2">
-							<strong className="block text-xl sm:text-2xl font-bold text-text tabular-nums">Node 24+</strong>
-							<span className="text-3xs uppercase tracking-wider text-accent font-semibold">Native Types</span>
+						<div className="gh-glass gh-interactive rounded-xl p-3 sm:p-ml-3.5">
+							<strong className="block text-xl sm:text-2xl font-bold text-text tabular-nums tracking-tight">Node 24+</strong>
+							<span className="text-3xs uppercase tracking-[0.06em] text-accent font-semibold">Native Types</span>
 						</div>
 					</div>
 				</section>

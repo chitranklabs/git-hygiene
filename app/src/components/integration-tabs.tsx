@@ -62,12 +62,12 @@ export function IntegrationTabs() {
 	const active = INTEGRATIONS.find((i) => i.id === activeId) || INTEGRATIONS[0]
 
 	return (
-		<div className="mt-ml-8 rounded-2xl border border-border bg-surface/60 p-4 sm:p-6 md:p-8 shadow-md">
-			{/* Tab Selector */}
+		<div className="mt-ml-8 rounded-2xl gh-glass p-4 sm:p-6 md:p-8">
+			{/* Tab Selector - Fluid Segmented Control */}
 			<div
 				role="tablist"
 				aria-label="Workflow integrations"
-				className="flex items-center gap-2 overflow-x-auto pb-3 border-b border-border max-w-full"
+				className="inline-flex items-center gap-1.5 p-1 rounded-xl bg-surface-2/60 border border-border/80 backdrop-blur-md max-w-full overflow-x-auto"
 			>
 				{INTEGRATIONS.map((tab) => (
 					<button
@@ -78,18 +78,18 @@ export function IntegrationTabs() {
 						aria-controls={`panel-integration-${tab.id}`}
 						type="button"
 						onClick={() => setActiveId(tab.id)}
-						className={`shrink-0 cursor-pointer inline-flex items-center gap-2 rounded-lg border px-3 py-1.5 sm:px-3.5 sm:py-2 font-mono text-xs font-semibold transition-all ${
+						className={`shrink-0 cursor-pointer inline-flex items-center gap-2 rounded-lg px-3.5 py-2 font-mono text-xs font-semibold transition-all duration-150 ${
 							activeId === tab.id
-								? "border-accent bg-surface-2 text-text shadow-xs"
-								: "border-transparent bg-transparent text-text-muted hover:bg-surface-2/60 hover:text-text"
+								? "bg-surface text-text shadow-xs border border-border/90"
+								: "text-text-muted hover:text-text hover:bg-surface/40 border border-transparent"
 						}`}
 					>
 						<span>{tab.title}</span>
 						<span
-							className={`rounded px-1.5 py-0.5 text-3xs uppercase tracking-wider ${
+							className={`rounded-md px-1.5 py-0.5 text-3xs uppercase tracking-wider font-semibold ${
 								activeId === tab.id
 									? "bg-accent-soft text-accent"
-									: "bg-surface-2 text-text-muted"
+									: "bg-surface-3 text-text-muted"
 							}`}
 						>
 							{tab.badge}

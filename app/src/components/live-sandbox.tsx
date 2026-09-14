@@ -248,12 +248,12 @@ export function LiveSandbox() {
 	}
 
 	return (
-		<div className="rounded-2xl border border-border bg-surface p-4 sm:p-6 md:p-8 shadow-md backdrop-blur-md">
+		<div className="rounded-2xl gh-glass p-4 sm:p-6 md:p-8">
 			{/* Inspector Header */}
-			<div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border pb-4 sm:pb-5">
+			<div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border/80 pb-4 sm:pb-5">
 				<div>
 					<div className="flex items-center gap-2">
-						<span className="flex size-2.5 rounded-full bg-accent animate-pulse" />
+						<span className="flex size-2.5 rounded-full bg-accent animate-pulse shadow-[0_0_8px_var(--accent)]" />
 						<h3 className="font-mono text-sm font-bold text-text tracking-tight">
 							Live Metadata Inspector
 						</h3>
@@ -268,21 +268,21 @@ export function LiveSandbox() {
 					<button
 						type="button"
 						onClick={() => setShowConfig(!showConfig)}
-						className={`cursor-pointer inline-flex items-center gap-1.5 rounded-xl border px-3 py-1.5 font-mono text-xs font-semibold transition-all ${
+						className={`cursor-pointer inline-flex items-center gap-1.5 rounded-xl border px-3 py-1.5 font-mono text-xs font-semibold transition-all duration-150 ${
 							showConfig
 								? "border-accent bg-accent-soft text-accent"
-								: "border-border bg-surface-2 text-text-secondary hover:text-text"
+								: "border-border/80 bg-surface-2/70 text-text-secondary hover:text-text hover:bg-surface-2"
 						}`}
 					>
 						<span>⚙️</span>
 						<span>{showConfig ? "Hide Config" : "Edit Config"}</span>
 					</button>
 
-					{/* Mode Tabs */}
+					{/* Mode Tabs - Fluid Segmented Control */}
 					<div
 						role="tablist"
 						aria-label="Validation target"
-						className="inline-flex rounded-xl border border-border bg-surface-2 p-1 font-mono text-xs shadow-xs"
+						className="inline-flex rounded-xl border border-border/80 bg-surface-2/70 p-1 font-mono text-xs shadow-xs backdrop-blur-md"
 					>
 						<button
 							role="tab"
@@ -291,7 +291,7 @@ export function LiveSandbox() {
 							aria-controls="panel-commit"
 							type="button"
 							onClick={() => setMode("commit")}
-							className={`rounded-lg px-2.5 sm:px-3.5 py-1.5 font-medium transition-all cursor-pointer ${
+							className={`rounded-lg px-2.5 sm:px-3.5 py-1.5 font-medium transition-all duration-150 cursor-pointer ${
 								mode === "commit"
 									? "bg-accent text-accent-foreground font-semibold shadow-xs"
 									: "text-text-muted hover:text-text"
@@ -306,7 +306,7 @@ export function LiveSandbox() {
 							aria-controls="panel-branch"
 							type="button"
 							onClick={() => setMode("branch")}
-							className={`rounded-lg px-2.5 sm:px-3.5 py-1.5 font-medium transition-all cursor-pointer ${
+							className={`rounded-lg px-2.5 sm:px-3.5 py-1.5 font-medium transition-all duration-150 cursor-pointer ${
 								mode === "branch"
 									? "bg-accent text-accent-foreground font-semibold shadow-xs"
 									: "text-text-muted hover:text-text"
@@ -332,7 +332,7 @@ export function LiveSandbox() {
 								setCommitInput(p.commit)
 								setBranchInput(p.branch)
 							}}
-							className="shrink-0 cursor-pointer rounded-lg border border-border bg-surface-2/60 px-2.5 py-1 font-mono text-2xs text-text-secondary transition-all hover:border-accent hover:text-text active:scale-98"
+							className="shrink-0 cursor-pointer rounded-lg border border-border/80 bg-surface-2/60 px-2.5 py-1 font-mono text-2xs text-text-secondary transition-all duration-150 hover:border-accent/60 hover:text-text hover:bg-surface-2 active:scale-95"
 						>
 							{p.label}
 						</button>
@@ -506,7 +506,7 @@ export function LiveSandbox() {
 
 				{/* Live Inspection Result Box */}
 				<div
-					className="rounded-xl border border-border bg-surface-2/60 p-ml-5 flex flex-col justify-between shadow-xs"
+					className="rounded-xl gh-glass p-ml-5 flex flex-col justify-between"
 					aria-live="polite"
 					aria-atomic="true"
 				>
