@@ -28,7 +28,6 @@ const nextConfig: NextConfig = {
       '@chitrank2050/monoline-ui',
       '@radix-ui/react-slot',
       'prismjs',
-      '@vercel/analytics',
       'clsx',
       'tailwind-merge',
     ],

@@ -1,10 +1,9 @@
 import type { Metadata } from "next"
 
-import { Analytics } from "@vercel/analytics/next"
-
 import { SiteFooter } from "@/src/components/site-footer"
 import { SiteHeader } from "@/src/components/site-header"
 import { ThemeProvider } from "@/src/components/theme-provider"
+import { UmamiAnalytics } from "@/src/components/umami-analytics"
 import { WebVitals } from "@/src/components/web-vitals"
 import { monolineFontClassName } from "@/src/lib/fonts"
 import { fetchIdentity } from "@/src/lib/identity"
@@ -89,7 +88,7 @@ export default function RootLayout({
 }: Readonly<{
 	children: React.ReactNode
 }>) {
-	const isProduction = process.env.NEXT_PUBLIC_VERCEL_ENV === "production"
+	const isProduction = process.env.NODE_ENV === "production"
 
 	return (
 		<html
@@ -119,8 +118,12 @@ export default function RootLayout({
 						<SiteFooter />
 					</div>
 				</ThemeProvider>
-				<WebVitals />
-				{isProduction && <Analytics />}
+				{isProduction && (
+					<>
+						<WebVitals />
+						<UmamiAnalytics />
+					</>
+				)}
 			</body>
 		</html>
 	)
