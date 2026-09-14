@@ -93,7 +93,7 @@ export async function SiteFooter() {
 		<Footer
 			brand={
 				<Link href="/" className="font-mono font-bold tracking-tight flex items-center gap-2">
-					<span className="text-text">🌊 git-hygiene</span>
+					<span className="text-text">git-hygiene</span>
 				</Link>
 			}
 			description="Zero-dependency metadata validator for modern Git workflows. Built for Node.js 24+ with native TypeScript performance. MIT licensed."

@@ -55,7 +55,7 @@ const benchmarks = [
 	},
 	{
 		metric: "Multi-Registry Distribution",
-		hygiene: "NPM + JSR + Action",
+		hygiene: "NPM · JSR · Action",
 		traditional: "NPM only",
 		note: "TypeScript-native distribution on JSR and automated GitHub Marketplace Action.",
 	},
@@ -140,41 +140,43 @@ export default async function HomePage() {
 	}
 
 	return (
-		<div className="relative min-h-screen gh-hero-glow">
+		<div className="relative min-h-screen apple-canvas">
 			<JsonLd data={jsonLd} />
 
 			<Container as="main" id="main-content" tabIndex={-1} className="pt-ml-10 pb-ml-24">
 				{/* ── HERO SECTION ── */}
-				<section className="text-center max-w-4xl mx-auto pt-4 sm:pt-ml-6 pb-ml-10 px-2 sm:px-0">
-					{/* Badge Pill */}
-					<div className="gh-glass gh-interactive inline-flex max-w-full flex-wrap items-center justify-center gap-2 rounded-full p-1 sm:pr-3.5 shadow-xs mb-ml-6 cursor-default">
-						<Status variant="accent" size="sm">
+				<section className="text-center max-w-4xl mx-auto pt-4 sm:pt-ml-6 pb-ml-12 px-2 sm:px-0">
+					{/* Status Eyebrow Badge */}
+					<div className="gh-glass inline-flex items-center justify-center gap-2 rounded-full px-3.5 py-1.5 shadow-xs mb-ml-6 cursor-default whitespace-nowrap max-w-full overflow-hidden">
+						<span className="inline-flex items-center gap-1.5 font-mono text-2xs font-semibold text-accent shrink-0">
+							<span className="apple-status-dot" aria-hidden="true" />
 							{release.version}
-						</Status>
-						<span className="font-mono text-3xs sm:text-2xs font-semibold text-text-muted uppercase tracking-[0.06em]">
+						</span>
+						<span className="text-border-strong font-mono text-xs select-none shrink-0">/</span>
+						<span className="font-mono text-3xs sm:text-2xs font-medium text-text-muted uppercase tracking-[0.06em] truncate">
 							Node.js 24+ Native · Zero Dependencies
 						</span>
 					</div>
 
-					{/* High-Conviction Product Headline */}
-					<h1 className="display-title font-sans text-text text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] leading-[1.1] sm:leading-[1.05]">
-						The zero-dependency metadata validator for <span className="text-accent">modern Git</span>.
+					{/* High-Conviction Product Headline (Roman, tight optical tracking, no AI accent highlight) */}
+					<h1 className="display-title font-sans text-text text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.035em] leading-[1.06]">
+						Zero-dependency Git metadata validation. Engineered for microsecond CI performance.
 					</h1>
 
 					{/* Problem & Value Prop Subtitle */}
-					<p className="subheading mt-4 sm:mt-ml-5 text-text-secondary text-sm sm:text-base md:text-lg font-normal leading-relaxed max-w-2xl mx-auto font-sans tracking-[-0.01em]">
-						Enforce conventional commits, branch naming patterns, and PR titles with native Node.js 24+ type-stripping speed. Stop broken branch names and non-standard commits in CI before they happen.
+					<p className="subheading mt-4 sm:mt-ml-5 text-text-secondary text-base sm:text-lg md:text-xl font-normal leading-relaxed max-w-2xl mx-auto font-sans tracking-[-0.012em]">
+						Enforce Conventional Commits, branch naming policies, and PR titles with native Node.js 24+ type-stripping speed. Pure built-ins, zero transitive attack surface, SLSA Level 3 provenance.
 					</p>
 
 					{/* Action Buttons */}
 					<div className="mt-6 sm:mt-ml-8 flex flex-col sm:flex-row items-center justify-center gap-3">
-						<Button asChild size="md" className="w-full sm:w-auto gh-interactive shadow-md hover:shadow-lg">
+						<Button asChild size="md" className="w-full sm:w-auto shadow-md hover:shadow-lg">
 							<a href="#sandbox">
 								Try Live Sandbox
 								<Button.Arrow />
 							</a>
 						</Button>
-						<Button asChild variant="secondary" size="md" className="w-full sm:w-auto gh-interactive gh-glass border-border/80">
+						<Button asChild variant="secondary" size="md" className="w-full sm:w-auto">
 							<a
 								href="https://github.com/chitranklabs/git-hygiene"
 								target="_blank"
@@ -190,33 +192,37 @@ export default async function HomePage() {
 						<InstallCommand command="pnpm add -D @chitrank2050/git-hygiene" />
 					</div>
 
-					{/* Quick Proof Metrics */}
-					<div className="mt-8 sm:mt-ml-12 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-ml-4 text-center font-mono">
-						<div className="gh-glass gh-interactive rounded-xl p-3 sm:p-ml-3.5">
-							<strong className="block text-xl sm:text-2xl font-bold text-text tabular-nums tracking-tight">0</strong>
-							<span className="text-3xs uppercase tracking-[0.06em] text-accent font-semibold">Runtime Deps</span>
+					{/* Integrated Apple Telemetry Spec Strip */}
+					<div className="mt-8 sm:mt-ml-12 apple-spec-strip">
+						<div className="apple-spec-item">
+							<strong className="block text-xl sm:text-2xl font-bold text-text font-mono tabular-nums tracking-tight">0</strong>
+							<span className="text-3xs uppercase tracking-[0.06em] text-accent font-semibold font-mono">Runtime Packages</span>
+							<p className="text-3xs text-text-muted leading-tight font-sans mt-0.5">Pure Node.js built-ins. Zero transitive dependency attack surface.</p>
 						</div>
-						<div className="gh-glass gh-interactive rounded-xl p-3 sm:p-ml-3.5">
-							<strong className="block text-xl sm:text-2xl font-bold text-text tabular-nums tracking-tight">&lt; 5ms</strong>
-							<span className="text-3xs uppercase tracking-[0.06em] text-accent font-semibold">Cold Startup</span>
+						<div className="apple-spec-item">
+							<strong className="block text-xl sm:text-2xl font-bold text-text font-mono tabular-nums tracking-tight">&lt; 5 ms</strong>
+							<span className="text-3xs uppercase tracking-[0.06em] text-accent font-semibold font-mono">Cold Startup</span>
+							<p className="text-3xs text-text-muted leading-tight font-sans mt-0.5">Native Node 24+ type-stripping execution without transpilation overhead.</p>
 						</div>
-						<div className="gh-glass gh-interactive rounded-xl p-3 sm:p-ml-3.5">
-							<strong className="block text-xl sm:text-2xl font-bold text-text tabular-nums tracking-tight">SLSA-3</strong>
-							<span className="text-3xs uppercase tracking-[0.06em] text-accent font-semibold">Provenance</span>
+						<div className="apple-spec-item">
+							<strong className="block text-xl sm:text-2xl font-bold text-text font-mono tabular-nums tracking-tight">SLSA-3</strong>
+							<span className="text-3xs uppercase tracking-[0.06em] text-accent font-semibold font-mono">Supply Chain</span>
+							<p className="text-3xs text-text-muted leading-tight font-sans mt-0.5">100% SHA-pinned workflows with OpenSSF & Zizmor security audits.</p>
 						</div>
-						<div className="gh-glass gh-interactive rounded-xl p-3 sm:p-ml-3.5">
-							<strong className="block text-xl sm:text-2xl font-bold text-text tabular-nums tracking-tight">Node 24+</strong>
-							<span className="text-3xs uppercase tracking-[0.06em] text-accent font-semibold">Native Types</span>
+						<div className="apple-spec-item">
+							<strong className="block text-xl sm:text-2xl font-bold text-text font-mono tabular-nums tracking-tight">Node 24+</strong>
+							<span className="text-3xs uppercase tracking-[0.06em] text-accent font-semibold font-mono">Native Types</span>
+							<p className="text-3xs text-text-muted leading-tight font-sans mt-0.5">Executes pure TypeScript directly via built-in experimental-strip-types.</p>
 						</div>
 					</div>
 				</section>
 
-				{/* ── LIVE INTERACTIVE SANDBOX ── */}
-				<section id="sandbox" className="mt-ml-10 scroll-mt-24">
+				{/* ── LIVE INTERACTIVE SANDBOX (Front & Center Workbench) ── */}
+				<section id="sandbox" className="mt-ml-8 scroll-mt-24">
 					<SectionHead
-						eyebrow="Interactive Demo"
+						eyebrow="Interactive Workbench"
 						title="Test your Git metadata rules live in the browser."
-						lede="Type a commit message or branch name below to inspect validation results and semantic release recommendations in real-time."
+						lede="Evaluate commit messages, branch patterns, and semantic release recommendations in real time with the pure client-side core engine."
 						size="sm"
 						level={2}
 					/>
@@ -225,58 +231,69 @@ export default async function HomePage() {
 					</div>
 				</section>
 
-				{/* ── WHY ZERO DEPS / BENCHMARK COMPARISON ── */}
+				{/* ── ARCHITECTURE & TELEMETRY COMPARISON MATRIX ── */}
 				<section id="benchmark" className="mt-ml-24 pt-ml-8 border-t border-border scroll-mt-24">
 					<SectionHead
-						eyebrow="Performance & Architecture"
+						eyebrow="Architecture & Telemetry"
 						title="Engineered for microsecond execution and zero bloat."
 						lede="Why install dozens of transitive packages just to validate a string? git-hygiene is built purely on Node.js built-in APIs."
 						size="sm"
 						level={2}
 					/>
 
-					<div className="mt-ml-8 grid grid-cols-1 md:grid-cols-2 gap-ml-4">
-						{benchmarks.map((b) => (
-							<Card key={b.metric} size="md">
-								<Card.Body>
-									<div className="flex items-center justify-between border-b border-border pb-ml-2 mb-ml-3 font-mono">
-										<span className="text-xs font-semibold text-text">{b.metric}</span>
-										<span className="rounded bg-accent-soft px-2 py-0.5 text-xs font-bold text-accent border border-accent/30">
-											{b.hygiene}
-										</span>
-									</div>
-									<div className="flex items-center justify-between text-2xs font-mono text-text-muted mb-ml-2">
-										<span>Traditional Tooling:</span>
-										<span className="line-through text-text-muted/70">{b.traditional}</span>
-									</div>
-									<Card.Description className="text-xs text-text-secondary leading-relaxed font-sans mt-ml-2">
-										{b.note}
-									</Card.Description>
-								</Card.Body>
-							</Card>
-						))}
+					<div className="mt-ml-8 overflow-hidden rounded-2xl border border-border bg-surface shadow-xs backdrop-blur-xl">
+						<div className="overflow-x-auto overscroll-x-contain">
+							<table className="w-full min-w-[620px] text-left font-mono text-xs border-collapse">
+								<thead>
+									<tr className="border-b border-border bg-surface-2/60 text-text-muted text-3xs uppercase tracking-[0.08em]">
+										<th className="py-3 px-4 sm:px-6 font-semibold whitespace-nowrap">Engineering Metric</th>
+										<th className="py-3 px-4 sm:px-6 font-bold text-accent whitespace-nowrap">git-hygiene (Native)</th>
+										<th className="py-3 px-4 sm:px-6 font-semibold text-text-muted whitespace-nowrap">Husky + Commitlint (Traditional)</th>
+										<th className="py-3 px-4 sm:px-6 font-semibold hidden md:table-cell">Architectural Benefit</th>
+									</tr>
+								</thead>
+								<tbody className="divide-y divide-border/60">
+									{benchmarks.map((b) => (
+										<tr key={b.metric} className="hover:bg-surface-2/40 transition-colors">
+											<td className="py-3.5 px-4 sm:px-6 font-semibold text-text whitespace-nowrap">{b.metric}</td>
+											<td className="py-3.5 px-4 sm:px-6 font-bold text-accent whitespace-nowrap">
+												<span className="apple-badge">
+													<span className="apple-status-dot" aria-hidden="true" />
+													<span>{b.hygiene}</span>
+												</span>
+											</td>
+											<td className="py-3.5 px-4 sm:px-6 text-text-muted line-through opacity-80 whitespace-nowrap">{b.traditional}</td>
+											<td className="py-3.5 px-4 sm:px-6 font-sans text-xs text-text-secondary hidden md:table-cell leading-relaxed">{b.note}</td>
+										</tr>
+									))}
+								</tbody>
+							</table>
+						</div>
 					</div>
 				</section>
 
-				{/* ── CORE PILLARS / FEATURES ── */}
+				{/* ── CORE CAPABILITIES (2x2 Asymmetric Grid) ── */}
 				<section id="features" className="mt-ml-24 pt-ml-8 border-t border-border scroll-mt-24">
 					<SectionHead
-						eyebrow="Standard Capabilities"
+						eyebrow="Core Architecture"
 						title="Everything you need for strict, automated Git hygiene."
 						size="sm"
 						level={2}
 					/>
 
-					<div className="mt-ml-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-ml-4">
+					<div className="mt-ml-8 grid grid-cols-1 md:grid-cols-2 gap-ml-4">
 						{keyPillars.map((pillar) => (
 							<Card key={pillar.number} size="md">
 								<Card.Body>
-									<span className="block font-mono text-2xs font-bold text-accent mb-ml-2">
-										{pillar.number}
-									</span>
-									<Card.Title className="text-sm font-bold text-text font-mono mb-ml-2">
-										{pillar.title}
-									</Card.Title>
+									<div className="flex items-center gap-2 mb-ml-2">
+										<span className="font-mono text-xs font-bold text-accent">
+											{pillar.number}
+										</span>
+										<span className="text-border-strong font-mono text-xs">/</span>
+										<Card.Title className="text-sm font-bold text-text font-mono">
+											{pillar.title}
+										</Card.Title>
+									</div>
 									<Card.Description className="text-xs text-text-secondary leading-relaxed font-sans">
 										{pillar.description}
 									</Card.Description>
@@ -286,7 +303,7 @@ export default async function HomePage() {
 					</div>
 				</section>
 
-				{/* ── INTERACTIVE INTEGRATIONS ── */}
+				{/* ── DEVELOPER WORKFLOWS (Interactive Hook Drop-ins) ── */}
 				<section id="integrations" className="mt-ml-24 pt-ml-8 border-t border-border scroll-mt-24">
 					<SectionHead
 						eyebrow="Developer Workflows"
@@ -298,21 +315,27 @@ export default async function HomePage() {
 					<IntegrationTabs />
 				</section>
 
-				{/* ── CONFIGURATION SHOWCASE ── */}
+				{/* ── DUAL ARCHITECTURE: DECLARATIVE CONFIG & PROGRAMMATIC CORE ── */}
 				<section id="configuration" className="mt-ml-24 pt-ml-8 border-t border-border scroll-mt-24">
 					<SectionHead
-						eyebrow="Configuration"
-						title="Zero-config defaults. Easily customized in package.json."
-						lede="Works out of the box with standard Conventional Commits. Customize allowed types, branch patterns, and scopes directly in your package.json."
+						eyebrow="Integration & APIs"
+						title="Declarative CLI config or headless programmatic library."
+						lede="Define rules in package.json for zero-config CLI enforcement, or import the standalone core engine directly into your custom CI tools."
 						size="sm"
 						level={2}
 					/>
 
-					<div className="mt-ml-8 grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-ml-6 items-start">
-						<div className="min-w-0 max-w-full overflow-hidden">
-							<CodeBlock
-								filename="package.json"
-								code={`{
+					<div className="mt-ml-8 grid grid-cols-1 lg:grid-cols-2 gap-ml-6 items-start">
+						{/* Declarative CLI Station */}
+						<div className="space-y-ml-4">
+							<div className="flex items-center justify-between pb-ml-2 border-b border-border">
+								<span className="font-mono text-xs font-bold text-text">Declarative Git Hook Config</span>
+								<span className="font-mono text-3xs font-semibold text-accent bg-accent-soft px-2 py-0.5 rounded border border-accent/20">package.json</span>
+							</div>
+							<div className="min-w-0 max-w-full overflow-hidden">
+								<CodeBlock
+									filename="package.json"
+									code={`{
   "git-hygiene": {
     "extends": ["@commitlint/config-conventional"],
     "types": [
@@ -328,64 +351,25 @@ export default async function HomePage() {
     }
   }
 }`}
-							/>
+								/>
+							</div>
+							<p className="text-xs text-text-muted font-sans leading-relaxed">
+								Seamlessly extends <code>@commitlint/config-conventional</code> with zero extra configuration. Custom types, branch filters, and scope rules merge automatically.
+							</p>
 						</div>
 
+						{/* Programmatic Engine Station */}
 						<div className="space-y-ml-4">
-							<Card size="sm">
-								<Card.Body>
-									<Card.Title className="font-mono text-xs font-bold text-text mb-1">
-										Commitlint Rules Inheritance
-									</Card.Title>
-									<Card.Description className="text-xs text-text-muted leading-relaxed font-sans">
-										Seamlessly extends <code>@commitlint/config-conventional</code> with zero extra configuration. Custom types merge automatically.
-									</Card.Description>
-								</Card.Body>
-							</Card>
-
-							<Card size="sm">
-								<Card.Body>
-									<Card.Title className="font-mono text-xs font-bold text-text mb-1">
-										Programmatic Library
-									</Card.Title>
-									<Card.Description className="text-xs text-text-muted leading-relaxed font-sans">
-										Import <code>validateCommit</code>, <code>validateBranch</code>, and <code>analyzeBump</code> directly from <code>@chitrank2050/git-hygiene-core</code>.
-									</Card.Description>
-								</Card.Body>
-							</Card>
-
-							<Card size="sm">
-								<Card.Body>
-									<Card.Title className="font-mono text-xs font-bold text-text mb-1">
-										SLSA Level 3 Provenance
-									</Card.Title>
-									<Card.Description className="text-xs text-text-muted leading-relaxed font-sans">
-										Every release includes SHA-pinned GitHub workflows, Zizmor security audits, and Gitleaks secret scanning.
-									</Card.Description>
-								</Card.Body>
-							</Card>
-						</div>
-					</div>
-				</section>
-
-				{/* ── CORE PROGRAMMATIC API SHOWCASE ── */}
-				<section id="core-api" className="mt-ml-24 pt-ml-8 border-t border-border scroll-mt-24">
-					<SectionHead
-						eyebrow="Programmatic TypeScript API"
-						title="Headless validation engine with @chitrank2050/git-hygiene-core"
-						lede="Embed git-hygiene directly into custom scripts, bot runners, or internal platform tooling without process spawning or CLI overhead."
-						size="sm"
-						level={2}
-					/>
-
-					<div className="mt-ml-8 grid grid-cols-1 lg:grid-cols-[1.3fr_0.9fr] gap-ml-6 items-start">
-						<div className="min-w-0 max-w-full overflow-hidden">
-							<CodeBlock
-								filename="validate.ts"
-								code={`import { 
+							<div className="flex items-center justify-between pb-ml-2 border-b border-border">
+								<span className="font-mono text-xs font-bold text-text">Programmatic Core Engine</span>
+								<span className="font-mono text-3xs font-semibold text-text-muted bg-surface-2 px-2 py-0.5 rounded border border-border">TypeScript ESM</span>
+							</div>
+							<div className="min-w-0 max-w-full overflow-hidden">
+								<CodeBlock
+									filename="validate.ts"
+									code={`import { 
   validateCommit, 
   validateBranch, 
-  validateTitle,
   analyzeReleaseBump 
 } from '@chitrank2050/git-hygiene-core';
 
@@ -398,63 +382,27 @@ console.log(commit.type);  // 'feat'
 const branch = await validateBranch('feat/webhook-retry-policy');
 console.log(branch.valid); // true
 
-// 3. Programmatic Semantic Release Recommendation
+// 3. Recommended Release Increment
 const bump = await analyzeReleaseBump(['feat: auth', 'fix: crash']);
 console.log(bump.releaseType); // 'minor'`}
-							/>
-						</div>
-
-						<div className="space-y-ml-4">
-							<Card size="sm">
-								<Card.Body>
-									<div className="flex items-center justify-between mb-1">
-										<Card.Title className="font-mono text-xs font-bold text-text">
-											100% Typed & Tree-Shakeable
-										</Card.Title>
-										<span className="rounded bg-accent-soft px-1.5 py-0.5 font-mono text-3xs font-bold text-accent">
-											ESM Native
-										</span>
-									</div>
-									<Card.Description className="text-xs text-text-muted leading-relaxed font-sans">
-										Ships with first-class TypeScript declarations, standard ESM exports, and zero binary CLI wrapper overhead.
-									</Card.Description>
-								</Card.Body>
-							</Card>
-
-							<Card size="sm">
-								<Card.Body>
-									<div className="flex items-center justify-between mb-1">
-										<Card.Title className="font-mono text-xs font-bold text-text">
-											Automated Release Analyzer
-										</Card.Title>
-										<span className="rounded bg-surface-2 px-1.5 py-0.5 font-mono text-3xs font-semibold text-text-muted">
-											Semver Engine
-										</span>
-									</div>
-									<Card.Description className="text-xs text-text-muted leading-relaxed font-sans">
-										Pass git commit history arrays to compute recommended semantic bumps (<code>major</code>, <code>minor</code>, <code>patch</code>) with exact justification.
-									</Card.Description>
-								</Card.Body>
-							</Card>
-
-							<div className="rounded-xl border border-border bg-surface p-ml-4">
-								<span className="block font-mono text-2xs font-semibold text-text-muted uppercase tracking-wider mb-2">
-									Install Core Library:
-								</span>
+								/>
+							</div>
+							<div className="rounded-xl border border-border bg-surface p-ml-3 flex items-center justify-between gap-3">
+								<span className="font-mono text-3xs font-semibold text-text-muted uppercase tracking-wider">Install Core:</span>
 								<InstallCommand
 									command="pnpm add @chitrank2050/git-hygiene-core"
-									className="w-full bg-surface-2"
+									className="flex-1 bg-surface-2 py-1 text-2xs"
 								/>
 							</div>
 						</div>
 					</div>
 				</section>
 
-				{/* ── DISTRIBUTION REGISTRIES ── */}
+				{/* ── MULTI-REGISTRY DISTRIBUTION SHELF ── */}
 				<section id="registries" className="mt-ml-24 pt-ml-8 border-t border-border scroll-mt-24">
 					<SectionHead
-						eyebrow="Multi-Registry Distribution"
-						title="Available wherever you write and ship code."
+						eyebrow="Release Shelf"
+						title="Multi-registry distribution across Node, Deno, and GitHub Actions."
 						size="sm"
 						level={2}
 					/>
@@ -470,7 +418,7 @@ console.log(bump.releaseType); // 'minor'`}
 							>
 								<Card.Body>
 									<div className="flex items-center justify-between mb-ml-2">
-										<span className="font-mono text-3xs font-bold text-accent uppercase tracking-wider">
+										<span className="font-mono text-3xs font-bold text-accent uppercase tracking-wider whitespace-nowrap shrink-0 bg-accent-soft px-2 py-0.5 rounded border border-accent/20">
 											{pkgItem.badge}
 										</span>
 										<Card.Arrow />
@@ -490,3 +438,4 @@ console.log(bump.releaseType); // 'minor'`}
 		</div>
 	)
 }
+

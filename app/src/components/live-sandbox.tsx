@@ -253,7 +253,7 @@ export function LiveSandbox() {
 			<div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border/80 pb-4 sm:pb-5">
 				<div>
 					<div className="flex items-center gap-2">
-						<span className="flex size-2.5 rounded-full bg-accent animate-pulse shadow-[0_0_8px_var(--accent)]" />
+						<span className="apple-status-dot" aria-hidden="true" />
 						<h3 className="font-mono text-sm font-bold text-text tracking-tight">
 							Live Metadata Inspector
 						</h3>
@@ -516,11 +516,11 @@ export function LiveSandbox() {
 								Engine Analysis
 							</span>
 							{(mode === "commit" ? commitResult.valid : branchResult.valid) ? (
-								<span className="inline-flex items-center gap-1.5 rounded-full bg-accent-soft px-2.5 py-0.5 font-mono text-2xs font-bold text-accent border border-accent/40">
+								<span className="apple-badge text-2xs py-0.5 whitespace-nowrap shrink-0">
 									✓ VALID
 								</span>
 							) : (
-								<span className="inline-flex items-center gap-1.5 rounded-full bg-red-500/10 px-2.5 py-0.5 font-mono text-2xs font-bold text-red-500 border border-red-500/30">
+								<span className="inline-flex items-center gap-1.5 rounded-full bg-red-500/10 px-2.5 py-0.5 font-mono text-2xs font-bold text-red-500 border border-red-500/30 whitespace-nowrap shrink-0">
 									✕ INVALID
 								</span>
 							)}
