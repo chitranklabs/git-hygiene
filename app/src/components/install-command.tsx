@@ -26,6 +26,7 @@ export function InstallCommand({
 			type="button"
 			onClick={copy}
 			title="Click to copy install command"
+			aria-label={copied ? "Copied install command to clipboard" : `Copy install command: ${command}`}
 			className={`group inline-flex items-center justify-between gap-3 rounded-xl border border-border bg-surface/90 px-4 py-2 font-mono text-xs text-text shadow-xs backdrop-blur-md transition-all hover:border-accent hover:shadow-md cursor-pointer ${className}`}
 		>
 			<div className="flex items-center gap-2 truncate">
@@ -34,6 +35,9 @@ export function InstallCommand({
 			</div>
 			<span className="shrink-0 rounded bg-surface-2 px-1.5 py-0.5 text-3xs font-semibold uppercase tracking-wider text-text-muted transition-colors group-hover:text-accent">
 				{copied ? "✓ Copied" : "Copy"}
+			</span>
+			<span className="sr-only" aria-live="polite">
+				{copied ? "Copied command to clipboard" : ""}
 			</span>
 		</button>
 	)

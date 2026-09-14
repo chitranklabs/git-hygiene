@@ -13,17 +13,23 @@ interface PageMetadataInput {
   title: string;
   description: string;
   path: `/${string}`;
+  absoluteTitle?: boolean;
 }
 
 function absoluteUrl(path: `/${string}`) {
-  return new URL(path, siteUrl).toString();
+  return new URL(path, `${siteUrl}/`).toString();
 }
 
-export function createPageMetadata({ title, description, path }: PageMetadataInput): Metadata {
+export function createPageMetadata({
+  title,
+  description,
+  path,
+  absoluteTitle = false,
+}: PageMetadataInput): Metadata {
   const url = absoluteUrl(path);
 
   return {
-    title,
+    title: absoluteTitle ? { absolute: title } : title,
     description,
     openGraph: {
       type: 'website',
@@ -31,6 +37,7 @@ export function createPageMetadata({ title, description, path }: PageMetadataInp
       siteName: 'git-hygiene',
       title,
       description,
+      locale: 'en_US',
       images: [socialImage],
     },
     twitter: {

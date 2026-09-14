@@ -5,7 +5,7 @@ import { Button } from "@chitrank2050/monoline-ui/button"
 import { Container } from "@chitrank2050/monoline-ui/container"
 import { SectionHead } from "@chitrank2050/monoline-ui/section-head"
 
-import { ChangelogTimeline } from "@chitrank2050/monoline-ui/changelog"
+import { ChangelogTimeline, compactGitCliffReleases } from "@chitrank2050/monoline-ui/changelog"
 import type { GitCliffRelease } from "@chitrank2050/monoline-ui/changelog"
 
 import JsonLd, {
@@ -16,7 +16,7 @@ import changelogJson from "@/src/lib/changelog.json"
 import { createPageMetadata } from "@/src/lib/metadata"
 import { ChangelogToc } from "./toc"
 
-const changelogTitle = "Release Changelog & Version History - git-hygiene"
+const changelogTitle = "Release Changelog and Version History | git-hygiene"
 const changelogDescription =
 	"Read git-hygiene release notes for zero-dependency CLI updates, core parser optimizations, security provenance audits, and conventional commit features."
 
@@ -24,20 +24,20 @@ export const metadata: Metadata = createPageMetadata({
 	title: changelogTitle,
 	description: changelogDescription,
 	path: "/changelog",
+	absoluteTitle: true,
 })
 
-// Filter out unreleased tags and normalize git-cliff group names (stripping ordering comments like <!-- 0 -->)
-const releases = (changelogJson as unknown as GitCliffRelease[])
-	.filter((r) => r.version !== null)
-	.map((release) => ({
-		...release,
-		commits: (release.commits ?? []).map((commit) => ({
-			...commit,
-			group: commit.group
-				? commit.group.replace(/<!--.*?-->/g, "").replace(/^[^\w]+/, "").trim() || commit.group
-				: "Maintenance",
-		})),
-	}))
+// Normalize releases using monoline-ui's compactGitCliffReleases and strip ordering comments
+const rawReleases = compactGitCliffReleases(changelogJson as unknown as GitCliffRelease[])
+const releases = rawReleases.map((release) => ({
+	...release,
+	commits: (release.commits ?? []).map((commit) => ({
+		...commit,
+		group: commit.group
+			? commit.group.replace(/<!--.*?-->/g, "").replace(/^[^\w]+/, "").trim() || commit.group
+			: "Maintenance",
+	})),
+}))
 
 const tocItems = releases.map((release) => {
 	const version = release.version ?? "Unreleased"

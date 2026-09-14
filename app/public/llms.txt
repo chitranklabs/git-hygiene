@@ -1,0 +1,94 @@
+# git-hygiene
+
+> Zero-dependency Git metadata validator for modern workflows, built for Node.js 24+ with native TypeScript type-stripping execution.
+
+git-hygiene is published as `@chitrank2050/git-hygiene` on npm and JSR, with a standalone GitHub Action (`chitranklabs/git-hygiene`) and programmatic engine (`@chitrank2050/git-hygiene-core`).
+
+## Core Capabilities
+
+- **Commit message linting**: Enforces Conventional Commits with custom types, scopes, and breaking change patterns.
+- **Branch name validation**: Enforces `<type>/<description-with-dashes>` branch naming rules and protected branch exceptions.
+- **PR title & release automation**: GitHub Action for automated pull request inspection and semantic version increment recommendations (`major`, `minor`, `patch`).
+- **Zero runtime dependencies**: Built purely with Node.js built-in APIs, achieving <5ms cold start times via `node --experimental-strip-types`.
+- **SLSA Level 3 provenance**: Automated release provenance, SHA-pinned GitHub workflows, and Zizmor security audits.
+
+## CLI Usage
+
+Install as a dev dependency:
+
+```bash
+# npm
+npm install -D @chitrank2050/git-hygiene
+
+# pnpm
+pnpm add -D @chitrank2050/git-hygiene
+```
+
+Run lint commands:
+
+```bash
+# Validate commit message from hook file
+git-hygiene commit .git/COMMIT_EDITMSG
+
+# Validate active branch name
+git-hygiene branch
+
+# Direct CLI inspection
+git-hygiene commit --message "feat(core): add native type stripping"
+git-hygiene branch --name "feat/native-type-stripping"
+```
+
+## Programmatic API (`@chitrank2050/git-hygiene-core`)
+
+```typescript
+import {
+  validateCommit,
+  validateBranch,
+  validateTitle,
+  analyzeReleaseBump,
+} from '@chitrank2050/git-hygiene-core';
+
+// Validate commit
+const commit = await validateCommit('feat(api): add webhook support');
+console.log(commit.valid); // true
+console.log(commit.type);  // 'feat'
+
+// Validate branch
+const branch = await validateBranch('feat/webhook-retry-policy');
+console.log(branch.valid); // true
+
+// Analyze semantic release bump
+const bump = await analyzeReleaseBump(['feat: auth', 'fix: crash']);
+console.log(bump.releaseType); // 'minor'
+```
+
+## Configuration (`package.json`)
+
+Configure validation rules in your root `package.json`:
+
+```json
+{
+  "git-hygiene": {
+    "extends": ["@commitlint/config-conventional"],
+    "types": [
+      "feat", "fix", "chore", "docs",
+      "style", "refactor", "perf", "test",
+      "build", "ci", "revert"
+    ],
+    "ignoreBranches": ["main", "master", "develop"],
+    "maxHeaderLength": 100,
+    "allowEmptyScope": false
+  }
+}
+```
+
+## Documentation & Links
+
+- [Home](https://githygiene.chitrankagnihotri.com): Interactive demo, live sandbox, and benchmarks.
+- [Changelog](https://githygiene.chitrankagnihotri.com/changelog): Version release notes and commit history.
+- [GitHub](https://github.com/chitranklabs/git-hygiene): Source code, issues, and releases.
+- [npm CLI](https://www.npmjs.com/package/@chitrank2050/git-hygiene): Command-line runner for git hooks.
+- [npm Core](https://www.npmjs.com/package/@chitrank2050/git-hygiene-core): Programmatic TypeScript API.
+- [JSR Package](https://jsr.io/@chitrank2050/git-hygiene): TypeScript-native package for Node 24+ and Deno.
+- [GitHub Action](https://github.com/marketplace/actions/git-hygiene-validator): Marketplace action for PRs.
+- [Author](https://chitrankagnihotri.com): Chitrank Agnihotri.

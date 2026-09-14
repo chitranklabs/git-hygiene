@@ -279,8 +279,16 @@ export function LiveSandbox() {
 					</button>
 
 					{/* Mode Tabs */}
-					<div className="inline-flex rounded-xl border border-border bg-surface-2 p-1 font-mono text-xs shadow-xs">
+					<div
+						role="tablist"
+						aria-label="Validation target"
+						className="inline-flex rounded-xl border border-border bg-surface-2 p-1 font-mono text-xs shadow-xs"
+					>
 						<button
+							role="tab"
+							id="tab-commit"
+							aria-selected={mode === "commit"}
+							aria-controls="panel-commit"
 							type="button"
 							onClick={() => setMode("commit")}
 							className={`rounded-lg px-2.5 sm:px-3.5 py-1.5 font-medium transition-all cursor-pointer ${
@@ -292,6 +300,10 @@ export function LiveSandbox() {
 							Commit
 						</button>
 						<button
+							role="tab"
+							id="tab-branch"
+							aria-selected={mode === "branch"}
+							aria-controls="panel-branch"
 							type="button"
 							onClick={() => setMode("branch")}
 							className={`rounded-lg px-2.5 sm:px-3.5 py-1.5 font-medium transition-all cursor-pointer ${
@@ -431,7 +443,10 @@ export function LiveSandbox() {
 				{/* Input Column */}
 				<div className="flex flex-col gap-ml-3">
 					<div className="flex items-center justify-between">
-						<label htmlFor="inspector-input" className="font-mono text-2xs font-semibold text-text-muted uppercase tracking-wider">
+						<label
+							htmlFor={mode === "commit" ? "inspector-commit-input" : "inspector-branch-input"}
+							className="font-mono text-2xs font-semibold text-text-muted uppercase tracking-wider"
+						>
 							{mode === "commit" ? "Input Commit Message" : "Input Git Branch"}
 						</label>
 						{(mode === "commit" ? commitResult.valid : branchResult.valid) && (
@@ -446,9 +461,14 @@ export function LiveSandbox() {
 					</div>
 
 					{mode === "commit" ? (
-						<div className="relative">
+						<div
+							id="panel-commit"
+							role="tabpanel"
+							aria-labelledby="tab-commit"
+							className="relative"
+						>
 							<textarea
-								id="inspector-input"
+								id="inspector-commit-input"
 								rows={3}
 								value={commitInput}
 								onChange={(e) => setCommitInput(e.target.value)}
@@ -463,9 +483,14 @@ export function LiveSandbox() {
 							</div>
 						</div>
 					) : (
-						<div className="relative">
+						<div
+							id="panel-branch"
+							role="tabpanel"
+							aria-labelledby="tab-branch"
+							className="relative"
+						>
 							<input
-								id="inspector-input"
+								id="inspector-branch-input"
 								type="text"
 								value={branchInput}
 								onChange={(e) => setBranchInput(e.target.value)}
@@ -480,7 +505,11 @@ export function LiveSandbox() {
 				</div>
 
 				{/* Live Inspection Result Box */}
-				<div className="rounded-xl border border-border bg-surface-2/60 p-ml-5 flex flex-col justify-between shadow-xs">
+				<div
+					className="rounded-xl border border-border bg-surface-2/60 p-ml-5 flex flex-col justify-between shadow-xs"
+					aria-live="polite"
+					aria-atomic="true"
+				>
 					<div>
 						<div className="flex items-center justify-between border-b border-border pb-ml-3">
 							<span className="font-mono text-2xs font-semibold uppercase tracking-wider text-text-muted">

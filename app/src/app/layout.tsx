@@ -12,20 +12,25 @@ import { siteUrl } from "@/src/lib/seo"
 
 import "./globals.css"
 
+import { socialImage } from "@/src/lib/metadata"
+
 export async function generateMetadata(): Promise<Metadata> {
 	const identity = await fetchIdentity()
 	const author = identity
 		? { name: identity.name, url: identity.websiteUrl }
 		: { name: "Chitrank Agnihotri", url: "https://chitrankagnihotri.com" }
 
+	const title = "git-hygiene - Zero-Dependency Git Metadata Validator"
+	const description =
+		"Enforce conventional commits, branch naming patterns, and PR titles with native Node.js 24+ type-stripping speed. Zero dependencies, pure native performance."
+
 	return {
 		metadataBase: new URL(siteUrl),
 		title: {
-			default: "git-hygiene | Zero-Dependency Git Metadata Validator",
+			default: title,
 			template: "%s | git-hygiene",
 		},
-		description:
-			"High-performance, zero-dependency metadata validator for commits, branch names, and PR titles with native Node.js 24+ performance.",
+		description,
 		keywords: [
 			"git-hygiene",
 			"git metadata validator",
@@ -41,6 +46,25 @@ export async function generateMetadata(): Promise<Metadata> {
 		authors: [author],
 		creator: author.name,
 		publisher: author.name,
+		icons: {
+			icon: "/icon.png",
+			apple: "/apple-icon.png",
+		},
+		openGraph: {
+			type: "website",
+			url: siteUrl,
+			siteName: "git-hygiene",
+			title,
+			description,
+			locale: "en_US",
+			images: [socialImage],
+		},
+		twitter: {
+			card: "summary_large_image",
+			title,
+			description,
+			images: [socialImage],
+		},
 		appleWebApp: {
 			capable: true,
 			title: "git-hygiene",
@@ -86,6 +110,9 @@ export default function RootLayout({
 					}}
 				/>
 				<ThemeProvider>
+					<a className="skip-link" href="#main-content">
+						Skip to content
+					</a>
 					<div className="flex min-h-screen flex-col">
 						<SiteHeader />
 						<div className="flex-1">{children}</div>

@@ -23,14 +23,15 @@ import { siteUrl } from "@/src/lib/seo"
 
 import pkg from "@/package.json"
 
-const homeTitle = "git-hygiene - Zero-Dependency Metadata Validator for Modern Git"
+const homeTitle = "git-hygiene - Zero-Dependency Git Metadata Validator"
 const homeDescription =
-	"Enforce conventional commits, branch naming patterns, and PR titles with native Node.js 24+ type-stripping speed. Zero runtime dependencies."
+	"Enforce conventional commits, branch naming patterns, and PR titles with native Node.js 24+ type-stripping speed. Zero dependencies, pure native performance."
 
 export const metadata: Metadata = createPageMetadata({
 	title: homeTitle,
 	description: homeDescription,
 	path: "/",
+	absoluteTitle: true,
 })
 
 const benchmarks = [

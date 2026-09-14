@@ -80,6 +80,8 @@ export function getSoftwareSourceCodeJsonLd(
 		codeRepository: "https://github.com/chitranklabs/git-hygiene",
 		programmingLanguage: ["TypeScript", "JavaScript"],
 		runtimePlatform: "Node.js 24+",
+		applicationCategory: "DeveloperApplication",
+		operatingSystem: "Cross-platform",
 		license: "https://github.com/chitranklabs/git-hygiene/blob/main/LICENSE",
 		sameAs: [
 			"https://github.com/chitranklabs/git-hygiene",
@@ -186,7 +188,6 @@ export default function JsonLd<T>({ data }: Props<T>) {
 	return (
 		<script
 			type="application/ld+json"
-			// eslint-disable-next-line react/no-danger
 			dangerouslySetInnerHTML={{ __html: serializeJsonLd(data) }}
 		/>
 	)

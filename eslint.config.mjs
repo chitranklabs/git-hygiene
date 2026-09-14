@@ -11,10 +11,14 @@ export default tseslint.config(
     languageOptions: {
       globals: {
         ...globals.node,
+        ...globals.browser,
         ...globals.es2024,
       },
       parserOptions: {
-        project: './tsconfig.json',
+        projectService: {
+          allowDefaultProject: ['*.mjs', 'app/*.mjs', 'app/scripts/*.mjs'],
+        },
+        tsconfigRootDir: import.meta.dirname,
       },
     },
     rules: {
@@ -24,6 +28,12 @@ export default tseslint.config(
     },
   },
   {
-    ignores: ['dist/', 'node_modules/', 'eslint.config.mjs'],
+    ignores: [
+      '**/dist/**',
+      '**/node_modules/**',
+      '**/.next/**',
+      '**/coverage/**',
+      'eslint.config.mjs',
+    ],
   },
 );

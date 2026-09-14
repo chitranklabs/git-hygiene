@@ -149,6 +149,36 @@ body {
 	overflow-x: clip;
 }
 
+/* Accessible Skip Link */
+.skip-link {
+	position: fixed;
+	z-index: 1000;
+	top: 0.75rem;
+	left: 0.75rem;
+	padding: 0.5rem 1rem;
+	border: 1px solid var(--border-strong);
+	border-radius: 0.5rem;
+	background: var(--surface);
+	color: var(--text);
+	font-size: 0.875rem;
+	font-family: var(--font-mono);
+	font-weight: 600;
+	text-decoration: none;
+	box-shadow: var(--shadow-md);
+	opacity: 0;
+	pointer-events: none;
+	transform: translateY(-1rem);
+	transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.skip-link:focus-visible {
+	opacity: 1;
+	pointer-events: auto;
+	outline: none;
+	box-shadow: 0 0 0 2px var(--background), 0 0 0 4px var(--accent);
+	transform: translateY(0);
+}
+
 /* Ambient Radial Backdrop Glow */
 .gh-hero-glow {
 	background: radial-gradient(

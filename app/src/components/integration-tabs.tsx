@@ -64,10 +64,18 @@ export function IntegrationTabs() {
 	return (
 		<div className="mt-ml-8 rounded-2xl border border-border bg-surface/60 p-4 sm:p-6 md:p-8 shadow-md">
 			{/* Tab Selector */}
-			<div className="flex items-center gap-2 overflow-x-auto pb-3 border-b border-border max-w-full">
+			<div
+				role="tablist"
+				aria-label="Workflow integrations"
+				className="flex items-center gap-2 overflow-x-auto pb-3 border-b border-border max-w-full"
+			>
 				{INTEGRATIONS.map((tab) => (
 					<button
 						key={tab.id}
+						id={`tab-integration-${tab.id}`}
+						role="tab"
+						aria-selected={activeId === tab.id}
+						aria-controls={`panel-integration-${tab.id}`}
 						type="button"
 						onClick={() => setActiveId(tab.id)}
 						className={`shrink-0 cursor-pointer inline-flex items-center gap-2 rounded-lg border px-3 py-1.5 sm:px-3.5 sm:py-2 font-mono text-xs font-semibold transition-all ${
@@ -91,7 +99,12 @@ export function IntegrationTabs() {
 			</div>
 
 			{/* Tab Content */}
-			<div className="mt-6 grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-6 lg:gap-8 items-start">
+			<div
+				id={`panel-integration-${active.id}`}
+				role="tabpanel"
+				aria-labelledby={`tab-integration-${active.id}`}
+				className="mt-6 grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-6 lg:gap-8 items-start"
+			>
 				<div>
 					<h3 className="font-mono text-base font-bold text-text">
 						{active.title} Integration
