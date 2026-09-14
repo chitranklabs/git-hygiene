@@ -10,8 +10,10 @@ import type { GitCliffRelease } from "@chitrank2050/monoline-ui/changelog"
 import JsonLd, {
 	createBreadcrumbJsonLd,
 	createCollectionPageJsonLd,
+	getPersonJsonLd,
 } from "@/src/components/json-ld"
 import changelogJson from "@/src/lib/changelog.json"
+import { fetchIdentity } from "@/src/lib/identity"
 import { createPageMetadata } from "@/src/lib/metadata"
 import { groupReleasesByMinor } from "@/src/lib/releases"
 
@@ -29,13 +31,16 @@ export const metadata: Metadata = createPageMetadata({
 // Group fragmented patch releases into clean major/minor series while retaining all patch commits
 const releases = groupReleasesByMinor(changelogJson as unknown as GitCliffRelease[])
 
-export default function ChangelogPage() {
+export default async function ChangelogPage() {
+	const identity = await fetchIdentity()
+
 	return (
 		<div className="gh-canvas relative min-h-screen overflow-x-hidden">
 			<JsonLd
 				data={{
 					"@context": "https://schema.org",
 					"@graph": [
+						identity ? getPersonJsonLd(identity) : null,
 						createCollectionPageJsonLd({
 							title: changelogTitle,
 							description: changelogDescription,
@@ -51,7 +56,7 @@ export default function ChangelogPage() {
 							{ name: "Home", path: "/" },
 							{ name: "Changelog", path: "/changelog" },
 						]),
-					],
+					].filter(Boolean),
 				}}
 			/>
 

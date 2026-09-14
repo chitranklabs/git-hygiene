@@ -35,7 +35,13 @@ export function getPersonJsonLd(identity: Identity) {
 		},
 		nationality: identity.nationality,
 		knowsAbout: identity.knowsAbout,
-		sameAs: [identity.socials.linkedin, identity.socials.github],
+		sameAs: [
+			identity.socials.linkedin,
+			identity.socials.github,
+			identity.websiteUrl,
+			"https://monolineui.chitrankagnihotri.com",
+			"https://githygiene.chitrankagnihotri.com",
+		],
 		mainEntityOfPage: {
 			"@id": `${identity.websiteUrl}/#webpage`,
 		},
@@ -53,12 +59,16 @@ export function getWebsiteJsonLd(identity: Identity | null, siteUrl: string) {
 		about: {
 			"@id": `${siteUrl}/#software-source-code`,
 		},
+		sameAs: [
+			"https://github.com/chitranklabs/git-hygiene",
+			"https://chitrankagnihotri.com/project/git-hygiene",
+		],
 	}
 
 	if (identity) {
-		jsonLd.publisher = {
-			"@id": `${identity.websiteUrl}/#person`,
-		}
+		const person = { "@id": `${identity.websiteUrl}/#person` }
+		jsonLd.publisher = person
+		jsonLd.creator = person
 	}
 
 	return jsonLd
@@ -104,6 +114,21 @@ export function getSoftwareSourceCodeJsonLd(
 		],
 		version,
 		isAccessibleForFree: true,
+		isRelatedTo: [
+			{
+				"@type": "SoftwareSourceCode",
+				name: "Monoline UI",
+				alternateName: "@chitrank2050/monoline-ui",
+				url: "https://monolineui.chitrankagnihotri.com",
+				codeRepository: "https://github.com/chitranklabs/monoline-ui",
+				description: "A monochrome-first React 19 component library for personal sites, portfolios, and documentation.",
+			},
+			{
+				"@type": "WebSite",
+				name: "Chitrank Agnihotri Portfolio",
+				url: "https://chitrankagnihotri.com",
+			},
+		],
 	}
 
 	if (identity) {
@@ -111,6 +136,7 @@ export function getSoftwareSourceCodeJsonLd(
 		jsonLd.author = person
 		jsonLd.creator = person
 		jsonLd.maintainer = person
+		jsonLd.producer = person
 	}
 
 	return jsonLd

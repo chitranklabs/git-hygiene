@@ -91,4 +91,10 @@ Configure validation rules in your root `package.json`:
 - [npm Core](https://www.npmjs.com/package/@chitrank2050/git-hygiene-core): Programmatic TypeScript API.
 - [JSR Package](https://jsr.io/@chitrank2050/git-hygiene): TypeScript-native package for Node 24+ and Deno.
 - [GitHub Action](https://github.com/marketplace/actions/git-hygiene-validator): Marketplace action for PRs.
-- [Author](https://chitrankagnihotri.com): Chitrank Agnihotri.
+
+## Author & Ecosystem Backlinks
+
+- [Chitrank Agnihotri (Author)](https://chitrankagnihotri.com): Senior Technical Lead & AI Engineer portfolio.
+- [Portfolio Case Study](https://chitrankagnihotri.com/project/git-hygiene): Full engineering deep-dive and performance telemetry.
+- [Monoline UI](https://monolineui.chitrankagnihotri.com): Modern taste-aware component library by Chitrank Agnihotri used to build git-hygiene.
+- [Chitrank Labs GitHub](https://github.com/chitranklabs): Open-source engineering lab and developer tooling organization.

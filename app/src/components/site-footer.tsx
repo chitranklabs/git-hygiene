@@ -59,13 +59,8 @@ const footerGroups = [
 		title: "Chitrank Labs",
 		links: [
 			{
-				title: "Author Website",
+				title: "Chitrank Agnihotri",
 				href: "https://chitrankagnihotri.com",
-				external: true,
-			},
-			{
-				title: "Portfolio Case Study",
-				href: "https://chitrankagnihotri.com/project/git-hygiene",
 				external: true,
 			},
 			{
@@ -74,8 +69,18 @@ const footerGroups = [
 				external: true,
 			},
 			{
-				title: "GitHub Org",
+				title: "Portfolio Case Study",
+				href: "https://chitrankagnihotri.com/project/git-hygiene",
+				external: true,
+			},
+			{
+				title: "GitHub Organization",
 				href: "https://github.com/chitranklabs",
+				external: true,
+			},
+			{
+				title: "Author Profile",
+				href: "https://github.com/chitrank2050",
 				external: true,
 			},
 		],
@@ -112,7 +117,28 @@ export async function SiteFooter() {
 			}))}
 			subscribe={false}
 			meta={`© ${new Date().getFullYear()} git-hygiene · MIT license`}
-			attribution="Crafted with precision by Chitrank Agnihotri"
+			attribution={
+				<span>
+					Built by{" "}
+					<a
+						href="https://chitrankagnihotri.com"
+						target="_blank"
+						rel="noopener noreferrer"
+						className="text-text hover:text-accent transition-colors underline underline-offset-4"
+					>
+						Chitrank Agnihotri
+					</a>{" "}
+					· Crafted with{" "}
+					<a
+						href="https://monolineui.chitrankagnihotri.com"
+						target="_blank"
+						rel="noopener noreferrer"
+						className="text-text hover:text-accent transition-colors underline underline-offset-4"
+					>
+						Monoline UI
+					</a>
+				</span>
+			}
 			linkComponent={SiteFooterLink}
 		/>
 	)

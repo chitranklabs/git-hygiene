@@ -953,9 +953,80 @@
           "is_first_time": false
         },
         "raw_message": "chore: remove emoji from footer brand and clear changelog data"
+      },
+      {
+        "id": "338e1319bd0f65f77be5f4c9b0cb7cf6d1085384",
+        "message": "clear changelog data and update related UI components",
+        "body": null,
+        "footers": [],
+        "group": "<!-- 2 -->Refactor",
+        "breaking_description": null,
+        "breaking": false,
+        "scope": null,
+        "links": [],
+        "author": {
+          "name": "chitrank2050",
+          "email": "chitrank2050@gmail.com",
+          "timestamp": 1789382500
+        },
+        "committer": {
+          "name": "chitrank2050",
+          "email": "chitrank2050@gmail.com",
+          "timestamp": 1789382500
+        },
+        "conventional": true,
+        "merge_commit": false,
+        "statistics": { "files_changed": 5, "additions": 107, "deletions": 37 },
+        "extra": null,
+        "github": {
+          "username": null,
+          "pr_author": null,
+          "pr_title": null,
+          "pr_number": null,
+          "pr_numbers": [],
+          "pr_labels": [],
+          "is_first_time": false
+        },
+        "gitlab": {
+          "username": null,
+          "pr_author": null,
+          "pr_title": null,
+          "pr_number": null,
+          "pr_numbers": [],
+          "pr_labels": [],
+          "is_first_time": false
+        },
+        "gitea": {
+          "username": null,
+          "pr_author": null,
+          "pr_title": null,
+          "pr_number": null,
+          "pr_numbers": [],
+          "pr_labels": [],
+          "is_first_time": false
+        },
+        "bitbucket": {
+          "username": null,
+          "pr_author": null,
+          "pr_title": null,
+          "pr_number": null,
+          "pr_numbers": [],
+          "pr_labels": [],
+          "is_first_time": false
+        },
+        "azure_devops": {
+          "username": null,
+          "pr_author": null,
+          "pr_title": null,
+          "pr_number": null,
+          "pr_numbers": [],
+          "pr_labels": [],
+          "is_first_time": false
+        },
+        "raw_message": "refactor: clear changelog data and update related UI components"
       }
     ],
-    "commit_id": "6825b9ee3d04ae1def67968f196c1386f06c61c3",
+    "commit_id": "338e1319bd0f65f77be5f4c9b0cb7cf6d1085384",
     "timestamp": null,
     "previous": {
       "version": "v0.5.1",
@@ -1504,13 +1575,13 @@
     "repository": "/Users/chitrank/dev/github-chitranklabs/git-hygiene",
     "commit_range": {
       "from": "509313be686cabf135cd671d0620031d76d29002",
-      "to": "6825b9ee3d04ae1def67968f196c1386f06c61c3"
+      "to": "338e1319bd0f65f77be5f4c9b0cb7cf6d1085384"
     },
     "submodule_commits": {},
     "statistics": {
-      "commit_count": 12,
+      "commit_count": 13,
       "commits_timespan": 4,
-      "conventional_commit_count": 12,
+      "conventional_commit_count": 13,
       "links": [],
       "days_passed_since_last_release": 4
     },

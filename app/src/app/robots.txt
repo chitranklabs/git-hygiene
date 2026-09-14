@@ -8,6 +8,10 @@
 #  Built by Chitrank Agnihotri
 #  Senior Technical Lead & AI Engineer
 #  https://chitrankagnihotri.com
+#  Case Study: https://chitrankagnihotri.com/project/git-hygiene
+#
+#  Designed with Monoline UI
+#  https://monolineui.chitrankagnihotri.com
 #  -----
 #
 # ==================================================
