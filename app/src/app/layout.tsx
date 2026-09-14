@@ -1,11 +1,11 @@
 import type { Metadata } from "next"
 
 import { Analytics } from "@vercel/analytics/next"
-import { SpeedInsights } from "@vercel/speed-insights/next"
 
 import { SiteFooter } from "@/src/components/site-footer"
 import { SiteHeader } from "@/src/components/site-header"
 import { ThemeProvider } from "@/src/components/theme-provider"
+import { WebVitals } from "@/src/components/web-vitals"
 import { monolineFontClassName } from "@/src/lib/fonts"
 import { fetchIdentity } from "@/src/lib/identity"
 import { siteUrl } from "@/src/lib/seo"
@@ -119,12 +119,8 @@ export default function RootLayout({
 						<SiteFooter />
 					</div>
 				</ThemeProvider>
-				{isProduction && (
-					<>
-						<SpeedInsights />
-						<Analytics />
-					</>
-				)}
+				<WebVitals />
+				{isProduction && <Analytics />}
 			</body>
 		</html>
 	)
