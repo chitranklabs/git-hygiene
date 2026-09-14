@@ -13,7 +13,6 @@ out
 *.tsbuildinfo
 deno.lock
 next-env.d.ts
-app/src/lib/changelog.json
 .turbo
 
 # Logs

@@ -4,8 +4,7 @@ import Link from "next/link"
 import { Button } from "@chitrank2050/monoline-ui/button"
 import { Container } from "@chitrank2050/monoline-ui/container"
 import { SectionHead } from "@chitrank2050/monoline-ui/section-head"
-
-import { ChangelogTimeline, compactGitCliffReleases } from "@chitrank2050/monoline-ui/changelog"
+import { ChangelogTimeline } from "@chitrank2050/monoline-ui/changelog"
 import type { GitCliffRelease } from "@chitrank2050/monoline-ui/changelog"
 
 import JsonLd, {
@@ -14,7 +13,7 @@ import JsonLd, {
 } from "@/src/components/json-ld"
 import changelogJson from "@/src/lib/changelog.json"
 import { createPageMetadata } from "@/src/lib/metadata"
-import { ChangelogToc } from "./toc"
+import { groupReleasesByMinor } from "@/src/lib/releases"
 
 const changelogTitle = "Release Changelog and Version History | git-hygiene"
 const changelogDescription =
@@ -27,25 +26,8 @@ export const metadata: Metadata = createPageMetadata({
 	absoluteTitle: true,
 })
 
-// Normalize releases using monoline-ui's compactGitCliffReleases and strip ordering comments
-const rawReleases = compactGitCliffReleases(changelogJson as unknown as GitCliffRelease[])
-const releases = rawReleases.map((release) => ({
-	...release,
-	commits: (release.commits ?? []).map((commit) => ({
-		...commit,
-		group: commit.group
-			? commit.group.replace(/<!--.*?-->/g, "").replace(/^[^\w]+/, "").trim() || commit.group
-			: "Maintenance",
-	})),
-}))
-
-const tocItems = releases.map((release) => {
-	const version = release.version ?? "Unreleased"
-	return {
-		id: `release-${version.replace(/\./g, "-")}`,
-		label: version,
-	}
-})
+// Group fragmented patch releases into clean major/minor series while retaining all patch commits
+const releases = groupReleasesByMinor(changelogJson as unknown as GitCliffRelease[])
 
 export default function ChangelogPage() {
 	return (
@@ -77,50 +59,37 @@ export default function ChangelogPage() {
 				as="main"
 				id="main-content"
 				tabIndex={-1}
-				className="pt-ml-10 pb-ml-24"
+				className="max-w-4xl pt-ml-10 pb-ml-24"
 			>
 				{/* Header Section */}
 				<div className="mb-ml-12 border-b border-border pb-ml-8">
 					<SectionHead
 						eyebrow="Release Notes"
-						title="git-hygiene Changelog"
+						title="Changelog"
 						lede="Every feature, performance optimization, and bug fix shipped across official releases, generated from conventional commits."
 						size="md"
 						level={1}
 					/>
 				</div>
 
-				{/* Two-column layout: sticky TOC left, timeline right */}
-				<div className="changelog-layout">
-					{/* Sticky TOC sidebar */}
-					<aside className="changelog-layout__toc">
-						<div className="changelog-layout__toc-inner">
-							<ChangelogToc items={tocItems} />
-						</div>
-					</aside>
+				{/* Monoline UI Changelog Component */}
+				<ChangelogTimeline
+					releases={releases}
+					githubOwner="chitranklabs"
+					githubRepo="git-hygiene"
+					allowedGroups={[
+						"Features",
+						"Bug Fixes",
+						"Refactor",
+						"Performance",
+						"Security",
+						"Documentation",
+						"Maintenance",
+					]}
+					maxCommitsPerRelease={8}
+				/>
 
-					{/* Main timeline */}
-					<section className="changelog-layout__content">
-						<h2 className="sr-only">Release history</h2>
-						<ChangelogTimeline
-							releases={releases}
-							githubOwner="chitranklabs"
-							githubRepo="git-hygiene"
-							allowedGroups={[
-								"Features",
-								"Bug Fixes",
-								"Refactor",
-								"Performance",
-								"Documentation",
-								"Security",
-								"Maintenance",
-								"Miscellaneous Tasks",
-							]}
-						/>
-					</section>
-				</div>
-
-				{/* Bottom Navigation Pager */}
+				{/* Bottom Navigation */}
 				<div className="mt-ml-16 pt-ml-8 border-t border-border flex items-center justify-between">
 					<Button asChild variant="secondary" size="sm">
 						<Link href="/">
