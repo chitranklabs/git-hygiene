@@ -1,5 +1,5 @@
 import { execSync } from 'node:child_process';
-import { existsSync, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -21,11 +21,21 @@ function generateChangelog() {
   if (isGitCliffAvailable() && existsSync(cliffConfigPath)) {
     console.log('📖 Generating web changelog with git-cliff...');
     try {
-      execSync(`git-cliff --config "${cliffConfigPath}" --context -o "${changelogJsonPath}"`, {
+      const raw = execSync(`git-cliff --config "${cliffConfigPath}" --context`, {
         cwd: rootDir,
-        stdio: 'inherit',
+        encoding: 'utf8',
+        maxBuffer: 50 * 1024 * 1024,
       });
-      console.log('✅ Web changelog generated successfully.');
+      const parsed = JSON.parse(raw);
+      const formatted = JSON.stringify(parsed, null, 2) + '\n';
+
+      const current = existsSync(changelogJsonPath) ? readFileSync(changelogJsonPath, 'utf8') : '';
+      if (current === formatted) {
+        console.log('ℹ️ Web changelog is already up-to-date.');
+      } else {
+        writeFileSync(changelogJsonPath, formatted, 'utf8');
+        console.log('✅ Web changelog generated successfully.');
+      }
       return;
     } catch (err) {
       const message = err instanceof Error ? err.message : String(err);
