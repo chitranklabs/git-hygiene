@@ -33,6 +33,7 @@ export default tseslint.config(
       '**/node_modules/**',
       '**/.next/**',
       '**/coverage/**',
+      '**/changelog.json',
       'eslint.config.mjs',
     ],
   },

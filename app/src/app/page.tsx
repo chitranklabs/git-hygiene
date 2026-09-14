@@ -4,7 +4,6 @@ import { Button } from "@chitrank2050/monoline-ui/button"
 import { Card } from "@chitrank2050/monoline-ui/card"
 import { Container } from "@chitrank2050/monoline-ui/container"
 import { SectionHead } from "@chitrank2050/monoline-ui/section-head"
-import { Status } from "@chitrank2050/monoline-ui/status"
 
 import { InstallCommand } from "@/src/components/install-command"
 import { IntegrationTabs } from "@/src/components/integration-tabs"
