@@ -4,9 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "sync:identity": "node scripts/sync-identity.mjs",
     "prebuild": "node ../scripts/generate-web-changelog.mjs && node scripts/sync-identity.mjs",
-    "dev": "node ../scripts/generate-web-changelog.mjs && node scripts/sync-identity.mjs && next dev --port 3005",
+    "predev": "node ../scripts/generate-web-changelog.mjs && node scripts/sync-identity.mjs",
+    "dev": "next dev --port 3005",
     "build": "next build",
     "start": "next start",
     "clean": "rm -rf .next out",
