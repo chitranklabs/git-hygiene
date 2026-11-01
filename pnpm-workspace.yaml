@@ -9,10 +9,10 @@ overrides:
   markdown-it: '^15.0.0'
   # Patched transitive versions for advisories detected by the CI OSV scan.
   'brace-expansion@5.0.9': '5.0.12'
-  'katex@0.16.47': '0.18.2'
+  'katex@0.16.47': '0.19.1'
   'sharp@0.35.4': '0.35.5'
-  'shell-quote@1.10.0': '1.11.0'
-  'smol-toml@1.7.2': '1.9.0'
+  'shell-quote@1.10.0': '1.12.0'
+  'smol-toml@1.7.2': '1.9.1'
   'source-map-js@1.2.1': '1.2.2'
 allowBuilds:
   esbuild: true
